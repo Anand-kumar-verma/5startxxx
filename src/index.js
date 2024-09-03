@@ -34,12 +34,9 @@ root.render(
                   marginTop: "100px",
                   borderRadius: "10px",
                   background: '#6C10ED',
-
                 },
-
               }}
               limit={1}
-
             />
           </ThemeProvider>
         </BrowserRouter>

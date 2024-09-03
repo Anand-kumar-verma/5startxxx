@@ -8,6 +8,9 @@
 // import CricketWalletFundDepositForm from "../cricket/transacton/CricketWalletFundDepositForm";
 // import DepositCash from "../cricket/transacton/DepositCash";
 // import WithdrawlCash from "../cricket/transacton/WithdrawlCash";
+import SattaChart from "../pages/SattaMatka/game/Chart";
+import Satta from "../pages/SattaMatka/game/Satta";
+import Sattagameplay from "../pages/SattaMatka/game/Sattagameplay";
 import Test from "../pages/Test";
 import Account from "../pages/account/Account";
 import AddBankDetails from "../pages/account/Component/AddBankDetails";
@@ -76,6 +79,10 @@ export const routes = [
     {
         path: "/wallet/Recharge",
         component: <WalletRecharge />
+    },
+    {
+        path: "/satta/matka",
+        component: <Satta />
     },
     // {
     //     path: "/trx",
@@ -280,5 +287,13 @@ export const routes = [
     {
         path: "/deposit/qr-screen",
         component: <QRScreen />
+    },
+    {
+        path: "/SattaChart",
+        component: <SattaChart />
+    },
+    {
+        path: "/satta/play",
+        component: <Sattagameplay />
     },
 ]

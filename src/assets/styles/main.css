@@ -1420,6 +1420,11 @@ img {
   transform: translate(2px, 2px) !important;
 }
 
+.fp11 {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+}
+
 .fp13 {
   font-size: 13px !important;
   font-weight: 500 !important;
@@ -1428,6 +1433,11 @@ img {
 .fp15 {
   font-size: 15px !important;
   font-weight: 500 !important;
+}
+
+.fp18 {
+  font-size: 18px !important;
+  font-weight: 600 !important;
 }
 
 @media (min-width: 768px) {
@@ -1559,4 +1569,9 @@ img {
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 11px !important;
   border: 1px solid #6227d1 !important;
+}
+
+.w95 {
+  width: 95% !important;
+  margin-left: 2.5% !important;
 }
