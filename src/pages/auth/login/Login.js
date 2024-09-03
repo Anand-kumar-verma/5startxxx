@@ -32,9 +32,7 @@ function Login() {
   );
 
 
-  const logindata = localStorage.getItem("logindataen") && CryptoJS.AES.decrypt(localStorage.getItem("logindataen"), "anand")?.toString(CryptoJS.enc.Utf8) || null
-  // const aviator_data = localStorage.getItem("aviator_data")
-
+ 
 
   // useEffect(() => {
   //   !aviator_login_data && get_user_data_fn(dispatch);
@@ -47,9 +45,9 @@ function Login() {
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
 
-  useEffect(() => {
-    (logindata) && navigate('/dashboard')
-  }, [])
+  // useEffect(() => {
+  //   (logindata) && navigate('/dashboard')
+  // }, [])
 
   return (
     <Container

@@ -28,22 +28,22 @@ const Coin = ({ mouseClickSound, setAmount, amount, setisSelectedDropBet }) => {
         justifyContent: 'space-between',
         flexDirection: 'column',
         alignItems: 'center',
-        position: 'absolute', top: '19%', right: '3%',
+        position: 'absolute', top: '20%', right: '3%',
       }}>
-      <NavLink onClick={() => {
+      {/* <NavLink onClick={() => {
         mouseClickSound()
         setisSelectedDropBet(false);
         setAmount(2)
       }}>
         <Box component='img' src={amount === 2 ? g2 : two} sx={{ width: '40px', mt: 2, }} ></Box>
-      </NavLink>
-      <NavLink onClick={() => {
+      </NavLink> */}
+      {/* <NavLink onClick={() => {
         mouseClickSound()
         setisSelectedDropBet(false);
         setAmount(5)
       }}>
         <Box component='img' src={amount === 5 ? g5 : five} sx={{ width: '40px', mt: 2, }} ></Box>
-      </NavLink>
+      </NavLink> */}
       <NavLink onClick={() => {
         mouseClickSound()
         setisSelectedDropBet(false);

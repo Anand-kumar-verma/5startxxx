@@ -13,161 +13,7 @@ const Third12 = ({
 }) => {
   return (
     <Stack direction="row" justifyContent="end" sx={{ height: "31%" }}>
-
-      {/* <div
-        className="w-[18%]   "
-        style={{
-          borderTop: "1px solid white",
-          borderLeft: "1px solid white",
-        }}
-      >
-        <Box
-          sx={{
-            width: "100%",
-            height: "50%",
-            ...style.flex,
-            borderBottom: "1px solid white",
-          }}
-        >
-          <NavLink
-            id="1936"
-            onClick={(e) => {
-              if (isSelectedDropBet) {
-                removeSingleBetFunction(1936);
-                return;
-              }
-              if (amount < 10 || amount > 50000)
-                return toast(
-                  <span
-                    className="!p-2"
-                    style={{
-                      marginTop: "10% ",
-                      transform: "rotate(90deg)",
-                      backgroundColor: "black",
-                    }}
-                  >
-                    Please select amount greater than 10
-                  </span>
-                );
-              let isContainsPre = bet?.find((i) => i?.id === 1936);
-              if (isContainsPre) {
-                // setOpenDialogBox(1936);
-                if (
-                  isContainsPre?.amount + amount > 50000 ||
-                  isContainsPre?.amount < 10
-                ) {
-                  return toast(
-                    <span
-                      className="!p-2"
-                      style={{
-                        marginTop: "10% ",
-                        transform: "rotate(90deg)",
-                        backgroundColor: "black",
-                      }}
-                    >
-                      Bet must be greater than 10 and less that 50000 Rupees
-                    </span>
-                  );
-                } else {
-                  setBetFuncton(
-                    1936,
-                    [1936],
-                    Number(isContainsPre?.amount) + amount
-                  );
-                }
-              } else {
-                setBetFuncton(1936, [1936], amount);
-              }
-              e.stopPropagation();
-            }}
-          >
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{
-                width: "50px",
-                textAlign: "center",
-                color: "white",
-                fontSize: "12px",
-                fontWeight: "700",
-                transform: "rotate(90deg)",
-              }}
-            >
-              19 to 36
-            </Typography>
-          </NavLink>
-        </Box>
-        <Box sx={{ width: "100%", height: "50%", ...style.flex }}>
-          <NavLink
-            id="202"
-            onClick={(e) => {
-              if (isSelectedDropBet) {
-                removeSingleBetFunction(202);
-                return;
-              }
-              if (amount < 10 || amount > 50000)
-                return toast(
-                  <span
-                    className="!p-2"
-                    style={{
-                      marginTop: "10% ",
-                      transform: "rotate(90deg)",
-                      backgroundColor: "black",
-                    }}
-                  >
-                    Please select amount greater than 10
-                  </span>
-                );
-              let isContainsPre = bet?.find((i) => i?.id === 202);
-              if (isContainsPre) {
-                // setOpenDialogBox(202);
-                if (
-                  isContainsPre?.amount + amount > 50000 ||
-                  isContainsPre?.amount < 10
-                ) {
-                  return toast(
-                    <span
-                      className="!p-2"
-                      style={{
-                        marginTop: "10% ",
-                        transform: "rotate(90deg)",
-                        backgroundColor: "black",
-                      }}
-                    >
-                      Bet must be greater than 10 and less that 50000 Rupees
-                    </span>
-                  );
-                } else {
-                  setBetFuncton(
-                    202,
-                    [202],
-                    Number(isContainsPre?.amount) + amount
-                  );
-                }
-              } else {
-                setBetFuncton(202, [202], amount);
-              }
-              e.stopPropagation();
-            }}
-          >
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{
-                color: "white",
-                fontSize: "12px",
-                fontWeight: "700",
-                transform: "rotate(90deg)",
-              }}
-            >
-              ODD
-            </Typography>
-          </NavLink>
-        </Box>
-      </div> */}
-
-
-      <Stack
+       <Stack
         sx={{
           width: "82%",
           height: "100%",
@@ -220,7 +66,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="361000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -274,9 +120,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
-          <p className="absolute top-[5%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[5%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="362000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -330,9 +176,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* quadratic */}
-          <p className="absolute top-[17%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[17%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="363000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -386,8 +232,8 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
-          <p className="absolute  top-[5%] left-[-20%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          </p> */}
+          {/* <p className="absolute  top-[5%] left-[-20%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="342000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -441,7 +287,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="33"
@@ -486,7 +332,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="331000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -540,9 +386,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
-          <p className="absolute top-[30%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[30%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="332000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -596,9 +442,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* quadratic */}
-          <p className="absolute top-[42%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[42%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="333000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -707,7 +553,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="30"
@@ -752,7 +598,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[68%] left-[28%] h-4 w-4  !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[68%] left-[28%] h-4 w-4  !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="301000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -806,9 +652,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
-          <p className="absolute top-[55%] left-[82%] h-4 w-4  !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[55%] left-[82%] h-4 w-4  !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="302000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -862,9 +708,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* quadratic */}
-          <p className="absolute top-[67%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[67%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="303000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -918,8 +764,8 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
-          <p className="absolute top-[55%] left-[-20%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          </p> */}
+          {/* <p className="absolute top-[55%] left-[-20%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="282000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -973,7 +819,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="27"
@@ -1018,7 +864,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="271000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1072,9 +918,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
-          <p className="absolute top-[80%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[80%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="272000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1128,9 +974,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* quadratic */}
-          <p className="absolute top-[92%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[92%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="273000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1184,8 +1030,8 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
-          <p className="absolute top-[80%] left-[-20%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          </p> */}
+          {/* <p className="absolute top-[80%] left-[-20%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="252000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1239,7 +1085,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
         </span>
         <span className="!grid grid-rows-4 !w-full !h-full !relative">
           <IconButton sx={{ ...style.btn2, ...style.black }}>
@@ -1286,7 +1132,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="351000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1340,9 +1186,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
-          <p className="absolute top-[5%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[5%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="352000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1396,9 +1242,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* quadratic */}
-          <p className="absolute top-[17%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[17%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="353000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1452,7 +1298,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="32"
@@ -1497,7 +1343,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="321000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1551,9 +1397,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
-          <p className="absolute top-[30%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[30%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="322000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1607,9 +1453,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* quadratic */}
-          <p className="absolute top-[42%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[42%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="323000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1663,7 +1509,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="29"
@@ -1708,7 +1554,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="291000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1762,9 +1608,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
-          <p className="absolute top-[55%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[55%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="292000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1818,9 +1664,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* quadratic */}
-          <p className="absolute top-[67%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[67%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="293000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1874,7 +1720,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="26"
@@ -1919,7 +1765,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="261000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1973,9 +1819,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
-          <p className="absolute top-[80%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[80%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="262000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -2029,9 +1875,9 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* quadratic */}
-          <p className="absolute top-[92%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[92%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="263000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -2085,7 +1931,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
         </span>
         <span className="!grid grid-rows-4 !w-full !h-full !relative">
           <IconButton sx={{ ...style.btn2, ...style.red }}>
@@ -2132,7 +1978,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="341000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -2186,7 +2032,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
 
           <IconButton sx={{ ...style.btn2, ...style.black }}>
@@ -2233,7 +2079,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="311000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -2287,7 +2133,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
 
           <IconButton sx={{ ...style.btn2, ...style.black }}>
@@ -2334,7 +2180,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="281000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -2388,7 +2234,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
 
           <IconButton sx={{ ...style.btn2, ...style.red }}>
@@ -2435,7 +2281,7 @@ const Third12 = ({
             </p>
           </IconButton>
           {/* Buttom */}
-          <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="251000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -2489,7 +2335,7 @@ const Third12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* right */}
         </span>
       </Stack>

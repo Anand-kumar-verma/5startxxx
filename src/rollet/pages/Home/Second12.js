@@ -8,61 +8,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
   return (
     <Stack direction="row" justifyContent="end" sx={{ height: "31%" }}>
 
-      {/* <div className="w-[18%] !grid grid-rows-1   !place-items-center" style={{
-        ...style.flex,
-        borderTop: '1px solid white',
-        borderLeft: '1px solid white',
-      }}>
-        <IconButton
-          className="!p-0"
-          style={{ transform: "rotate(-270deg)" }}
-        >
-          <Typography
-            variant="body1"
-            color="initial"
-          >
-            <span
-              style={{ color: 'white', fontWeight: 800 }}
-              className="whitespace-nowrap !text-[12px] "
-              id="212"
-              onClick={(e) => {
-                if (isSelectedDropBet) {
-                  removeSingleBetFunction(212)
-                  return
-                }
-                if (amount < 10 || amount > 50000)
-                  return toast(<span style={{ marginTop: "10% ",  transform: "rotate(90deg)", backgroundColor: 'black' }}>
-                              Please select amount greater than 10
-                            </span>);
-                let isContainsPre = bet?.find((i) => i?.id === 212);
-                if (isContainsPre) {
-                  // setOpenDialogBox(212);
-                  if (
-                    isContainsPre?.amount + amount > 50000 ||
-                    isContainsPre?.amount < 10
-                  ) {
-                    return toast(
-                    <span className="!p-2" style={{ marginTop: "10% ", transform: "rotate(90deg)", backgroundColor: 'black' }}>
-                                Bet must be greater than 10 and less that 50000 Rupees
-                              </span>
-                    );
-                  } else {
-                    setBetFuncton(
-                      212, [212],
-                      Number(isContainsPre?.amount) + amount
-                    );
-                  }
-                } else {
-                  setBetFuncton(212, [212], amount);
-                }
-                e.stopPropagation();
-              }}
-            >
-              2nd 12
-            </span>
-          </Typography>
-        </IconButton>
-      </div> */}
+    
       <Stack
         sx={{
           width: "82% !important",
@@ -110,7 +56,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               24
             </p>
           </IconButton>
-          <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="241000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -261,7 +207,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="21"
@@ -298,7 +244,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               21
             </p>
           </IconButton>
-          <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="211000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -449,7 +395,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="18"
@@ -486,7 +432,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               18
             </p>
           </IconButton>
-          <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="181000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -637,7 +583,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="15"
@@ -674,7 +620,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               15
             </p>
           </IconButton>
-          <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="151000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -825,7 +771,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
         </span>
         <span className="!grid grid-rows-4 !w-full !h-full relative">
           <IconButton sx={{ ...style.btn2, ...style.red }}>
@@ -864,7 +810,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               23
             </p>
           </IconButton>
-          <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="231000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -977,7 +923,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="20"
@@ -1014,7 +960,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               20
             </p>
           </IconButton>
-          <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="201000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1127,7 +1073,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="17"
@@ -1164,7 +1110,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               17
             </p>
           </IconButton>
-          <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="171000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1277,7 +1223,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="14"
@@ -1314,7 +1260,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               14
             </p>
           </IconButton>
-          <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="141000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1427,7 +1373,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
         </span>
         <span className="!grid grid-rows-4 !w-full !h-full relative">
           <IconButton sx={{ ...style.btn2, ...style.black }}>
@@ -1466,7 +1412,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               22
             </p>
           </IconButton>
-          <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="221000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1503,7 +1449,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
 
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
@@ -1541,7 +1487,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               19
             </p>
           </IconButton>
-          <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="191000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1578,7 +1524,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
 
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
@@ -1616,7 +1562,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               16
             </p>
           </IconButton>
-          <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="161000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1653,7 +1599,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
 
           <IconButton sx={{
             ...style.btn2, ...style.blue
@@ -1693,7 +1639,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               13
             </p>
           </IconButton>
-          <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="131000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1730,7 +1676,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
 
         </span>
       </Stack>

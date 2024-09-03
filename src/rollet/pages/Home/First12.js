@@ -13,163 +13,7 @@ const First12 = ({
 }) => {
   return (
     <Stack direction="row" justifyContent="end" sx={{ height: "31%" }}>
-      {/* <div
-          className="w-[18%]   "
-          style={{
-            borderTop: "1px solid white",
-            borderLeft: "1px solid white",
-            borderBottom: "1px solid white",
-          }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              height: "50%",
-              ...style.flex,
-              borderBottom: "1px solid white",
-            }}
-          >
-            <NavLink
-              id="119"
-              onClick={(e) => {
-                if (isSelectedDropBet) {
-                  removeSingleBetFunction(119);
-                  return;
-                }
-                if (amount < 10 || amount > 50000)
-                  return toast(
-                    <span
-                      className="!p-2"
-                      style={{
-                        marginTop: "10% ",
-                        transform: "rotate(90deg)",
-                        backgroundColor: "black",
-                      }}
-                    >
-                      Please select amount greater than 10
-                    </span>
-                  );
-                let isContainsPre = bet?.find((i) => i?.id === 119);
-                if (isContainsPre) {
-                  // setOpenDialogBox(119);
-                  if (
-                    isContainsPre?.amount + amount > 50000 ||
-                    isContainsPre?.amount < 10
-                  ) {
-                    return toast(
-                      <span
-                        className="!p-2"
-                        style={{
-                          marginTop: "10% ",
-                          transform: "rotate(90deg)",
-                          backgroundColor: "black",
-                        }}
-                      >
-                        Bet must be greater than 10 and less that 50000 Rupees
-                      </span>
-                    );
-                  } else {
-                    setBetFuncton(
-                      119,
-                      [119],
-                      Number(isContainsPre?.amount) + amount
-                    );
-                  }
-                } else {
-                  setBetFuncton(119, [119], amount);
-                }
-                e.stopPropagation();
-              }}
-            >
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={{
-                  width: "50px",
-                  textAlign: "center",
-                  color: "white",
-                  fontSize: "12px",
-                  fontWeight: "700",
-                  transform: "rotate(90deg)",
-                }}
-              >
-                {" "}
-                Even
-              </Typography>
-            </NavLink>
-          </Box>
-          <Box sx={{ width: "100%", height: "50%", ...style.flex }}>
-            <NavLink
-              id="118"
-              onClick={(e) => {
-                if (isSelectedDropBet) {
-                  removeSingleBetFunction(118);
-                  return;
-                }
-                if (amount < 10 || amount > 50000)
-                  return toast(
-                    <span
-                      className="!p-2"
-                      style={{
-                        marginTop: "10% ",
-                        transform: "rotate(90deg)",
-                        backgroundColor: "black",
-                      }}
-                    >
-                      Please select amount greater than 10
-                    </span>
-                  );
-                let isContainsPre = bet?.find((i) => i?.id === 118);
-                if (isContainsPre) {
-                  // setOpenDialogBox(118);
-                  if (
-                    isContainsPre?.amount + amount > 50000 ||
-                    isContainsPre?.amount < 10
-                  ) {
-                    return toast(
-                      <span
-                        className="!p-2"
-                        style={{
-                          marginTop: "10% ",
-                          transform: "rotate(90deg)",
-                          backgroundColor: "black",
-                        }}
-                      >
-                        Bet must be greater than 10 and less that 50000 Rupees
-                      </span>
-                    );
-                  } else {
-                    setBetFuncton(
-                      118,
-                      [118],
-                      Number(isContainsPre?.amount) + amount
-                    );
-                  }
-                } else {
-                  setBetFuncton(118, [118], amount);
-                }
-                e.stopPropagation();
-              }}
-            >
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={{
-                  width: "50px",
-                  textAlign: "center",
-                  color: "white",
-                  fontSize: "12px",
-                  fontWeight: "700",
-                  transform: "rotate(90deg)",
-                }}
-              >
-                {" "}
-                1to 18
-              </Typography>
-            </NavLink>
-          </Box>
-        </div> */}
-
+   
 
       <Stack
         sx={{
@@ -224,7 +68,7 @@ const First12 = ({
               12
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="121000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -443,7 +287,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>{" "}
+          </p>{" "} */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="9"
@@ -487,7 +331,7 @@ const First12 = ({
               9
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="91000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -706,7 +550,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="6"
@@ -750,7 +594,7 @@ const First12 = ({
               6
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="61000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -969,7 +813,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="3"
@@ -1013,7 +857,7 @@ const First12 = ({
               3
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[80%] left-[-20%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[80%] left-[-20%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="12000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1122,7 +966,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* <p style={{ height: '100% !important' }} className="absolute top-[92%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center"></p> */}
         </span>
         <span className="!grid grid-rows-4 !w-full !h-full relative">
@@ -1169,7 +1013,7 @@ const First12 = ({
               11
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="111000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1333,7 +1177,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="8"
@@ -1377,7 +1221,7 @@ const First12 = ({
               8
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="81000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1541,7 +1385,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
               id="5"
@@ -1585,7 +1429,7 @@ const First12 = ({
               5
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="51000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1749,7 +1593,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="2"
@@ -1794,7 +1638,7 @@ const First12 = ({
             </p>
           </IconButton>
           {/* <p style={{ height: '100% !important' }} className="absolute top-[93%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center"></p> */}
-          <p style={{ height: '100% !important' }} className="absolute top-[80%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[80%] left-[82%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="22000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1848,7 +1692,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
           {/* <p style={{ height: '100% !important' }} className="absolute top-[92%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center"></p> */}
         </span>
         <span className="!grid grid-rows-4 !w-full !h-full relative">
@@ -1895,7 +1739,7 @@ const First12 = ({
               10
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[18%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="101000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -1949,7 +1793,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
 
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p
@@ -1994,7 +1838,7 @@ const First12 = ({
               7
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[43%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="71000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -2048,7 +1892,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
 
           <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
@@ -2093,7 +1937,7 @@ const First12 = ({
               4
             </p>
           </IconButton>
-          <p style={{ height: '100% !important' }} className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
+          {/* <p style={{ height: '100% !important' }} className="absolute top-[68%] left-[28%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center">
             <span
               id="41000"
               className="!z-100 h-full w-full !text-[10px]"
@@ -2147,7 +1991,7 @@ const First12 = ({
                 e.stopPropagation();
               }}
             ></span>
-          </p>
+          </p> */}
 
           <IconButton sx={{ ...style.btn2, ...style.red }}>
             <p

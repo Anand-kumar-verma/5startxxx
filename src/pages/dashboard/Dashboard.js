@@ -3,7 +3,6 @@ import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import FitbitIcon from "@mui/icons-material/Fitbit";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import {
-  Avatar,
   Box,
   Button,
   CircularProgress,
@@ -13,64 +12,47 @@ import {
   Slide,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
-import stage from "../../assets/images/podium.png";
 import axios from "axios";
 import copy from "clipboard-copy";
-import CryptoJS from "crypto-js";
 import { useFormik } from "formik";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { RxCross2 } from "react-icons/rx";
 import { useQuery, useQueryClient } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { checkTokenValidity } from "../../Shared/CookieStorage";
 import CustomCircularProgress from "../../Shared/CustomCircularProgress";
-import { gray, starblue, starbluegrad, stardarkblue, stargold, stargrad, stargreen, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
+import { gray, starblue, starbluegrad, stardarkblue, stargold, stargrad, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
 import one from "../../assets/banner1.png";
 import two from "../../assets/banner2.png";
+import crown1 from "../../assets/crown1.png";
+import crown3 from "../../assets/crown3.png";
 import three from "../../assets/images/banner (3).jpg";
 import five from "../../assets/images/banner (4).jpg";
 import four from "../../assets/images/banner (5).jpg";
-import game from "../../rollet/assets/images/casino.png";
-import position2 from "../../assets/images/positio2.png";
-import position3 from "../../assets/images/position3.png";
-import position1 from "../../assets/images/positoin1.png";
 import crown2 from "../../assets/images/crown2.png";
+import stage from "../../assets/images/podium.png";
 import refresh from "../../assets/images/refresh.png";
-import winp4 from "../../assets/images/winp4.jpg";
 import winerbanner1 from "../../assets/images/winerbanner1.png";
-import sajid from "../../assets/sajid.PNG";
-import tanveer from "../../assets/tanveer.PNG";
-import Layout from "../../component/Layout/Layout";
+import place1 from "../../assets/place1.png";
+import place2 from "../../assets/place2.png";
+import place3 from "../../assets/place3.png";
 import profile1 from "../../assets/profile1.png";
 import profile2 from "../../assets/profile2.png";
 import profile3 from "../../assets/profile3.png";
 import winning_bg from "../../assets/winning_bg-d9c728ae.png";
-import crown1 from "../../assets/crown1.png";
-import crown3 from "../../assets/crown3.png";
-import place1 from "../../assets/place1.png";
-import place2 from "../../assets/place2.png";
-import place3 from "../../assets/place3.png";
+import Layout from "../../component/Layout/Layout";
+import game from "../../rollet/assets/images/casino.png";
 
-import {
-  please_reconnect_the_serverFun,
-  waitingAviatorFun,
-} from "../../redux/slices/counterSlice";
 import megaphone from "../../rollet/assets/images/megaphone.png";
-import taptoplay from "../../rollet/assets/images/taptoplay.png";
 import {
   MyProfileDataFn,
-  allWithdrawlCashUserFn,
-  get_user_data_fn,
-  logOutFunctoinRoulette,
-  walletamount,
+  walletamount
 } from "../../services/apicalling";
 import {
   download_app_url,
@@ -97,37 +79,11 @@ const imageSources = [
 ];
 
 function Dashboard() {
-  const dispatch = useDispatch();
-  const aviator_login_data = useSelector(
-    (state) => state.aviator.aviator_login_data
-  );
-
-  const isAvailableUser = sessionStorage.getItem("isAvailableUser");
-  // const aviator_data = localStorage.getItem("aviator_data");
-  const value =
-    (localStorage.getItem("logindataen") &&
-      CryptoJS.AES.decrypt(
-        localStorage.getItem("logindataen"),
-        "anand"
-      )?.toString(CryptoJS.enc.Utf8)) ||
-    null;
-  //  console.log(JSON.parse(value));
   const navigate = useNavigate();
   const [poicy, setpoicy] = React.useState(false);
-  const [type_of_game, settype_of_game] = React.useState("");
   const [winnner_data, setwinnerdata] = useState([]);
-  const [openbannerurl, setopenbannerurl] = useState("");
   const [loding, setloding] = useState(false);
-  const [lodingBanner, setlodingBanner] = useState(false);
 
-  useEffect(() => {
-    if (!checkTokenValidity()) {
-      logOutFunctoinRoulette(navigate);
-      localStorage.clear();
-      sessionStorage.clear();
-      window.location.href = "/"; // Redirect to login page
-    }
-  }, []);
   const client = useQueryClient()
 
   const functionTOCopy = (value) => {
@@ -158,16 +114,6 @@ function Dashboard() {
 
   const newdata = data?.data?.data || 0;
 
-  const {
-    isLoading: allWithdrawlCashUserFnLoding,
-    data: allWithdrawlCashData,
-  } = useQuery(["allWithdrawlCashUser"], () => allWithdrawlCashUserFn(), {
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-  });
-
-  const allWithdrawl_CashData = allWithdrawlCashData?.data?.data || [];
-
   const { isLoading: profile_loding, data: profile } = useQuery(
     ["myprofile"],
     () => MyProfileDataFn(),
@@ -179,42 +125,8 @@ function Dashboard() {
 
   const result = profile?.data?.data || [];
 
-  useEffect(() => {
-    openbannerFunction();
-    localStorage.removeItem("amount_set");
-    localStorage.removeItem("Deposit_type");
-    localStorage.removeItem("server_provider");
-  }, []);
-
-  const openbannerFunction = async () => {
-    setlodingBanner(true);
-    try {
-      const response = await axios.get(`${endpoint.openbannerUrl}`);
-      setopenbannerurl(response?.data?.image);
-    } catch (e) {
-      toast(e?.message);
-      console.log(e);
-    }
-    setlodingBanner(false);
-  };
-
-  // console.log(openbannerurl);
-
-  // useEffect(() => {
-  //   console.log(result?.referral_code, "nandn");
-  //   setReferral_code(
-  //     CryptoJS.AES.encrypt(
-  //       JSON.stringify(result?.referral_code),
-  //       "anand"
-  //     ).toString()
-  //   );
-  //   console.log(referal_code, "converted value");
-  // }, [result]);
-
   const initialValues = {
-    //  referrel_code: `https://play.ferryinfotech.in/register?ref=${referal_code}`,
     referrel_code: `${fron_end_main_domain}/register?ref=${result?.referral_code}`,
-    // referrel_code: `https://play.ferryinfotech.in/register?ref=${referal_code}`,
   };
 
   const fk = useFormik({
@@ -227,67 +139,8 @@ function Dashboard() {
 
   const handleClosepolicy = () => {
     setpoicy(false);
-    sessionStorage.removeItem("isAvailableUser");
   };
-  useEffect(() => {
-    if (isAvailableUser) {
-      setpoicy(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    dispatch(waitingAviatorFun(true));
-    dispatch(please_reconnect_the_serverFun(false));
-  }, []);
-
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setdata_array([...data_array, 100]);
-  //     setTimeout(() => {
-  //       setdata_array(data_array.slice(0, data_array.length));
-  //     }, 1000);
-  //   }, 3000);
-  // }, []);
-
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  useEffect(() => {
-    localStorage.setItem("isPreBet", false);
-    !aviator_login_data && get_user_data_fn(dispatch);
-  }, []);
-
-  const game_data = [
-    {
-      name: "5 Star xxx",
-      // img: green_roulette,
-    },
-    // {
-    //   name: "Aviator",
-    //   img: aviator_game_image,
-    // },
-    // {
-    //   name: "Sports",
-    //   img: "https://ossimg.bdgadminbdg.com/IndiaBDG/gamecategory/gamecategory_20240110061915xrqy.png",
-    // },
-    // {
-    //   name: "Slots",
-    //   img: "https://ossimg.bdgadminbdg.com/IndiaBDG/gamecategory/gamecategory_20240110061937gbid.png",
-    // },
-    // {
-    //   name: "Popular",
-    //   img: "https://ossimg.bdgadminbdg.com/IndiaBDG/gamecategory/gamecategory_202401100619464x51.png",
-    // },
-    // {
-    //   name: "Casino",
-    //   img: "https://ossimg.bdgadminbdg.com/IndiaBDG/gamecategory/gamecategory_20240110061909hwqs.png",
-    // },
-  ];
-
+ 
 
   function refreshFunctionForRotation() {
     client.refetchQueries = ("walletamount")
@@ -416,50 +269,7 @@ function Dashboard() {
               </div>
             </Swiper>
           </Box>
-          {/* <Box className="!px-2">
-            <Swiper
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{ delay: 2000, disableOnInteraction: false }}
-              pagination={{ clickable: true }}
-              navigation={false}
-              modules={[Autoplay, Pagination, Navigation]}
-              className="mySwiper !rounded-lg "
-            >
-              {allWithdrawlCashUserFnLoding
-                ? [1, 2]?.map((i) => {
-                  return (
-                    <SwiperSlide>
-                      <CircularProgress className="!text-white" />
-                    </SwiperSlide>
-                  );
-                })
-                : allWithdrawl_CashData?.map((i, index) => {
-                  return (
-                    <SwiperSlide key={index}>
-                      <div className="!h-20 !w-full  !flex !items-center ">
-                        <div className="!w-full grid grid-cols-2 place-items-center !bg-gradient-to-l from-[#212c26] via-[#2f6a45]  to-[#06100d] !py-6">
-                          <div className="flex items-center justify-between gap-1 mx-1">
-                            <Avatar alt="Remy Sharp" sizes="large">
-                              {i?.full_name?.substring(0, 1) || ""}
-                            </Avatar>
-                            <p className=" !text-white !text-sm !whitespace-nowrap">
-                              {i?.full_name?.substring(0, 11) || ""}.....
-                            </p>
-                          </div>
-                          <p className=" !text-white text-sm">
-                            Withdraw {rupees}{" "}
-                            <spna className={"!font-bold !text-[#FB8356]"}>
-                              {Number(i?.amount || 0).toFixed(2)}
-                            </spna>
-                          </p>
-                        </div>
-                      </div>
-                    </SwiperSlide>
-                  );
-                })}
-            </Swiper>
-          </Box> */}
+       
           <Box
             sx={{
               display: "flex",

@@ -44,7 +44,7 @@ function LoginWithEmail() {
 
   const fk = useFormik({
     initialValues: initialValue,
-    validationSchema: LoginEmailSchemaValidaton,
+    // validationSchema: LoginEmailSchemaValidaton,
     onSubmit: () => {
       if (fk.values.pass && (fk.values.mob || fk.values.email)) {
         const reqbody = {
@@ -69,17 +69,13 @@ function LoginWithEmail() {
       });
 
       toast.success(response?.data?.msg);
-      if (response?.data?.error === "200") {
-        const value = CryptoJS.AES.encrypt(JSON.stringify(response?.data), "anand")?.toString();
+      if (response?.data?.msg === "Login Successfully") {
+        const value = CryptoJS.AES.encrypt(JSON.stringify(1), "anand")?.toString();
+        localStorage.setItem("singh" ,response?.data?.token)
         localStorage.setItem("logindataen", value);
-        // localStorage.setItem("logindata", JSON.stringify(response?.data));
-        sessionStorage.setItem("isAvailableUser", true);
-        sessionStorage.setItem("isAvailableCricketUser", true);
-        // get_user_data(response?.data?.UserID);
         setloding(false);
-        storeCookies();
-        navigate("/dashboard");
-        window.location.reload();
+        navigate("/dash");
+        // window.location.reload();
       }
     } catch (e) {
       toast.error(e?.message);

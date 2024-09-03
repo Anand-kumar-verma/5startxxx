@@ -18,10 +18,10 @@ const App = () => {
         "anand"
       )?.toString(CryptoJS.enc.Utf8)) ||
     null; // Check if the user is authenticated
-  useQuery(["promotion_data"], () => isAuthenticated && MypromotionDataFn(), {
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-  });
+  // useQuery(["promotion_data"], () => isAuthenticated && MypromotionDataFn(), {
+  //   refetchOnMount: false,
+  //   refetchOnReconnect: true,
+  // });
 
   return (
     <Routes>

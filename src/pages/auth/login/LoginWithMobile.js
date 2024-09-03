@@ -70,16 +70,10 @@ function LoginWithMobile() {
           "Access-Control-Allow-Origin": "*",
         },
       });
-
       toast.success(response?.data?.msg);
-      if (response?.data?.error === "200") {
-        const value = CryptoJS.AES.encrypt(JSON.stringify(response?.data), "anand")?.toString();
+      if (response?.data?.msg === "Login Successfully") {
+        const value = response?.data?.token
         localStorage.setItem("logindataen", value);
-        sessionStorage.setItem("isAvailableUser", true);
-        sessionStorage.setItem("isAvailableCricketUser", true);
-        // get_user_data(response?.data?.UserID);
-        setloding(false);
-        storeCookies();
         navigate("/dashboard");
         window.location.reload();
       }

@@ -40,17 +40,6 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 function Home() {
 
-  const [incvalue, setIncvalue] = useState(0);
-
-  const handleIncrement = () => {
-    setIncvalue(prev => prev + 10);
-  };
-
-  const handleDecrement = () => {
-    setIncvalue(prev => prev - 10);
-  };
-
-
   const navigate = useNavigate();
   const isAlreadyAppliedBet = localStorage?.getItem("rollet_bet_placed");
   let isPreBet = localStorage.getItem("isPreBet");
@@ -182,7 +171,6 @@ function Home() {
       console.log("inside else");
       setBet([...bet, obj]);
     }
-
     let element = document.getElementById(`${id}`);
     element.style.position = "relative"; // Ensure the parent is positioned relatively
     let newelement = element.querySelector("span");
@@ -879,7 +867,7 @@ function Home() {
                 onClick={() => {
                   setisSelectedDropBet(true);
                 }}>Remove</Button>
-              <Button variant="contained" onClick={handleDecrement} sx={{
+              <Button variant="contained"  sx={{
                 backgroundImage: `url(${btbg3})`,
                 backgroundSize: '100% 100%',
                 color: 'white !important', fontSize: '20px', fontWeight: '700', '&:hover': { backgroundColor: 'transparent', },
@@ -887,8 +875,9 @@ function Home() {
                 -
               </Button>
               <TextField
-                value={incvalue}
-                onChange={(e) => setIncvalue(Number(e.target.value))}
+                 value= {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
+                  Number(total_amount_bet)?.toFixed(2)}
+                // onChange={(e) => setIncvalue(Number(e.target.value))}
                 size="small"
                 inputProps={{ style: { textAlign: 'center' } }}
                 sx={{
@@ -896,7 +885,7 @@ function Home() {
                   backgroundSize: '100% 100%', '&>div>input': { color: 'white !important', fontSize: '20px', fontWeight: '700' },
                 }}
               />
-              <Button variant="contained" onClick={handleIncrement} sx={{
+              <Button variant="contained"  sx={{
                 backgroundImage: `url(${btbg3})`,
                 backgroundSize: '100% 100%',
                 color: 'white !important', fontSize: '20px', fontWeight: '700',
