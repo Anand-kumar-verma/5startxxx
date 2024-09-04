@@ -22,15 +22,11 @@ export const apiConnectorGet = async (endpoint, params) => {
 };
 export const apiConnectorPost = async (endpoint, reqBody) => {
   try {
-    const response = await axios?.post(
-      endpoint,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+    const response = await axios?.post(endpoint, reqBody, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      reqBody
-    );
+    });
     return response;
   } catch (e) {
     return {
