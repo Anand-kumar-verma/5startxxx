@@ -227,6 +227,7 @@ export const walletamount = async () => {
     console.log(e);
   }
 };
+
 export const allWithdrawlCashUserFn = async () => {
   try {
     const response = await axios.get(`${endpoint.all_withdrawl_user_list}`);

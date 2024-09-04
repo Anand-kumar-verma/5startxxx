@@ -19,11 +19,11 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink, useNavigate } from "react-router-dom";
 // import * as uuid from "uuid";
-import CryptoJS from 'crypto-js';
+import CryptoJS from "crypto-js";
 import { storeCookies } from "../../../Shared/CookieStorage";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 import { LoginMobileSchemaValidaton } from "../../../Shared/Validation";
-import { stargreen, } from "../../../Shared/color";
+import { stargreen } from "../../../Shared/color";
 import { endpoint } from "../../../services/urls";
 function LoginWithMobile() {
   // const device_id = uuid.v4();
@@ -72,8 +72,15 @@ function LoginWithMobile() {
       });
       toast.success(response?.data?.msg);
       if (response?.data?.msg === "Login Successfully") {
-        const value = response?.data?.token
-        localStorage.setItem("logindataen", value);
+        const value = response?.data?.token;
+        localStorage.setItem(
+          "logindataen",
+          CryptoJS.AES.encrypt(
+            JSON.stringify({ UserID: 1 }),
+            "anand"
+          )?.toString()
+        );
+        localStorage.setItem("token",value)
         navigate("/dashboard");
         window.location.reload();
       }
@@ -176,18 +183,18 @@ function LoginWithMobile() {
           {fk.touched.pass && fk.errors.pass && (
             <div className="error">{fk.errors.pass}</div>
           )}
-          <Typography  >
+          <Typography>
             <span
               className="!text-white !cursor-pointer fp13"
               onClick={() => navigate("/forget-password")}
-              style={{ float: 'right', marginTop: '10px' }}
+              style={{ float: "right", marginTop: "10px" }}
             >
               Forget Password?
             </span>
           </Typography>
         </FormControl>
       </Box>
-      <Box >
+      <Box>
         <FormControl fullWidth>
           <FormControlLabel
             // required
@@ -200,7 +207,7 @@ function LoginWithMobile() {
                 sx={{ color: stargreen }}
               />
             }
-            label={<Typography className="fp13" >Remember password</Typography>}
+            label={<Typography className="fp13">Remember password</Typography>}
             sx={{ color: "white" }}
           />
         </FormControl>
@@ -216,12 +223,7 @@ function LoginWithMobile() {
         Let's go
       </Button>
 
-      <Button
-        component={NavLink}
-        className="btnregister"
-        mt={2}
-        to="/register"
-      >
+      <Button component={NavLink} className="btnregister" mt={2} to="/register">
         Register
       </Button>
 

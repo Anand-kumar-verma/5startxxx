@@ -1,4 +1,4 @@
-import StartIcon from '@mui/icons-material/ArrowRightAlt';
+import StartIcon from "@mui/icons-material/ArrowRightAlt";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import FitbitIcon from "@mui/icons-material/Fitbit";
 import TelegramIcon from "@mui/icons-material/Telegram";
@@ -12,7 +12,7 @@ import {
   Slide,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import axios from "axios";
 import copy from "clipboard-copy";
@@ -26,8 +26,17 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import CustomCircularProgress from "../../Shared/CustomCircularProgress";
-import { gray, starblue, starbluegrad, stardarkblue, stargold, stargrad, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
+import {
+  gray,
+  starblue,
+  starbluegrad,
+  stardarkblue,
+  stargold,
+  stargrad,
+  zubgback,
+  zubgbackgrad,
+  zubgmid,
+} from "../../Shared/color";
 import one from "../../assets/banner1.png";
 import two from "../../assets/banner2.png";
 import crown1 from "../../assets/crown1.png";
@@ -50,19 +59,17 @@ import Layout from "../../component/Layout/Layout";
 import game from "../../rollet/assets/images/casino.png";
 
 import megaphone from "../../rollet/assets/images/megaphone.png";
-import {
-  MyProfileDataFn,
-  walletamount
-} from "../../services/apicalling";
+import { MyProfileDataFn } from "../../services/apicalling";
+import { apiConnectorGet } from "../../services/apiconnector";
 import {
   download_app_url,
   endpoint,
   fron_end_main_domain,
   // telegram_url,
-  telegram_url
+  telegram_url,
 } from "../../services/urls";
 import Notification from "./Notification";
-
+import CustomCircularProgress from "../../Shared/CustomCircularProgress";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -84,7 +91,7 @@ function Dashboard() {
   const [winnner_data, setwinnerdata] = useState([]);
   const [loding, setloding] = useState(false);
 
-  const client = useQueryClient()
+  const client = useQueryClient();
 
   const functionTOCopy = (value) => {
     copy(value);
@@ -104,26 +111,34 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    top11WinnerFunction();
+    // top11WinnerFunction();
   }, []);
 
-  const { isLoading, data } = useQuery(["walletamount"], () => walletamount(), {
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-  });
+  const { isLoading, data } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus:false
+    }
+  );
 
   const newdata = data?.data?.data || 0;
+
 
   const { isLoading: profile_loding, data: profile } = useQuery(
     ["myprofile"],
     () => MyProfileDataFn(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus:false
     }
   );
 
-  const result = profile?.data?.data || [];
+  const result = [];
+  // profile?.data?.data || [];
 
   const initialValues = {
     referrel_code: `${fron_end_main_domain}/register?ref=${result?.referral_code}`,
@@ -140,47 +155,45 @@ function Dashboard() {
   const handleClosepolicy = () => {
     setpoicy(false);
   };
- 
 
   function refreshFunctionForRotation() {
-    client.refetchQueries = ("walletamount")
-    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    client.refetchQueries = "walletamount";
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
 
     const element = document.getElementById("refresh_button");
     if (!item) {
       element.classList.add("rotate_refresh_image");
     }
     setTimeout(() => {
-      element.classList.remove("rotate_refresh_image")
+      element.classList.remove("rotate_refresh_image");
     }, 2000);
-
   }
   useEffect(() => {
     const element = document.getElementById("refresh_button");
-    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
     if (item) {
       element.classList.remove("rotate_refresh_image");
     }
-  }, [])
+  }, []);
 
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress);
+    progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
-
 
   return (
     <Layout>
       <Box sx={styles.root}>
         <Container
           className="!h-[100%] !overflow-auto no-scrollbar"
-          sx={{ background: stardarkblue, }}
+          sx={{ background: stardarkblue }}
         >
           <div
             style={{
-              background: stargrad, paddind: '10px 0px'
+              background: stargrad,
+              paddind: "10px 0px",
             }}
           >
             <div className="px-2 py-2 flex justify-between">
@@ -217,8 +230,20 @@ function Dashboard() {
               modules={[Autoplay, Pagination, Navigation]}
               onAutoplayTimeLeft={onAutoplayTimeLeft}
               className="mySwiper"
-              style={{ height: '25vh !important', borderRadius: '5px', overflow: 'hidden', marginBottom: '16px' }}>
-              <SwiperSlide sx={{ height: '25vh !important', borderRadius: '5px', overflow: 'hidden', }}>
+              style={{
+                height: "25vh !important",
+                borderRadius: "5px",
+                overflow: "hidden",
+                marginBottom: "16px",
+              }}
+            >
+              <SwiperSlide
+                sx={{
+                  height: "25vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
                 <Box
                   component="img"
                   src={one}
@@ -226,7 +251,13 @@ function Dashboard() {
                   sx={styles.swiperImage}
                 />
               </SwiperSlide>
-              <SwiperSlide sx={{ height: '25vh !important', borderRadius: '5px', overflow: 'hidden', }}>
+              <SwiperSlide
+                sx={{
+                  height: "25vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
                 <Box
                   component="img"
                   src={five}
@@ -234,7 +265,13 @@ function Dashboard() {
                   sx={styles.swiperImage}
                 />
               </SwiperSlide>
-              <SwiperSlide style={{ height: '25vh !important', borderRadius: '5px', overflow: 'hidden', }}>
+              <SwiperSlide
+                style={{
+                  height: "25vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
                 <Box
                   component="img"
                   src={two}
@@ -242,7 +279,13 @@ function Dashboard() {
                   sx={styles.swiperImage}
                 />
               </SwiperSlide>
-              <SwiperSlide sx={{ height: '25vh !important', borderRadius: '5px', overflow: 'hidden', }}>
+              <SwiperSlide
+                sx={{
+                  height: "25vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
                 <Box
                   component="img"
                   src={three}
@@ -251,8 +294,13 @@ function Dashboard() {
                 />
               </SwiperSlide>
 
-
-              <SwiperSlide sx={{ height: '25vh !important', borderRadius: '5px', overflow: 'hidden', }}>
+              <SwiperSlide
+                sx={{
+                  height: "25vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
                 <Box
                   component="img"
                   src={four}
@@ -261,7 +309,11 @@ function Dashboard() {
                 />
               </SwiperSlide>
 
-              <div className="autoplay-progress" slot="container-end" style={{ opacity: 0, }}>
+              <div
+                className="autoplay-progress"
+                slot="container-end"
+                style={{ opacity: 0 }}
+              >
                 <svg viewBox="0 0 48 48" ref={progressCircle}>
                   <circle cx="24" cy="24" r="20"></circle>
                 </svg>
@@ -269,7 +321,7 @@ function Dashboard() {
               </div>
             </Swiper>
           </Box>
-       
+
           <Box
             sx={{
               display: "flex",
@@ -365,25 +417,33 @@ function Dashboard() {
             </Box>
           </Stack> */}
 
-
           <Box sx={styles.depositWithdrawContainer}>
             <div className="!flex !justify-center gap-1">
-              <Typography variant="body1" color="initial" className="b-val !flex !justify-center gap-1">
+              <Typography
+                variant="body1"
+                color="initial"
+                className="b-val !flex !justify-center gap-1"
+              >
                 {" "}
                 {Number(
                   Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
-                )?.toFixed(2)} <img className="rotate_refresh_image w-8" id="refresh_button"
-                  src={refresh} width={15} ml={2} onClick={() => {
-                    refreshFunctionForRotation()
-                  }} />
+                )?.toFixed(2)}{" "}
+                <img
+                  className="rotate_refresh_image w-8"
+                  id="refresh_button"
+                  src={refresh}
+                  width={15}
+                  ml={2}
+                  onClick={() => {
+                    refreshFunctionForRotation();
+                  }}
+                />
               </Typography>
-
             </div>
             <Typography variant="body1" color="initial" className="b-valp ">
               Available Balance
             </Typography>
           </Box>
-
 
           <Box sx={styles.referralLinkContainer}>
             <Typography variant="body1" sx={styles.referralLinkTitle}>
@@ -432,17 +492,45 @@ function Dashboard() {
               mb: "20px",
             }}
           >
-            <Box sx={{ ...styles.flexbetween, ...styles.gamemenubox }} className="w95">
+            <Box
+              sx={{ ...styles.flexbetween, ...styles.gamemenubox }}
+              className="w95"
+            >
               <Box sx={{ ...styles.gameimgbox }}>
-                <Box component='img' src={game} sx={{ ...styles.gameimg }}></Box>
+                <Box
+                  component="img"
+                  src={game}
+                  sx={{ ...styles.gameimg }}
+                ></Box>
               </Box>
               <Box sx={{ ...styles.gamenamebox }}>
                 <Box sx={{ ...styles.flexbetween }}>
-                  <Typography variant="h6" sx={{ fontWeight: '700', color: 'white' }} >Jackpot</Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: "700", color: "white" }}
+                  >
+                    Jackpot
+                  </Typography>
                 </Box>
                 <Box sx={{ ...styles.flexbetween, my: 1, ...styles.maxwin }}>
-                  <Typography variant="body2" className="kip13" sx={{ textAlign: 'center', color: 'white !important', }}>The Highest Bonus in History</Typography>
-                  <Typography variant="body2" className="kip15" sx={{ color: 'white', fontWeight: '600', textAlign: 'center' }}>98456.66</Typography>
+                  <Typography
+                    variant="body2"
+                    className="kip13"
+                    sx={{ textAlign: "center", color: "white !important" }}
+                  >
+                    The Highest Bonus in History
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    className="kip15"
+                    sx={{
+                      color: "white",
+                      fontWeight: "600",
+                      textAlign: "center",
+                    }}
+                  >
+                    98456.66
+                  </Typography>
                 </Box>
               </Box>
               <Button
@@ -450,7 +538,7 @@ function Dashboard() {
                 color="primary"
                 className="blinking-button"
                 sx={{ ...styles.playbutton }}
-                onClick={() => navigate('/rollet')}
+                onClick={() => navigate("/rollet")}
               >
                 Play Now <StartIcon ml={2} />
               </Button>
@@ -462,30 +550,30 @@ function Dashboard() {
             </div>
           ) : (
             <Box sx={styles.wininfoouter}>
-              <Stack direction={"row"} sx={{ alignItems: "center", mb: 2, }}>
+              <Stack direction={"row"} sx={{ alignItems: "center", mb: 2 }}>
                 <Box
                   sx={{
-                    background: 'white',
+                    background: "white",
                     width: "4px",
                     height: "16px",
                   }}
                 ></Box>
                 <Typography
                   variant="body1"
-
-                  sx={{ fontSize: "18px", fontWeight: 700, ml: 1, color: 'white' }}
+                  sx={{
+                    fontSize: "18px",
+                    fontWeight: 700,
+                    ml: 1,
+                    color: "white",
+                  }}
                 >
                   Winning information
                 </Typography>
               </Stack>
               {winnner_data.slice(3, 8)?.map((i, index) => {
                 return (
-                  <Stack
-                    key={index}
-                    direction="row"
-                    sx={styles.winnerslider}
-                  >
-                    <div style={{ position: 'relative' }}>
+                  <Stack key={index} direction="row" sx={styles.winnerslider}>
+                    <div style={{ position: "relative" }}>
                       <Box
                         width={25}
                         height={25}
@@ -501,20 +589,15 @@ function Dashboard() {
                         height={45}
                         sx={styles.winnerprofile}
                       ></Box>
-
                     </div>
-                    <Typography
-                      variant="body1"
-
-                      sx={styles.winnername}
-                    >
-                      <p className="!flex !flex-col" style={{ color: 'white' }}>
+                    <Typography variant="body1" sx={styles.winnername}>
+                      <p className="!flex !flex-col" style={{ color: "white" }}>
                         {i?.email
                           ? i.email.split("@")[0].substring(0, 2) +
-                          "**" +
-                          (i.email.split("@")[0].length > 2
-                            ? i.email.split("@")[0].substring(2, 4)
-                            : "")
+                            "**" +
+                            (i.email.split("@")[0].length > 2
+                              ? i.email.split("@")[0].substring(2, 4)
+                              : "")
                           : "**"}
                       </p>
                     </Typography>
@@ -527,18 +610,10 @@ function Dashboard() {
                       ></Box>
                     </Box>
                     <Box>
-                      <Typography
-                        variant="body1"
-
-                        sx={styles.winneramout || 0}
-                      >
-                        Receive ₹{Number((Number(i?.win || 0)) * 200).toFixed(2)}
+                      <Typography variant="body1" sx={styles.winneramout || 0}>
+                        Receive ₹{Number(Number(i?.win || 0) * 200).toFixed(2)}
                       </Typography>
-                      <Typography
-                        variant="body1"
-
-                        sx={styles.winnertitle}
-                      >
+                      <Typography variant="body1" sx={styles.winnertitle}>
                         Winning amount
                       </Typography>
                     </Box>
@@ -567,20 +642,20 @@ function Dashboard() {
                   sx={styles.winnerposition}
                 ></Box>
                 <Box sx={styles.winner2amt}>
-                  <Typography variant="body1" >
+                  <Typography variant="body1">
                     {winnner_data?.[0]?.email
-                      ? winnner_data?.[0]?.email?.split("@")?.[0]?.substring(0, 2) +
-                      "**" +
-                      (winnner_data?.[0]?.email?.split("@")?.[0]?.length > 2
-                        ? winnner_data?.[0]?.email?.split("@")?.[0]?.substring(2, 4)
-                        : "")
+                      ? winnner_data?.[0]?.email
+                          ?.split("@")?.[0]
+                          ?.substring(0, 2) +
+                        "**" +
+                        (winnner_data?.[0]?.email?.split("@")?.[0]?.length > 2
+                          ? winnner_data?.[0]?.email
+                              ?.split("@")?.[0]
+                              ?.substring(2, 4)
+                          : "")
                       : "**"}
                   </Typography>
-                  <Typography
-                    variant="body1"
-
-                    sx={styles.winningamount}
-                  >
+                  <Typography variant="body1" sx={styles.winningamount}>
                     ₹ {Number(winnner_data?.[0]?.win)?.toFixed(2)}
                   </Typography>
                 </Box>
@@ -611,21 +686,21 @@ function Dashboard() {
                   sx={styles.winnerposition}
                 ></Box>
                 <Box sx={styles.winner2amt}>
-                  <Typography variant="body1" >
+                  <Typography variant="body1">
                     {winnner_data?.[2]?.email
-                      ? winnner_data?.[1]?.email?.split("@")?.[0]?.substring(0, 2) +
-                      "**" +
-                      (winnner_data?.[1]?.email?.split("@")?.[0]?.length > 2
-                        ? winnner_data?.[1]?.email?.split("@")?.[0]?.substring(2, 4)
-                        : "")
+                      ? winnner_data?.[1]?.email
+                          ?.split("@")?.[0]
+                          ?.substring(0, 2) +
+                        "**" +
+                        (winnner_data?.[1]?.email?.split("@")?.[0]?.length > 2
+                          ? winnner_data?.[1]?.email
+                              ?.split("@")?.[0]
+                              ?.substring(2, 4)
+                          : "")
                       : "**"}
                   </Typography>
-                  <Typography
-                    variant="body1"
-
-                    sx={styles.winningamount}
-                  >
-                    ₹  {Number(winnner_data?.[1]?.win)?.toFixed(2)}
+                  <Typography variant="body1" sx={styles.winningamount}>
+                    ₹ {Number(winnner_data?.[1]?.win)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
@@ -655,20 +730,20 @@ function Dashboard() {
                   sx={styles.winnerposition}
                 ></Box>
                 <Box sx={styles.winner2amt}>
-                  <Typography variant="body1" >
+                  <Typography variant="body1">
                     {winnner_data?.[2]?.email
-                      ? winnner_data?.[2]?.email?.split("@")?.[0]?.substring(0, 2) +
-                      "**" +
-                      (winnner_data?.[2]?.email?.split("@")?.[0]?.length > 2
-                        ? winnner_data?.[2]?.email?.split("@")?.[0]?.substring(2, 4)
-                        : "")
+                      ? winnner_data?.[2]?.email
+                          ?.split("@")?.[0]
+                          ?.substring(0, 2) +
+                        "**" +
+                        (winnner_data?.[2]?.email?.split("@")?.[0]?.length > 2
+                          ? winnner_data?.[2]?.email
+                              ?.split("@")?.[0]
+                              ?.substring(2, 4)
+                          : "")
                       : "**"}
                   </Typography>
-                  <Typography
-                    variant="body1"
-
-                    sx={styles.winningamount}
-                  >
+                  <Typography variant="body1" sx={styles.winningamount}>
                     ₹ {Number(winnner_data?.[2]?.win)?.toFixed(2)}
                   </Typography>
                 </Box>
@@ -685,12 +760,8 @@ function Dashboard() {
             <Box sx={{ ...styles.wininfoouter, mb: "40px" }}>
               {winnner_data.slice(0, 3)?.map((i, index) => {
                 return (
-                  <Stack
-                    key={index}
-                    direction="row"
-                    sx={styles.winnerslider}
-                  >
-                    <div style={{ position: 'relative' }}>
+                  <Stack key={index} direction="row" sx={styles.winnerslider}>
+                    <div style={{ position: "relative" }}>
                       <Box
                         width={25}
                         height={25}
@@ -706,20 +777,15 @@ function Dashboard() {
                         height={45}
                         sx={styles.winnerprofile}
                       ></Box>
-
                     </div>
-                    <Typography
-                      variant="body1"
-
-                      sx={styles.winnername}
-                    >
-                      <p className="!flex !flex-col" style={{ color: 'white' }}>
+                    <Typography variant="body1" sx={styles.winnername}>
+                      <p className="!flex !flex-col" style={{ color: "white" }}>
                         {i?.email
                           ? i.email.split("@")[0].substring(0, 2) +
-                          "**" +
-                          (i.email.split("@")[0].length > 2
-                            ? i.email.split("@")[0].substring(2, 4)
-                            : "")
+                            "**" +
+                            (i.email.split("@")[0].length > 2
+                              ? i.email.split("@")[0].substring(2, 4)
+                              : "")
                           : "**"}
                       </p>
                     </Typography>
@@ -732,25 +798,16 @@ function Dashboard() {
                       ></Box>
                     </Box>
                     <Box>
-                      <Typography
-                        variant="body1"
-
-                        sx={styles.winneramout || 0}
-                      >
-                        Receive ₹{Number((Number(i?.win || 0)) * 200).toFixed(2)}
+                      <Typography variant="body1" sx={styles.winneramout || 0}>
+                        Receive ₹{Number(Number(i?.win || 0) * 200).toFixed(2)}
                       </Typography>
-                      <Typography
-                        variant="body1"
-
-                        sx={styles.winnertitle}
-                      >
+                      <Typography variant="body1" sx={styles.winnertitle}>
                         Winning amount
                       </Typography>
                     </Box>
                   </Stack>
                 );
               })}
-
             </Box>
           )}
           {/* poicy && !lodingBanner && */}
@@ -1060,25 +1117,44 @@ const styles = {
   },
 
   flexbetween: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between;',
-    flexWrap: 'wrap',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between;",
+    flexWrap: "wrap",
   },
   gameheading: { fontSize: "20px", fontWeight: 700, color: "white" },
-  gamemenubox: { padding: 1, background: starbluegrad, mt: 2, mb: 2, borderRadius: '10px', width: '100%' },
-  gameimgbox: { width: '35%', borderRadius: '10px', },
-  gameimg: { width: '120px', maxHeight: '120px', borderRadius: '10px' },
-  gamenamebox: { width: '63%', },
-  playbutton: { background: stargrad, color: 'white', fontWeight: '600', fontSize: "15px", padding: '5px 30px', width: '100%', mt: 1, },
-  maxwin: { background: stardarkblue, padding: '2px 5px 2px 5px', borderRadius: '5px' },
+  gamemenubox: {
+    padding: 1,
+    background: starbluegrad,
+    mt: 2,
+    mb: 2,
+    borderRadius: "10px",
+    width: "100%",
+  },
+  gameimgbox: { width: "35%", borderRadius: "10px" },
+  gameimg: { width: "120px", maxHeight: "120px", borderRadius: "10px" },
+  gamenamebox: { width: "63%" },
+  playbutton: {
+    background: stargrad,
+    color: "white",
+    fontWeight: "600",
+    fontSize: "15px",
+    padding: "5px 30px",
+    width: "100%",
+    mt: 1,
+  },
+  maxwin: {
+    background: stardarkblue,
+    padding: "2px 5px 2px 5px",
+    borderRadius: "5px",
+  },
   winnerslider: {
     justifyContent: "space-around",
     alignItems: "center",
     padding: "10px 0px 10px 5px",
     backgroundImage: `url(${winning_bg})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%',
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100% 100%",
     borderRadius: "10px",
     my: 1.5,
     boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
@@ -1088,9 +1164,8 @@ const styles = {
     borderRadius: "50%",
     objectPosition: "top",
     objectFit: "cover",
-    marginTop: '-25px',
-    marginLeft: '-3px',
-
+    marginTop: "-25px",
+    marginLeft: "-3px",
   },
   winnername: { fontSize: "12px", fontWeight: 400, mx: 1 },
   winnerbannerouter: {
@@ -1105,26 +1180,36 @@ const styles = {
     objectPosition: "top",
     objectFit: "cover",
   },
-  winneramout: { fontSize: "12px", fontWeight: 600, marginLeft: 1, color: 'white' },
-  winnertitle: { fontSize: "11px", fontWeight: 400, marginLeft: 1, color: 'white' },
+  winneramout: {
+    fontSize: "12px",
+    fontWeight: 600,
+    marginLeft: 1,
+    color: "white",
+  },
+  winnertitle: {
+    fontSize: "11px",
+    fontWeight: 400,
+    marginLeft: 1,
+    color: "white",
+  },
   bca: {
-    width: '25px',
-    height: '25px',
-    position: 'absolute',
-    bottom: '120%',
-    left: '-33%',
-    transform: 'rotate(-7deg)',
+    width: "25px",
+    height: "25px",
+    position: "absolute",
+    bottom: "120%",
+    left: "-33%",
+    transform: "rotate(-7deg)",
   },
   podiumbox: {
     backgroundImage: `url(${stage})`,
     width: "95%",
     height: "140px",
-    mt: '54px',
+    mt: "54px",
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
     position: "relative",
     zIndex: 10,
-    ml: '2.5%',
+    ml: "2.5%",
   },
   podiumtextouterbox: { width: "100%", height: "100%", position: "relative" },
   winner2box: {
@@ -1174,7 +1259,7 @@ const styles = {
     padding: "5px",
     borderRadius: "10px",
     background: stargold,
-    marginLeft: '5%',
-    width: '90%',
+    marginLeft: "5%",
+    width: "90%",
   },
 };

@@ -1,13 +1,11 @@
 export const rupees = "";
 
 export const baseUrl = "https://web.vegusgain.com";
-// export const baseUrl = "https://admin.sunlottery.fun";
-// export const fron_end_main_domain = "https://sunlottery.fun";
+
 export const fron_end_main_domain = "https://vegusgain.com";
 
-// export const domain = "https://sun-lottery-timer-tlhr.onrender.com/";
 export const domain = "https://rollet-node-backend.onrender.com/";
-export const domain1 = "http://192.168.18.183:9002/"
+export const domain1 = "http://192.168.18.183:9002"
 
 
 export const download_app_url = "https://vegusgain.com/VegusGain.apk"
@@ -16,7 +14,7 @@ export const support_mail = "";
 export const telegram_url =`https://t.me/vegusgain`;
 
 export const endpoint = {
-  login: `${domain1}api/v1/login`,
+  login: `${domain1}/api/v1/login`,
   send_otp: `${baseUrl}/api/forget-password`,
   veryfy_otp: `${baseUrl}/api/user-otp-verify`,
   signup: `${baseUrl}/api/user_register`,
@@ -70,7 +68,7 @@ export const endpoint = {
   cash_out: `${baseUrl}/api/aviator/cash_out`,
   callback_response:`${baseUrl}/api/deposit-collback`,
   level_team:`${baseUrl}/api/view-Level-team`,
- level_income:`${baseUrl}/api/view-Level-income`,
+  level_income:`${baseUrl}/api/view-Level-income`,
   rollet: {
     logout:baseUrl + "/api/roulette-logout",
     login: baseUrl + "/api/roulette-login",
@@ -79,4 +77,8 @@ export const endpoint = {
     history: baseUrl + "/api/get-bet-history",
     game_result: baseUrl + "/api/roulette-results-history",
   },
+
+  node:{
+    get_wallet:domain1+"/api/v1/balance"
+  }
 };
