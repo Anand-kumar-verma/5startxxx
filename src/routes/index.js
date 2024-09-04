@@ -26,7 +26,6 @@ import Register from "../pages/auth/register/Register";
 import Dashboard from "../pages/dashboard/Dashboard";
 import FundRequest from "../pages/dashboard/FundRequest";
 import Withdrawl from "../pages/dashboard/Withdrawl";
-import Dash from "../pages/dashboard/Dash";
 import MainPageOFIncome from "../pages/income/MainPageOFIncome";
 import BetReferal from "../pages/income/incomeSubSection/BetReferal";
 import DailyCashBackBonus from "../pages/income/incomeSubSection/DailyCashBackBonus";
@@ -59,10 +58,6 @@ export const routes = [
         component: <Home />
     },
     {
-        path: "/dash",
-        component: <Dash />
-    },
-    {
         path: "/account",
         component: <Account />
     },
@@ -82,10 +77,6 @@ export const routes = [
         path: "/wallet/Recharge",
         component: <WalletRecharge />
     },
-    // {
-    //     path: "/trx",
-    //     component: <Trx />
-    // },
     {
         path: "/wallet",
         component: <Wallet />

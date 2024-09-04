@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import win_cap from "../assets/images/pwin.png";
 import axios from "axios";
 import { endpoint } from "../../services/urls";
+import { apiConnectorPost } from "../../services/apiconnector";
 
 export const red_array = [
   1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
@@ -188,45 +189,43 @@ export const confirmBet = async (
 
   let updatedBet = [...bet]; // Create a copy of the current bet state
 
-  updatedBet.forEach((element) => {
-    let idInString = String(element?.id);
-    let array = element?.number;
+  // updatedBet.forEach((element) => {
+  //   let idInString = String(element?.id);
+  //   let array = element?.number;
 
-    if (array?.length > 1) {
-      let d_amount = Number(element?.amount) / array?.length;
+  //   if (array?.length > 1) {
+  //     let d_amount = Number(element?.amount) / array?.length;
 
-      array.forEach((newelement) => {
-        let isContainsPre = updatedBet.find(
-          (i) => String(i?.id) === String(newelement)
-        );
+  //     array.forEach((newelement) => {
+  //       let isContainsPre = updatedBet.find(
+  //         (i) => String(i?.id) === String(newelement)
+  //       );
 
-        if (isContainsPre) {
-          updatedBet = updatedBet.map((item) => {
-            if (String(item.id) === String(newelement)) {
-              return { ...item, amount: item.amount + d_amount };
-            }
-            return item;
-          });
-        } else {
-          const obj = {
-            id: Number(newelement),
-            number: [Number(newelement)],
-            amount: d_amount,
-          };
-          updatedBet.push(obj);
-        }
-      });
+  //       if (isContainsPre) {
+  //         updatedBet = updatedBet.map((item) => {
+  //           if (String(item.id) === String(newelement)) {
+  //             return { ...item, amount: item.amount + d_amount };
+  //           }
+  //           return item;
+  //         });
+  //       } else {
+  //         const obj = {
+  //           id: Number(newelement),
+  //           number: Number(newelement),
+  //           amount: d_amount,
+  //         };
+  //         updatedBet.push(obj);
+  //       }
+  //     });
 
-      updatedBet = updatedBet.filter((i) => String(i?.id) !== idInString);
-    }
-  });
+  //     updatedBet = updatedBet.filter((i) => String(i?.id) !== idInString);
+  //   }
+  // });
   // console.log(updatedBet);
   // setBet(updatedBet);
 
   const reqbody = {
-    number: updatedBet,
-    userid: user_id,
-    amount: 10,
+    bet_array: updatedBet
   };
   const total_amount_bet = updatedBet?.reduce(
     (a, b) => a + Number(b?.amount || 0),
@@ -252,7 +251,7 @@ export const confirmBet = async (
   } else {
     setloding(true);
     try {
-      const res = await axios.post(endpoint?.rollet?.bet_now, reqbody);
+      const res = await apiConnectorPost(endpoint?.rollet?.bet_now, {bet_array:JSON.stringify(reqbody)});
       toast(
         <span
           className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
@@ -328,12 +327,12 @@ export const justDouble = (bet, setBet, wallet_amount_data) => {
     return {
       ...ele,
       amount: [...black_array, ...red_array]?.includes(Number(ele?.id))
-        ? Number(ele?.amount) * 2 > 5000
+        ? Number(ele?.amount) * 10 > 5000
           ? ele?.amount
-          : Number(ele?.amount) * 2
-        : Number(ele?.amount) * 2 > 50000
+          : Number(ele?.amount) * 10 
+        : Number(ele?.amount) * 10 > 50000
         ? ele?.amount
-        : Number(ele?.amount) * 2,
+        : Number(ele?.amount) * 10,
     };
   });
   const total_bet_amont = newUpdateAmountArray?.reduce(
@@ -368,6 +367,55 @@ export const justDouble = (bet, setBet, wallet_amount_data) => {
   newUpdateAmountArray?.forEach((ele) => {
     forPlaceCoin(ele?.id, ele?.amount);
   });
+  setBet(newUpdateAmountArray);
+};
+export const justHalf = (bet, setBet, wallet_amount_data) => {
+  let newUpdateAmountArray = bet?.map((ele) => {
+    let newAmount = Number(ele?.amount) > 20
+      ? Number(ele?.amount) / 10
+      : Number(ele?.amount);
+
+    let finalAmount = [...black_array, ...red_array]?.includes(Number(ele?.id))
+      ? newAmount > 5000
+        ? Number(ele?.amount)
+        : newAmount
+      : newAmount > 50000
+        ? Number(ele?.amount)
+        : newAmount;
+
+    return {
+      ...ele,
+      amount: finalAmount
+    };
+  });
+
+  const total_bet_amount = newUpdateAmountArray?.reduce(
+    (a, b) => a + Number(b?.amount),
+    0
+  );
+
+  if (total_bet_amount > Number(wallet_amount_data?.wallet || 0) + Number(wallet_amount_data?.winning || 0)) {
+    return toast(
+      <span
+        className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
+        style={{ display: "inline-block", transform: "rotate(90deg)" }}
+      >
+        Insufficient Wallet Amount
+      </span>
+    );
+  }
+
+  bet?.forEach((ele) => {
+    let element = document.getElementById(`${ele?.id}`);
+    let span = element.querySelector("span");
+    if (span) {
+      element.removeChild(span);
+    }
+  });
+  newUpdateAmountArray?.forEach((ele) => {
+    forPlaceCoin(ele?.id, ele?.amount);
+  });
+
   setBet(newUpdateAmountArray);
 };
 

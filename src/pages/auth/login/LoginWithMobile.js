@@ -81,6 +81,11 @@ function LoginWithMobile() {
           )?.toString()
         );
         localStorage.setItem("token",value)
+        sessionStorage.setItem("isAvailableUser", true);
+        sessionStorage.setItem("isAvailableCricketUser", true);
+        // get_user_data(response?.data?.UserID);
+        setloding(false);
+        storeCookies();
         navigate("/dashboard");
         window.location.reload();
       }

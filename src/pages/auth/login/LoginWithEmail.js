@@ -70,12 +70,22 @@ function LoginWithEmail() {
 
       toast.success(response?.data?.msg);
       if (response?.data?.msg === "Login Successfully") {
-        const value = CryptoJS.AES.encrypt(JSON.stringify(1), "anand")?.toString();
-        localStorage.setItem("singh" ,response?.data?.token)
-        localStorage.setItem("logindataen", value);
+        const value = response?.data?.token;
+        localStorage.setItem(
+          "logindataen",
+          CryptoJS.AES.encrypt(
+            JSON.stringify({ UserID: 1 }),
+            "anand"
+          )?.toString()
+        );
+        localStorage.setItem("token",value)
+        sessionStorage.setItem("isAvailableUser", true);
+        sessionStorage.setItem("isAvailableCricketUser", true);
+        // get_user_data(response?.data?.UserID);
         setloding(false);
-        navigate("/dash");
-        // window.location.reload();
+        storeCookies();
+        navigate("/dashboard");
+        window.location.reload();
       }
     } catch (e) {
       toast.error(e?.message);

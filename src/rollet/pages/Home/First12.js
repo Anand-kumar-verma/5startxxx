@@ -55,12 +55,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       12,
-                      [12],
+                      12,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(12, [12], amount);
+                  setBetFuncton(12, 12, amount);
                 }
                 e.stopPropagation();
               }}
@@ -318,12 +318,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       9,
-                      [9],
+                      9,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(9, [9], amount);
+                  setBetFuncton(9, 9, amount);
                 }
                 e.stopPropagation();
               }}
@@ -581,12 +581,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       6,
-                      [6],
+                      6,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(6, [6], amount);
+                  setBetFuncton(6, 6, amount);
                 }
                 e.stopPropagation();
               }}
@@ -844,12 +844,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       3,
-                      [3],
+                      3,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(3, [3], amount);
+                  setBetFuncton(3, 3, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1000,12 +1000,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       11,
-                      [11],
+                      11,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(11, [11], amount);
+                  setBetFuncton(11, 11, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1208,12 +1208,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       8,
-                      [8],
+                      8,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(8, [8], amount);
+                  setBetFuncton(8, 8, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1416,12 +1416,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       5,
-                      [5],
+                      5,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(5, [5], amount);
+                  setBetFuncton(5, 5, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1726,12 +1726,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       10,
-                      [10],
+                      10,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(10, [10], amount);
+                  setBetFuncton(10, 10, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1825,12 +1825,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       7,
-                      [7],
+                      7,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(7, [7], amount);
+                  setBetFuncton(7, 7, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1924,12 +1924,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       4,
-                      [4],
+                      4,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(4, [4], amount);
+                  setBetFuncton(4, 4, amount);
                 }
                 e.stopPropagation();
               }}
@@ -2023,12 +2023,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       1,
-                      [1],
+                      1,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(1, [1], amount);
+                  setBetFuncton(1, 1, amount);
                 }
                 e.stopPropagation();
               }}
@@ -2093,12 +2093,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       112,
-                      [112],
+                      112,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(112, [112], amount);
+                  setBetFuncton(112, 112, amount);
                 }
                 e.stopPropagation();
               }}

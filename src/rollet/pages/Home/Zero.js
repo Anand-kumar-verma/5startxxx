@@ -47,12 +47,12 @@ const Zero = ({
                 } else {
                   setBetFuncton(
                     "0",
-                    [0],
+                    0,
                     Number(isContainsPre?.amount) + amount
                   );
                 }
               } else {
-                setBetFuncton("0", [0], amount);
+                setBetFuncton("0", 0, amount);
               }
               e.stopPropagation();
             }}

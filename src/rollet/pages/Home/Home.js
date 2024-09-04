@@ -18,7 +18,7 @@ import roulettebg from "../../../rollet/assets/images/thumbs_bgs.png";
 import roulette from "../../assets/images/realwgeelwith1red.png";
 import stop_ball_music from "../../assets/images/stop_ball_music.mp3";
 import watch from "../../assets/images/watch.png";
-import { addWinCap, black_array, confirmBet, justDouble, rebetFuncton, red_array, spinFunction, } from "../../sharedFunction";
+import { addWinCap, black_array, confirmBet, justDouble, justHalf, rebetFuncton, red_array, spinFunction, } from "../../sharedFunction";
 import Rolletball from "../Rolletball";
 import Coin from "./Coin";
 import { style } from "./CommonCss";
@@ -46,22 +46,16 @@ function Home() {
   let total_amount_bet = localStorage.getItem("total_amount_bet") || 0;
   const client = useQueryClient();
   const socket = useSocket();
+  const login_data = localStorage.getItem("logindataen") && CryptoJS.AES.decrypt(localStorage.getItem("logindataen"), "anand")?.toString(CryptoJS.enc.Utf8) || null
+  const user_id = login_data && JSON.parse(login_data)?.UserID;
   const audioRefMusic = useRef();
   const audioRefMusicStopBall = useRef();
   const mouseClickSoundref = useRef();
   const placeBetMusic = useRef();
-  const value =
-    (localStorage.getItem("logindataen") &&
-      CryptoJS.AES.decrypt(
-        localStorage.getItem("logindataen"),
-        "anand"
-      )?.toString(CryptoJS.enc.Utf8)) ||
-    null;
   const [open1, setOpen1] = useState();
   const [loding, setloding] = useState(false);
   const [isOpenPreRoundDialogBox, setisOpenPreRoundDialogBox] = useState(false);
   const [isSelectedDropBet, setisSelectedDropBet] = useState(false);
-  const user_id = value && JSON.parse(value)?.UserID;
   const [openDialogBoxhistory, setopenDialogBoxhistory] = useState(false);
   const [one_min_time, setOne_min_time] = useState(0);
   const [result_rollet, setresult_rollet] = useState(0);
@@ -472,8 +466,9 @@ function Home() {
                     <Rolletball />
                   </div>
                 </Box>
-                <Box sx={{ width: '50px', height: '25px', background: '#BA903B', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '5px', mt: 1, }}>
-                  <Typography onClick={toggleDrawer3(true)} variant="body1" color="initial" sx={{ fontWeight: '500', color: 'white', borderRadius: '5px', }}><RemoveRedEyeIcon /></Typography>
+                <Box sx={{ width: '50px', height: '25px', background: '#BA903B', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '5px', mt: 1, }}
+                onClick={toggleDrawer3(true)}>
+                  <Typography  variant="body1" color="initial" sx={{ fontWeight: '500', color: 'white', borderRadius: '5px', }}><RemoveRedEyeIcon /></Typography>
                 </Box>
               </>
             );
@@ -864,14 +859,13 @@ function Home() {
                 fontSize: "11px",
                 borderRadius: "5px",
               }}
-                onClick={() => {
-                  setisSelectedDropBet(true);
-                }}>Remove</Button>
+              onClick={() => removeBetFunctonAll()}>Remove</Button>
               <Button variant="contained"  sx={{
                 backgroundImage: `url(${btbg3})`,
                 backgroundSize: '100% 100%',
                 color: 'white !important', fontSize: '20px', fontWeight: '700', '&:hover': { backgroundColor: 'transparent', },
-              }}>
+              }}
+              onClick={() => justHalf(bet, setBet, wallet_amount_data)}>
                 -
               </Button>
               <TextField
@@ -890,7 +884,9 @@ function Home() {
                 backgroundSize: '100% 100%',
                 color: 'white !important', fontSize: '20px', fontWeight: '700',
                 '&:hover': { backgroundColor: 'transparent', },
-              }}>
+              }} 
+               onClick={() => justDouble(bet, setBet, wallet_amount_data)}
+               >
                 +
               </Button>
               {/* <Button variant="contained" disabled={one_min_time < 10 || !(bet?.length > 0 && isAlreadyAppliedBet === "false")} onClick={() => removeBetFunctonAll()}>Clear Bet</Button> */}

@@ -43,12 +43,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       24,
-                      [24],
+                      24,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(24, [24], amount);
+                  setBetFuncton(24, 24, amount);
                 }
                 e.stopPropagation();
               }}
@@ -231,12 +231,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       21,
-                      [21],
+                      21,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(21, [21], amount);
+                  setBetFuncton(21, 21, amount);
                 }
                 e.stopPropagation();
               }}
@@ -419,12 +419,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       18,
-                      [18],
+                      18,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(18, [18], amount);
+                  setBetFuncton(18, 18, amount);
                 }
                 e.stopPropagation();
               }}
@@ -607,12 +607,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       15,
-                      [15],
+                      15,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(15, [15], amount);
+                  setBetFuncton(15, 15, amount);
                 }
                 e.stopPropagation();
               }}
@@ -797,12 +797,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       23,
-                      [23],
+                      23,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(23, [23], amount);
+                  setBetFuncton(23, 23, amount);
                 }
                 e.stopPropagation();
               }}
@@ -947,12 +947,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       20,
-                      [20],
+                      20,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(20, [20], amount);
+                  setBetFuncton(20, 20, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1097,12 +1097,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       17,
-                      [17],
+                      17,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(17, [17], amount);
+                  setBetFuncton(17, 17, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1247,12 +1247,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       14,
-                      [14],
+                      14,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(14, [14], amount);
+                  setBetFuncton(14, 14, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1399,12 +1399,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       22,
-                      [22],
+                      22,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(22, [22], amount);
+                  setBetFuncton(22, 22, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1474,12 +1474,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       19,
-                      [19],
+                      19,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(19, [19], amount);
+                  setBetFuncton(19, 19, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1549,12 +1549,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       16,
-                      [16],
+                      16,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(16, [16], amount);
+                  setBetFuncton(16, 16, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1626,12 +1626,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   } else {
                     setBetFuncton(
                       13,
-                      [13],
+                      13,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(13, [13], amount);
+                  setBetFuncton(13, 13, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1747,12 +1747,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   );
                 } else {
                   setBetFuncton(
-                    201, [201],
+                    201, 201,
                     Number(isContainsPre?.amount) + amount
                   );
                 }
               } else {
-                setBetFuncton(201, [201], amount);
+                setBetFuncton(201, 201, amount);
               }
               e.stopPropagation();
             }}
