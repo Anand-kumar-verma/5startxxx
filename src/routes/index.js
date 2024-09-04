@@ -8,7 +8,10 @@
 // import CricketWalletFundDepositForm from "../cricket/transacton/CricketWalletFundDepositForm";
 // import DepositCash from "../cricket/transacton/DepositCash";
 // import WithdrawlCash from "../cricket/transacton/WithdrawlCash";
+import AnderBaherChart from "../pages/SattaMatka/game/AnderBaherChart";
 import SattaChart from "../pages/SattaMatka/game/Chart";
+import LocationChart from "../pages/SattaMatka/game/LocationChart";
+import LocationListChart from "../pages/SattaMatka/game/LocationListChart";
 import Satta from "../pages/SattaMatka/game/Satta";
 import Sattagameplay from "../pages/SattaMatka/game/Sattagameplay";
 import Test from "../pages/Test";
@@ -295,5 +298,17 @@ export const routes = [
     {
         path: "/satta/play",
         component: <Sattagameplay />
+    },
+    {
+        path: "/anderbaher/chart",
+        component: <AnderBaherChart />
+    },
+    {
+        path: "/location/chart/list",
+        component: <LocationListChart />
+    },
+    {
+        path: "/location/chart",
+        component: <LocationChart />
     },
 ]

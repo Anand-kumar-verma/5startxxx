@@ -6,6 +6,7 @@ function Jodi() {
   const buttons = Array.from({ length: 100 }, (_, i) => String(i).padStart(2, '0'));
 
   const [open, setOpen] = useState(false);
+  const [selectedNumber, setSelectedNumber] = useState(null);
 
   const toggleDrawer = (open) => {
     setOpen(open);
@@ -21,29 +22,41 @@ function Jodi() {
     }
   };
 
+  const handleClickbtn = (number) => {
+    setSelectedNumber(number);
+  };
+
   return (
     <Box className="w95">
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center', justifyContent: 'space-between', my: 5 }}>
         {buttons.map((number) => (
           <Button
-            onClick={() => toggleDrawer(true)}
+            onClick={() => {
+              handleClickbtn(number);
+              toggleDrawer(true);
+            }}
             key={number}
             variant="contained"
             sx={{
               width: '50px',
               height: '50px',
               textAlign: 'center',
+              background: number === selectedNumber ? '#4caf50' : '#8d819f',
+              color: 'white',
+              '&:hover': {
+                background: number === selectedNumber ? '#45a049' : '#6a4a71', // Hover color based on selection
+              },
             }}
           >
             {number}
           </Button>
         ))}
       </Box>
-      <Box sx={{ pb: 4 }}  >
+      <Box sx={{ pb: 4 }}>
         <Box className="w95" sx={style.flexbetween}>
           <Box sx={{ width: '50%' }}>
             <Typography variant="body1" className='fp13' sx={{ color: 'white' }}>Total Amount:</Typography>
-            <Typography variant="body1" className='fp18' sx={{ color: 'white' }}>₹  150.00</Typography>
+            <Typography variant="body1" className='fp18' sx={{ color: 'white' }}>₹ 150.00</Typography>
           </Box>
           <Box sx={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
             <Button sx={style.openButton}>Place Bid</Button>

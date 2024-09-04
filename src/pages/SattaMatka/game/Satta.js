@@ -177,7 +177,7 @@ function Satta() {
 export default Satta;
 
 const styles = {
-  root: { background: "#202020", pb: 6 },
+  root: { background: stardarkblue, pb: 6 },
   container: { background: stardarkblue },
   banner: { background: stargrad, padding: '10px 0px' },
   bannerText: { color: "white" },

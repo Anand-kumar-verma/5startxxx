@@ -1061,7 +1061,7 @@ function Dashboard() {
 export default Dashboard;
 
 const styles = {
-  root: { background: "#202020", pb: 6 },
+  root: { background: stardarkblue, pb: 6 },
   dashboardTitle: {
     textAlign: "center",
     color: "white !important",

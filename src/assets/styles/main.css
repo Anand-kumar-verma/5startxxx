@@ -7,7 +7,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #000000;
+  background-color: #0A001B !important;
 }
 
 a {
@@ -1015,7 +1015,7 @@ img {
 }
 
 .dialog-rules>div>div {
-  background-color: #202020 !important;
+  background-color: #0A001B !important;
 }
 
 .dialog-text>p {

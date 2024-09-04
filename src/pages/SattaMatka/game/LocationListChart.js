@@ -1,3 +1,4 @@
+
 import { ArrowBack, Wallet } from "@mui/icons-material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import FitbitIcon from "@mui/icons-material/Fitbit";
@@ -18,7 +19,8 @@ import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
 import { download_app_url } from "../../../services/urls";
 
-function SattaChart() {
+
+function LocationListChart() {
   const navigate = useNavigate();
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
@@ -27,6 +29,7 @@ function SattaChart() {
     progressCircle.current.style.setProperty('--progress', 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
+
 
   return (
     <Layout>
@@ -38,7 +41,7 @@ function SattaChart() {
           <div style={styles.banner}>
             <div className="px-2 py-2 flex justify-between">
               <div className="flex items-center gap-2" style={styles.bannerText}>
-                <Box component={NavLink} to="/satta/matka">
+                <Box component={NavLink} to="/SattaChart">
                   <ArrowBack sx={{ color: 'white' }} />
                 </Box>
                 <span className="text-[14px]">Welcome To 5 Star xxx Satta Matka</span>
@@ -53,50 +56,12 @@ function SattaChart() {
               </div>
             </div>
           </div>
-          <Box className="!px-2" pt={2}>
-            <Swiper
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-              }}
-              pagination={{
-                clickable: false,
-              }}
-              navigation={false}
-              modules={[Autoplay, Pagination, Navigation]}
-              onAutoplayTimeLeft={onAutoplayTimeLeft}
-              className="mySwiper"
-              style={styles.swiperContainer}
-            >
-              <SwiperSlide sx={styles.swiperSlide}>
-                <Box
-                  component="img"
-                  src={one}
-                  alt="Slide 1"
-                  sx={styles.swiperImage}
-                />
-              </SwiperSlide>
-              <div className="autoplay-progress" slot="container-end" style={styles.autoplayProgress}>
-                <svg viewBox="0 0 48 48" ref={progressCircle}>
-                  <circle cx="24" cy="24" r="20"></circle>
-                </svg>
-                <span ref={progressContent}></span>
-              </div>
-            </Swiper>
-          </Box>
-
-          <Box sx={{ ...styles.flexbetween, width: '95%', ml: '2.5%' }} >
-            <Button component={NavLink} to='/satta/matka' sx={styles.chartButton}>Play satta matka</Button>
-            <Button component={NavLink} to='/wallet' startIcon={<Wallet />} sx={styles.walletButton}>My Wallet</Button>
-          </Box>
 
           <div className="mt-2 w-full" style={styles.contentContainer}>
 
-            <Box sx={styles.contentBox} component={NavLink} to='/location/chart/list'>
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">Location</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Gaziabad</Typography>
                 <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  59</Typography>
               </Box>
               <Box sx={styles.imageContainer}>
@@ -106,13 +71,50 @@ function SattaChart() {
                 <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
               </Box>
             </Box>
-            <Box sx={styles.contentBox} component={NavLink} to='/anderbaher/chart'>
+
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">Ander Baher</Typography>
-                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  79</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Noida</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  59</Typography>
               </Box>
               <Box sx={styles.imageContainer}>
-                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>79</Typography>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>25</Typography>
+              </Box>
+              <Box sx={styles.buttonContainer}>
+                <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
+              </Box>
+            </Box>
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+              <Box sx={styles.textContainer}>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Lucknow</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  59</Typography>
+              </Box>
+              <Box sx={styles.imageContainer}>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>25</Typography>
+              </Box>
+              <Box sx={styles.buttonContainer}>
+                <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
+              </Box>
+            </Box>
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+              <Box sx={styles.textContainer}>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Jharekhapur</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  59</Typography>
+              </Box>
+              <Box sx={styles.imageContainer}>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>25</Typography>
+              </Box>
+              <Box sx={styles.buttonContainer}>
+                <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
+              </Box>
+            </Box>
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+              <Box sx={styles.textContainer}>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Motipur</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  59</Typography>
+              </Box>
+              <Box sx={styles.imageContainer}>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>25</Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
                 <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
@@ -125,7 +127,7 @@ function SattaChart() {
   );
 }
 
-export default SattaChart;
+export default LocationListChart;
 
 const styles = {
   root: { background: stardarkblue, pb: 6 },
