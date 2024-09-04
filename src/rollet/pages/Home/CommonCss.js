@@ -397,7 +397,7 @@ export const style = {
       color: "white",
       mb: '1px',
       textAlign: 'center',
-      transform: "rotate(90deg)",
+      // transform: "rotate(90deg)",
     },
     "&>p:nth-child(2)": {
       fontSize: "15px",
@@ -405,9 +405,9 @@ export const style = {
       color: "#F01111",
       mb: '1px',
       textAlign: 'center',
-      transform: "rotate(90deg)",
+      // transform: "rotate(90deg)",
     },
-    "&>p:nth-child(3)": { fontSize: "15px", fontWeight: "600", color: "#6C10ED", mb: '1px', textAlign: 'center', transform: "rotate(90deg)", },
+    "&>p:nth-child(3)": { fontSize: "15px", fontWeight: "600", color: "#6C10ED", mb: '1px', textAlign: 'center', },
   },
   winnerLooserList2: {
     width: "80%",
