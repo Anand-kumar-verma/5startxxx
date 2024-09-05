@@ -44,6 +44,10 @@ import crown3 from "../../assets/crown3.png";
 import three from "../../assets/images/banner (3).jpg";
 import five from "../../assets/images/banner (4).jpg";
 import four from "../../assets/images/banner (5).jpg";
+import satta from "../../pages/SattaMatka/assets/images/satta.jpg";
+import position2 from "../../assets/images/positio2.png";
+import position3 from "../../assets/images/position3.png";
+import position1 from "../../assets/images/positoin1.png";
 import crown2 from "../../assets/images/crown2.png";
 import stage from "../../assets/images/podium.png";
 import refresh from "../../assets/images/refresh.png";
@@ -137,9 +141,8 @@ function Dashboard() {
     }
   );
 
-  const result = [];
-  // profile?.data?.data || [];
-
+  // const result = [];
+  const result = profile?.data?.data || [];
   const initialValues = {
     referral_code: `${fron_end_main_domain}/register?ref=${result?.referral_code}`,
   };
@@ -453,9 +456,9 @@ function Dashboard() {
               <TextField
                 className="dbinput"
                 fullWidth
-                id="referrel_code"
-                name="referrel_code"
-                value={fk.values.referrel_code}
+                id="referral_code"
+                name="referral_code"
+                value={fk.values.referral_code}
                 // onChange={fk.handleChange}
                 sx={styles.referralLinkInput}
               />
@@ -463,7 +466,7 @@ function Dashboard() {
                 variant="contained"
                 className="whitebtn"
                 sx={styles.referralLinkButton}
-                onClick={() => functionTOCopy(fk.values.referrel_code)}
+                onClick={() => functionTOCopy(fk.values.referral_code)}
               >
                 Copy
               </Button>
@@ -539,6 +542,40 @@ function Dashboard() {
                 className="blinking-button"
                 sx={{ ...styles.playbutton }}
                 onClick={() => navigate("/rollet")}
+              >
+                Play Now <StartIcon ml={2} />
+              </Button>
+            </Box>
+          </div>
+          <div
+            className="mt-2 w-full "
+            style={{
+              width: "95%",
+              marginLeft: "2.5%",
+              marginTop: "20px",
+              mb: "20px",
+              mt: '16px',
+            }}
+          >
+            <Box sx={{ ...styles.flexbetween, ...styles.gamemenubox }} className="w95">
+              <Box sx={{ ...styles.gameimgbox }}>
+                <Box component='img' src={satta} sx={{ ...styles.gameimg }}></Box>
+              </Box>
+              <Box sx={{ ...styles.gamenamebox }}>
+                <Box sx={{ ...styles.flexbetween }}>
+                  <Typography variant="h6" sx={{ fontWeight: '700', color: 'white' }} > Satta Matka </Typography>
+                </Box>
+                <Box sx={{ ...styles.flexbetween, my: 1, ...styles.maxwin }}>
+                  <Typography variant="body2" className="kip13" sx={{ textAlign: 'center', color: 'white !important', }}>The Highest Bonus in History</Typography>
+                  <Typography variant="body2" className="kip15" sx={{ color: 'white', fontWeight: '600', textAlign: 'center' }}>98456.66</Typography>
+                </Box>
+              </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                className="blinking-button"
+                sx={{ ...styles.playbutton }}
+                onClick={() => navigate('/satta/matka')}
               >
                 Play Now <StartIcon ml={2} />
               </Button>
@@ -893,7 +930,7 @@ function Dashboard() {
 export default Dashboard;
 
 const styles = {
-  root: { background: "#202020", pb: 6 },
+  root: { background: stardarkblue, pb: 6 },
   dashboardTitle: {
     textAlign: "center",
     color: "white !important",

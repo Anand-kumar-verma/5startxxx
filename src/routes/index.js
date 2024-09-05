@@ -8,6 +8,12 @@
 // import CricketWalletFundDepositForm from "../cricket/transacton/CricketWalletFundDepositForm";
 // import DepositCash from "../cricket/transacton/DepositCash";
 // import WithdrawlCash from "../cricket/transacton/WithdrawlCash";
+import AnderBaherChart from "../pages/SattaMatka/game/AnderBaherChart";
+import SattaChart from "../pages/SattaMatka/game/Chart";
+import LocationChart from "../pages/SattaMatka/game/LocationChart";
+import LocationListChart from "../pages/SattaMatka/game/LocationListChart";
+import Satta from "../pages/SattaMatka/game/Satta";
+import Sattagameplay from "../pages/SattaMatka/game/Sattagameplay";
 import Test from "../pages/Test";
 import Account from "../pages/account/Account";
 import AddBankDetails from "../pages/account/Component/AddBankDetails";
@@ -77,6 +83,14 @@ export const routes = [
         path: "/wallet/Recharge",
         component: <WalletRecharge />
     },
+    {
+        path: "/satta/matka",
+        component: <Satta />
+    },
+    // {
+    //     path: "/trx",
+    //     component: <Trx />
+    // },
     {
         path: "/wallet",
         component: <Wallet />
@@ -276,5 +290,25 @@ export const routes = [
     {
         path: "/deposit/qr-screen",
         component: <QRScreen />
+    },
+    {
+        path: "/SattaChart",
+        component: <SattaChart />
+    },
+    {
+        path: "/satta/play",
+        component: <Sattagameplay />
+    },
+    {
+        path: "/anderbaher/chart",
+        component: <AnderBaherChart />
+    },
+    {
+        path: "/location/chart/list",
+        component: <LocationListChart />
+    },
+    {
+        path: "/location/chart",
+        component: <LocationChart />
     },
 ]
