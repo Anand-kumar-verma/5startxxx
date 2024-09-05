@@ -1,26 +1,27 @@
-import { Box, Button, Typography, TextField, Drawer } from '@mui/material';
+import { Box, Button, Typography, TextField, Drawer, Grid, IconButton } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import { stargrad } from '../../../Shared/color';
+import { Add, Remove } from '@mui/icons-material';
 
 function Jodi() {
   const buttons = Array.from({ length: 100 }, (_, i) => String(i).padStart(2, '0'));
-  // const [bidAmount, setBidAmount] = useState(0);
+  const [bidAmount, setBidAmount] = useState(0);
   const [open, setOpen] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState(null);
-  // const handleIncrement = () => {
-  //   setBidAmount(prevAmount => prevAmount + 1);
-  // };
+  const handleIncrement = () => {
+    setBidAmount(prevAmount => prevAmount + 1);
+  };
 
-  // const handleDecrement = () => {
-  //   setBidAmount(prevAmount => (prevAmount > 0 ? prevAmount - 1 : 0));
-  // };
+  const handleDecrement = () => {
+    setBidAmount(prevAmount => (prevAmount > 0 ? prevAmount - 1 : 0));
+  };
 
-  // const handleChange = (event) => {
-  //   const value = parseInt(event.target.value, 10);
-  //   if (!isNaN(value)) {
-  //     setBidAmount(value);
-  //   }
-  // }
+  const handleChange = (event) => {
+    const value = parseInt(event.target.value, 10);
+    if (!isNaN(value)) {
+      setBidAmount(value);
+    }
+  }
   const toggleDrawer = (open) => {
     setOpen(open);
   };
@@ -96,12 +97,11 @@ function Jodi() {
           }}
         >
           <Typography variant="h4" sx={{ marginBottom: '10px', fontSize: '25px', fontWeight: '600px' }}>
-         {/* {selectedNumber} */} 43
+       43
           </Typography>
           <Typography variant="subtitle1" className='fp15' sx={{ marginBottom: '10px' }}>
             Enter Bid Amount
           </Typography>
-
           <TextField
             fullWidth
             type="number"

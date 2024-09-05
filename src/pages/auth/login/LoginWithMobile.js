@@ -38,7 +38,7 @@ function LoginWithMobile() {
   const initialValue = {
     mob: "",
     pass: "",
-    isAllowCheckBox: false,
+    // isAllowCheckBox: false,
     // device_id: device_id || uuid.v4(),
   };
 
@@ -46,10 +46,10 @@ function LoginWithMobile() {
     initialValues: initialValue,
     validationSchema: LoginMobileSchemaValidaton,
     onSubmit: () => {
-      if (!fk.values.isAllowCheckBox) {
-        toast("Plese Check Remember Password!");
-        return;
-      }
+      // if (!fk.values.isAllowCheckBox) {
+      //   toast("Plese Check Remember Password!");
+      //   return;
+      // }
 
       const reqbody = {
         username: fk.values.mob,
@@ -199,7 +199,7 @@ function LoginWithMobile() {
           </Typography>
         </FormControl>
       </Box>
-      <Box>
+      {/* <Box>
         <FormControl fullWidth>
           <FormControlLabel
             // required
@@ -216,7 +216,7 @@ function LoginWithMobile() {
             sx={{ color: "white" }}
           />
         </FormControl>
-      </Box>
+      </Box> */}
 
       <Button
         type="submit"
