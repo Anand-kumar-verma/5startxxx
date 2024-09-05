@@ -1747,12 +1747,12 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   );
                 } else {
                   setBetFuncton(
-                    201, 201,
+                    201, 38,
                     Number(isContainsPre?.amount) + amount
                   );
                 }
               } else {
-                setBetFuncton(201, 201, amount);
+                setBetFuncton(201, 38, amount);
               }
               e.stopPropagation();
             }}

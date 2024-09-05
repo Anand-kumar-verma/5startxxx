@@ -141,7 +141,7 @@ function Dashboard() {
   // profile?.data?.data || [];
 
   const initialValues = {
-    referrel_code: `${fron_end_main_domain}/register?ref=${result?.referral_code}`,
+    referral_code: `${fron_end_main_domain}/register?ref=${result?.referral_code}`,
   };
 
   const fk = useFormik({

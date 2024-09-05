@@ -2093,12 +2093,12 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       112,
-                      112,
+                      37,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(112, 112, amount);
+                  setBetFuncton(112, 37, amount);
                 }
                 e.stopPropagation();
               }}

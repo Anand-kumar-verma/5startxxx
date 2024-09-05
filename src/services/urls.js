@@ -2,16 +2,16 @@ export const rupees = "";
 
 export const baseUrl = "https://web.vegusgain.com";
 
-export const fron_end_main_domain = "https://vegusgain.com";
+export const fron_end_main_domain = "https://5starxxx.com";
 
 export const domain = "https://rollet-node-backend.onrender.com/";
 export const domain1 = "http://192.168.18.183:9002"
 
 
-export const download_app_url = "https://vegusgain.com/VegusGain.apk"
+export const download_app_url = ""
 export const support_mail = "";
 // `support@sunlottrey.fun`;
-export const telegram_url =`https://t.me/vegusgain`;
+export const telegram_url =``;
 
 export const endpoint = {
   login: `${domain1}/api/v1/login`,

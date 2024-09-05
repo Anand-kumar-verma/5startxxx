@@ -208,7 +208,7 @@ function LoginWithEmail() {
         </FormControl>
       </Box>
       <Box >
-        <FormControl fullWidth>
+        {/* <FormControl fullWidth>
           <FormControlLabel
             onClick={() =>
               fk.setFieldValue("isAllowCheckBox", !fk.values.isAllowCheckBox)
@@ -222,7 +222,7 @@ function LoginWithEmail() {
             label={<Typography className="fp13" >Remember password</Typography>}
             sx={{ color: "white" }}
           />
-        </FormControl>
+        </FormControl> */}
       </Box>
 
       <Button

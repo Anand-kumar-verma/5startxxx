@@ -8,6 +8,7 @@ function Layout(props) {
     window.scrollTo(0, 0);
   }, [])
   return (
+    
     <Box
       // background: '#202020',
       sx={{

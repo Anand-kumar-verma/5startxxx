@@ -584,12 +584,12 @@ const Third12 = ({
                   } else {
                     setBetFuncton(
                       30,
-                      [30],
+                      30,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(30, [30], amount);
+                  setBetFuncton(30, 30, amount);
                 }
                 e.stopPropagation();
               }}
@@ -2394,12 +2394,12 @@ const Third12 = ({
                   } else {
                     setBetFuncton(
                       312,
-                      312,
+                      39,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(312, 312, amount);
+                  setBetFuncton(312, 39, amount);
                 }
                 e.stopPropagation();
               }}
