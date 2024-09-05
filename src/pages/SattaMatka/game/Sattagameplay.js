@@ -31,7 +31,7 @@ function Sattagameplay() {
                 <Box component={NavLink} to="/satta/matka">
                   <ArrowBackRounded sx={{ mr: 1, color: 'white', }} />
                 </Box>
-                <Typography variant="body1" className='fp15' sx={{ color: 'white' }}>location </Typography>
+                <Typography variant="body1" className='fp15' sx={{ color: 'white' }}>Gali </Typography>
               </Box>
               <Box sx={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
                 <Wallet sx={{ mr: 1, color: 'white', }} />
@@ -46,8 +46,8 @@ function Sattagameplay() {
               aria-label="simple tabs example"
               sx={{ display: 'flex', justifyContent: 'space-between' }}
             >
-              <Tab label="Location" sx={{ flex: 1, color: 'white' }} />
-              <Tab label="Ander Bahar" sx={{ flex: 1, color: 'white' }} />
+              <Tab label="Gali" sx={{ flex: 1, color: 'white' }} />
+              <Tab label="Andar / Bahar" sx={{ flex: 1, color: 'white' }} />
             </Tabs>
             {value === 0 && <Jodi />}
             {value === 1 && <AndarBaharTable />}

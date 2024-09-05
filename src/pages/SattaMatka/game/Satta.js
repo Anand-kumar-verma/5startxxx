@@ -127,11 +127,11 @@ function Satta() {
                 <Box sx={styles.image} component='img' src={buildings}></Box>
               </Box>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">{`Location 7`}</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Gaziabad</Typography>
                 <Typography variant="body1" sx={styles.textWhite} className="fp13">Last result was :  59</Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
-                <Typography variant="body1" className="fp15" sx={{ color: '#4CBB17', textAlign: 'center', mb: 1, }}>Open</Typography>
+                <Typography variant="body1" className="fp15" sx={{ color: 'red', textAlign: 'center', mb: 1, }}>Closed</Typography>
                 <Button variant="text" className="fp11" sx={styles.upcomingButton}>Upcoming Result </Button>
                 <Typography variant="body1" className="fp13" sx={{ color: 'white', textAlign: 'center', mt: 1, }}>Time Left : {formatTime(time)}</Typography>
               </Box>
@@ -141,22 +141,22 @@ function Satta() {
                 <Box sx={styles.image} component='img' src={buildings}></Box>
               </Box>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">{`Location 7`}</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Faridabad</Typography>
                 <Typography variant="body1" sx={styles.textWhite} className="fp13">Last result was :  59</Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
-                <Typography variant="body1" className="fp15" sx={{ color: 'red', textAlign: 'center', mb: 1, }}>Closed</Typography>
+                <Typography variant="body1" className="fp15" sx={{ color: 'green', textAlign: 'center', mb: 1, }}>Open</Typography>
                 <Button variant="text" color="primary" sx={styles.playButton}>Play</Button>
               </Box>
             </Box>
-
+{/* 
             {[buildings, residential, buildings3d, apartments, property, buildings1].map((image, index) => (
               <Box key={index} sx={styles.contentBox}>
                 <Box sx={styles.imageContainer}>
                   <Box sx={styles.image} component='img' src={image}></Box>
                 </Box>
                 <Box sx={styles.textContainer}>
-                  <Typography variant="body1" sx={styles.textWhite} className="fp15">{`Location ${index + 1}`}</Typography>
+                  <Typography variant="body1" sx={styles.textWhite} className="fp15">{`Location ${index}`}</Typography>
                   <Typography variant="body1" sx={styles.textWhite} className="fp13">Last result was :  59</Typography>
                 </Box>
                 <Box sx={styles.buttonContainer}>
@@ -164,8 +164,33 @@ function Satta() {
                   <Button component={NavLink} to='/satta/play' variant="text" color="primary" sx={styles.playButton}>Play</Button>
                 </Box>
               </Box>
-            ))}
-
+            ))} */}
+             <Box sx={styles.contentBox}>
+                <Box sx={styles.imageContainer}>
+                  <Box sx={styles.image} component='img' src={""}></Box>
+                </Box>
+                <Box sx={styles.textContainer}>
+                  <Typography variant="body1" sx={styles.textWhite} className="fp15">Gali </Typography>
+                  <Typography variant="body1" sx={styles.textWhite} className="fp13">Last result was :  59</Typography>
+                </Box>
+                <Box sx={styles.buttonContainer}>
+                  <Typography variant="body1" className="fp15" sx={{ color: '#4CBB17', textAlign: 'center', mb: 1, }}>Open</Typography>
+                  <Button component={NavLink} to='/satta/play' variant="text" color="primary" sx={styles.playButton}>Play</Button>
+                </Box>
+              </Box>
+              <Box sx={styles.contentBox}>
+                <Box sx={styles.imageContainer}>
+                  <Box sx={styles.image} component='img' src={""}></Box>
+                </Box>
+                <Box sx={styles.textContainer}>
+                  <Typography variant="body1" sx={styles.textWhite} className="fp15"> Disawar</Typography>
+                  <Typography variant="body1" sx={styles.textWhite} className="fp13">Last result was :  59</Typography>
+                </Box>
+                <Box sx={styles.buttonContainer}>
+                  <Typography variant="body1" className="fp15" sx={{ color: '#4CBB17', textAlign: 'center', mb: 1, }}>Open</Typography>
+                  <Button component={NavLink} to='/satta/play' variant="text" color="primary" sx={styles.playButton}>Play</Button>
+                </Box>
+              </Box>
           </div>
 
         </Container>

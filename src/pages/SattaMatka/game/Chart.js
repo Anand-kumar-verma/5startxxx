@@ -94,9 +94,9 @@ function SattaChart() {
 
           <div className="mt-2 w-full" style={styles.contentContainer}>
 
-            <Box sx={styles.contentBox} component={NavLink} to='/location/chart/list'>
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">Location</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Gali</Typography>
                 <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  59</Typography>
               </Box>
               <Box sx={styles.imageContainer}>
@@ -106,9 +106,33 @@ function SattaChart() {
                 <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
               </Box>
             </Box>
-            <Box sx={styles.contentBox} component={NavLink} to='/anderbaher/chart'>
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">Ander Baher</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Faridabad</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  79</Typography>
+              </Box>
+              <Box sx={styles.imageContainer}>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>79</Typography>
+              </Box>
+              <Box sx={styles.buttonContainer}>
+                <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
+              </Box>
+            </Box>
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+              <Box sx={styles.textContainer}>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Disawar</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  79</Typography>
+              </Box>
+              <Box sx={styles.imageContainer}>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>79</Typography>
+              </Box>
+              <Box sx={styles.buttonContainer}>
+                <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
+              </Box>
+            </Box>
+            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+              <Box sx={styles.textContainer}>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">Gaziabad</Typography>
                 <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  79</Typography>
               </Box>
               <Box sx={styles.imageContainer}>
