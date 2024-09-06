@@ -7,7 +7,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import { checkTokenValidity } from "../../../Shared/CookieStorage";
 import { useSocket } from "../../../Shared/SocketContext";
-import { getHistoryRollet, getProfileRollet, getResultOfRollet, logOutFunctoinRoulette, walletamount, } from "../../../services/apicalling";
+import {  getProfileRollet, logOutFunctoinRoulette, walletamount, } from "../../../services/apicalling";
 import axios from "axios";
 import { endpoint } from "../../../services/urls";
 import placebetmusic from "../../assets/images/applybet_music.mp3";
@@ -28,6 +28,7 @@ import SvgCircle from "./SvgCircle";
 import MyTableComponent from "./Tablehistory";
 import TwoToOne from "./TwoToOne";
 import dealer from "../../../rollet/assets/images/pngegg.png";
+import { apiConnectorGet } from "../../../services/apiconnector";
 
 
 
@@ -91,19 +92,9 @@ function Home() {
   );
 
   const profileData = data?.data?.data || 0;
-  const { isLoading: bet_history_loding, data: bet_history } = useQuery(
-    ["history_rollet"],
-    () => getHistoryRollet(),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
-
-  const bet_history_Data = bet_history?.data?.data || [];
 
   const { isLoading: bet_result_history_loding, data: bet_result_history } =
-    useQuery(["history_rollet_result"], () => getResultOfRollet(), {
+    useQuery(["history_rollet_result"], () => apiConnectorGet(endpoint.node.game_result), {
       refetchOnMount: false,
       refetchOnReconnect: true,
     });

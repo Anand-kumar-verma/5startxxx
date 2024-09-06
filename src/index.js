@@ -24,7 +24,7 @@ root.render(
           <ThemeProvider theme={theme}>
             <App />
             <Toaster
-              position="top-right"
+              position="top-center"
               toastOptions={{
                 duration: 1000,
                 className: "",

@@ -62,7 +62,7 @@ const ConfirmationDialogBox = ({
         sx={{
           "&>div": {
             background: "transparent",
-            width: "400px",
+            // width: "400px",
             height: "85vh",
             ...style.flex,
           },
@@ -79,9 +79,9 @@ const ConfirmationDialogBox = ({
             // width: "100%",
             // height: "50%",
             background: "black !important ",
-            transform: "rotate(90deg)",
+            // transform: "rotate(90deg)",
             borderRadius: "10px",
-            padding: "10px",
+            padding: "5px",
           }}
         >
           PLEASE &nbsp; WAIT&nbsp; TO &nbsp;COMPLETE &nbsp; LAST &nbsp; GAME

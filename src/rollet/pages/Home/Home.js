@@ -1,21 +1,28 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Button, ButtonGroup, Collapse, Drawer, Stack, TextField, Typography } from "@mui/material";
+import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
+import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
+import { Box, Button, ButtonGroup, Collapse, Drawer, Stack, Typography } from "@mui/material";
 import CryptoJS from "crypto-js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { checkTokenValidity } from "../../../Shared/CookieStorage";
+import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 import { useSocket } from "../../../Shared/SocketContext";
-import { getHistoryRollet, getProfileRollet, getResultOfRollet, logOutFunctoinRoulette, walletamount, } from "../../../services/apicalling";
-import axios from "axios";
+import btbg1 from "../../../assets/btbg1.png";
+import btbg2 from "../../../assets/btbg2.png";
+import btbg3 from "../../../assets/btbg3.png";
+import rouletteBORD from "../../assets/images/thumbs_bgs.png";
+import model2 from "../../../rollet/assets/images/model2.png";
+import dealer from "../../../rollet/assets/images/model3.png";
+import { getProfileRollet } from "../../../services/apicalling";
+import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import placebetmusic from "../../assets/images/applybet_music.mp3";
 import mouse_click from "../../assets/images/mouse_click.mp3";
+import roulette from "../../../assets/mainrollet.png";
 import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.mp3";
-import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
-import roulettebg from "../../../rollet/assets/images/thumbs_bgs.png";
-import roulette from "../../assets/images/realwgeelwith1red.png";
 import stop_ball_music from "../../assets/images/stop_ball_music.mp3";
 import watch from "../../assets/images/watch.png";
 import { addWinCap, black_array, confirmBet, justDouble, justHalf, rebetFuncton, red_array, spinFunction, } from "../../sharedFunction";
@@ -27,21 +34,11 @@ import Rule from "./Rule";
 import SvgCircle from "./SvgCircle";
 import MyTableComponent from "./Tablehistory";
 import TwoToOne from "./TwoToOne";
-import dealer from "../../../rollet/assets/images/model3.png";
-import model2 from "../../../rollet/assets/images/model2.png";
-import btbg1 from "../../../assets/btbg1.png";
-import btbg2 from "../../../assets/btbg2.png";
-import btbg3 from "../../../assets/btbg3.png";
-import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
-import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { apiConnectorGet } from "../../../services/apiconnector";
 
 
 
 function Home() {
-
-  const navigate = useNavigate();
+  
   const isAlreadyAppliedBet = localStorage?.getItem("rollet_bet_placed");
   let isPreBet = localStorage.getItem("isPreBet");
   let total_amount_bet = localStorage.getItem("total_amount_bet") || 0;
@@ -69,23 +66,23 @@ function Home() {
   const [amount, setAmount] = useState(10);
   const [rebet, setrebet] = useState([]);
   const [preBetHandle, setIsPreBetHandle] = useState(false);
-  
+
   useEffect(() => {
     localStorage?.setItem("isPreBet", false);
   }, []);
-  const {  data:wallet } = useQuery(
+  const { data: wallet } = useQuery(
     ["walletamount"],
     () => apiConnectorGet(endpoint.node.get_wallet),
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false
     }
   );
 
   const newdata = wallet?.data?.data || 0;
- 
-  const {  data } = useQuery(
+
+  const { data } = useQuery(
     ["profile_rollet"],
     () => getProfileRollet(),
     {
@@ -96,21 +93,21 @@ function Home() {
 
   const profileData = data?.data?.data || 0;
 
-  const { data:hist } = useQuery(
+  const { data: hist } = useQuery(
     ["history_w"],
     () => apiConnectorGet(endpoint.node.history_my),
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false
     }
   );
 
-  const res= hist?.data?.data || [];
+  const res = hist?.data?.data || [];
 
 
   const { data: bet_result_history } =
-    useQuery(["history_rollet_result"], () => getResultOfRollet(), {
+    useQuery(["history_rollet_result"], () => apiConnectorGet(endpoint.node.game_result), {
       refetchOnMount: false,
       refetchOnReconnect: true,
     });
@@ -145,7 +142,7 @@ function Home() {
       )?.toFixed(2)
     )
 
-   
+
       return toast(
         <span
           className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
@@ -238,7 +235,6 @@ function Home() {
 
   useEffect(() => {
     if (!checkTokenValidity()) {
-      logOutFunctoinRoulette(navigate);
       localStorage.clear();
       sessionStorage.clear();
       window.location.href = "/"; // Redirect to login page
@@ -310,7 +306,7 @@ function Home() {
       setOne_min_time(onemin);
 
       if (onemin === 58 || onemin === 57) {
-        setOpen3(false);
+        // setOpen3(false);
         setIsPreBetHandle(true);
         localStorage.setItem("total_amount_bet", 0);
       }
@@ -321,7 +317,7 @@ function Home() {
       }
 
       if (onemin === 15) {
-       
+        // setOpen3(false)
         let id = localStorage.getItem("result_rollet");
         let element = document.getElementById(`${String(id)}_rotate`);
 
@@ -358,7 +354,7 @@ function Home() {
         getWinPopup();
       }, 12000);
     };
-
+    // oneminrollet
     socket.on("oneminrollet", handleOneMin);
     socket.on("rolletresult", handleOneMinrolletresult);
     return () => {
@@ -375,12 +371,9 @@ function Home() {
     let isPlaced = localStorage.getItem("rollet_bet_placed");
     let win_amount = 0;
     try {
-      const response = await axios.get(
-        endpoint?.rollet?.history + `?userid=${user_id}&limit=0`
-      );
-
-      const newupdatedArray = response?.data?.data?.[0] || [];
-      console.log(newupdatedArray, "new array");
+      const response = await apiConnectorGet(endpoint.node.history_my)
+      const newupdatedArray = response?.data?.data?.[0]?.win || [];
+      console.log(response?.data?.data?.[0]?.win, "ff");
       win_amount = newupdatedArray?.win || 0;
       if (win_amount > 0 && isPlaced === "true") {
         setOpenDialogBox(win_amount);
@@ -414,23 +407,6 @@ function Home() {
     }
   };
 
-  const toggleDrawer3 = (open) => () => {
-    setOpen3(open);
-  };
-
-  useEffect(() => {
-    if (one_min_time === 0) {
-      setOpen3(true);
-    }
-
-    if (one_min_time === 15) {
-      let id = localStorage.getItem("result_rollet");
-      let element = document.getElementById(`${String(id)}_rotate`);
-      element?.classList.add("hidden");
-      setresult_rollet("");
-    }
-  }, [one_min_time]);
-
   return (
     <Box className="home" sx={style.root}>
       <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }} className="w95">
@@ -451,21 +427,57 @@ function Home() {
           }} />
         </Box>
       </Stack>
-      <Stack sx={{ mt: 1, alignItems: 'center', justifyContent: 'space-between', }} direction='row'>
+      <Stack sx={{  alignItems: 'center', justifyContent: 'space-between', }} direction='row' >
         <Stack sx={{ alignItems: 'center', justifyContent: 'space-between', }} direction='row'>
           <Box sx={{ width: '50px', height: '40px', background: '#BA903B', borderRadius: '5px', border: '1px solid white', mr: 1, }}>
             <Typography variant="body1" sx={{ fontSize: '25px', fontWeight: '700', color: 'white', textAlign: 'center' }}>    {result_rollet}</Typography>
           </Box>
           <Box>
-            <Typography variant="body1" sx={style.p13}>       {profileData?.full_name
+            <Typography className="!text-xs " variant="body1" sx={style.p13}>       {profileData?.full_name
               ? profileData?.full_name?.substring(0, 10) + "..."
               : "*******"}</Typography>
-            <Typography variant="body1" sx={style.p13}> Bet Amount -    {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
+            <Typography className="!text-xs" variant="body1" sx={style.p13}> Bet -    {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
               Number(total_amount_bet)?.toFixed(2)}</Typography>
-            <Typography variant="body1" sx={style.p13}> You Win -    {openDialogBox ? Number(openDialogBox || 0)?.toFixed(2) : 0}</Typography>
+            <Typography className="!-mb-2 !text-xs" variant="body1" sx={style.p13}> Win - 
+                 { Number(res?.[0]?.win || 0)?.toFixed(2)}
+                 </Typography>
           </Box>
         </Stack>
+        <Collapse in={open3}>
+          <Box sx={{ position: 'absolute', width: '90%', height: '50%', background: 'red', zIndex: '1000', left: '5%', top: '25%', borderRadius: '10px' }}>
+            <Box sx={{
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              // backgroundImage: `url(${roulettebg})`,
+              // backgroundRepeat: "no-repeat",
+              // backgroundSize: "100% 100%",
+              // background: '#BA903B',
+              backgroundImage: `url(${rouletteBORD})`,
+              borderRadius: '5px', 
+              border: '1px solid white',
+            }}>
+              <div
+                style={{
+                  width: '250px',
+                  height: '250px',
+                  position: 'absolute',
+                  top: '5%',
+                  right: '10%',
+                }}
+                className=" !flex !justify-center !items-center animation_image z-50"
+              >
+                <img
+                  src={roulette}
+                  className="!h-full !w-full !bg-no-repeat "
+                />
+                <Rolletball />
+              </div>
 
+
+            </Box>
+          </Box>
+        </Collapse >
         <Box sx={{ width: '50px', height: '50px', background: '#BA903B', borderRadius: '5px', border: '1px solid white', }}>
           {useMemo(() => {
             return (
@@ -485,10 +497,10 @@ function Home() {
                       src={roulette}
                       className="!h-full !w-full !bg-no-repeat "
                     />
-                    <Rolletball />
+                    {/* <Rolletball /> */}
                   </div>
                 </Box>
-           
+
                 {/* <Box sx={{ width: '50px', height: '25px', background: '#BA903B', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '5px', mt: 1, }}
                 onClick={toggleDrawer3(true)}>
                   <Typography  variant="body1" color="initial" sx={{ fontWeight: '500', color: 'white', borderRadius: '5px', }}><RemoveRedEyeIcon /></Typography>
@@ -498,44 +510,7 @@ function Home() {
           }, [])}
         </Box>
       </Stack>
-      <Collapse in={open3}>
-        <Box sx={{ position: 'absolute', width: '90%', height: '50%', background: 'red', zIndex: '1000', left: '5%', top: '25%', borderRadius: '10px' }}>
-          <Box sx={{
-            width: '100%',
-            height: '100%',
-            position: 'relative',
-            // backgroundImage: `url(${roulettebg})`,
-            // backgroundRepeat: "no-repeat",
-            // backgroundSize: "100% 100%",
-            background: '#BA903B',
-            borderRadius: '10px'
-          }}>
-            <div
-              style={{
-                width: '250px',
-                height: '250px',
-                position: 'absolute',
-                top: '5%',
-                right: '15%',
-              }}
-              className=" !flex !justify-center !items-center animation_image"
-            >
-              <img
-                src={roulette}
-                className="!h-full !w-full !bg-no-repeat "
-              />
-              <Rolletball />
-            </div>
 
-            <Button sx={{
-              width: '30%', background: '#E70127', position: 'absolute', bottom: '5%', left: '35%', backgroundImage: `url(${btbg2})`,
-              backgroundSize: '100% 100%',
-              color: 'white', '&:hover': { backgroundColor: 'transparent', },
-
-            }} onClick={toggleDrawer3(false)} variant="contained">close</Button>
-          </Box>
-        </Box>
-      </Collapse >
       <CustomCircularProgress isLoading={loding} />
       {
         useMemo(() => {
@@ -860,7 +835,7 @@ function Home() {
                 width: '25%',
               },
               '&>button:nth-child(3)': {
-                backgroundImage: `url(${btbg3})`,
+                backgroundImage: `url(${btbg1})`,
                 backgroundSize: '100% 100%',
                 color: 'white',
                 width: '25%',
@@ -879,34 +854,46 @@ function Home() {
                 fontSize: "11px",
                 borderRadius: "5px",
               }}
-              onClick={() => removeBetFunctonAll()}>Remove</Button>
-              <Button variant="contained"  sx={{
+                onClick={() => removeBetFunctonAll()}>Remove</Button>
+              <Button variant="contained" sx={{
                 backgroundImage: `url(${btbg3})`,
                 backgroundSize: '100% 100%',
                 color: 'white !important', fontSize: '20px', fontWeight: '700', '&:hover': { backgroundColor: 'transparent', },
               }}
-              onClick={() => justHalf(bet, setBet, newdata)}>
+                onClick={() => justHalf(bet, setBet, newdata)}>
                 -
               </Button>
-              <TextField
-                 value= {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
-                  Number(total_amount_bet)?.toFixed(2)}
-                // onChange={(e) => setIncvalue(Number(e.target.value))}
-                size="small"
-                inputProps={{ style: { textAlign: 'center' } }}
-                sx={{
-                  width: '25%', backgroundImage: `url(${btbg1})`,
-                  backgroundSize: '100% 100%', '&>div>input': { color: 'white !important', fontSize: '20px', fontWeight: '700' },
+              <Button
+                onClick={() => {
+                  mouseClickSound();
+                  confirmBet(
+                    setloding,
+                    rebet,
+                    setrebet,
+                    bet,
+                    setBet,
+                    user_id,
+                    newdata,
+                    client
+                  );
                 }}
-              />
-              <Button variant="contained"  sx={{
+                className="text-white w-[25%] !text-center pt-3 !cursor-pointer"
+                sx={{
+                  backgroundImage: `url(${btbg1})`,
+                  backgroundSize: '100% 100%', '&>div>input': { color: 'white !important', fontSize: '20px', fontWeight: '700' },
+                }}   >
+                {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
+                  Number(total_amount_bet)?.toFixed(2)}
+              </Button>
+
+                 <Button variant="contained" sx={{
                 backgroundImage: `url(${btbg3})`,
                 backgroundSize: '100% 100%',
                 color: 'white !important', fontSize: '20px', fontWeight: '700',
                 '&:hover': { backgroundColor: 'transparent', },
-              }} 
-               onClick={() => justDouble(bet, setBet, newdata)}
-               >
+              }}
+                onClick={() => justDouble(bet, setBet, newdata)}
+              >
                 +
               </Button>
               {/* <Button variant="contained" disabled={one_min_time < 10 || !(bet?.length > 0 && isAlreadyAppliedBet === "false")} onClick={() => removeBetFunctonAll()}>Clear Bet</Button> */}
@@ -1040,13 +1027,13 @@ function Home() {
           >
             <Box
               sx={{
-                // width: "100%",
-                // height: "100%",
-                // // transform: "rotate(90deg)",
-                width: "160%",
+                width: "100%",
                 height: "55%",
+                // // transform: "rotate(90deg)",
+                // width: "150%",
+                // height: "55%",
                 background: "white",
-                transform: "rotate(90deg)",
+                // transform: "rotate(90deg)",
                 borderRadius: "5px",
                 padding: "0px",
               }}

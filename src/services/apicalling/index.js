@@ -37,28 +37,8 @@ export const getProfileRollet = async () => {
     console.log(e);
   }
 };
-export const getHistoryRollet = async () => {
-  try {
-    const response = await axios.get(
-      endpoint?.rollet?.history + `?userid=${user_id}&limit=0`
-    );
-    return response;
-  } catch (e) {
-    toast(e?.message);
-    console.log(e);
-  }
-};
-export const getResultOfRollet = async () => {
-  try {
-    const response = await axios.get(
-      endpoint?.rollet?.game_result + "?limit=10"
-    );
-    return response;
-  } catch (e) {
-    toast(e?.message);
-    console.log(e);
-  }
-};
+
+
 
 export const MyProfileDataFn = async () => {
   try {

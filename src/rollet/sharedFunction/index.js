@@ -175,13 +175,13 @@ export const confirmBet = async (
   const isAlreadyAppliedBet = localStorage.getItem("rollet_bet_placed");
   if (isAlreadyAppliedBet === "true")
     return toast(
-      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700 !rotate-90 !rounded-full">
+      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700  !rounded-full">
         Bid Already Placed.
       </span>
     );
   if (bet?.length <= 0)
     return toast(
-      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700 !rotate-90 !rounded-full">
+      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700  !rounded-full">
         Please Select Your Bet First.
       </span>
     );
@@ -253,14 +253,14 @@ export const confirmBet = async (
       const res = await apiConnectorPost(endpoint?.rollet?.bet_now, {bet_array:JSON.stringify(reqbody)});
       toast(
         <span
-          className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
-          style={{ display: "inline-block", transform: "rotate(90deg)" }}
+          className=" !text-white  !rounded-full"
+          style={{ display: "inline-block"}}
         >
           {res?.data?.msg}
         </span>
       );
       if (res?.data?.msg === "Bet Successfully") {
-        setrebet(bet);
+        setrebet(bet)
         localStorage.setItem("betlen", bet?.length || 0);
         // bet?.forEach((ele) => {
         //   let element = document.getElementById(`${ele?.id}`);

@@ -474,7 +474,9 @@ function Account() {
               textTransform: 'capitalize',
             }}
             onClick={() => {
-              logOutFunctoinRoulette(navigate);
+              localStorage.clear();
+              sessionStorage.clear();
+              window.location.href = "/";
             }}
           >
             Logout

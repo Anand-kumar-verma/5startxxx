@@ -4,7 +4,8 @@ export const baseUrl = "https://admin.5starxxx.com";
 export const fron_end_main_domain = "https://5starxxx.com";
 
 export const domain = "https://rollet-node-backend.onrender.com/";
-// export const domain1 = "http://192.168.18.183:9002"
+// export const domain ="http://192.168.18.183:9002/"
+export const domainn = "http://192.168.18.183:9002"
 export const domain1 = "https://api.5starxxx.com"
 
 
@@ -75,12 +76,12 @@ export const endpoint = {
     login: baseUrl + "/api/roulette-login",
     bet_now: domain1 + "/api/v1/betPlacedRoulette",
     profile: baseUrl + "/api/roulette-profile",
-    history: baseUrl + "/api/get-bet-history",
-    game_result: baseUrl + "/api/roulette-results-history",
+    // game_result: baseUrl + "/api/roulette-results-history",
   },
 
   node:{
     get_wallet:domain1+"/api/v1/balance",
     history_my: domain1 + "/api/v1/getMyHistory",
+     game_result: domainn + "/api/v1/getRouletteGameHistory"
   }
 };
