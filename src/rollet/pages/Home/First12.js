@@ -49,7 +49,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -312,7 +312,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -575,7 +575,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -838,7 +838,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -994,7 +994,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -1202,7 +1202,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -1410,7 +1410,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -1618,7 +1618,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -1720,7 +1720,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -1819,7 +1819,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -1918,7 +1918,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {
@@ -2017,7 +2017,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                        Bet must be greater than 10 and less that 50000 Rupees
                       </span>
                     );
                   } else {

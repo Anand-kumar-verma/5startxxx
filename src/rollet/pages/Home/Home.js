@@ -54,6 +54,7 @@ function Home() {
   const mouseClickSoundref = useRef();
   const placeBetMusic = useRef();
   const [open1, setOpen1] = useState();
+  const [open3, setOpen3] = useState();
   const [loding, setloding] = useState(false);
   const [isOpenPreRoundDialogBox, setisOpenPreRoundDialogBox] = useState(false);
   const [isSelectedDropBet, setisSelectedDropBet] = useState(false);
@@ -68,6 +69,7 @@ function Home() {
   const [amount, setAmount] = useState(10);
   const [rebet, setrebet] = useState([]);
   const [preBetHandle, setIsPreBetHandle] = useState(false);
+  
   useEffect(() => {
     localStorage?.setItem("isPreBet", false);
   }, []);
@@ -83,8 +85,7 @@ function Home() {
 
   const newdata = wallet?.data?.data || 0;
  
-
-  const { isLoading, data } = useQuery(
+  const {  data } = useQuery(
     ["profile_rollet"],
     () => getProfileRollet(),
     {
@@ -107,18 +108,8 @@ function Home() {
 
   const res= hist?.data?.data || [];
 
-  const { isLoading: bet_history_loding, data: bet_history } = useQuery(
-    ["history_rollet"],
-    () => getHistoryRollet(),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
 
-  const bet_history_Data = bet_history?.data?.data || [];
-
-  const { isLoading: bet_result_history_loding, data: bet_result_history } =
+  const { data: bet_result_history } =
     useQuery(["history_rollet_result"], () => getResultOfRollet(), {
       refetchOnMount: false,
       refetchOnReconnect: true,
@@ -319,15 +310,18 @@ function Home() {
       setOne_min_time(onemin);
 
       if (onemin === 58 || onemin === 57) {
+        setOpen3(false);
         setIsPreBetHandle(true);
         localStorage.setItem("total_amount_bet", 0);
       }
       if (onemin === 55) localStorage?.setItem("rollet_bet_placed", false);
       if (onemin === 0) {
+        setOpen3(true)
         handlePlaySound();
       }
 
       if (onemin === 15) {
+       
         let id = localStorage.getItem("result_rollet");
         let element = document.getElementById(`${String(id)}_rotate`);
 
@@ -364,6 +358,7 @@ function Home() {
         getWinPopup();
       }, 12000);
     };
+
     socket.on("oneminrollet", handleOneMin);
     socket.on("rolletresult", handleOneMinrolletresult);
     return () => {
@@ -419,11 +414,22 @@ function Home() {
     }
   };
 
-  const [open3, setOpen3] = useState(false);
-
-  const toggleDrawer3 = (data) => () => {
-    setOpen3(data);
+  const toggleDrawer3 = (open) => () => {
+    setOpen3(open);
   };
+
+  useEffect(() => {
+    if (one_min_time === 0) {
+      setOpen3(true);
+    }
+
+    if (one_min_time === 15) {
+      let id = localStorage.getItem("result_rollet");
+      let element = document.getElementById(`${String(id)}_rotate`);
+      element?.classList.add("hidden");
+      setresult_rollet("");
+    }
+  }, [one_min_time]);
 
   return (
     <Box className="home" sx={style.root}>
@@ -482,10 +488,11 @@ function Home() {
                     <Rolletball />
                   </div>
                 </Box>
-                <Box sx={{ width: '50px', height: '25px', background: '#BA903B', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '5px', mt: 1, }}
+           
+                {/* <Box sx={{ width: '50px', height: '25px', background: '#BA903B', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '5px', mt: 1, }}
                 onClick={toggleDrawer3(true)}>
                   <Typography  variant="body1" color="initial" sx={{ fontWeight: '500', color: 'white', borderRadius: '5px', }}><RemoveRedEyeIcon /></Typography>
-                </Box>
+                </Box> */}
               </>
             );
           }, [])}

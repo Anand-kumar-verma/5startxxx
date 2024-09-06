@@ -642,7 +642,8 @@ function WalletRecharge() {
               {fk.touched.amount && fk.errors.amount && (
                 <div className="error">{fk.errors.amount}</div>
               )}
-              <Button sx={style.paytmbtntwo} onClick={fk.handleSubmit}>
+              {/* <Button sx={style.paytmbtntwo} onClick={fk.handleSubmit}> */}
+              <Button sx={style.paytmbtntwo}>
                 Deposit
               </Button>
             </Stack>

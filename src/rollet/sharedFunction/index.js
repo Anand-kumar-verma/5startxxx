@@ -150,8 +150,7 @@ export const spinFunction = (id) => {
       animation20.innerHTML = keyframes20;
       document.getElementsByTagName("head")[0].appendChild(animation20);
 
-      element.style.animation =
-        "rotatemainnumber20 3s reverse linear 2 forwards";
+      element.style.animation = "rotatemainnumber20 3s reverse linear 2 forwards";
     } else if (event.animationName === "rotatemainnumber20") {
       element.style.animation = "";
       // element.classList.add("hidden");
@@ -371,17 +370,21 @@ export const justDouble = (bet, setBet, wallet_amount_data) => {
 };
 export const justHalf = (bet, setBet, wallet_amount_data) => {
   let newUpdateAmountArray = bet?.map((ele) => {
-    let newAmount = Number(ele?.amount) > 20
-      ? Number(ele?.amount) / 10
-      : Number(ele?.amount);
+    let initialAmount = Number(ele?.amount);
+    let newAmount = initialAmount > 20
+      ? initialAmount / 10
+      : initialAmount;
 
-    let finalAmount = [...black_array, ...red_array]?.includes(Number(ele?.id))
-      ? newAmount > 5000
-        ? Number(ele?.amount)
-        : newAmount
-      : newAmount > 50000
-        ? Number(ele?.amount)
-        : newAmount;
+    let finalAmount = Math.max(
+      10,
+      [...black_array, ...red_array]?.includes(Number(ele?.id))
+        ? newAmount > 5000
+          ? initialAmount
+          : newAmount
+        : newAmount > 50000
+          ? initialAmount
+          : newAmount
+    );
 
     return {
       ...ele,
@@ -412,6 +415,7 @@ export const justHalf = (bet, setBet, wallet_amount_data) => {
       element.removeChild(span);
     }
   });
+
   newUpdateAmountArray?.forEach((ele) => {
     forPlaceCoin(ele?.id, ele?.amount);
   });
