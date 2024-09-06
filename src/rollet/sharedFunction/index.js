@@ -371,10 +371,10 @@ export const justDouble = (bet, setBet, wallet_amount_data) => {
 export const justHalf = (bet, setBet, wallet_amount_data) => {
   let newUpdateAmountArray = bet?.map((ele) => {
     let initialAmount = Number(ele?.amount);
-    let newAmount = initialAmount > 20
-      ? initialAmount / 10
-      : initialAmount;
-
+    let newAmount = initialAmount > 20 ? initialAmount / 10 : initialAmount;
+    if (newAmount < 10) {
+      newAmount = initialAmount;
+    }
     let finalAmount = Math.max(
       10,
       [...black_array, ...red_array]?.includes(Number(ele?.id))
@@ -385,18 +385,15 @@ export const justHalf = (bet, setBet, wallet_amount_data) => {
           ? initialAmount
           : newAmount
     );
-
     return {
       ...ele,
       amount: finalAmount
     };
   });
-
   const total_bet_amount = newUpdateAmountArray?.reduce(
     (a, b) => a + Number(b?.amount),
     0
   );
-
   if (total_bet_amount > Number(wallet_amount_data?.wallet || 0) + Number(wallet_amount_data?.winning || 0)) {
     return toast(
       <span
@@ -407,21 +404,19 @@ export const justHalf = (bet, setBet, wallet_amount_data) => {
       </span>
     );
   }
-
   bet?.forEach((ele) => {
     let element = document.getElementById(`${ele?.id}`);
-    let span = element.querySelector("span");
+    let span = element?.querySelector("span");
     if (span) {
       element.removeChild(span);
     }
   });
-
   newUpdateAmountArray?.forEach((ele) => {
     forPlaceCoin(ele?.id, ele?.amount);
   });
-
   setBet(newUpdateAmountArray);
 };
+
 
 export const rebetFuncton = (bet, rebet, setBet, wallet_amount_data) => {
   // setBet([]);

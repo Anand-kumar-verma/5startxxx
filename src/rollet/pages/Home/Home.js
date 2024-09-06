@@ -549,11 +549,8 @@ function Home() {
         }, [placeBetMusic])
       }
       <Rule setOpen2={setOpen2} open2={open2} style={style} />
-      <Box
-
-      >
-        <Box
-        >
+      <Box>
+        <Box>
           {useMemo(() => {
             return (
               <>
