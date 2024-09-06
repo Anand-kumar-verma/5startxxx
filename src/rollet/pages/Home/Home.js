@@ -306,7 +306,7 @@ function Home() {
       setOne_min_time(onemin);
 
       if (onemin === 58 || onemin === 57) {
-        setOpen3(false);
+        // setOpen3(false);
         setIsPreBetHandle(true);
         localStorage.setItem("total_amount_bet", 0);
       }
@@ -317,7 +317,7 @@ function Home() {
       }
 
       if (onemin === 15) {
-        setOpen3(false)
+        // setOpen3(false)
         let id = localStorage.getItem("result_rollet");
         let element = document.getElementById(`${String(id)}_rotate`);
 
@@ -451,20 +451,20 @@ function Home() {
               position: 'relative',
               // backgroundImage: `url(${roulettebg})`,
               // backgroundRepeat: "no-repeat",
-              // backgroundSize: "100% 100%",
+              backgroundSize: "100% 100%",
               // background: '#BA903B',
               backgroundImage: `url(${rouletteBORD})`,
-              borderRadius: '5px', 
+              borderRadius: '25px', 
               border: '1px solid white',
             }}>
               <div
                 style={{
-                  width: '250px',
-                  height: '250px',
+                  width: '300px',
+                  height: '300px',
+                  bottom:"12px",
+                  left:"12px",
                   position: 'absolute',
-                  top: '5%',
-                  right: '15%',
-                }}
+                 }}
                 className=" !flex !justify-center !items-center animation_image z-50"
               >
                 <img
