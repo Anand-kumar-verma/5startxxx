@@ -31,8 +31,8 @@ const MyTableComponent = ({ res }) => {
           <TableHead>
             <TableRow>
               <TableCell align="center">S.No.</TableCell>
-              <TableCell align="center">Number/Amount</TableCell>
-              <TableCell align="center">Total Amount</TableCell>
+              <TableCell align="center">BetNumber/Amount</TableCell>
+              <TableCell align="center">Win Amount</TableCell>
               <TableCell align="center"> Color</TableCell>
               <TableCell align="center">Result No</TableCell>
               <TableCell align="center">Win</TableCell>

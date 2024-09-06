@@ -306,7 +306,7 @@ function Home() {
       setOne_min_time(onemin);
 
       if (onemin === 58 || onemin === 57) {
-        // setOpen3(false);
+        setOpen3(false);
         setIsPreBetHandle(true);
         localStorage.setItem("total_amount_bet", 0);
       }
@@ -317,7 +317,7 @@ function Home() {
       }
 
       if (onemin === 15) {
-        // setOpen3(false)
+        setOpen3(false)
         let id = localStorage.getItem("result_rollet");
         let element = document.getElementById(`${String(id)}_rotate`);
 
@@ -463,7 +463,7 @@ function Home() {
                   height: '250px',
                   position: 'absolute',
                   top: '5%',
-                  right: '10%',
+                  right: '15%',
                 }}
                 className=" !flex !justify-center !items-center animation_image z-50"
               >
@@ -473,9 +473,7 @@ function Home() {
                 />
                 <Rolletball />
               </div>
-
-
-            </Box>
+                </Box>
           </Box>
         </Collapse >
         <Box sx={{ width: '50px', height: '50px', background: '#BA903B', borderRadius: '5px', border: '1px solid white', }}>
