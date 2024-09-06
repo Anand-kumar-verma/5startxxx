@@ -15,6 +15,7 @@ export const telegram_url =``;
 
 export const endpoint = {
   login: `${domain1}/api/v1/login`,
+  my_hisory: `${domain1}/api/v1/getMyHistory`,
   send_otp: `${baseUrl}/api/forget-password`,
   veryfy_otp: `${baseUrl}/api/user-otp-verify`,
   signup: `${baseUrl}/api/user_register`,
@@ -79,6 +80,7 @@ export const endpoint = {
   },
 
   node:{
-    get_wallet:domain1+"/api/v1/balance"
+    get_wallet:domain1+"/api/v1/balance",
+    history_my: domain1 + "/api/v1/getMyHistory",
   }
 };

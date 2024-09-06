@@ -35,6 +35,7 @@ import btbg3 from "../../../assets/btbg3.png";
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { apiConnectorGet } from "../../../services/apiconnector";
 
 
 
@@ -70,19 +71,19 @@ function Home() {
   useEffect(() => {
     localStorage?.setItem("isPreBet", false);
   }, []);
-  const { isLoading: wallet_amont_lodin, data: wallet_amount } = useQuery(
+  const {  data:wallet } = useQuery(
     ["walletamount"],
-    () => walletamount(),
+    () => apiConnectorGet(endpoint.node.get_wallet),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus:false
     }
   );
 
-  const wallet_amount_data = wallet_amount?.data?.data || 0;
-  useMemo(() => {
-    console.log(wallet_amount_data);
-  }, [wallet_amount?.data?.data]);
+  const newdata = wallet?.data?.data || 0;
+ 
+
   const { isLoading, data } = useQuery(
     ["profile_rollet"],
     () => getProfileRollet(),
@@ -93,6 +94,19 @@ function Home() {
   );
 
   const profileData = data?.data?.data || 0;
+
+  const { data:hist } = useQuery(
+    ["history_w"],
+    () => apiConnectorGet(endpoint.node.history_my),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus:false
+    }
+  );
+
+  const res= hist?.data?.data || [];
+
   const { isLoading: bet_history_loding, data: bet_history } = useQuery(
     ["history_rollet"],
     () => getHistoryRollet(),
@@ -135,10 +149,12 @@ function Home() {
     if (
       total_bet_amont >
       Number(
-        Number(wallet_amount_data?.wallet || 0) +
-        Number(wallet_amount_data?.winning || 0)
+        Number(newdata?.wallet || 0) +
+        Number(newdata?.winning || 0)
       )?.toFixed(2)
     )
+
+   
       return toast(
         <span
           className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
@@ -208,7 +224,7 @@ function Home() {
           bet,
           setBet,
           user_id,
-          wallet_amount_data,
+          newdata,
           client
         );
       }
@@ -418,8 +434,8 @@ function Home() {
             setOpen1(true);
           }} />
           <Box sx={style.p15}>  <Typography variant="h6" color="initial" sx={style.p13}>Balance ₹    {Number(
-            Number(wallet_amount_data?.wallet || 0) +
-            Number(wallet_amount_data?.winning || 0)
+            Number(newdata?.wallet || 0) +
+            Number(newdata?.winning || 0)
           )?.toFixed(2)}</Typography></Box>
         </Box>
         <Box>
@@ -749,7 +765,7 @@ function Home() {
                   className={"!ml-10"}
                 >
                   <Typography
-                    onClick={() => justDouble(bet, setBet, wallet_amount_data)}
+                    onClick={() => justDouble(bet, setBet, newdata)}
                     variant="body1"
                     color="initial"
                   >
@@ -763,7 +779,7 @@ function Home() {
                 >
                   <Typography
                     onClick={() =>
-                      rebetFuncton(bet, rebet, setBet, wallet_amount_data)
+                      rebetFuncton(bet, rebet, setBet, newdata)
                     }
                     variant="body1"
                     color="initial"
@@ -865,7 +881,7 @@ function Home() {
                 backgroundSize: '100% 100%',
                 color: 'white !important', fontSize: '20px', fontWeight: '700', '&:hover': { backgroundColor: 'transparent', },
               }}
-              onClick={() => justHalf(bet, setBet, wallet_amount_data)}>
+              onClick={() => justHalf(bet, setBet, newdata)}>
                 -
               </Button>
               <TextField
@@ -885,7 +901,7 @@ function Home() {
                 color: 'white !important', fontSize: '20px', fontWeight: '700',
                 '&:hover': { backgroundColor: 'transparent', },
               }} 
-               onClick={() => justDouble(bet, setBet, wallet_amount_data)}
+               onClick={() => justDouble(bet, setBet, newdata)}
                >
                 +
               </Button>
@@ -1020,18 +1036,21 @@ function Home() {
           >
             <Box
               sx={{
-                width: "150%",
-                height: "50%",
+                // width: "100%",
+                // height: "100%",
+                // // transform: "rotate(90deg)",
+                width: "160%",
+                height: "55%",
                 background: "white",
                 transform: "rotate(90deg)",
-                borderRadius: "10px",
-                padding: "20px",
+                borderRadius: "5px",
+                padding: "0px",
               }}
             >
-              <Stack direction="row" sx={{ float: "right", my: 1 }}>
+              <Stack direction="row" sx={{ float: "right", mx: 2 }}>
                 <CloseIcon onClick={() => setopenDialogBoxhistory("")} />
               </Stack>
-              <MyTableComponent bet_history_Data={bet_history_Data} />
+              <MyTableComponent res={res} />
             </Box>
           </Drawer>
         </Box>

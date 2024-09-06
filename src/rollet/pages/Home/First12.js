@@ -1386,7 +1386,7 @@ const First12 = ({
               }}
             ></span>
           </p> */}
-          <IconButton sx={{ ...style.btn2, ...style.red }}>
+          <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="5"
               onClick={(e) => {
@@ -1696,7 +1696,7 @@ const First12 = ({
           {/* <p style={{ height: '100% !important' }} className="absolute top-[92%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center"></p> */}
         </span>
         <span className="!grid grid-rows-4 !w-full !h-full relative">
-          <IconButton sx={{ ...style.btn2, ...style.blue }}>
+          <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="10"
               onClick={(e) => {
@@ -1795,7 +1795,7 @@ const First12 = ({
             ></span>
           </p> */}
 
-          <IconButton sx={{ ...style.btn2, ...style.red }}>
+          <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="7"
               onClick={(e) => {
@@ -2044,7 +2044,7 @@ const First12 = ({
         style={{
           ...style.flex,
           border: "1px solid white",
-          background: '#5352FF',
+          background: 'black',
         }}
       >
         <IconButton className="!p-0" style={{ transform: "rotate(270deg)" }}>
@@ -2093,17 +2093,17 @@ const First12 = ({
                   } else {
                     setBetFuncton(
                       112,
-                      37,
+                      38,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(112, 37, amount);
+                  setBetFuncton(112, 38, amount);
                 }
                 e.stopPropagation();
               }}
             >
-              Blue
+              Black
             </span>
           </Typography>
         </IconButton>

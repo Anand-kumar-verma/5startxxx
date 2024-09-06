@@ -11,15 +11,15 @@ import {
 } from "@mui/material";
 import moment from "moment";
 
-const MyTableComponent = ({ bet_history_Data }) => {
+const MyTableComponent = ({ res }) => {
   const [page, setPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 3;
 
   // Calculate the number of pages
-  const pageCount = Math.ceil(bet_history_Data?.length / itemsPerPage);
+  const pageCount = Math.ceil(res?.length / itemsPerPage);
 
   // Get the data for the current page
-  const paginatedData = bet_history_Data?.slice(
+  const paginatedData = res?.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
@@ -31,10 +31,12 @@ const MyTableComponent = ({ bet_history_Data }) => {
           <TableHead>
             <TableRow>
               <TableCell align="center">S.No.</TableCell>
-              <TableCell align="center">Number</TableCell>
-              <TableCell align="center">Amount</TableCell>
+              <TableCell align="center">Number/Amount</TableCell>
+              <TableCell align="center">Total Amount</TableCell>
+              <TableCell align="center"> Color</TableCell>
+              <TableCell align="center">Result No</TableCell>
               <TableCell align="center">Win</TableCell>
-              <TableCell align="center">Date/Time</TableCell>
+              <TableCell align="center">Total Win</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -46,19 +48,42 @@ const MyTableComponent = ({ bet_history_Data }) => {
                 <TableCell align="center">
                   {(page - 1) * itemsPerPage + index + 1}
                 </TableCell>
-                <TableCell align="center">
-                  {row?.number_result || " "}
+                <TableCell align="center" className="!flex flex-col gap-2">
+                  <div>
+                {row?.number?.split(",")?.map((i)=>{
+                    return <span className="border-2 mr-1 py-[0.5px] px-1 border-gray-600">
+                        {i === "37"
+                          ? "Blue"
+                          : i === "38"
+                          ? "Black"
+                          : i === "39"
+                          ? "Red"
+                          : i}
+                    </span>
+                  }) || " "} 
+                </div>
+                <div> {row?.amount_string?.split(",")?.map((i) => {
+                    return <span className="border-2 mr-1 px-1 border-gray-600">{i}</span>
+                  }) || " "}
+                  </div>
+
                 </TableCell>
                 <TableCell align="center">
                   {Number(row?.amount || 0)?.toFixed(2) || 0}
                 </TableCell>
                 <TableCell align="center">
-                  {Number(row?.win)?.toFixed(2) || 0}
+                  {row?.result_color}
                 </TableCell>
-                <TableCell align="center" className="!whitespace-nowrap">
-                  {moment(row?.datetime)?.format("DD-MM-YYYY")}{" "}
-                  {moment(row?.datetime)?.format("HH:mm:ss")}
+                <TableCell align="center">
+                  {Number(row?.result_number)?.toFixed(2) || 0}
                 </TableCell>
+                <TableCell align="center">
+                  {row?.win_string?.split(" ")?.map((i) => { return Number(i || 0)?.toFixed(1) + "," }) || ""}
+                </TableCell>
+                <TableCell align="center">
+                  {Number(row?.win || 0)?.toFixed(2) || 0}
+                </TableCell>
+
               </TableRow>
             ))}
           </TableBody>

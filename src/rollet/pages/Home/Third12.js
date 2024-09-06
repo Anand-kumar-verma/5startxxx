@@ -1510,7 +1510,7 @@ const Third12 = ({
               }}
             ></span>
           </p> */}
-          <IconButton sx={{ ...style.btn2, ...style.blue }}>
+          <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="29"
               onClick={(e) => {

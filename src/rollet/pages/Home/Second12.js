@@ -924,7 +924,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               }}
             ></span>
           </p> */}
-          <IconButton sx={{ ...style.btn2, ...style.blue }}>
+          <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="20"
               onClick={(e) => {
@@ -1224,7 +1224,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
               }}
             ></span>
           </p> */}
-          <IconButton sx={{ ...style.btn2, ...style.red }}>
+          <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="14"
               onClick={(e) => {
@@ -1721,7 +1721,7 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
             <Typography variant="body1" color="initial" sx={{ color: 'white', fontSize: '12px', fontWeight: '700', transform: 'rotate(90deg)' }}>Red</Typography>
           </NavLink>
         </Box> */}
-        <Box sx={{ width: '100%', height: '100%', background: 'black', ...style.flex }} >
+        <Box sx={{ width: '100%', height: '100%', background: '#5352FF', ...style.flex }} >
           <NavLink
             id="201"
             onClick={(e) => {
@@ -1747,17 +1747,17 @@ const Second12 = ({ isSelectedDropBet, removeSingleBetFunction, setOpenDialogBox
                   );
                 } else {
                   setBetFuncton(
-                    201, 38,
+                    201, 37,
                     Number(isContainsPre?.amount) + amount
                   );
                 }
               } else {
-                setBetFuncton(201, 38, amount);
+                setBetFuncton(201, 37, amount);
               }
               e.stopPropagation();
             }}
           >
-            <Typography variant="body1" color="initial" sx={{ color: 'white', fontSize: '12px', fontWeight: '700', transform: 'rotate(270deg)' }}>Black</Typography>
+            <Typography variant="body1" color="initial" sx={{ color: 'white', fontSize: '12px', fontWeight: '700', transform: 'rotate(270deg)' }}>Blue</Typography>
           </NavLink>
         </Box>
 
