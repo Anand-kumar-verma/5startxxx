@@ -7,7 +7,7 @@ import {
   Container,
   Typography
 } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,12 +17,31 @@ import { stardarkblue, stargold, stargrad } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
 import { download_app_url, endpoint } from "../../../services/urls";
-import { apiConnectorGet } from "../../../services/apiconnector";
+import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
 import { useQuery } from "react-query";
 
 function SattaChart() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
+  const navigate = useNavigate();
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [sattaType, setSattaType] = useState('1');
+
+  
+
+  const { data:wallet,  } = useQuery(
+    ['game_history', { fromDate, toDate, sattaType }],
+    () => apiConnectorPost(endpoint.node.satta_game_gamehistory,
+       { startDate: fromDate, endDate: toDate, satta_type: sattaType }),
+    {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      enabled: false, 
+    }
+  );
+
+  const gaming = wallet?.data?.data || []
 
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty('--progress', 1 - progress);
@@ -34,9 +53,8 @@ function SattaChart() {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false
   })
-const game_history= data?.data?.data|| 0
+  const game_history= data?.data?.data|| 0
 
-console.log(game_history , "jij")
   return (
     <Layout>
       <Box sx={styles.root}>
@@ -103,49 +121,65 @@ console.log(game_history , "jij")
 
           <div className="mt-2 w-full" style={styles.contentContainer}>
 
-            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+            <Box sx={styles.contentBox}  onClick={() => navigate("/location/chart",{
+              state:{
+                satta_type:1
+              }
+            })}>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">Gali</Typography>
-                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  59</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15" >GAZIABAD</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:   {game_history?.[0]?.gaziyabad}</Typography>
               </Box>
               <Box sx={styles.imageContainer}>
-                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>25</Typography>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>{game_history?.[0]?.gaziyabad}</Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
                 <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
               </Box>
             </Box>
-            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+            <Box sx={styles.contentBox}  onClick={() => navigate("/location/chart",{
+              state:{
+                satta_type:2
+              }
+            })}>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">Faridabad</Typography>
-                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  79</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">FARIDABAD</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  {game_history?.[0]?.faridabad}</Typography>
               </Box>
               <Box sx={styles.imageContainer}>
-                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>79</Typography>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>{game_history?.[0]?.faridabad}</Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
                 <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
               </Box>
             </Box>
-            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+            <Box sx={styles.contentBox}  onClick={() => navigate("/location/chart",{
+              state:{
+                satta_type:3
+              }
+            })}>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">Disawar</Typography>
-                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  79</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">GALI</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  {game_history?.[0]?.gali}</Typography>
               </Box>
               <Box sx={styles.imageContainer}>
-                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>79</Typography>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>{game_history?.[0]?.gali}</Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
                 <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>
               </Box>
             </Box>
-            <Box sx={styles.contentBox} component={NavLink} to='/location/chart'>
+            <Box sx={styles.contentBox}  onClick={() => navigate("/location/chart",{
+              state:{
+                satta_type:4
+              }
+            })}>
               <Box sx={styles.textContainer}>
-                <Typography variant="body1" sx={styles.textWhite} className="fp15">Gaziabad</Typography>
-                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result:  79</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp15">DISAWAR</Typography>
+                <Typography variant="body1" sx={styles.textWhite} className="fp13">Winner Result: {game_history?.[0]?.disawar}</Typography>
               </Box>
               <Box sx={styles.imageContainer}>
-                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>79</Typography>
+                <Typography variant="body1" className="fp18" sx={{ color: 'white', }}>{game_history?.[0]?.disawar}</Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
                 <Button variant="text" color="primary" sx={styles.openButton}>View Chart</Button>

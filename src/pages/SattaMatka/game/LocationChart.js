@@ -1,20 +1,34 @@
 
 import { ArrowBackRounded, Wallet } from '@mui/icons-material';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
-import React, { useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import Layout from '../../../component/Layout/Layout';
 import { starblue, starbluegrad, stardarkblue, stargrad } from '../../../Shared/color';
+import { apiConnectorPost } from '../../../services/apiconnector';
+import { endpoint } from '../../../services/urls';
+import { useQuery } from 'react-query';
+import moment from 'moment';
 
 function LocationChart() {
-  const buttons = Array.from({ length: 100 }, (_, i) => String(i).padStart(2, '0'));
+ const location = useLocation()
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
+  
+  const { data } = useQuery(
+    ['game_history',  fromDate, toDate, location?.state?.satta_type ],
+    () => apiConnectorPost(endpoint.node.satta_game_gamehistory,
+       { startDate: fromDate, endDate: toDate, satta_type: location?.state?.satta_type }),
+    {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMount:false
+    }
+  );
 
-  const handleFilter = () => {
-    console.log('Filtering from:', fromDate, 'to:', toDate);
+  const gaming = data?.data?.data || []
+  
 
-  };
   return (
     <Layout>
       <Box sx={style.root}>
@@ -57,16 +71,15 @@ function LocationChart() {
                 sx={style.dateField}
               />
             </Box>
-            <Button variant="contained" onClick={handleFilter} sx={style.filterButton}>
+            {/* <Button variant="contained" onClick={handleFilter} sx={style.filterButton}>
               Apply Filter
-            </Button>
+            </Button> */}
           </Box>
           <Box sx={{ width: '100%', mt: 1 }}>
             <Box className="w95">
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center', justifyContent: 'space-between', my: 5 }}>
-                {buttons.map((number) => (
+                {gaming?.map((item) => (
                   <Button
-                    key={number}
                     variant="contained"
                     sx={{
                       width: '50px',
@@ -75,8 +88,8 @@ function LocationChart() {
                     }}
                   >
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-                      <Typography sx={{ color: 'white' }} className='fp18' color="initial"> {number}</Typography>
-                      <Typography sx={{ color: 'white' }} className='fp13' color="initial"> 03:50</Typography>
+                      <Typography sx={{ color: 'white' }} className='fp18' color="initial"> {item?.number}</Typography>
+                      <Typography sx={{ color: 'white' }} className='fp13' color="initial"> {moment(item?.datetime)?.format("HH:mm:ss")}</Typography>
                     </Box>
                   </Button>
                 ))}
