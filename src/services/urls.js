@@ -82,6 +82,7 @@ export const endpoint = {
   node:{
     get_wallet:domain1+"/api/v1/balance",
     history_my: domain1 + "/api/v1/getMyHistory",
-     game_result: domainn + "/api/v1/getRouletteGameHistory"
+     game_result: domainn + "/api/v1/getRouletteGameHistory",
+     bet_satta: domainn + "/api/v1/betPlacedSatta",
   }
 };

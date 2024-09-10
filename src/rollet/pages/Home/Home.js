@@ -141,8 +141,6 @@ function Home() {
         Number(newdata?.winning || 0)
       )?.toFixed(2)
     )
-
-
       return toast(
         <span
           className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
@@ -306,7 +304,7 @@ function Home() {
       setOne_min_time(onemin);
 
       if (onemin === 58 || onemin === 57) {
-        // setOpen3(false);
+        setOpen3(false);
         setIsPreBetHandle(true);
         localStorage.setItem("total_amount_bet", 0);
       }
@@ -317,7 +315,7 @@ function Home() {
       }
 
       if (onemin === 15) {
-        // setOpen3(false)
+        setOpen3(false)
         let id = localStorage.getItem("result_rollet");
         let element = document.getElementById(`${String(id)}_rotate`);
 
@@ -454,17 +452,24 @@ function Home() {
               backgroundSize: "100% 100%",
               // background: '#BA903B',
               backgroundImage: `url(${rouletteBORD})`,
-              borderRadius: '25px', 
+              borderRadius: '10px', 
               border: '1px solid white',
             }}>
               <div
-                style={{
-                  width: '300px',
-                  height: '300px',
-                  bottom:"12px",
-                  left:"12px",
-                  position: 'absolute',
-                 }}
+              style={{
+                width: '250px',
+                height: '250px',
+                position: 'absolute',
+                top: '5%',
+                right: '15%',
+              }}
+                // style={{
+                //   width: '300px',
+                //   height: '300px',
+                //   bottom:"12px",
+                //   left:"12px",
+                //   position: 'absolute',
+                //  }}
                 className=" !flex !justify-center !items-center animation_image z-50"
               >
                 <img

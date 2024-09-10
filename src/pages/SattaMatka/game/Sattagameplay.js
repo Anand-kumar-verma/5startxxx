@@ -9,14 +9,21 @@ import Jodi from './LocationGame';
 import Haroof from './AnderBaherGame';
 import AndarBaharTable from './AnderBaherGame';
 import { NavLink } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { apiConnectorPost } from '../../../services/apiconnector';
+import { endpoint } from '../../../services/urls';
+import CustomCircularProgress from '../../../Shared/CustomCircularProgress';
 
 function Sattagameplay() {
 
   const [value, setValue] = useState(0);
 
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+ 
+  
 
   return (
     <Layout>

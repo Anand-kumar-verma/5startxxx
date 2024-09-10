@@ -1,6 +1,9 @@
 import { Box, Button, Typography, TextField, Drawer, Grid, IconButton } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import { stargrad } from '../../../Shared/color';
+import { endpoint } from '../../../services/urls';
+import { apiConnectorGet } from '../../../services/apiconnector';
+import { useQuery } from 'react-query';
 
 function Jodi() {
   const buttons = Array.from({ length: 100 }, (_, i) => String(i).padStart(2, '0'));
@@ -25,6 +28,18 @@ function Jodi() {
     setSelectedNumber(number);
   };
 
+  const { data: wallet } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false
+    }
+  );
+
+  const newdata = wallet?.data?.data || 0;
+  
   return (
     <Box className="w95">
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center', justifyContent: 'space-between', my: 5 }}>
@@ -51,8 +66,8 @@ function Jodi() {
           </Button>
         ))}
       </Box>
-      <Box sx={{ pb: 4 }}>
-        <Box className="w95" sx={style.flexbetween}>
+     
+        <Box className="w94 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3" sx={style.flexbetween}>
           <Box sx={{ width: '50%' }}>
             <Typography variant="body1" className='fp13' sx={{ color: 'white' }}>Total Amount:</Typography>
             <Typography variant="body1" className='fp18' sx={{ color: 'white' }}>₹ 150.00</Typography>
@@ -61,7 +76,7 @@ function Jodi() {
             <Button sx={style.openButton}>Place Bid</Button>
           </Box>
         </Box>
-      </Box>
+     
       <Drawer
         anchor="bottom"
         open={open}
@@ -82,7 +97,7 @@ function Jodi() {
           }}
         >
           <Typography variant="h4" sx={{ marginBottom: '10px', fontSize: '25px', fontWeight: '600px' }}>
-       43
+    {selectedNumber}
           </Typography>
           <Typography variant="subtitle1" className='fp15' sx={{ marginBottom: '10px' }}>
             Enter Bid Amount

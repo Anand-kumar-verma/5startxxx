@@ -287,6 +287,8 @@ export const confirmBet = async (
   setloding(false);
 };
 
+
+
 export const forPlaceCoin = (id, amount) => {
   let element = document.getElementById(`${id}`);
   element.style.position = "relative"; // Ensure the parent is positioned relatively
