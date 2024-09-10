@@ -16,7 +16,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { stardarkblue, stargold, stargrad } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
-import { download_app_url } from "../../../services/urls";
+import { download_app_url, endpoint } from "../../../services/urls";
+import { apiConnectorGet } from "../../../services/apiconnector";
+import { useQuery } from "react-query";
 
 function SattaChart() {
   const progressCircle = useRef(null);
@@ -27,6 +29,14 @@ function SattaChart() {
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
 
+  const { data } = useQuery(["game"], () => apiConnectorGet(endpoint?.node?.satta_game_Lastfour), {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false
+  })
+const game_history= data?.data?.data|| 0
+
+console.log(game_history , "jij")
   return (
     <Layout>
       <Box sx={styles.root}>

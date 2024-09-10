@@ -12,9 +12,8 @@ import { stardarkblue, stargrad } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
 import buildings from "../../../pages/SattaMatka/assets/images/buildings.png";
-import { download_app_url, endpoint } from "../../../services/urls";
-import { useQuery } from "react-query";
-import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
+import { download_app_url } from "../../../services/urls";
+
 
 function Satta() {
   const progressCircle = useRef(null);
@@ -24,14 +23,7 @@ function Satta() {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
-  const { data } = useQuery(["game"], () => apiConnectorGet(endpoint?.node?.satta_game_Lastfour), {
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
-    // refetchOnReconnect: false
-  })
-const game_history= data?.data?.data|| 0
 
-console.log(game_history , "jij")
 
   useEffect(() => {
     const timer = setInterval(() => {
