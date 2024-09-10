@@ -3,7 +3,7 @@ export const rupees = "";
 export const baseUrl = "https://admin.5starxxx.com";
 export const fron_end_main_domain = "https://5starxxx.com";
 
-export const domain = "https://rollet-node-backend.onrender.com/";
+export const domain = "http://192.168.18.183:9002";
 // export const domain ="http://192.168.18.183:9002/"
 export const domainn = "http://192.168.18.183:9002"
 export const domain1 = "https://api.5starxxx.com"

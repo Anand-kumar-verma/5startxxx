@@ -13,43 +13,37 @@ import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
 import buildings from "../../../pages/SattaMatka/assets/images/buildings.png";
 import { download_app_url } from "../../../services/urls";
-
+import moment from "moment";
+import { useSocket } from "../../../Shared/SocketContext";
 
 function Satta() {
+  const socket = useSocket();
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const navigate = useNavigate();
+  const [minut, setMinut] = useState(0);
+  const [one_min_time, setOne_min_time] = useState(0);
+
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
 
-
   useEffect(() => {
     const timer = setInterval(() => {
-      setTime((prevTime) => {
-        if (prevTime <= 1) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prevTime - 1;
-      });
+      setMinut(moment(Date.now())?.format("mm"));
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
-
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(
-      2,
-      "0"
-    )}`;
-  };
-
-  const [time, setTime] = useState(300);
-
+  useEffect(() => {
+    const handleOneMin = (onemin) => {
+      setOne_min_time(onemin);
+    };
+    socket.on("seconds", handleOneMin);
+    return () => {
+      socket.off("seconds", handleOneMin);
+    };
+  }, []);
   return (
     <Layout>
       <Box sx={styles.root}>
@@ -138,6 +132,20 @@ function Satta() {
             </Button>
           </Box>
 
+          <div className="!text-white !pt-5 !pl-4 !text-sm !w-full !flex !justify-between">
+            <span>Time Left:</span>
+            <p className="!pr-5">
+              <span>
+                {Number(minut) < 30
+                  ? String(30 - Number(minut))?.padStart(2,'0')
+                  : String(60 - Number(minut))?.padStart(2,'0')}
+              </span>
+              :
+              <span className="!w-[20px]">
+                {String(one_min_time)?.padStart(2,'0')}
+              </span>
+            </p>
+          </div>
           <div className="mt-2 w-full" style={styles.contentContainer}>
             {/* <Box sx={styles.contentBox}>
               <Box sx={styles.imageContainer}>
@@ -183,8 +191,8 @@ function Satta() {
                 </Typography>
               </Box>
             </Box> */}
-          
-               <Box sx={styles.contentBox}>
+
+            <Box sx={styles.contentBox}>
               <Box sx={styles.imageContainer}>
                 <Box sx={styles.image} component="img" src={buildings}></Box>
               </Box>
@@ -194,7 +202,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp15"
                 >
-                 GAZIABAD
+                  GAZIABAD
                 </Typography>
                 <Typography
                   variant="body1"
@@ -228,8 +236,7 @@ function Satta() {
                 </Button>
               </Box>
             </Box>
-            
-           
+
             <Box sx={styles.contentBox}>
               <Box sx={styles.imageContainer}>
                 <Box sx={styles.image} component="img" src={buildings}></Box>

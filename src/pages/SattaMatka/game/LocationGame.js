@@ -1,15 +1,7 @@
-import {
-  Box,
-  Button,
-  Drawer,
-  TextField,
-  Typography
-} from "@mui/material";
+import { Box, Button, Drawer, TextField, Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
-import { useQuery } from "react-query";
 import { stargrad } from "../../../Shared/color";
-import { apiConnectorGet } from "../../../services/apiconnector";
-import { endpoint } from "../../../services/urls";
+import toast from "react-hot-toast";
 
 function Jodi({ betArray, setBetArray }) {
   const buttons = Array.from({ length: 100 }, (_, i) =>
@@ -35,7 +27,6 @@ function Jodi({ betArray, setBetArray }) {
   const handleClickbtn = (number) => {
     setSelectedNumber(number);
   };
-
 
   const addNumberINBetArray = (number, amount) => {
     const body = {
@@ -156,7 +147,9 @@ function Jodi({ betArray, setBetArray }) {
               selectedNumber !== "" &&
                 amount !== "" &&
                 amount !== 0 &&
-                addNumberINBetArray(selectedNumber, amount);
+                (Number(amount) < 10
+                  ? toast("Amount should be grater or equal to 10")
+                  : addNumberINBetArray(selectedNumber, amount));
             }}
             sx={{
               marginTop: "16px",
@@ -189,22 +182,3 @@ function Jodi({ betArray, setBetArray }) {
 }
 
 export default Jodi;
-
-const style = {
-  flexbetween: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-  },
-  openButton: {
-    width: "100%",
-    background: "#24cc3b",
-    textTransform: "capitalize",
-    borderRadius: "5px",
-    color: "white",
-    mb: 1,
-    py: 1,
-    "&:hover": { backgroundColor: "#24cc3b" },
-  },
-};

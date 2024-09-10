@@ -172,21 +172,3 @@ const AndarBaharTable = ({ betArray, setBetArray }) => {
 
 export default AndarBaharTable;
 
-const style = {
-  flexbetween: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-  },
-  openButton: {
-    width: "100%",
-    background: "#24cc3b",
-    textTransform: "capitalize",
-    borderRadius: "5px",
-    color: "white",
-    mb: 1,
-    py: 1,
-    "&:hover": { backgroundColor: "#24cc3b" },
-  },
-};

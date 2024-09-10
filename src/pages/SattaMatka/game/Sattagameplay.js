@@ -1,6 +1,6 @@
 import { ArrowBackRounded, Wallet } from "@mui/icons-material";
 import { Box, Button, Container, Tab, Tabs, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink, useLocation } from "react-router-dom";
 import Layout from "../../../component/Layout/Layout";
@@ -14,11 +14,14 @@ import { getSattaType } from "../../../Shared/sharedFunction";
 import AndarBaharTable from "./AnderBaherGame";
 import Jodi from "./LocationGame";
 import { useQuery, useQueryClient } from "react-query";
+import moment from "moment";
+import { useSocket } from "../../../Shared/SocketContext";
 function Sattagameplay() {
   const location = useLocation();
   const game_type = location?.state?.satta_type;
   const [value, setValue] = useState(0);
   const client = useQueryClient();
+  const [minut, setMinut] = useState(0);
   const [betArray, setBetArray] = useState([
     {
       number: "1000",
@@ -116,18 +119,17 @@ function Sattagameplay() {
           );
       });
       const newArrya = betArray?.filter((i) => i?.amount !== null);
+      if (newArrya?.length <= 0) return toast("Please choose no.");
       const reqBody = {
         bet_array: JSON.stringify(newArrya),
         satta_type_user: game_type,
       };
-      console.log(reqBody);
       const response = await apiConnectorPost(
         endpoint?.node?.bet_satta,
         reqBody
       );
-      toast(response?.data?.msg)
+      toast(response?.data?.msg);
       client.refetchQueries("walletamount");
-      console.log(response);
     } catch (e) {
       toast("Something went wrong", e);
     }
@@ -147,7 +149,12 @@ function Sattagameplay() {
   );
 
   const newdata = wallet?.data?.data || 0;
-  console.log(newdata);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setMinut(moment(Date.now())?.format("mm"));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
   return (
     <Layout>
       <Box sx={style.root}>
@@ -215,7 +222,7 @@ function Sattagameplay() {
               <AndarBaharTable betArray={betArray} setBetArray={setBetArray} />
             )}
             <Box
-              className="w95 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
+              className=" !w-[38%] !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
               sx={style.flexbetween}
             >
               <Box className={"!flex !flex-col"}>
@@ -237,12 +244,17 @@ function Sattagameplay() {
                     ?.toFixed(2) || 0}
                 </Typography>
               </Box>
-              <Button
-                className="!bg-[#24cc3b] !text-white "
-                onClick={() => placeBet()}
-              >
-                Place Bid
-              </Button>
+              {!(
+                (Number(minut) < 30 && 30 - Number(minut) <= 5) ||
+                (Number(minut) > 30 && 60 - Number(minut) <= 5)
+              ) && (
+                <Button
+                  className="!bg-[#24cc3b] !text-white "
+                  onClick={() => placeBet()}
+                >
+                  Place Bid
+                </Button>
+              )}
             </Box>
           </Box>
         </Container>
