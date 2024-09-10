@@ -107,7 +107,7 @@ function LocationChart() {
                   </Button>
                 ))}
               </Box>
-              <Box sx={{ py: 3 }}></Box>
+              <Box sx={{py: 3}}></Box>
             </Box>
           </Box>
         </Container>
