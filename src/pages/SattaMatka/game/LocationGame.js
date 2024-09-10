@@ -1,15 +1,23 @@
-import { Box, Button, Typography, TextField, Drawer, Grid, IconButton } from '@mui/material';
-import React, { useRef, useState } from 'react';
-import { stargrad } from '../../../Shared/color';
-import { endpoint } from '../../../services/urls';
-import { apiConnectorGet } from '../../../services/apiconnector';
-import { useQuery } from 'react-query';
+import {
+  Box,
+  Button,
+  Drawer,
+  TextField,
+  Typography
+} from "@mui/material";
+import React, { useRef, useState } from "react";
+import { useQuery } from "react-query";
+import { stargrad } from "../../../Shared/color";
+import { apiConnectorGet } from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
 
-function Jodi() {
-  const buttons = Array.from({ length: 100 }, (_, i) => String(i).padStart(2, '0'));
+function Jodi({ betArray, setBetArray }) {
+  const buttons = Array.from({ length: 100 }, (_, i) =>
+    String(i).padStart(2, "0")
+  );
   const [open, setOpen] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState(null);
- 
+  const [amount, setAmount] = useState(0);
   const toggleDrawer = (open) => {
     setOpen(open);
   };
@@ -20,7 +28,7 @@ function Jodi() {
     toggleDrawer(false);
 
     if (myElementRef.current) {
-      myElementRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      myElementRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   };
 
@@ -28,37 +36,65 @@ function Jodi() {
     setSelectedNumber(number);
   };
 
-  const { data: wallet } = useQuery(
-    ["walletamount"],
-    () => apiConnectorGet(endpoint.node.get_wallet),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false
-    }
-  );
 
-  const newdata = wallet?.data?.data || 0;
-  
+  const addNumberINBetArray = (number, amount) => {
+    const body = {
+      number: number,
+      amount: amount,
+    };
+    const existingIndex = betArray.findIndex(
+      (item) => Number(item.number) === Number(number)
+    );
+
+    if (existingIndex !== -1) {
+      const updatedBetArray = betArray.map((item, index) =>
+        index === existingIndex ? { ...item, amount: amount } : item
+      );
+      setBetArray(updatedBetArray);
+    } else {
+      setBetArray([...betArray, body]);
+    }
+    setAmount(0);
+  };
+
+  console.log(betArray);
   return (
     <Box className="w95">
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center', justifyContent: 'space-between', my: 5 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+          alignItems: "center",
+          justifyContent: "space-between",
+          my: 5,
+        }}
+      >
         {buttons.map((number) => (
           <Button
             onClick={() => {
               handleClickbtn(number);
+              setAmount(
+                betArray?.find(
+                  (i) => Number(i?.number) === Number(selectedNumber || number)
+                )?.amount || null
+              );
               toggleDrawer(true);
             }}
             key={number}
             variant="contained"
             sx={{
-              width: '50px',
-              height: '50px',
-              textAlign: 'center',
-              background: number === selectedNumber ? '#4caf50' : '#8d819f',
-              color: 'white',
-              '&:hover': {
-                background: number === selectedNumber ? '#45a049' : '#6a4a71', // Hover color based on selection
+              width: "50px",
+              height: "50px",
+              textAlign: "center",
+              background: betArray?.find(
+                (i) => Number(i?.number) === Number(number)
+              )
+                ? "#4caf50"
+                : "#8d819f",
+              color: "white",
+              "&:hover": {
+                background: number === selectedNumber ? "#45a049" : "#6a4a71", // Hover color based on selection
               },
             }}
           >
@@ -66,62 +102,67 @@ function Jodi() {
           </Button>
         ))}
       </Box>
-     
-        <Box className="w94 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3" sx={style.flexbetween}>
-          <Box sx={{ width: '50%' }}>
-            <Typography variant="body1" className='fp13' sx={{ color: 'white' }}>Total Amount:</Typography>
-            <Typography variant="body1" className='fp18' sx={{ color: 'white' }}>₹ 150.00</Typography>
-          </Box>
-          <Box sx={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
-            <Button sx={style.openButton}>Place Bid</Button>
-          </Box>
-        </Box>
-     
+
       <Drawer
         anchor="bottom"
         open={open}
         onClose={() => toggleDrawer(false)}
         PaperProps={{
           sx: {
-            backgroundColor: '#2C092D',
-            borderRadius: '16px 16px 0 0',
-            padding: '8px',
-            color: '#fff',
+            backgroundColor: "#2C092D",
+            borderRadius: "16px 16px 0 0",
+            padding: "8px",
+            color: "#fff",
           },
         }}
       >
         <Box
           sx={{
-            textAlign: 'center',
-            padding: '20px 16px',
+            textAlign: "center",
+            padding: "20px 16px",
           }}
         >
-          <Typography variant="h4" sx={{ marginBottom: '10px', fontSize: '25px', fontWeight: '600px' }}>
-    {selectedNumber}
+          <Typography
+            variant="h4"
+            sx={{ marginBottom: "10px", fontSize: "25px", fontWeight: "600px" }}
+          >
+            {selectedNumber}
           </Typography>
-          <Typography variant="subtitle1" className='fp15' sx={{ marginBottom: '10px' }}>
+          <Typography
+            variant="subtitle1"
+            className="fp15"
+            sx={{ marginBottom: "10px" }}
+          >
             Enter Bid Amount
           </Typography>
           <TextField
             fullWidth
+            onChange={(e) => setAmount(e.target.value)}
+            value={amount}
             type="number"
             placeholder="00"
             sx={{
-              backgroundColor: '#4A234F',
-              borderRadius: '50px',
-              input: { color: '#fff' },
+              backgroundColor: "#4A234F",
+              borderRadius: "50px",
+              input: { color: "#fff" },
             }}
           />
           <Button
-            className='fp15'
+            className="fp15"
             fullWidth
             variant="contained"
-            onClick={handleClick}
+            onClick={() => {
+              handleClick();
+              selectedNumber !== "" &&
+                amount !== "" &&
+                amount !== 0 &&
+                addNumberINBetArray(selectedNumber, amount);
+            }}
             sx={{
-              marginTop: '16px',
+              marginTop: "16px",
               background: stargrad,
-              color: '#fff',
-              borderRadius: '8px',
+              color: "#fff",
+              borderRadius: "8px",
               py: 1,
               mb: 2,
             }}
@@ -132,9 +173,9 @@ function Jodi() {
             fullWidth
             variant="text"
             sx={{
-              marginTop: '8px',
-              color: '#fff',
-              textDecoration: 'underline',
+              marginTop: "8px",
+              color: "#fff",
+              textDecoration: "underline",
             }}
           >
             Remove this bet
@@ -144,26 +185,26 @@ function Jodi() {
       <Box sx={{ py: 2 }}></Box>
       <div ref={myElementRef}></div>
     </Box>
-  )
+  );
 }
 
 export default Jodi;
 
 const style = {
   flexbetween: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
   },
   openButton: {
-    width: '100%',
-    background: '#24cc3b',
-    textTransform: 'capitalize',
-    borderRadius: '5px',
-    color: 'white',
+    width: "100%",
+    background: "#24cc3b",
+    textTransform: "capitalize",
+    borderRadius: "5px",
+    color: "white",
     mb: 1,
     py: 1,
-    "&:hover": { backgroundColor: '#24cc3b' },
+    "&:hover": { backgroundColor: "#24cc3b" },
   },
 };

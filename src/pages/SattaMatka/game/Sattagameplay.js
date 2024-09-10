@@ -1,30 +1,152 @@
-import { ArrowBackRounded, Wallet } from '@mui/icons-material'
-import { Box, Container, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import Layout from '../../../component/Layout/Layout'
-import FitbitIcon from "@mui/icons-material/Fitbit";
-import { starblue, stardarkblue, stargrad } from '../../../Shared/color';
-import { Tabs, Tab, } from '@mui/material';
-import Jodi from './LocationGame';
-import Haroof from './AnderBaherGame';
-import AndarBaharTable from './AnderBaherGame';
-import { NavLink } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { apiConnectorPost } from '../../../services/apiconnector';
-import { endpoint } from '../../../services/urls';
-import CustomCircularProgress from '../../../Shared/CustomCircularProgress';
-
+import { ArrowBackRounded, Wallet } from "@mui/icons-material";
+import { Box, Button, Container, Tab, Tabs, Typography } from "@mui/material";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { NavLink, useLocation } from "react-router-dom";
+import Layout from "../../../component/Layout/Layout";
+import {
+  apiConnectorGet,
+  apiConnectorPost,
+} from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
+import { stardarkblue, stargrad } from "../../../Shared/color";
+import { getSattaType } from "../../../Shared/sharedFunction";
+import AndarBaharTable from "./AnderBaherGame";
+import Jodi from "./LocationGame";
+import { useQuery, useQueryClient } from "react-query";
 function Sattagameplay() {
-
+  const location = useLocation();
+  const game_type = location?.state?.satta_type;
   const [value, setValue] = useState(0);
+  const client = useQueryClient();
+  const [betArray, setBetArray] = useState([
+    {
+      number: "1000",
+      amount: null,
+    },
+    {
+      number: "1001",
+      amount: null,
+    },
+    {
+      number: "1002",
+      amount: null,
+    },
+    {
+      number: "1003",
+      amount: null,
+    },
+    {
+      number: "1004",
+      amount: null,
+    },
+    {
+      number: "1005",
+      amount: null,
+    },
+    {
+      number: "1006",
+      amount: null,
+    },
+    {
+      number: "1007",
+      amount: null,
+    },
+    {
+      number: "1008",
+      amount: null,
+    },
+    {
+      number: "1009",
+      amount: null,
+    },
+    {
+      number: "2000",
+      amount: null,
+    },
+    {
+      number: "2001",
+      amount: null,
+    },
+    {
+      number: "2002",
+      amount: null,
+    },
+    {
+      number: "2003",
+      amount: null,
+    },
+    {
+      number: "2004",
+      amount: null,
+    },
+    {
+      number: "2005",
+      amount: null,
+    },
+    {
+      number: "2006",
+      amount: null,
+    },
+    {
+      number: "2007",
+      amount: null,
+    },
+    {
+      number: "2008",
+      amount: null,
+    },
+    {
+      number: "2009",
+      amount: null,
+    },
+  ]);
 
+  async function placeBet() {
+    try {
+      betArray?.forEach((i) => {
+        if (i?.amount !== null && Number(i?.amount) < 5)
+          return toast(
+            "Your Amount is less than 5 on " +
+              `${
+                Number(i?.number) >= 1000 && Number(i?.number) <= 1009
+                  ? "Andar"
+                  : "Bahar"
+              } ${Number(i?.number) % 10}`
+          );
+      });
+      const newArrya = betArray?.filter((i) => i?.amount !== null);
+      const reqBody = {
+        bet_array: JSON.stringify(newArrya),
+        satta_type_user: game_type,
+      };
+      console.log(reqBody);
+      const response = await apiConnectorPost(
+        endpoint?.node?.bet_satta,
+        reqBody
+      );
+      client.refetchQueries("walletamount");
+      console.log(response);
+    } catch (e) {
+      toast("Something went wrong", e);
+    }
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
- 
-  
+  const { data: wallet } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 
+  const newdata = wallet?.data?.data || 0;
+  console.log(newdata);
   return (
     <Layout>
       <Box sx={style.root}>
@@ -32,45 +154,113 @@ function Sattagameplay() {
           className="!h-[100%] !overflow-auto no-scrollbar"
           sx={style.container}
         >
-          <Box sx={{ background: stargrad, py: 2, }}  >
+          <Box sx={{ background: stargrad, py: 2 }}>
             <Box className="w95" sx={style.flexbetween}>
-              <Box sx={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'start' }}>
+              <Box
+                sx={{
+                  width: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "start",
+                }}
+              >
                 <Box component={NavLink} to="/satta/matka">
-                  <ArrowBackRounded sx={{ mr: 1, color: 'white', }} />
+                  <ArrowBackRounded sx={{ mr: 1, color: "white" }} />
                 </Box>
-                <Typography variant="body1" className='fp15' sx={{ color: 'white' }}>Gali </Typography>
+                <Typography
+                  variant="body1"
+                  className="fp15"
+                  sx={{ color: "white" }}
+                >
+                  {getSattaType?.find((i) => i?.type === game_type)?.name}{" "}
+                </Typography>
               </Box>
-              <Box sx={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
-                <Wallet sx={{ mr: 1, color: 'white', }} />
-                <Typography variant="body1" className='fp15' sx={{ color: 'white' }}>₹ 10.50</Typography>
+              <Box
+                sx={{
+                  width: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "end",
+                }}
+              >
+                <Wallet sx={{ mr: 1, color: "white" }} />
+                <Typography
+                  variant="body1"
+                  className="fp15"
+                  sx={{ color: "white" }}
+                >
+                  ₹{" "}
+                  {Number(
+                    Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
+                  )?.toFixed(2)}
+                </Typography>
               </Box>
             </Box>
           </Box>
-          <Box sx={{ width: '100%', mt: 1 }}>
+          <Box sx={{ width: "100%", mt: 1 }}>
             <Tabs
               value={value}
               onChange={handleChange}
               aria-label="simple tabs example"
-              sx={{ display: 'flex', justifyContent: 'space-between' }}
+              sx={{ display: "flex", justifyContent: "space-between" }}
             >
-              <Tab label="Gali" sx={{ flex: 1, color: 'white' }} />
-              <Tab label="Andar / Bahar" sx={{ flex: 1, color: 'white' }} />
+              <Tab label="Jodi" sx={{ flex: 1, color: "white" }} />
+              <Tab label="Andar / Bahar" sx={{ flex: 1, color: "white" }} />
             </Tabs>
-            {value === 0 && <Jodi />}
-            {value === 1 && <AndarBaharTable />}
+            {value === 0 && (
+              <Jodi betArray={betArray} setBetArray={setBetArray} />
+            )}
+            {value === 1 && (
+              <AndarBaharTable betArray={betArray} setBetArray={setBetArray} />
+            )}
+            <Box
+              className="w94 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3 !w-[38%] !flex !justify-between"
+              sx={style.flexbetween}
+            >
+              <Box className={"!flex !flex-col"}>
+                <Typography
+                  variant="body1"
+                  className="fp13"
+                  sx={{ color: "white" }}
+                >
+                  Total Amount:
+                </Typography>
+                <Typography
+                  variant="body1"
+                  className="fp18"
+                  sx={{ color: "white" }}
+                >
+                  ₹{" "}
+                  {betArray
+                    ?.reduce((a, b) => a + Number(b?.amount || 0), 0)
+                    ?.toFixed(2) || 0}
+                </Typography>
+              </Box>
+              <Button
+                className="!bg-[#24cc3b] !text-white !pr-5"
+                onClick={() => placeBet()}
+              >
+                Place Bid
+              </Button>
+            </Box>
           </Box>
         </Container>
-      </Box >
-    </Layout >
-  )
+      </Box>
+    </Layout>
+  );
 }
 
-export default Sattagameplay
+export default Sattagameplay;
 
 const style = {
   root: { background: stardarkblue, pb: 6 },
-  container: { background: stardarkblue, },
-  banner: { background: stargrad, padding: '10px 0px' },
+  container: { background: stardarkblue },
+  banner: { background: stargrad, padding: "10px 0px" },
   bannerText: { color: "white" },
-  flexbetween: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' },
-}
+  flexbetween: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+  },
+};
