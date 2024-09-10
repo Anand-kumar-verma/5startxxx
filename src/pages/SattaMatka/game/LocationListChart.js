@@ -1,7 +1,6 @@
 
-import { ArrowBack, Wallet } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import FitbitIcon from "@mui/icons-material/Fitbit";
 import {
   Box,
   Button,
@@ -12,11 +11,8 @@ import React, { useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { stardarkblue, stargold, stargrad } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
-import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
 import { download_app_url } from "../../../services/urls";
 
 
