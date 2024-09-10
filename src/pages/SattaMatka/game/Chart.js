@@ -24,24 +24,7 @@ function SattaChart() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const navigate = useNavigate();
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
-  const [sattaType, setSattaType] = useState('1');
 
-  
-
-  const { data:wallet,  } = useQuery(
-    ['game_history', { fromDate, toDate, sattaType }],
-    () => apiConnectorPost(endpoint.node.satta_game_gamehistory,
-       { startDate: fromDate, endDate: toDate, satta_type: sattaType }),
-    {
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-      enabled: false, 
-    }
-  );
-
-  const gaming = wallet?.data?.data || []
 
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty('--progress', 1 - progress);

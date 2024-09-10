@@ -12,9 +12,11 @@ import { stardarkblue, stargrad } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
 import buildings from "../../../pages/SattaMatka/assets/images/buildings.png";
-import { download_app_url } from "../../../services/urls";
+import { download_app_url, endpoint } from "../../../services/urls";
 import moment from "moment";
 import { useSocket } from "../../../Shared/SocketContext";
+import { useQuery } from "react-query";
+import { apiConnectorGet } from "../../../services/apiconnector";
 
 function Satta() {
   const socket = useSocket();
@@ -24,10 +26,17 @@ function Satta() {
   const [minut, setMinut] = useState(0);
   const [one_min_time, setOne_min_time] = useState(0);
 
+  
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
+  const { data } = useQuery(["game"], () => apiConnectorGet(endpoint?.node?.satta_game_Lastfour), {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false
+  })
+  const game_history= data?.data?.data|| 0
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -147,52 +156,7 @@ function Satta() {
             </p>
           </div>
           <div className="mt-2 w-full" style={styles.contentContainer}>
-            {/* <Box sx={styles.contentBox}>
-              <Box sx={styles.imageContainer}>
-                <Box sx={styles.image} component="img" src={buildings}></Box>
-              </Box>
-              <Box sx={styles.textContainer}>
-                <Typography
-                  variant="body1"
-                  sx={styles.textWhite}
-                  className="fp15"
-                >
-                  Gaziabad
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={styles.textWhite}
-                  className="fp13"
-                >
-                  Last result was : 59
-                </Typography>
-              </Box>
-              <Box sx={styles.buttonContainer}>
-                <Typography
-                  variant="body1"
-                  className="fp15"
-                  sx={{ color: "red", textAlign: "center", mb: 1 }}
-                >
-                  Closed
-                </Typography>
-                <Button
-                  variant="text"
-                  className="fp11"
-                  sx={styles.upcomingButton}
-                >
-                  Upcoming Result{" "}
-                </Button>
-                <Typography
-                  variant="body1"
-                  className="fp13"
-                  sx={{ color: "white", textAlign: "center", mt: 1 }}
-                >
-                  Time Left : {formatTime(time)}
-                </Typography>
-              </Box>
-            </Box> */}
-
-            <Box sx={styles.contentBox}>
+           <Box sx={styles.contentBox}>
               <Box sx={styles.imageContainer}>
                 <Box sx={styles.image} component="img" src={buildings}></Box>
               </Box>
@@ -209,7 +173,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp13"
                 >
-                  Last result was : 59
+                  Last result was : {game_history?.[0]?.gaziyabad}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
@@ -254,7 +218,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp13"
                 >
-                  Last result was : 59
+                  Last result was : {game_history?.[0]?.faridabad}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
@@ -298,7 +262,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp13"
                 >
-                  Last result was : 59
+                  Last result was :  {game_history?.[0]?.gali}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
@@ -343,7 +307,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp13"
                 >
-                  Last result was : 59
+                  Last result was :  {game_history?.[0]?.disawar}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>

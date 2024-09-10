@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import Layout from '../../../component/Layout/Layout';
 import { starblue, starbluegrad, stardarkblue, stargrad } from '../../../Shared/color';
-import { apiConnectorPost } from '../../../services/apiconnector';
+import { apiConnectorGet, apiConnectorPost } from '../../../services/apiconnector';
 import { endpoint } from '../../../services/urls';
 import { useQuery } from 'react-query';
 import moment from 'moment';
@@ -27,6 +27,18 @@ function LocationChart() {
   );
 
   const gaming = data?.data?.data || []
+
+  const { data: wallet } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const newdata = wallet?.data?.data || 0;
   
 
   return (
@@ -46,12 +58,12 @@ function LocationChart() {
               </Box>
               <Box sx={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
                 <Wallet sx={{ mr: 1, color: 'white', }} />
-                <Typography variant="body1" className='fp15' sx={{ color: 'white' }}>₹ 10.50</Typography>
+                <Typography variant="body1" className='fp15' sx={{ color: 'white' }}>₹ {newdata?.wallet}</Typography>
               </Box>
             </Box>
           </Box>
-          <Box sx={style.filterContainer} className="w95" mt={4}>
-            <Box sx={{ display: 'flex', width: '100%', gap: '8px' }}>
+          <Box sx={style.filterContainer} className="w95 !text-white" mt={4}>
+            <Box sx={{ display: 'flex', width: '100%', gap: '8px' }}  className='!text-white'>
               <TextField
                 label="Start Date"
                 placeholder="Select start date"
@@ -62,6 +74,7 @@ function LocationChart() {
                 sx={style.dateField}
               />
               <TextField
+             
                 label="End Date"
                 placeholder="Select end date"
                 type="date"
