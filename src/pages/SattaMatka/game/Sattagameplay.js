@@ -125,6 +125,7 @@ function Sattagameplay() {
         endpoint?.node?.bet_satta,
         reqBody
       );
+      toast(response?.data?.msg)
       client.refetchQueries("walletamount");
       console.log(response);
     } catch (e) {
@@ -214,7 +215,7 @@ function Sattagameplay() {
               <AndarBaharTable betArray={betArray} setBetArray={setBetArray} />
             )}
             <Box
-              className="w94 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3 !w-[38%] !flex !justify-between"
+              className="w95 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
               sx={style.flexbetween}
             >
               <Box className={"!flex !flex-col"}>
@@ -237,7 +238,7 @@ function Sattagameplay() {
                 </Typography>
               </Box>
               <Button
-                className="!bg-[#24cc3b] !text-white !pr-5"
+                className="!bg-[#24cc3b] !text-white "
                 onClick={() => placeBet()}
               >
                 Place Bid

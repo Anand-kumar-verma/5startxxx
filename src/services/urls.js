@@ -84,5 +84,7 @@ export const endpoint = {
     history_my: domain1 + "/api/v1/getMyHistory",
      game_result: domainn + "/api/v1/getRouletteGameHistory",
      bet_satta: domainn + "/api/v1/betPlacedSatta",
+    satta_game_Lastfour: domainn + "/api/v1/getSattaGameHistoryLastFour",
+     
   }
 };

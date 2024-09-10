@@ -1,4 +1,4 @@
-import { List, Wallet } from "@mui/icons-material";
+import { History, List, Wallet } from "@mui/icons-material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import FitbitIcon from "@mui/icons-material/Fitbit";
 import { Box, Button, Container, Typography } from "@mui/material";
@@ -12,7 +12,9 @@ import { stardarkblue, stargrad } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
 import buildings from "../../../pages/SattaMatka/assets/images/buildings.png";
-import { download_app_url } from "../../../services/urls";
+import { download_app_url, endpoint } from "../../../services/urls";
+import { useQuery } from "react-query";
+import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
 
 function Satta() {
   const progressCircle = useRef(null);
@@ -22,6 +24,14 @@ function Satta() {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
+  const { data } = useQuery(["game"], () => apiConnectorGet(endpoint?.node?.satta_game_Lastfour), {
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
+    // refetchOnReconnect: false
+  })
+const game_history= data?.data?.data|| 0
+
+console.log(game_history , "jij")
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -47,7 +57,7 @@ function Satta() {
   };
 
   const [time, setTime] = useState(300);
-  
+
   return (
     <Layout>
       <Box sx={styles.root}>
@@ -128,11 +138,11 @@ function Satta() {
             </Button>
             <Button
               component={NavLink}
-              to="/wallet"
-              startIcon={<Wallet />}
+              to="/history"
+              startIcon={<History />}
               sx={styles.walletButton}
             >
-              My Wallet
+              My History
             </Button>
           </Box>
 
@@ -181,7 +191,8 @@ function Satta() {
                 </Typography>
               </Box>
             </Box> */}
-            <Box sx={styles.contentBox}>
+          
+               <Box sx={styles.contentBox}>
               <Box sx={styles.imageContainer}>
                 <Box sx={styles.image} component="img" src={buildings}></Box>
               </Box>
@@ -191,7 +202,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp15"
                 >
-                  Gaziyabad
+                 GAZIABAD
                 </Typography>
                 <Typography
                   variant="body1"
@@ -225,6 +236,8 @@ function Satta() {
                 </Button>
               </Box>
             </Box>
+            
+           
             <Box sx={styles.contentBox}>
               <Box sx={styles.imageContainer}>
                 <Box sx={styles.image} component="img" src={buildings}></Box>
@@ -235,7 +248,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp15"
                 >
-                  Faridabad
+                  FARIDABAD
                 </Typography>
                 <Typography
                   variant="body1"
@@ -279,7 +292,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp15"
                 >
-                  Gali{" "}
+                  GALI{" "}
                 </Typography>
                 <Typography
                   variant="body1"
@@ -324,7 +337,7 @@ function Satta() {
                   className="fp15"
                 >
                   {" "}
-                  Disawar
+                  DISAWAR
                 </Typography>
                 <Typography
                   variant="body1"

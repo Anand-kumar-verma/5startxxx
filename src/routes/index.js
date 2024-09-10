@@ -10,6 +10,7 @@
 // import WithdrawlCash from "../cricket/transacton/WithdrawlCash";
 import AnderBaherChart from "../pages/SattaMatka/game/AnderBaherChart";
 import SattaChart from "../pages/SattaMatka/game/Chart";
+import History from "../pages/SattaMatka/game/History";
 import LocationChart from "../pages/SattaMatka/game/LocationChart";
 import LocationListChart from "../pages/SattaMatka/game/LocationListChart";
 import Satta from "../pages/SattaMatka/game/Satta";
@@ -298,6 +299,10 @@ export const routes = [
     {
         path: "/satta/play",
         component: <Sattagameplay />
+    },
+    {
+        path: "/history",
+        component: <History />
     },
     {
         path: "/anderbaher/chart",

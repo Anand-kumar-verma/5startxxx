@@ -1,4 +1,4 @@
-import { ArrowBack, Wallet } from "@mui/icons-material";
+import { ArrowBack, History, Wallet } from "@mui/icons-material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import FitbitIcon from "@mui/icons-material/Fitbit";
 import {
@@ -19,7 +19,6 @@ import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-M
 import { download_app_url } from "../../../services/urls";
 
 function SattaChart() {
-  const navigate = useNavigate();
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
 
@@ -89,7 +88,7 @@ function SattaChart() {
 
           <Box sx={{ ...styles.flexbetween, width: '95%', ml: '2.5%' }} >
             <Button component={NavLink} to='/satta/matka' sx={styles.chartButton}>Play satta matka</Button>
-            <Button component={NavLink} to='/wallet' startIcon={<Wallet />} sx={styles.walletButton}>My Wallet</Button>
+            <Button component={NavLink} to='/history' startIcon={<History/>} sx={styles.walletButton}>My History</Button>
           </Box>
 
           <div className="mt-2 w-full" style={styles.contentContainer}>
