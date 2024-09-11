@@ -1,29 +1,27 @@
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
+import { Cancel } from "@mui/icons-material";
 import {
   Box,
   Button,
   Container,
-  IconButton,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
-import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
-import deposit from "../../../assets/history2.png";
-import Layout from "../../../component/Layout/Layout";
 import {
-  depositHistoryFunction
-} from "../../../services/apicalling";
+  starbluegrad,
+  zubgback,
+  zubgbackgrad,
+  zubgmid,
+} from "../../../Shared/color";
+import deposit from "../../../assets/history2.png";
 import logo2 from "../../../assets/images/5-Star-XXX-8-29-2024.png";
+import Layout from "../../../component/Layout/Layout";
 import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
-
 
 function History() {
   const navigate = useNavigate();
@@ -38,7 +36,7 @@ function History() {
       refetchOnReconnect: true,
     }
   );
-  const res = data?.data?.data
+  const res = data?.data?.data;
 
   console.log(res, "THis is response");
 
@@ -56,11 +54,7 @@ function History() {
       >
         <CustomCircularProgress isLoading={isLoading} />
         <Box sx={style.header} className={"!w-full !flex !justify-center"}>
-          <Box
-            component="img"
-            src={logo2}
-            sx={{ width: '150px' }}
-          ></Box>
+          <Box component="img" src={logo2} sx={{ width: "150px" }}></Box>
         </Box>
 
         <Box>
@@ -76,74 +70,115 @@ function History() {
             }}
           >
             <Stack direction="row" sx={{ alignItems: "center", mb: "20px" }}>
-              <Box component="img" src={deposit} width={30} sx={{ filter: 'grayscale(1)' }}></Box>
+              <Box
+                component="img"
+                src={deposit}
+                width={30}
+                sx={{ filter: "grayscale(1)" }}
+              ></Box>
               <Typography
                 variant="body1"
                 color="initial"
                 sx={{ fontSize: "15px ", color: "white", ml: "10px" }}
               >
-                My  history
+                My history
               </Typography>
             </Stack>
             {res?.map((item) => {
-              return <>
-                <Box
-                  sx={{
-                    mb: 2,
-                    padding: "15px",
-                    borderRadius: "10px",
-                    background: zubgmid,
-                  }}
-                >
-                  <Stack
-                    direction="row"
+              return (
+                <>
+                  <Box
                     sx={{
-                      paddingBottom: "10px",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      //   borderBottom: "1px solid white",
+                      mb: 2,
+                      padding: "15px",
+                      borderRadius: "10px",
+                      background: zubgmid,
                     }}
                   >
-                    <Box>
-                      <Button
-                        sx={{ color: "green", textTransform: "capitalize" }}
+                    <Stack
+                      direction="row"
+                      sx={{
+                        paddingBottom: "10px",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        //   borderBottom: "1px solid white",
+                      }}
+                    >
+                      <Box>
+                        <Button
+                          sx={{ color: "white", textTransform: "capitalize" }}
+                        >
+                          {item?.satta_type === "satta_gaziabad"
+                            ? "GAZIABAD"
+                            : item?.satta_type === "satta_faridabad"
+                            ? "FARIDABAD"
+                            : item?.satta_type === "satta_gali"
+                            ? "GALI"
+                            : "DISAWAR"}{" "}
+                          <span className="!pl-3 !text-yellow-500">
+                            {item?.gamesno}
+                          </span>{" "}
+                          <span className="!pl-3 !text-yellow-500">
+                            {moment(item?.datetime)?.format(
+                              "YYYY-MM-DD HH:mm:ss"
+                            )}
+                          </span>
+                        </Button>
+                      </Box>
+                      <Box>
+                        <Button
+                          sx={{
+                            // background: zubgmid,
+                            background: "white",
+                            color: "green",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {item?.result_number}
+                        </Button>
+                      </Box>
+                    </Stack>
 
-                      >
-                        {item?.satta_type}
-                      </Button>
+                    <div>
+                      <p className="!flex">
+                        {item?.number?.split(",")?.map((j, index) => (
+                          <span
+                            key={index}
+                            className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1"
+                          >
+                            {Number(j) >= 1000 && Number(j) <= 1009
+                              ? (Number(j) % 10) + "*"
+                              : Number(j) >= 2000 && Number(j) <= 2009
+                              ? "*" + (Number(j) % 10)
+                              : Number(j)}
+                          </span>
+                        ))}
+                      </p>
 
-                    </Box>
-                    <Box>
-                      <Button
-                        sx={{
-                          // background: zubgmid,
-                          background: "white",
-                          color: "green",
-                          textTransform: "capitalize",
-                        }}
-                      > 
-                      {item?.result_number}
-
-                      </Button>
-                    </Box>
-
-                  </Stack>
-                
-                  <div className=" ">
-                    {item?.number?.split(",")?.map((i) => {
-                      return <span className="border-2 mr-1 px-1 border-white text-white">{i}</span>
-                    }) || " "}
-                   </div>
-                  <div className=" text-white px-1">
-                    {item?.amount_string?.split(",")?.map((i) => {
-                      return <span className="border-2 mr-1 px-1 border-white text-white">{i}</span>
-                    }) || " "}
-                     </div>
-                
-                </Box>
-              </>
+                      <p className="!flex">
+                        {item?.win_string
+                          ?.split(" ")
+                          .filter((j) => j.trim() !== "") // Filter out empty strings
+                          .map((j, index) => (
+                            <span
+                              key={index}
+                              className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1"
+                            >
+                              {Number(j) === 0 ? (
+                                <Cancel className="!text-red-500" />
+                              ) : (
+                                <span className="!text-green-500">
+                                  {Number(j)?.toFixed(2)}
+                                </span>
+                              )}
+                            </span>
+                          ))}
+                      </p>
+                    </div>
+                  </Box>
+                </>
+              );
             })}
-
 
             {/* {res?.map((i) => {
               return (
