@@ -3,9 +3,9 @@ export const rupees = "";
 export const baseUrl = "https://admin.5starxxx.com";
 export const fron_end_main_domain = "https://5starxxx.com";
 
-export const domain = "http://192.168.18.183:9002";
+export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
 // export const domain ="http://192.168.18.183:9002/"
-export const domainn = "http://192.168.18.183:9002"
+// export const domainn = "http://192.168.18.183:9002"
 export const domain1 = "https://api.5starxxx.com"
 
 
@@ -81,16 +81,16 @@ export const endpoint = {
 
   node:{
     
-    top_two_winners:domainn+"/api/v1/getTopTwo_winner",
-    top_winners:domainn+"/api/v1/getTopWinners",
+    top_two_winners:domain1+"/api/v1/getTopTwo_winner",
+    top_winners:domain1+"/api/v1/getTopWinners",
     get_wallet:domain1+"/api/v1/balance",
     history_my: domain1 + "/api/v1/getMyHistory",
-     game_result: domainn + "/api/v1/getRouletteGameHistory",
-     bet_satta: domainn + "/api/v1/betPlacedSatta",
-    satta_game_Lastfour: domainn + "/api/v1/getSattaGameHistoryLastFour",
-    satta_game_gamehistory: domainn + "/api/v1/getSattaGameHistory",
-    satta_game_myhistory: domainn + "/api/v1/getSattaMyHistory",
-    getStatusSattaMatka: domainn + "/api/v1/getStatusSattaMatka",
+     game_result: domain1 + "/api/v1/getRouletteGameHistory",
+     bet_satta: domain1 + "/api/v1/betPlacedSatta",
+    satta_game_Lastfour: domain1 + "/api/v1/getSattaGameHistoryLastFour",
+    satta_game_gamehistory: domain1 + "/api/v1/getSattaGameHistory",
+    satta_game_myhistory: domain1 + "/api/v1/getSattaMyHistory",
+    getStatusSattaMatka: domain1 + "/api/v1/getStatusSattaMatka",
     
      
   }
