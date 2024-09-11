@@ -26,17 +26,31 @@ function Satta() {
   const [minut, setMinut] = useState(0);
   const [one_min_time, setOne_min_time] = useState(0);
 
-  
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
-  const { data } = useQuery(["game"], () => apiConnectorGet(endpoint?.node?.satta_game_Lastfour), {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false
-  })
-  const game_history= data?.data?.data|| 0
+  const { data } = useQuery(
+    ["game"],
+    () => apiConnectorGet(endpoint?.node?.satta_game_Lastfour),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+  const game_history = data?.data?.data || 0;
+  const { data: statta_matka_staus } = useQuery(
+    ["status_of_satta_matka"],
+    () => apiConnectorGet(endpoint?.node?.getStatusSattaMatka),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+  const statta_matka_staus_result = statta_matka_staus?.data?.data || 0;
+  console.log(statta_matka_staus_result);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -146,17 +160,17 @@ function Satta() {
             <p className="!pr-5">
               <span>
                 {Number(minut) < 30
-                  ? String(30 - Number(minut))?.padStart(2,'0')
-                  : String(60 - Number(minut))?.padStart(2,'0')}
+                  ? String(30 - Number(minut))?.padStart(2, "0")
+                  : String(60 - Number(minut))?.padStart(2, "0")}
               </span>
               :
               <span className="!w-[20px]">
-                {String(one_min_time)?.padStart(2,'0')}
+                {String(one_min_time)?.padStart(2, "0")}
               </span>
             </p>
           </div>
           <div className="mt-2 w-full" style={styles.contentContainer}>
-           <Box sx={styles.contentBox}>
+            <Box sx={styles.contentBox}>
               <Box sx={styles.imageContainer}>
                 <Box sx={styles.image} component="img" src={buildings}></Box>
               </Box>
@@ -262,7 +276,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp13"
                 >
-                  Last result was :  {game_history?.[0]?.gali}
+                  Last result was : {game_history?.[0]?.gali}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
@@ -307,7 +321,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp13"
                 >
-                  Last result was :  {game_history?.[0]?.disawar}
+                  Last result was : {game_history?.[0]?.disawar}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>

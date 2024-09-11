@@ -87,6 +87,7 @@ export const endpoint = {
     satta_game_Lastfour: domainn + "/api/v1/getSattaGameHistoryLastFour",
     satta_game_gamehistory: domainn + "/api/v1/getSattaGameHistory",
     satta_game_myhistory: domainn + "/api/v1/getSattaMyHistory",
+    getStatusSattaMatka: domainn + "/api/v1/getStatusSattaMatka",
     
      
   }

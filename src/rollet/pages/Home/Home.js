@@ -1,7 +1,15 @@
 import CloseIcon from "@mui/icons-material/Close";
-import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
-import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
-import { Box, Button, ButtonGroup, Collapse, Drawer, Stack, Typography } from "@mui/material";
+import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Collapse,
+  Drawer,
+  Stack,
+  Typography,
+} from "@mui/material";
 import CryptoJS from "crypto-js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -25,7 +33,16 @@ import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.mp3";
 import stop_ball_music from "../../assets/images/stop_ball_music.mp3";
 import rouletteBORD from "../../assets/images/thumbs_bgs.png";
 import watch from "../../assets/images/watch.png";
-import { addWinCap, black_array, confirmBet, justDouble, justHalf, rebetFuncton, red_array, spinFunction, } from "../../sharedFunction";
+import {
+  addWinCap,
+  black_array,
+  confirmBet,
+  justDouble,
+  justHalf,
+  rebetFuncton,
+  red_array,
+  spinFunction,
+} from "../../sharedFunction";
 import Rolletball from "../Rolletball";
 import Coin from "./Coin";
 import { style } from "./CommonCss";
@@ -35,16 +52,19 @@ import SvgCircle from "./SvgCircle";
 import MyTableComponent from "./Tablehistory";
 import TwoToOne from "./TwoToOne";
 
-
-
 function Home() {
-  
   const isAlreadyAppliedBet = localStorage?.getItem("rollet_bet_placed");
   let isPreBet = localStorage.getItem("isPreBet");
   let total_amount_bet = localStorage.getItem("total_amount_bet") || 0;
   const client = useQueryClient();
   const socket = useSocket();
-  const login_data = localStorage.getItem("logindataen") && CryptoJS.AES.decrypt(localStorage.getItem("logindataen"), "anand")?.toString(CryptoJS.enc.Utf8) || null
+  const login_data =
+    (localStorage.getItem("logindataen") &&
+      CryptoJS.AES.decrypt(
+        localStorage.getItem("logindataen"),
+        "anand"
+      )?.toString(CryptoJS.enc.Utf8)) ||
+    null;
   const user_id = login_data && JSON.parse(login_data)?.UserID;
   const audioRefMusic = useRef();
   const audioRefMusicStopBall = useRef();
@@ -76,20 +96,16 @@ function Home() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
     }
   );
 
   const newdata = wallet?.data?.data || 0;
 
-  const { data } = useQuery(
-    ["profile_rollet"],
-    () => getProfileRollet(),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
+  const { data } = useQuery(["profile_rollet"], () => getProfileRollet(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
 
   const profileData = data?.data?.data || 0;
 
@@ -99,18 +115,20 @@ function Home() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
     }
   );
 
   const res = hist?.data?.data || [];
 
-
-  const { data: bet_result_history } =
-    useQuery(["history_rollet_result"], () => apiConnectorGet(endpoint.node.game_result), {
+  const { data: bet_result_history } = useQuery(
+    ["history_rollet_result"],
+    () => apiConnectorGet(endpoint.node.game_result),
+    {
       refetchOnMount: false,
       refetchOnReconnect: true,
-    });
+    }
+  );
 
   const bet_result_history_Data = useMemo(() => {
     return bet_result_history?.data?.data?.slice(0, 10) || [];
@@ -137,8 +155,7 @@ function Home() {
     if (
       total_bet_amont >
       Number(
-        Number(newdata?.wallet || 0) +
-        Number(newdata?.winning || 0)
+        Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
       )?.toFixed(2)
     )
       return toast(
@@ -172,8 +189,9 @@ function Home() {
     let newelement = element.querySelector("span");
 
     if (newelement) {
-      newelement.innerHTML = `${amount >= 1000 ? String(amount / 1000) + "k" : amount
-        }`;
+      newelement.innerHTML = `${
+        amount >= 1000 ? String(amount / 1000) + "k" : amount
+      }`;
     } else {
       newelement = document.createElement("span");
       let vlaue = `${amount >= 1000 ? String(amount / 1000) + "k" : amount}`;
@@ -310,12 +328,12 @@ function Home() {
       }
       if (onemin === 55) localStorage?.setItem("rollet_bet_placed", false);
       if (onemin === 0) {
-        setOpen3(true)
+        setOpen3(true);
         handlePlaySound();
       }
 
       if (onemin === 15) {
-        setOpen3(false)
+        setOpen3(false);
         let id = localStorage.getItem("result_rollet");
         let element = document.getElementById(`${String(id)}_rotate`);
 
@@ -369,7 +387,7 @@ function Home() {
     let isPlaced = localStorage.getItem("rollet_bet_placed");
     let win_amount = 0;
     try {
-      const response = await apiConnectorGet(endpoint.node.history_my)
+      const response = await apiConnectorGet(endpoint.node.history_my);
       const newupdatedArray = response?.data?.data?.[0]?.win || [];
       console.log(response?.data?.data?.[0]?.win, "ff");
       win_amount = newupdatedArray?.win || 0;
@@ -407,62 +425,128 @@ function Home() {
 
   return (
     <Box className="home" sx={style.root}>
-      <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }} className="w95">
-        <Box sx={{ display: 'flex', alignItems: 'center', }}>
-          <ReplyOutlinedIcon sx={{ color: 'gray', width: '20px', mr: 1, }} onClick={() => {
-            mouseClickSound();
-            setOpen1(true);
-          }} />
-          <Box sx={style.p15}>  <Typography variant="h6" color="initial" sx={style.p13}>Balance ₹    {Number(
-            Number(newdata?.wallet || 0) +
-            Number(newdata?.winning || 0)
-          )?.toFixed(2)}</Typography></Box>
+      <Stack
+        direction="row"
+        sx={{ alignItems: "center", justifyContent: "space-between" }}
+        className="w95"
+      >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <ReplyOutlinedIcon
+            sx={{ color: "gray", width: "20px", mr: 1 }}
+            onClick={() => {
+              mouseClickSound();
+              setOpen1(true);
+            }}
+          />
+          <Box sx={style.p15}>
+            {" "}
+            <Typography variant="h6" color="initial" sx={style.p13}>
+              Balance ₹{" "}
+              {Number(
+                Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
+              )?.toFixed(2)}
+            </Typography>
+          </Box>
         </Box>
         <Box>
-          <ListOutlinedIcon sx={{ color: 'gray', width: '20px' }} onClick={() => {
-            mouseClickSound();
-            one_min_time > 10 && setopenDialogBoxhistory(true);
-          }} />
+          <ListOutlinedIcon
+            sx={{ color: "gray", width: "20px" }}
+            onClick={() => {
+              mouseClickSound();
+              one_min_time > 10 && setopenDialogBoxhistory(true);
+            }}
+          />
         </Box>
       </Stack>
-      <Stack sx={{  alignItems: 'center', justifyContent: 'space-between', }} direction='row' >
-        <Stack sx={{ alignItems: 'center', justifyContent: 'space-between', }} direction='row'>
-          <Box sx={{ width: '50px', height: '40px', background: '#BA903B', borderRadius: '5px', border: '1px solid white', mr: 1, }}>
-            <Typography variant="body1" sx={{ fontSize: '25px', fontWeight: '700', color: 'white', textAlign: 'center' }}>    {result_rollet}</Typography>
+      <Stack
+        sx={{ alignItems: "center", justifyContent: "space-between" }}
+        direction="row"
+      >
+        <Stack
+          sx={{ alignItems: "center", justifyContent: "space-between" }}
+          direction="row"
+        >
+          <Box
+            sx={{
+              width: "50px",
+              height: "40px",
+              background: "#BA903B",
+              borderRadius: "5px",
+              border: "1px solid white",
+              mr: 1,
+            }}
+          >
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: "25px",
+                fontWeight: "700",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              {" "}
+              {result_rollet}
+            </Typography>
           </Box>
           <Box>
-            <Typography className="!text-xs " variant="body1" sx={style.p13}>       {profileData?.full_name
-              ? profileData?.full_name?.substring(0, 10) + "..."
-              : "*******"}</Typography>
-            <Typography className="!text-xs" variant="body1" sx={style.p13}> Bet -    {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
-              Number(total_amount_bet)?.toFixed(2)}</Typography>
-            <Typography className="!-mb-2 !text-xs" variant="body1" sx={style.p13}> Win - 
-                 { Number(res?.[0]?.win || 0)?.toFixed(2)}
-                 </Typography>
+            <Typography className="!text-xs " variant="body1" sx={style.p13}>
+              {" "}
+              {profileData?.full_name
+                ? profileData?.full_name?.substring(0, 10) + "..."
+                : "*******"}
+            </Typography>
+            <Typography className="!text-xs" variant="body1" sx={style.p13}>
+              {" "}
+              Bet -{" "}
+              {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
+                Number(total_amount_bet)?.toFixed(2)}
+            </Typography>
+            <Typography
+              className="!-mb-2 !text-xs"
+              variant="body1"
+              sx={style.p13}
+            >
+              {" "}
+              Win -{Number(res?.[0]?.win || 0)?.toFixed(2)}
+            </Typography>
           </Box>
         </Stack>
         <Collapse in={open3}>
-          <Box sx={{ position: 'absolute', width: '90%', height: '50%', background: 'red', zIndex: '1000', left: '5%', top: '25%', borderRadius: '10px' }}>
-            <Box sx={{
-              width: '100%',
-              height: '100%',
-              position: 'relative',
-              // backgroundImage: `url(${roulettebg})`,
-              // backgroundRepeat: "no-repeat",
-              backgroundSize: "100% 100%",
-              // background: '#BA903B',
-              backgroundImage: `url(${rouletteBORD})`,
-              borderRadius: '10px', 
-              border: '1px solid white',
-            }}>
-              <div
-              style={{
-                width: '250px',
-                height: '250px',
-                position: 'absolute',
-                top: '5%',
-                right: '15%',
+          <Box
+            sx={{
+              position: "absolute",
+              width: "90%",
+              height: "50%",
+              background: "red",
+              zIndex: "1000",
+              left: "5%",
+              top: "25%",
+              borderRadius: "10px",
+            }}
+          >
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+                position: "relative",
+                // backgroundImage: `url(${roulettebg})`,
+                // backgroundRepeat: "no-repeat",
+                backgroundSize: "100% 100%",
+                // background: '#BA903B',
+                backgroundImage: `url(${rouletteBORD})`,
+                borderRadius: "10px",
+                border: "1px solid white",
               }}
+            >
+              <div
+                style={{
+                  width: "250px",
+                  height: "250px",
+                  position: "absolute",
+                  top: "5%",
+                  right: "15%",
+                }}
                 // style={{
                 //   width: '300px',
                 //   height: '300px',
@@ -479,10 +563,18 @@ function Home() {
                 />
                 <Rolletball />
               </div>
-                </Box>
+            </Box>
           </Box>
-        </Collapse >
-        <Box sx={{ width: '50px', height: '50px', background: '#BA903B', borderRadius: '5px', border: '1px solid white', }}>
+        </Collapse>
+        <Box
+          sx={{
+            width: "50px",
+            height: "50px",
+            background: "#BA903B",
+            borderRadius: "5px",
+            border: "1px solid white",
+          }}
+        >
           {useMemo(() => {
             return (
               <>
@@ -490,13 +582,10 @@ function Home() {
                   sx={{
                     width: "100%",
                     height: "100%",
-                    cursor: 'pointer',
+                    cursor: "pointer",
                   }}
-
                 >
-                  <div
-                    className=" !flex !justify-center !items-center animation_image"
-                  >
+                  <div className=" !flex !justify-center !items-center animation_image">
                     <img
                       src={roulette}
                       className="!h-full !w-full !bg-no-repeat "
@@ -516,17 +605,15 @@ function Home() {
       </Stack>
 
       <CustomCircularProgress isLoading={loding} />
-      {
-        useMemo(() => {
-          return (
-            <>
-              <audio ref={placeBetMusic} hidden>
-                <source src={`${placebetmusic}`} type="audio/mp3" />
-              </audio>
-            </>
-          );
-        }, [placeBetMusic])
-      }
+      {useMemo(() => {
+        return (
+          <>
+            <audio ref={placeBetMusic} hidden>
+              <source src={`${placebetmusic}`} type="audio/mp3" />
+            </audio>
+          </>
+        );
+      }, [placeBetMusic])}
       <Rule setOpen2={setOpen2} open2={open2} style={style} />
       <Box>
         <Box>
@@ -628,18 +715,23 @@ function Home() {
               </Box>
             </Box> */}
           {/* </Box> */}
-          <Box direction={"row"} sx={{ ...style.winnerlooserouter2, ...style.flex }}>
-            <Box sx={{
-              width: '45px',
-              height: '100%',
-              position: 'absolute',
-              right: 0,
-              border: '2px solid white',
-              borderRadius: '5px',
-            }}></Box>
+          <Box
+            direction={"row"}
+            sx={{ ...style.winnerlooserouter2, ...style.flex }}
+          >
+            <Box
+              sx={{
+                width: "45px",
+                height: "100%",
+                position: "absolute",
+                right: 0,
+                border: "2px solid white",
+                borderRadius: "5px",
+              }}
+            ></Box>
             {[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]?.map((ele) => {
               return (
-                <Box key={ele} sx={{ ...style.winnerLooserList, }}>
+                <Box key={ele} sx={{ ...style.winnerLooserList }}>
                   <Typography
                     variant="body1"
                     color="initial"
@@ -661,7 +753,6 @@ function Home() {
                     {/* {ele} */}
                   </Typography>
 
-
                   <Typography
                     variant="body1"
                     color="initial"
@@ -672,7 +763,6 @@ function Home() {
                     ) && Number(bet_result_history_Data?.[ele]?.number)}
                     {/* {ele} */}
                   </Typography>
-
                 </Box>
               );
             })}
@@ -761,9 +851,7 @@ function Home() {
                   className={"!ml-16"}
                 >
                   <Typography
-                    onClick={() =>
-                      rebetFuncton(bet, rebet, setBet, newdata)
-                    }
+                    onClick={() => rebetFuncton(bet, rebet, setBet, newdata)}
                     variant="body1"
                     color="initial"
                   >
@@ -804,7 +892,6 @@ function Home() {
               setisSelectedDropBet={setisSelectedDropBet}
             />
 
-
             {/* <Box
               sx={style.naiming4}
               onClick={() => {
@@ -816,55 +903,80 @@ function Home() {
                 LEAVE TABLE
               </Typography>
             </Box> */}
-            <ButtonGroup variant="outlined" aria-label="Basic button group" sx={{
-              position: 'absolute', bottom: '7%', right: '2%', width: '96%', '&>button': {
-                py: '10px', background: 'transparent', '&.Mui-disabled': {
-                  backgroundColor: 'transparent',
-                  color: '#757575',
-                  cursor: 'not-allowed',
-                  opacity: '0.5',
+            <ButtonGroup
+              variant="outlined"
+              aria-label="Basic button group"
+              sx={{
+                position: "absolute",
+                bottom: "7%",
+                right: "2%",
+                width: "96%",
+                "&>button": {
+                  py: "10px",
+                  background: "transparent",
+                  "&.Mui-disabled": {
+                    backgroundColor: "transparent",
+                    color: "#757575",
+                    cursor: "not-allowed",
+                    opacity: "0.5",
+                  },
+                  "&:hover": { backgroundColor: "transparent" },
                 },
-                '&:hover': { backgroundColor: 'transparent', },
-              },
-              '&>button:nth-child(1)': {
-                backgroundImage: `url(${btbg1})`,
-                backgroundSize: '100% 100%',
-                color: 'white',
-                width: '25%',
-              },
-              '&>button:nth-child(2)': {
-                backgroundImage: `url(${btbg2})`,
-                backgroundSize: '100% 100%',
-                color: 'white',
-                width: '25%',
-              },
-              '&>button:nth-child(3)': {
-                backgroundImage: `url(${btbg1})`,
-                backgroundSize: '100% 100%',
-                color: 'white',
-                width: '25%',
-              },
-              '&>button:nth-child(4)': {
-                backgroundImage: `url(${btbg3})`,
-                backgroundSize: '100% 100%',
-                color: 'white',
-                width: '25%',
-              },
-            }} >
-              <Button disabled={one_min_time < 10 || !(bet?.length > 0 && isAlreadyAppliedBet === "false")} variant="contained" sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "11px",
-                borderRadius: "5px",
+                "&>button:nth-child(1)": {
+                  backgroundImage: `url(${btbg1})`,
+                  backgroundSize: "100% 100%",
+                  color: "white",
+                  width: "25%",
+                },
+                "&>button:nth-child(2)": {
+                  backgroundImage: `url(${btbg2})`,
+                  backgroundSize: "100% 100%",
+                  color: "white",
+                  width: "25%",
+                },
+                "&>button:nth-child(3)": {
+                  backgroundImage: `url(${btbg1})`,
+                  backgroundSize: "100% 100%",
+                  color: "white",
+                  width: "25%",
+                },
+                "&>button:nth-child(4)": {
+                  backgroundImage: `url(${btbg3})`,
+                  backgroundSize: "100% 100%",
+                  color: "white",
+                  width: "25%",
+                },
               }}
-                onClick={() => removeBetFunctonAll()}>Remove</Button>
-              <Button variant="contained" sx={{
-                backgroundImage: `url(${btbg3})`,
-                backgroundSize: '100% 100%',
-                color: 'white !important', fontSize: '20px', fontWeight: '700', '&:hover': { backgroundColor: 'transparent', },
-              }}
-                onClick={() => justHalf(bet, setBet, newdata)}>
+            >
+              <Button
+                disabled={
+                  one_min_time < 10 ||
+                  !(bet?.length > 0 && isAlreadyAppliedBet === "false")
+                }
+                variant="contained"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "11px",
+                  borderRadius: "5px",
+                }}
+                onClick={() => removeBetFunctonAll()}
+              >
+                Remove
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundImage: `url(${btbg3})`,
+                  backgroundSize: "100% 100%",
+                  color: "white !important",
+                  fontSize: "20px",
+                  fontWeight: "700",
+                  "&:hover": { backgroundColor: "transparent" },
+                }}
+                onClick={() => justHalf(bet, setBet, newdata)}
+              >
                 -
               </Button>
               <Button
@@ -884,18 +996,28 @@ function Home() {
                 className="text-white w-[25%] !text-center pt-3 !cursor-pointer"
                 sx={{
                   backgroundImage: `url(${btbg1})`,
-                  backgroundSize: '100% 100%', '&>div>input': { color: 'white !important', fontSize: '20px', fontWeight: '700' },
-                }}   >
+                  backgroundSize: "100% 100%",
+                  "&>div>input": {
+                    color: "white !important",
+                    fontSize: "20px",
+                    fontWeight: "700",
+                  },
+                }}
+              >
                 {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
                   Number(total_amount_bet)?.toFixed(2)}
               </Button>
 
-                 <Button variant="contained" sx={{
-                backgroundImage: `url(${btbg3})`,
-                backgroundSize: '100% 100%',
-                color: 'white !important', fontSize: '20px', fontWeight: '700',
-                '&:hover': { backgroundColor: 'transparent', },
-              }}
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundImage: `url(${btbg3})`,
+                  backgroundSize: "100% 100%",
+                  color: "white !important",
+                  fontSize: "20px",
+                  fontWeight: "700",
+                  "&:hover": { backgroundColor: "transparent" },
+                }}
                 onClick={() => justDouble(bet, setBet, newdata)}
               >
                 +
@@ -987,8 +1109,27 @@ function Home() {
               </>
             )} */}
           </Box>
-          <Box component='img' src={dealer} sx={{ width: "230px", position: 'absolute', bottom: '18%', left: '-3%', filter: 'drop-shadow(2px 4px 30px #1B9E6F )' }}></Box>
-          <Box component='img' src={model2} sx={{ width: "90px", position: 'absolute', top: '-2%', right: '28%', }}></Box>
+          <Box
+            component="img"
+            src={dealer}
+            sx={{
+              width: "230px",
+              position: "absolute",
+              bottom: "18%",
+              left: "-3%",
+              filter: "drop-shadow(2px 4px 30px #1B9E6F )",
+            }}
+          ></Box>
+          <Box
+            component="img"
+            src={model2}
+            sx={{
+              width: "90px",
+              position: "absolute",
+              top: "-2%",
+              right: "28%",
+            }}
+          ></Box>
           <Box
             // countdown
             sx={{
@@ -1050,7 +1191,7 @@ function Home() {
           </Drawer>
         </Box>
       </Box>
-    </Box >
+    </Box>
   );
 }
 export default Home;
