@@ -80,6 +80,9 @@ export const endpoint = {
   },
 
   node:{
+    
+    top_two_winners:domainn+"/api/v1/getTopTwo_winner",
+    top_winners:domainn+"/api/v1/getTopWinners",
     get_wallet:domain1+"/api/v1/balance",
     history_my: domain1 + "/api/v1/getMyHistory",
      game_result: domainn + "/api/v1/getRouletteGameHistory",

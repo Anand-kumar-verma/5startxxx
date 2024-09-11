@@ -14,10 +14,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import copy from "clipboard-copy";
 import { useFormik } from "formik";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { RxCross2 } from "react-icons/rx";
 import { useQuery, useQueryClient } from "react-query";
@@ -44,10 +43,6 @@ import crown3 from "../../assets/crown3.png";
 import three from "../../assets/images/banner (3).jpg";
 import five from "../../assets/images/banner (4).jpg";
 import four from "../../assets/images/banner (5).jpg";
-import satta from "../../pages/SattaMatka/assets/images/satta.jpg";
-import position2 from "../../assets/images/positio2.png";
-import position3 from "../../assets/images/position3.png";
-import position1 from "../../assets/images/positoin1.png";
 import crown2 from "../../assets/images/crown2.png";
 import stage from "../../assets/images/podium.png";
 import refresh from "../../assets/images/refresh.png";
@@ -60,8 +55,10 @@ import profile2 from "../../assets/profile2.png";
 import profile3 from "../../assets/profile3.png";
 import winning_bg from "../../assets/winning_bg-d9c728ae.png";
 import Layout from "../../component/Layout/Layout";
+import satta from "../../pages/SattaMatka/assets/images/satta.jpg";
 import game from "../../rollet/assets/images/casino.png";
 
+import CustomCircularProgress from "../../Shared/CustomCircularProgress";
 import megaphone from "../../rollet/assets/images/megaphone.png";
 import { MyProfileDataFn } from "../../services/apicalling";
 import { apiConnectorGet } from "../../services/apiconnector";
@@ -73,7 +70,6 @@ import {
   telegram_url,
 } from "../../services/urls";
 import Notification from "./Notification";
-import CustomCircularProgress from "../../Shared/CustomCircularProgress";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -92,8 +88,6 @@ const imageSources = [
 function Dashboard() {
   const navigate = useNavigate();
   const [poicy, setpoicy] = React.useState(false);
-  const [winnner_data, setwinnerdata] = useState([]);
-  const [loding, setloding] = useState(false);
 
   const client = useQueryClient();
 
@@ -102,21 +96,20 @@ function Dashboard() {
     toast.success("Copied to clipboard!");
   };
 
-  const top11WinnerFunction = async () => {
-    setloding(true);
-    try {
-      const response = await axios.get(`${endpoint.top11winner}`);
-      setwinnerdata(response?.data?.data);
-    } catch (e) {
-      toast(e?.message);
-      console.log(e);
-    }
-    setloding(false);
-  };
+  const { isLoadingdata, data:image} = useQuery(["winner"] , ()=>apiConnectorGet(endpoint.node.top_winners) ,{
+    refetchOnMount :false,
+    refetchOnWindowFocus:false,
+    refetchOnReconnect :false
+  })
 
-  useEffect(() => {
-    // top11WinnerFunction();
-  }, []);
+  const winnner_data = image?.data?.data || []
+
+  const {data:toptwo}= useQuery(["top"] , ()=>apiConnectorGet(endpoint?.node?.top_two_winners) ,{
+    refetchOnMount:false ,
+    refetchOnReconnect:false ,
+    refetchOnWindowFocus:false
+  })
+  const topdata = toptwo.data.data ||[]
 
   const { isLoading, data } = useQuery(
     ["walletamount"],
@@ -130,7 +123,6 @@ function Dashboard() {
 
   const newdata = data?.data?.data || 0;
 
-
   const { isLoading: profile_loding, data: profile } = useQuery(
     ["myprofile"],
     () => MyProfileDataFn(),
@@ -141,7 +133,6 @@ function Dashboard() {
     }
   );
 
-  // const result = [];
   const result = profile?.data?.data || [];
   const initialValues = {
     referral_code: `${fron_end_main_domain}/register?ref=${result?.referral_code}`,
@@ -162,7 +153,6 @@ function Dashboard() {
   function refreshFunctionForRotation() {
     client.refetchQueries = "walletamount";
     const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
-
     const element = document.getElementById("refresh_button");
     if (!item) {
       element.classList.add("rotate_refresh_image");
@@ -532,7 +522,7 @@ function Dashboard() {
                       textAlign: "center",
                     }}
                   >
-                    98456.66
+                    ₹ {topdata?.[0]?.amount}
                   </Typography>
                 </Box>
               </Box>
@@ -567,7 +557,7 @@ function Dashboard() {
                 </Box>
                 <Box sx={{ ...styles.flexbetween, my: 1, ...styles.maxwin }}>
                   <Typography variant="body2" className="kip13" sx={{ textAlign: 'center', color: 'white !important', }}>The Highest Bonus in History</Typography>
-                  <Typography variant="body2" className="kip15" sx={{ color: 'white', fontWeight: '600', textAlign: 'center' }}>98456.66</Typography>
+                  <Typography variant="body2" className="kip15" sx={{ color: 'white', fontWeight: '600', textAlign: 'center' }}>₹ {topdata?.[1]?.amount}</Typography>
                 </Box>
               </Box>
               <Button
@@ -581,7 +571,7 @@ function Dashboard() {
               </Button>
             </Box>
           </div>
-          {loding ? (
+          {isLoadingdata ? (
             <div className="w-[100%] flex justify-center">
               <CircularProgress className="!text-white" />
             </div>
@@ -607,7 +597,7 @@ function Dashboard() {
                   Winning information
                 </Typography>
               </Stack>
-              {winnner_data.slice(3, 8)?.map((i, index) => {
+              {winnner_data?.slice(3, 8)?.map((i, index) => {
                 return (
                   <Stack key={index} direction="row" sx={styles.winnerslider}>
                     <div style={{ position: "relative" }}>
@@ -648,7 +638,7 @@ function Dashboard() {
                     </Box>
                     <Box>
                       <Typography variant="body1" sx={styles.winneramout || 0}>
-                        Receive ₹{Number(Number(i?.win || 0) * 200).toFixed(2)}
+                        Receive ₹{Number(Number(i?.winning_amount || 0) * 200).toFixed(2)}
                       </Typography>
                       <Typography variant="body1" sx={styles.winnertitle}>
                         Winning amount
@@ -693,7 +683,7 @@ function Dashboard() {
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
-                    ₹ {Number(winnner_data?.[0]?.win)?.toFixed(2)}
+                    ₹ {Number(winnner_data?.[0]?.winning_amount)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
@@ -724,7 +714,7 @@ function Dashboard() {
                 ></Box>
                 <Box sx={styles.winner2amt}>
                   <Typography variant="body1">
-                    {winnner_data?.[2]?.email
+                    {winnner_data?.[1]?.email
                       ? winnner_data?.[1]?.email
                           ?.split("@")?.[0]
                           ?.substring(0, 2) +
@@ -737,7 +727,7 @@ function Dashboard() {
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
-                    ₹ {Number(winnner_data?.[1]?.win)?.toFixed(2)}
+                    ₹ {Number(winnner_data?.[1]?.winning_amount)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
@@ -781,14 +771,14 @@ function Dashboard() {
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
-                    ₹ {Number(winnner_data?.[2]?.win)?.toFixed(2)}
+                    ₹ {Number(winnner_data?.[2]?.winning_amount)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
             </Stack>
           </Box>
 
-          {loding ? (
+          {isLoadingdata ? (
             <div className="w-[100%] flex justify-center">
               {" "}
               <CircularProgress className="!text-white" />
@@ -836,7 +826,7 @@ function Dashboard() {
                     </Box>
                     <Box>
                       <Typography variant="body1" sx={styles.winneramout || 0}>
-                        Receive ₹{Number(Number(i?.win || 0) * 200).toFixed(2)}
+                        Receive ₹{Number(Number(i?.winning_amount || 0) * 200).toFixed(2)}
                       </Typography>
                       <Typography variant="body1" sx={styles.winnertitle}>
                         Winning amount
