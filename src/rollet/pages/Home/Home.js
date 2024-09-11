@@ -13,7 +13,7 @@ import { useSocket } from "../../../Shared/SocketContext";
 import btbg1 from "../../../assets/btbg1.png";
 import btbg2 from "../../../assets/btbg2.png";
 import btbg3 from "../../../assets/btbg3.png";
-import rouletteBORD from "../../assets/images/thumbs_bgs.png";
+import roulette from "../../../assets/mainrollet.png";
 import model2 from "../../../rollet/assets/images/model2.png";
 import dealer from "../../../rollet/assets/images/model3.png";
 import { getProfileRollet } from "../../../services/apicalling";
@@ -21,9 +21,9 @@ import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import placebetmusic from "../../assets/images/applybet_music.mp3";
 import mouse_click from "../../assets/images/mouse_click.mp3";
-import roulette from "../../../assets/mainrollet.png";
 import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.mp3";
 import stop_ball_music from "../../assets/images/stop_ball_music.mp3";
+import rouletteBORD from "../../assets/images/thumbs_bgs.png";
 import watch from "../../assets/images/watch.png";
 import { addWinCap, black_array, confirmBet, justDouble, justHalf, rebetFuncton, red_array, spinFunction, } from "../../sharedFunction";
 import Rolletball from "../Rolletball";
@@ -474,6 +474,7 @@ function Home() {
               >
                 <img
                   src={roulette}
+                  alt=""
                   className="!h-full !w-full !bg-no-repeat "
                 />
                 <Rolletball />

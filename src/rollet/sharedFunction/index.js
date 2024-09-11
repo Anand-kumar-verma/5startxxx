@@ -1,6 +1,5 @@
 import toast from "react-hot-toast";
 import win_cap from "../assets/images/pwin.png";
-import axios from "axios";
 import { endpoint } from "../../services/urls";
 import { apiConnectorPost } from "../../services/apiconnector";
 

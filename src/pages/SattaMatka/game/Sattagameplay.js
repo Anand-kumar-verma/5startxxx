@@ -222,10 +222,10 @@ function Sattagameplay() {
               <AndarBaharTable betArray={betArray} setBetArray={setBetArray} />
             )}
             <Box
-              className=" !w-[38%] !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
+              className="w95 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
               sx={style.flexbetween}
             >
-              <Box className={"!flex !flex-col"}>
+              <Box className="">
                 <Typography
                   variant="body1"
                   className="fp13"

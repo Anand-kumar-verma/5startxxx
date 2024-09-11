@@ -1,8 +1,7 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
-import { style } from "./CommonCss";
 import toast from "react-hot-toast";
-import { NavLink } from "react-router-dom";
+import { style } from "./CommonCss";
 const Third12 = ({
   isSelectedDropBet,
   removeSingleBetFunction,
