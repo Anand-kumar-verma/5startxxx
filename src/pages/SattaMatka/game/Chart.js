@@ -1,13 +1,13 @@
-import { ArrowBack, History, Wallet } from "@mui/icons-material";
+import { ArrowBack, History } from "@mui/icons-material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import FitbitIcon from "@mui/icons-material/Fitbit";
 import {
   Box,
   Button,
   Container,
   Typography
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
+import { useQuery } from "react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -16,9 +16,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { stardarkblue, stargold, stargrad } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
+import { apiConnectorGet } from "../../../services/apiconnector";
 import { download_app_url, endpoint } from "../../../services/urls";
-import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
-import { useQuery } from "react-query";
 
 function SattaChart() {
   const progressCircle = useRef(null);

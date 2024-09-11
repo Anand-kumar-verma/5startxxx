@@ -354,7 +354,7 @@ function Home() {
     const handleOneMinrolletresult = (onemin) => {
       spinFunction(onemin);
       localStorage.setItem("result_rollet", onemin);
-
+      console.log(onemin,"roulette result function");
       setTimeout(() => {
         handlePlaySound();
       }, 9000);
