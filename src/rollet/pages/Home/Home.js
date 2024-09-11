@@ -540,13 +540,13 @@ function Home() {
               }}
             >
               <div
-                style={{
-                  width: "250px",
-                  height: "250px",
-                  position: "absolute",
-                  top: "5%",
-                  right: "15%",
-                }}
+                // style={{
+                //   width: "250px",
+                //   height: "250px",
+                //   position: "absolute",
+                //   top: "5%",
+                //   right: "15%",
+                // }}
                 // style={{
                 //   width: '300px',
                 //   height: '300px',
