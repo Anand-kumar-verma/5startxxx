@@ -522,7 +522,7 @@ function Dashboard() {
                       textAlign: "center",
                     }}
                   >
-                    ₹ {Number(topdata?.[0]?.amount)?.toFixed(2)}
+                    ₹ {Number(topdata?.[1]?.amount)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
@@ -557,7 +557,7 @@ function Dashboard() {
                 </Box>
                 <Box sx={{ ...styles.flexbetween, my: 1, ...styles.maxwin }}>
                   <Typography variant="body2" className="kip13" sx={{ textAlign: 'center', color: 'white !important', }}>The Highest Bonus in History</Typography>
-                  <Typography variant="body2" className="kip15" sx={{ color: 'white', fontWeight: '600', textAlign: 'center' }}>₹ {Number(topdata?.[1]?.amount)?.toFixed(2)}</Typography>
+                  <Typography variant="body2" className="kip15" sx={{ color: 'white', fontWeight: '600', textAlign: 'center' }}>₹ {Number(topdata?.[0]?.amount)?.toFixed(2)}</Typography>
                 </Box>
               </Box>
               <Button
