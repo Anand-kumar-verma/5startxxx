@@ -5,7 +5,7 @@ export const fron_end_main_domain = "https://5starxxx.com";
 
 export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
 // export const domain ="http://192.168.18.183:9002/"
-export const domainn = "http://192.168.18.183:9002"
+// export const domainn = "http://192.168.18.183:9002"
 export const domain1 = "https://api.5starxxx.com"
 
 
@@ -90,8 +90,8 @@ export const endpoint = {
     satta_game_gamehistory: domain1 + "/api/v1/getSattaGameHistory",
     satta_game_myhistory: domain1 + "/api/v1/getSattaMyHistory",
     getStatusSattaMatka: domain1 + "/api/v1/getStatusSattaMatka",
-    referral_bonus: domainn + "/api/v1/getReferralBonus",
-    level_income: domainn + "/api/v1/getLevelIncome",
+    referral_bonus: domain1 + "/api/v1/getReferralBonus",
+    level_income: domain1 + "/api/v1/getLevelIncome",
 
     
      
