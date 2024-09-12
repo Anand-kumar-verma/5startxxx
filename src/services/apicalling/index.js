@@ -284,17 +284,17 @@ export const depositBonusFn = async () => {
     console.log(e);
   }
 };
-export const referralBonusFn = async () => {
-  try {
-    const response = await axios.get(
-      `${endpoint.referral_bonus}?user_id=${user_id}`
-    );
-    return response;
-  } catch (e) {
-    toast(e?.message);
-    console.log(e);
-  }
-};
+// export const referralBonusFn = async () => {
+//   try {
+//     const response = await axios.get(
+//       `${endpoint.referral_bonus}?user_id=${user_id}`
+//     );
+//     return response;
+//   } catch (e) {
+//     toast(e?.message);
+//     console.log(e);
+//   }
+// };
 export const referralBetFn = async () => {
   try {
     const response = await axios.get(
@@ -340,18 +340,7 @@ export const dailySalaryIncomeFn = async () => {
     console.log(e);
   }
 };
-export const teamRewartBonus = async () => {
-  //
-  try {
-    const response = await axios.get(
-      `${endpoint.team_reward_bonus}?user_id=${user_id}`
-    );
-    return response;
-  } catch (e) {
-    toast(e?.message);
-    console.log(e);
-  }
-};
+
 
 export const BankListDetails = async () => {
   try {

@@ -1,13 +1,12 @@
-import { Money } from "@mui/icons-material";
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import Diversity2Icon from "@mui/icons-material/Diversity2";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import * as React from "react";
 import { NavLink } from "react-router-dom";
 import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
-import Layout from "../../component/Layout/Layout";
 import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import Layout from "../../component/Layout/Layout";
 
 
 function MainPageOFIncome() {
@@ -22,82 +21,11 @@ function MainPageOFIncome() {
         />
       ),
     },
-    // {
-    //   to: "/account/income-main/level-income",
-    //   name: "Level Income",
-    //   logo: (
-    //     <StairsIcon
-    //       sx={{width: "20px", height: "20px", marginRight: "10px"}}
-    //       color="#ffffff"
-    //     />
-    //   ),
-    // },
-    // {
-    //   to: "/account/income-main/referral-bonus",
-    //   name: "Referral Bonus",
-    //   logo: (
-    //     <RedeemIcon
-    //       sx={{width: "20px", height: "20px", marginRight: "10px"}}
-    //       color="#ffffff"
-    //     />
-    //   ),
-    // },
-    // {
-    //   to: "/account/income-main/daily-cash-back-bonus",
-    //   name: "Daily Cashback Bonus",
-    //   logo: (
-    //     <LocalConvenienceStoreIcon
-    //       sx={{width: "20px", height: "20px", marginRight: "10px"}}
-    //       color="#ffffff"
-    //     />
-    //   ),
-    // },
-    // {
-    //   to: "/account/income-main/daily-salary-bonus",
-    //   name: "Daily Salary Bonus",
-    //   logo: (
-    //     <AccountBalanceIcon
-    //       sx={{width: "20px", height: "20px", marginRight: "10px"}}
-    //       color="#ffffff"
-    //     />
-    //   ),
-    // },
-    // {
-    //   to: "/account/income-main/self-trading-bonus",
-    //   name: "Self Trading Bonus",
-    //   logo: (
-    //     <StoreIcon
-    //       sx={{width: "20px", height: "20px", marginRight: "10px"}}
-    //       color="#ffffff"
-    //     />
-    //   ),
-    // },
-    // {
-    //   to: "/account/income-main/team-trading-bonus",
-    //   name: "Team Trading  Bonus",
-    //   logo: (
-    //     <CardGiftcardIcon
-    //       sx={{width: "20px", height: "20px", marginRight: "10px"}}
-    //       color="#ffffff"
-    //     />
-    //   ),
-    // },
     {
-      to: "/account/income-main/team-reward-bonus",
-      name: "Vegus Bonus",
+      to: "/account/income-main/level-income",
+      name: "Level Income",
       logo: (
         <Diversity2Icon
-          sx={{ width: "20px", height: "20px", marginRight: "10px", color: 'white', }}
-          color="#ffffff"
-        />
-      ),
-    },
-
-    {
-      to: "/account/income-main/referral-bet",
-      name: "Bet Referral ",
-      logo: (
-        <Money
           sx={{ width: "20px", height: "20px", marginRight: "10px", color: 'white', }}
           color="#ffffff"
         />

@@ -1,8 +1,5 @@
 import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
-import {
-  Box,
-  Container
-} from "@mui/material";
+import { Box, Container } from "@mui/material";
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
@@ -10,50 +7,27 @@ import { NavLink, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 import { zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
-import {
-  dailySelfBetIncomeFn
-} from "../../../services/apicalling";
+import { registrationBonusFn, teamRewartBonus } from "../../../services/apicalling";
 import nodatafoundimage from "../../../assets/images/nodatafoundimage.png";
+import { apiConnectorGet } from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
 
-function SelfTradingBonus() {
+function LevelIncome() {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
 
   const { isLoading, data } = useQuery(
-    ["self_trading_bonus"],
-    () => dailySelfBetIncomeFn(),
+    ["team_reward_bonus"],
+    () => apiConnectorGet(endpoint?.node?.level_income),
     {
       refetchOnMount: false,
       refetchOnReconnect: true,
     }
   );
   const res = data?.data?.data;
-  if (!isLoading && !res)
-  return (
-    <Layout>
-      <Container
-        sx={{
-          background: zubgback,
-          width: "100%",
-          height: "100vh",
-          overflow: "auto",
-          mb: 5,
-        }}
-      >
-        <Box sx={style.header}>
-          <Box component={NavLink} onClick={goBack}>
-            <KeyboardArrowLeftOutlinedIcon />
-          </Box>
-          <p>Daily Cashback Bonus</p>
-        </Box>
-        <div>
-          <img className="" src={nodatafoundimage} />
-        </div>
-      </Container>
-    </Layout>
-  );
+
   return (
     <Layout>
       <Container
@@ -71,12 +45,14 @@ function SelfTradingBonus() {
           <Box component={NavLink} onClick={goBack}>
             <KeyboardArrowLeftOutlinedIcon />
           </Box>
-          <p>Self Tradin Bonus</p>
+          <p>Level Income</p>
         </Box>
         <div className="no-scrollbar !mb-10">
-          {res?.map((i) => {
-            return (
-              <div className="!w-full !flex !flex-col  !bg-white !bg-opacity-5 !p-2 !rounded-lg !mt-2">
+          {isLoading ? (
+            <CustomCircularProgress isLoading={isLoading} />
+          ) : res && res?.length > 0 ? (
+            res.map((i, index) => (
+              <div key={index} className="!w-full !flex !flex-col !bg-white !bg-opacity-5 !p-2 !rounded-lg !mt-2">
                 <div className="!w-full !flex !justify-between">
                   <span className="!text-white">{i?.l01_transection_type}</span>
                   <span className="!text-green-400 !text-lg">
@@ -84,27 +60,26 @@ function SelfTradingBonus() {
                   </span>
                 </div>
                 <div className="!w-full !flex !justify-between">
-                  <span className="!text-white">{i?.lo1_id}</span>
-                  <span className="!text-yellow-400  !text-[12px]">
+                  <span className="!text-white"></span>
+                  <span className="!text-yellow-400 !text-[12px]">
                     {moment(i?.l01_date)?.format("DD-MM-YYYY")}{" "}
                     {moment(i?.l01_date)?.format("HH:mm:ss")}
                   </span>
                 </div>
-                <div className="!w-full !flex !justify-between">
-                  <span className="!text-white !text-[12px]">
-                    {i?.l01_type}
-                  </span>
-                </div>
               </div>
-            );
-          })}
+            ))
+          ) : (
+            <div>
+           <img className="" src={nodatafoundimage} />
+            </div>
+          )}
         </div>
       </Container>
     </Layout>
   );
 }
 
-export default SelfTradingBonus;
+export default LevelIncome;
 
 const style = {
   header: {
@@ -191,6 +166,3 @@ const style = {
     "&>p": { marginLeft: "10px", color: "white !important", fontSize: "14px" },
   },
 };
-
-
-

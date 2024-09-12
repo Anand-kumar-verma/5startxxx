@@ -34,15 +34,8 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import FundRequest from "../pages/dashboard/FundRequest";
 import Withdrawl from "../pages/dashboard/Withdrawl";
 import MainPageOFIncome from "../pages/income/MainPageOFIncome";
-import BetReferal from "../pages/income/incomeSubSection/BetReferal";
-import DailyCashBackBonus from "../pages/income/incomeSubSection/DailyCashBackBonus";
-import DailySalaryBonus from "../pages/income/incomeSubSection/DailySalaryBonus";
-import LevelIncome from "../pages/income/incomeSubSection/DepositBonus";
+import LevelIncome from "../pages/income/incomeSubSection/LevelIncome";
 import ReferralBonus from "../pages/income/incomeSubSection/ReferralBonus";
-import RegistrationBonus from "../pages/income/incomeSubSection/RegistrationBonus";
-import SelfTradingBonus from "../pages/income/incomeSubSection/SelfTradingBonus";
-import TeamRewardBonus from "../pages/income/incomeSubSection/TeamRewardBonus";
-import TeamTradingBonus from "../pages/income/incomeSubSection/TeamTradingBonus";
 import Promotion from "../pages/promotion/Promotion";
 import CustomerLine from "../pages/promotion/component/CustomerLine";
 import Invitaton from "../pages/promotion/component/Invitaton";
@@ -245,40 +238,12 @@ export const routes = [
         component: <MainPageOFIncome />
     },
     {
-        path: "/account/income-main/registration-bonus",
-        component: <RegistrationBonus />
-    },
-    {
-        path: "/account/income-main/referral-bet",
-        component: <BetReferal />
-    },
-    {
-        path: "/account/income-main/level-income",
-        component: <LevelIncome />
-    },
-    {
         path: "/account/income-main/referral-bonus",
         component: <ReferralBonus />
     },
     {
-        path: "/account/income-main/daily-cash-back-bonus",
-        component: <DailyCashBackBonus />
-    },
-    {
-        path: "/account/income-main/daily-salary-bonus",
-        component: <DailySalaryBonus />
-    },
-    {
-        path: "/account/income-main/self-trading-bonus",
-        component: <SelfTradingBonus />
-    },
-    {
-        path: "/account/income-main/team-trading-bonus",
-        component: <TeamTradingBonus />
-    },
-    {
-        path: "/account/income-main/team-reward-bonus",
-        component: <TeamRewardBonus />
+        path: "/account/income-main/level-income",
+        component: <LevelIncome />
     },
     {
         path: "/add-bank-details",
