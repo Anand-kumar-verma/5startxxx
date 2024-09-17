@@ -52,6 +52,7 @@ import { endpoint, fron_end_main_domain } from "../../services/urls";
 import Image from "./Image";
 import { BorderColor } from "@mui/icons-material";
 import zIndex from "@mui/material/styles/zIndex";
+import { apiConnectorGet } from "../../services/apiconnector";
 function Account() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -88,6 +89,18 @@ function Account() {
     }
     client.removeQueries("myprofile");
   }
+
+  const {data:wallet } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus:false
+    }
+  );
+
+  const newdata = wallet?.data?.data || 0;
   const images = [
     "https://mui.com/static/images/avatar/2.jpg",
     "https://mui.com/static/images/avatar/3.jpg",
@@ -171,8 +184,8 @@ function Account() {
             <Typography variant="body1" color="initial" sx={style.totalBalance}>
               {(
                 Number(
-                  Number(result?.winning_wallet || 0) +
-                  Number(result?.wallet || 0)
+                  Number(newdata?.winning_wallet || 0) +
+                  Number(newdata?.wallet || 0)
                 ) || 0
               )?.toFixed(0)}
             </Typography>

@@ -41,7 +41,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -80,7 +80,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -99,7 +99,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -136,7 +136,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -155,7 +155,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -192,7 +192,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -211,7 +211,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -247,7 +247,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -266,7 +266,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -307,7 +307,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -346,7 +346,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -365,7 +365,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -402,7 +402,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -421,7 +421,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -458,7 +458,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -477,7 +477,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -513,7 +513,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -532,7 +532,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -573,7 +573,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -612,7 +612,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -631,7 +631,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -668,7 +668,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -687,7 +687,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -724,7 +724,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -743,7 +743,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -779,7 +779,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -798,7 +798,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -839,7 +839,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -878,7 +878,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -897,7 +897,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -934,7 +934,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -953,7 +953,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -990,7 +990,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1009,7 +1009,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1045,7 +1045,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1064,7 +1064,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1107,7 +1107,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1146,7 +1146,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1165,7 +1165,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1202,7 +1202,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1221,7 +1221,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1258,7 +1258,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1277,7 +1277,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1318,7 +1318,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1357,7 +1357,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1376,7 +1376,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1413,7 +1413,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1432,7 +1432,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1469,7 +1469,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1488,7 +1488,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1529,7 +1529,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1568,7 +1568,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1587,7 +1587,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1624,7 +1624,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1643,7 +1643,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1680,7 +1680,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1699,7 +1699,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1740,7 +1740,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1779,7 +1779,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1798,7 +1798,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1835,7 +1835,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1854,7 +1854,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1891,7 +1891,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1910,7 +1910,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1953,7 +1953,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -1992,7 +1992,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2011,7 +2011,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -2054,7 +2054,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -2093,7 +2093,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2112,7 +2112,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -2155,7 +2155,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -2194,7 +2194,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2213,7 +2213,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -2256,7 +2256,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -2295,7 +2295,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2314,7 +2314,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -2364,7 +2364,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2383,7 +2383,7 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >

@@ -40,7 +40,7 @@ const Zero = ({
                   isContainsPre?.amount < 2
                 ) {
                   return toast(
-                    <span className="!p-2" style={{ marginTop: "10% ", transform: "rotate(90deg)", backgroundColor: 'black' }}>
+                    <span className="!p-2" style={{ marginTop: "10% ",  backgroundColor: 'black' }}>
                       Bet must be greater than 10 and less that 50000 Rupees
                     </span>
                   );

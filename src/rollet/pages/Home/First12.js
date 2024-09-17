@@ -44,7 +44,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -307,7 +307,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -570,7 +570,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -833,7 +833,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -989,7 +989,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -1405,7 +1405,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -1613,7 +1613,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -1814,7 +1814,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -1913,7 +1913,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -2012,7 +2012,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
@@ -2082,7 +2082,7 @@ const First12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >

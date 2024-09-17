@@ -30,7 +30,7 @@ const ConfirmationDialogBox = ({
             width: "350px",
             height: "150px",
             background: "black",
-            transform: "rotate(90deg)",
+            // transform: "rotate(90deg)",
             borderRadius: "10px",
             padding: "20px",
             color: "yellow",

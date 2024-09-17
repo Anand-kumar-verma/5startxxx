@@ -30,7 +30,7 @@ const Rule = ({ setOpen2, open2, style }) => {
             width: "500px",
             height: "100%",
             background: "black",
-            transform: "rotate(90deg)",
+            // transform: "rotate(90deg)",
             borderRadius: "10px",
             padding: "10px",
             color: "white",

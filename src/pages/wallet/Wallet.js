@@ -26,6 +26,8 @@ import sunlotteryhomebanner from "../../assets/sunlotteryhomebanner.jpg";
 import refresh from "../../assets/images/refresh.png";
 import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
 import atmbg from "../../assets/atmbg2.jpg";
+import { apiConnectorGet } from "../../services/apiconnector";
+import { endpoint } from "../../services/urls";
 
 
 function Wallet() {
@@ -38,145 +40,156 @@ function Wallet() {
     refetchOnReconnect: true,
   });
   const result = data?.data?.data;
-  console.log(result);
-  const main_wallet = {
-    colors: ["#63BA0E", "red", "green"],
-    series: [Number(result?.wallet || 0)?.toFixed(0) || 0],
-    options: {
-      chart: {
-        height: 250,
-        type: "radialBar",
-        toolbar: {
-          show: false,
-        },
-      },
-      plotOptions: {
-        radialBar: {
-          startAngle: -135,
-          endAngle: 225,
-          hollow: {
-            margin: 0,
-            size: "70%",
-            background: zubgmid,
-            image: undefined,
-            imageOffsetX: 0,
-            imageOffsetY: 0,
-            position: "front",
-            dropShadow: {
-              enabled: true,
-              top: 3,
-              left: 0,
-              blur: 4,
-              opacity: 0.24,
-            },
-          },
-          track: {
-            background: "#fff",
-            strokeWidth: "67%",
-            margin: 0, // margin is in pixels
-            dropShadow: {
-              enabled: true,
-              top: -3,
-              left: 0,
-              blur: 4,
-              opacity: 0.35,
-            },
-          },
 
-          dataLabels: {
-            show: true,
-            name: {
-              offsetY: -10,
-              show: true,
-              color: "white",
-              fontSize: "17px",
-            },
-            value: {
-              formatter: function (val) {
-                return parseInt(val);
-              },
-              color: "white",
-              fontSize: "15px",
-              show: true,
-            },
-          },
-        },
-      },
-      stroke: {
-        lineCap: "round",
-      },
-      labels: ["Deposit"],
-    },
-  };
-  const third_party_wallet = {
-    series: [(Number(Number(result?.winning_wallet || 0)) || 0)?.toFixed()],
-    colors: ["#63BA0E", "red", "green"],
-    options: {
-      chart: {
-        height: 350,
-        type: "radialBar",
-        toolbar: {
-          show: false,
-        },
-      },
-      plotOptions: {
-        radialBar: {
-          startAngle: -135,
-          endAngle: 225,
-          hollow: {
-            margin: 0,
-            size: "70%",
-            image: undefined,
-            imageOffsetX: 0,
-            imageOffsetY: 0,
-            position: "front",
-            dropShadow: {
-              enabled: true,
-              top: 3,
-              left: 0,
-              blur: 4,
-              opacity: 0.24,
-            },
-          },
-          track: {
-            background: "red",
-            strokeWidth: "67%",
-            margin: 0,
-            dropShadow: {
-              enabled: true,
-              top: -3,
-              left: 0,
-              blur: 4,
-              opacity: 0.35,
-            },
-          },
+  const {data:wallet } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus:false
+    }
+  );
 
-          dataLabels: {
-            show: true,
-            name: {
-              offsetY: -10,
-              show: true,
-              color: "white",
-              fontSize: "17px",
-            },
-            value: {
-              formatter: function (val) {
-                return parseInt(val);
-              },
-              color: "white",
-              fontSize: "15px",
-              show: true,
-            },
-          },
-        },
-      },
+  const newdata = wallet?.data?.data || 0;
+  // const main_wallet = {
+  //   colors: ["#63BA0E", "red", "green"],
+  //   series: [Number(result?.wallet || 0)?.toFixed(0) || 0],
+  //   options: {
+  //     chart: {
+  //       height: 250,
+  //       type: "radialBar",
+  //       toolbar: {
+  //         show: false,
+  //       },
+  //     },
+  //     plotOptions: {
+  //       radialBar: {
+  //         startAngle: -135,
+  //         endAngle: 225,
+  //         hollow: {
+  //           margin: 0,
+  //           size: "70%",
+  //           background: zubgmid,
+  //           image: undefined,
+  //           imageOffsetX: 0,
+  //           imageOffsetY: 0,
+  //           position: "front",
+  //           dropShadow: {
+  //             enabled: true,
+  //             top: 3,
+  //             left: 0,
+  //             blur: 4,
+  //             opacity: 0.24,
+  //           },
+  //         },
+  //         track: {
+  //           background: "#fff",
+  //           strokeWidth: "67%",
+  //           margin: 0, // margin is in pixels
+  //           dropShadow: {
+  //             enabled: true,
+  //             top: -3,
+  //             left: 0,
+  //             blur: 4,
+  //             opacity: 0.35,
+  //           },
+  //         },
 
-      stroke: {
-        lineCap: "round",
-      },
-      labels: ["Winning"],
-    },
-  };
+  //         dataLabels: {
+  //           show: true,
+  //           name: {
+  //             offsetY: -10,
+  //             show: true,
+  //             color: "white",
+  //             fontSize: "17px",
+  //           },
+  //           value: {
+  //             formatter: function (val) {
+  //               return parseInt(val);
+  //             },
+  //             color: "white",
+  //             fontSize: "15px",
+  //             show: true,
+  //           },
+  //         },
+  //       },
+  //     },
+  //     stroke: {
+  //       lineCap: "round",
+  //     },
+  //     labels: ["Deposit"],
+  //   },
+  // };
+  // const third_party_wallet = {
+  //   series: [(Number(Number(result?.winning_wallet || 0)) || 0)?.toFixed()],
+  //   colors: ["#63BA0E", "red", "green"],
+  //   options: {
+  //     chart: {
+  //       height: 350,
+  //       type: "radialBar",
+  //       toolbar: {
+  //         show: false,
+  //       },
+  //     },
+  //     plotOptions: {
+  //       radialBar: {
+  //         startAngle: -135,
+  //         endAngle: 225,
+  //         hollow: {
+  //           margin: 0,
+  //           size: "70%",
+  //           image: undefined,
+  //           imageOffsetX: 0,
+  //           imageOffsetY: 0,
+  //           position: "front",
+  //           dropShadow: {
+  //             enabled: true,
+  //             top: 3,
+  //             left: 0,
+  //             blur: 4,
+  //             opacity: 0.24,
+  //           },
+  //         },
+  //         track: {
+  //           background: "red",
+  //           strokeWidth: "67%",
+  //           margin: 0,
+  //           dropShadow: {
+  //             enabled: true,
+  //             top: -3,
+  //             left: 0,
+  //             blur: 4,
+  //             opacity: 0.35,
+  //           },
+  //         },
+
+  //         dataLabels: {
+  //           show: true,
+  //           name: {
+  //             offsetY: -10,
+  //             show: true,
+  //             color: "white",
+  //             fontSize: "17px",
+  //           },
+  //           value: {
+  //             formatter: function (val) {
+  //               return parseInt(val);
+  //             },
+  //             color: "white",
+  //             fontSize: "15px",
+  //             show: true,
+  //           },
+  //         },
+  //       },
+  //     },
+
+  //     stroke: {
+  //       lineCap: "round",
+  //     },
+  //     labels: ["Winning"],
+  //   },
+  // };
   const client = useQueryClient()
 
   function refreshFunctionForRotation() {
@@ -258,12 +271,9 @@ function Wallet() {
               <Box className="!flex justify-center gap-1 walletBox">
                 <Typography variant="h2" color="initial">
                   {" "}
-                  {(
-                    Number(
-                      Number(result?.winning_wallet || 0) +
-                      Number(result?.wallet || 0)
-                    ) || 0
-                  )?.toFixed(0)}
+                  {Number(
+                  Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
+                )?.toFixed(2)}
                 </Typography>
                 <img className="rotate_refresh_image w-5 h-6 mt-5" id="refresh_button"
                   src={refresh} width={25} ml={2} onClick={() => {
@@ -311,7 +321,7 @@ function Wallet() {
                 }}
               >
                 <Typography variant="body1" color="initial">
-                  ₹  {Number(result?.wallet || 0)?.toFixed(0)}.00
+                  ₹  {Number(newdata?.wallet || 0)?.toFixed(0)}.00
                 </Typography>
                 <Typography variant="body1" color="initial">
                   Total Deposit
@@ -335,7 +345,7 @@ function Wallet() {
               >
                 <Typography variant="body1" color="initial">
                   {" "}
-                  ₹ {(Number(Number(result?.winning_wallet || 0)) || 0)?.toFixed(
+                  ₹ {(Number(Number(newdata?.winning_wallet || 0)) || 0)?.toFixed(
                     0
                   )}.00
                 </Typography>

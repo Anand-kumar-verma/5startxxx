@@ -34,7 +34,7 @@ const TwoToOne = ({
                       <span
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -53,7 +53,7 @@ const TwoToOne = ({
                           className="p-2"
                           style={{
                             marginTop: "10% ",
-                            transform: "rotate(90deg)",
+                            
                             backgroundColor: "black",
                           }}
                         >
@@ -90,7 +90,7 @@ const TwoToOne = ({
                         className="p-2"
                         style={{
                           marginTop: "100%",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -109,7 +109,7 @@ const TwoToOne = ({
                           className="p-2"
                           style={{
                             marginTop: "10% ",
-                            transform: "rotate(90deg)",
+                            
                             backgroundColor: "black",
                           }}
                         >
@@ -146,7 +146,7 @@ const TwoToOne = ({
                         className="p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
@@ -166,7 +166,7 @@ const TwoToOne = ({
                           style={{
                             marginTop: "10% ",
                             alignItems: "center",
-                            transform: "rotate(90deg)",
+                            
                             backgroundColor: "black",
                           }}
                         >

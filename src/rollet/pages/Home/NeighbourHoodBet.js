@@ -40,7 +40,7 @@ const NeighbourHoodBet = ({
         <Box
           sx={{
             position: "absolute",
-            transform: "rotate(90deg)",
+            // 
             width: 600,
             height: 300,
             top: "35%",
@@ -89,7 +89,7 @@ const NeighbourHoodBet = ({
                     isContainsPre?.amount < 2
                   ) {
                     return toast(
-                    <span className="!p-2" style={{ marginTop: "10% ", transform: "rotate(90deg)", backgroundColor: 'black' }}>
+                    <span className="!p-2" style={{ marginTop: "10% ", backgroundColor: 'black' }}>
                                 Bet must be greater than 10 and less that 50000 Rupees
                               </span>
                     );
@@ -137,7 +137,7 @@ const NeighbourHoodBet = ({
                     isContainsPre?.amount < 2
                   ) {
                     return toast(
-                    <span className="!p-2" style={{ marginTop: "10% ", transform: "rotate(90deg)", backgroundColor: 'black' }}>
+                    <span className="!p-2" style={{ marginTop: "10% ",  backgroundColor: 'black' }}>
                                 Bet must be greater than 10 and less that 50000 Rupees
                               </span>
                     );
@@ -183,7 +183,7 @@ const NeighbourHoodBet = ({
                     isContainsPre?.amount < 2
                   ) {
                     return toast(
-                    <span className="!p-2" style={{ marginTop: "10% ", transform: "rotate(90deg)", backgroundColor: 'black' }}>
+                    <span className="!p-2" style={{ marginTop: "10% ", backgroundColor: 'black' }}>
                                 Bet must be greater than 10 and less that 50000 Rupees
                               </span>
                     );
@@ -230,7 +230,7 @@ const NeighbourHoodBet = ({
                     isContainsPre?.amount < 2
                   ) {
                     return toast(
-                    <span className="!p-2" style={{ marginTop: "10% ", transform: "rotate(90deg)", backgroundColor: 'black' }}>
+                    <span className="!p-2" style={{ marginTop: "10% ", backgroundColor: 'black' }}>
                                 Bet must be greater than 10 and less that 50000 Rupees
                               </span>
                     );
