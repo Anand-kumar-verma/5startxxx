@@ -136,13 +136,13 @@ function WithdravalHistory() {
                     <Box>
                       <Button
                         sx={{ color: "green", textTransform: "capitalize" }}
-                        className={`${i?.status
+                        className={`${i?.tr15_status
                           === "Approve"
                           ? "!text-green-500"
                           : "!text-red-500"
                           }`}
                       >
-                        {i?.status === "Approve" ? "Approved" : i?.status}
+                        {i?.tr15_status === "Approve" ? "Approved" : i?.tr15_status}
                       </Button>
 
                       <IconButton>
@@ -150,7 +150,22 @@ function WithdravalHistory() {
                       </IconButton>
                     </Box>
                   </Stack>
-                  .
+                  <Stack
+                    direction="row"
+                    sx={{
+                      mb: "10px",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      "&>p": { color: "white" },
+                    }}
+                  >
+                    <Typography variant="body1" color="initial">
+                    Deposit Type
+                    </Typography>
+                    <Typography variant="body1" color="initial">
+                      {i?.Deposit_type}
+                    </Typography>
+                  </Stack>
                   <Stack
                     direction="row"
                     sx={{
@@ -164,7 +179,7 @@ function WithdravalHistory() {
                       Balance
                     </Typography>
                     <Typography variant="body1" color="initial">
-                      {i?.amount}
+                      {i?.tr15_amt}
                     </Typography>
                   </Stack>
                   <Stack
@@ -180,8 +195,8 @@ function WithdravalHistory() {
                       Date/Time
                     </Typography>
                     <Typography variant="body1" color="initial">
-                      {moment(i?.date)?.format("DD-MM-YYYY")}{" "}
-                      {moment(i?.date)?.format("HH:mm:ss")}
+                      {moment(i?.tr15_date)?.format("DD-MM-YYYY")}{" "}
+                      {moment(i?.tr15_date)?.format("HH:mm:ss")}
                     </Typography>
                   </Stack>
                   <Stack
@@ -197,7 +212,7 @@ function WithdravalHistory() {
                       Status
                     </Typography>
                     <Typography variant="body1" color="initial">
-                      {i?.status
+                      {i?.tr15_status
                       }{" "}
                     </Typography>
                   </Stack>

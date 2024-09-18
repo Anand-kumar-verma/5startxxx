@@ -38,8 +38,8 @@ export const endpoint = {
   payment_url: "https://vpayout.com/Upi_controller/insert_fund_request_online",
   get_name_by_referral_code: `${baseUrl}/api/get-user-reffral-name`,
   registration_bonus: `${baseUrl}/api/welcom-bonus`,
-  deposit_history: `${baseUrl}/api/deposit-history`,
-  withdrawl_history: `${baseUrl}/api/withdrawl-history`,
+  // deposit_history: `${baseUrl}/api/deposit-history`,
+  // withdrawl_history: `${baseUrl}/api/withdrawl-history`,
   deposit_bonus: `${baseUrl}/api/deposit-bonus`,
   bet_reffral: `${baseUrl}/api/bet-reffral`,
   daily_self_bet_income: `${baseUrl}/api/daily-self-bet-income`,
@@ -99,6 +99,9 @@ export const endpoint = {
     withdraw_payment: domainn + "/api/v1/payout-request",
     add_bank: domainn + "/api/v1/add-bank-upi",
     bank_details: domainn + "/api/v1/user-bank-details",
+    withdrawl_history: domainn + "/api/v1/withdrawal-history",
+    deposit_history: domainn + "/api/v1/deposit-history",
+    
     
    
       

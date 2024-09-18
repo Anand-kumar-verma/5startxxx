@@ -3,6 +3,7 @@ import CryptoJS from "crypto-js";
 import toast from "react-hot-toast";
 import { aviator_login_data_fn } from "../../redux/slices/counterSlice";
 import { endpoint } from "../urls";
+import { apiConnectorGet } from "../apiconnector";
 const value =
   (localStorage.getItem("logindataen") &&
     CryptoJS.AES.decrypt(
@@ -229,8 +230,8 @@ export const top11WinnerFunction = async () => {
 };
 export const depositHistoryFunction = async () => {
   try {
-    const response = await axios.get(
-      `${endpoint.deposit_history}?user_id=${user_id}`
+    const response = await apiConnectorGet(
+      `${endpoint.node.deposit_history}?user_id=${user_id}`
     );
     return response;
   } catch (e) {
@@ -240,8 +241,8 @@ export const depositHistoryFunction = async () => {
 };
 export const withdrawlHistoryFunction = async () => {
   try {
-    const response = await axios.get(
-      `${endpoint.withdrawl_history}?user_id=${user_id}`
+    const response = await apiConnectorGet(
+      `${endpoint?.node?.withdrawl_history}?user_id=${user_id}`
     );
     return response;
   } catch (e) {
