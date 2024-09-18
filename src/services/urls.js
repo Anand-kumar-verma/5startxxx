@@ -3,10 +3,12 @@ export const rupees = "";
 export const baseUrl = "https://admin.5starxxx.com";
 export const fron_end_main_domain = "https://5starxxx.com";
 
-export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
-// export const domain ="http://192.168.18.183:9002/"
-// export const domainn = "http://192.168.18.183:9002"
-export const domain1 = "https://api.5starxxx.com"
+// export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
+export const domain ="http://192.168.18.183:9002/"
+export const domainn = "http://192.168.18.183:9002"
+export const domain1 = "http://192.168.18.183:9002"
+
+// export const domain1 = "https://api.5starxxx.com"
 
 
 export const download_app_url = ""
@@ -15,6 +17,7 @@ export const support_mail = "";
 export const telegram_url =``;
 
 export const endpoint = {
+
   login: `${domain1}/api/v1/login`,
   my_hisory: `${domain1}/api/v1/getMyHistory`,
   send_otp: `${baseUrl}/api/forget-password`,
@@ -35,7 +38,6 @@ export const endpoint = {
   payment_url: "https://vpayout.com/Upi_controller/insert_fund_request_online",
   withdraw_payment: `${baseUrl}/api/payout-request`,
   get_name_by_referral_code: `${baseUrl}/api/get-user-reffral-name`,
-  payment_request: `${baseUrl}/api/deposit-request`,
   registration_bonus: `${baseUrl}/api/welcom-bonus`,
   deposit_history: `${baseUrl}/api/deposit-history`,
   withdrawl_history: `${baseUrl}/api/withdrawl-history`,
@@ -47,7 +49,6 @@ export const endpoint = {
   team_reward_bonus: `${baseUrl}/api/team-reward-bonus`,
   team_trading_bonus: `${baseUrl}/api/team-trading-bonus`,
   add_bank_details: `${baseUrl}/api/bank-add`,
-  get_bank_list: `${baseUrl}/api/user-bank-details`,
   promotion_data: `https://promotion-page-data-roulete-game.onrender.com/api/v1/promotiondata`,
   all_withdrawl_user_list: `${baseUrl}/api/widthrol-user-list`,
   recharge_call_bakc: `${baseUrl}/api/deposits-user-request`,
@@ -92,8 +93,10 @@ export const endpoint = {
     getStatusSattaMatka: domain1 + "/api/v1/getStatusSattaMatka",
     referral_bonus: domain1 + "/api/v1/getReferralBonus",
     level_income: domain1 + "/api/v1/getLevelIncome",
-
-    
-     
+    cashback_income: domainn + "/api/v1/cash-back-income",
+    get_bank_list: domainn + "/api/v1/get-bank-Details",
+    get_upi_list: domainn + "/api/v1/get-upi-details",
+    deposite_request: domainn + "/api/v1/payin-request",
+      
   }
 };

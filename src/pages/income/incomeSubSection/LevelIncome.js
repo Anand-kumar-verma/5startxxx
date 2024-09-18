@@ -19,7 +19,7 @@ function LevelIncome() {
   };
 
   const { isLoading, data } = useQuery(
-    ["team_reward_bonus"],
+    ["level_bonus"],
     () => apiConnectorGet(endpoint?.node?.level_income),
     {
       refetchOnMount: false,

@@ -34,6 +34,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import FundRequest from "../pages/dashboard/FundRequest";
 import Withdrawl from "../pages/dashboard/Withdrawl";
 import MainPageOFIncome from "../pages/income/MainPageOFIncome";
+import CashbackIncome from "../pages/income/incomeSubSection/Cashback";
 import LevelIncome from "../pages/income/incomeSubSection/LevelIncome";
 import ReferralBonus from "../pages/income/incomeSubSection/ReferralBonus";
 import Promotion from "../pages/promotion/Promotion";
@@ -245,6 +246,11 @@ export const routes = [
         path: "/account/income-main/level-income",
         component: <LevelIncome />
     },
+    {
+        path: "/account/income-main/cashback-income",
+        component: <CashbackIncome />
+    },
+
     {
         path: "/add-bank-details",
         component: <AddBankDetails />

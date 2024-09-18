@@ -74,14 +74,13 @@ function LoginWithEmail() {
         localStorage.setItem(
           "logindataen",
           CryptoJS.AES.encrypt(
-            JSON.stringify({ UserID: 1 }),
+            JSON.stringify({ UserID: response?.data?.UserID }),
             "anand"
           )?.toString()
         );
         localStorage.setItem("token",value)
         sessionStorage.setItem("isAvailableUser", true);
         sessionStorage.setItem("isAvailableCricketUser", true);
-        // get_user_data(response?.data?.UserID);
         setloding(false);
         storeCookies();
         navigate("/dashboard");

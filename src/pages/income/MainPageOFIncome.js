@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
 import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
 import Layout from "../../component/Layout/Layout";
+import { CallMergeSharp } from '@mui/icons-material';
 
 
 function MainPageOFIncome() {
@@ -26,6 +27,16 @@ function MainPageOFIncome() {
       name: "Level Income",
       logo: (
         <Diversity2Icon
+          sx={{ width: "20px", height: "20px", marginRight: "10px", color: 'white', }}
+          color="#ffffff"
+        />
+      ),
+    },
+    {
+      to: "/account/income-main/cashback-income",
+      name: "Cashback Income",
+      logo: (
+        <CallMergeSharp
           sx={{ width: "20px", height: "20px", marginRight: "10px", color: 'white', }}
           color="#ffffff"
         />

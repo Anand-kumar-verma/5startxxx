@@ -62,6 +62,7 @@ function Account() {
   const profile_data = localStorage.getItem("profile_data");
   const [openDialogBoxHomeBanner, setopenDialogBoxHomeBanner] = useState(false);
   const [imageNumber, setImageNumber] = useState(profile_data || "1");
+
   const { isLoading, data } = useQuery(["myprofile"], () => MyProfileDataFn(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
@@ -184,7 +185,7 @@ function Account() {
             <Typography variant="body1" color="initial" sx={style.totalBalance}>
               {(
                 Number(
-                  Number(newdata?.winning_wallet || 0) +
+                  Number(newdata?.winning || 0) +
                   Number(newdata?.wallet || 0)
                 ) || 0
               )?.toFixed(0)}
@@ -207,9 +208,15 @@ function Account() {
             }}
           >
             <Box component="img" src={cip} sx={style.cardImage} />
-            <Typography variant="body1" color="initial" sx={style.cardNumber}>
-              Rererral Code: {result?.referral_code}
+           <div className="!flex flex-col">
+           <Typography variant="body1" color="initial" sx={style.cardNumber}>
+              Rererral Code : {result?.referral_code}
             </Typography>
+            <Typography variant="body1" color="initial" sx={style.cardNumber}>
+              Mobile No : {result?.mobile}
+            </Typography>
+           </div>
+            
           </Stack>
         </Box>
 

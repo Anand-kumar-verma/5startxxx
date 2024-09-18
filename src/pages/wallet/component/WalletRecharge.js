@@ -8,10 +8,13 @@ import {
   Container,
   IconButton,
   InputAdornment,
+  MenuItem,
   OutlinedInput,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
+import copy from "clipboard-copy";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 import { useFormik } from "formik";
@@ -27,23 +30,23 @@ import cip from "../../../assets/cip.png";
 import dot from "../../../assets/images/circle-arrow.png";
 import payment from "../../../assets/wallet2.png";
 import playgame from "../../../assets/images/card.webp";
+import atmchip from "../../../assets/cip.png";
 import balance from "../../../assets/images/send.png";
 import user from "../../../assets/history2.png";
 import payNameIcon2 from "../../../assets/payNameIcon2.png";
 import Layout from "../../../component/Layout/Layout";
 import { get_user_data_fn } from "../../../services/apicalling";
-import { endpoint } from "../../../services/urls";
+import { baseUrl, endpoint } from "../../../services/urls";
+import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
+import { useQuery, useQueryClient } from "react-query";
 function WalletRecharge() {
-  const [t_id, setT_id] = React.useState();
+
 
   const dispatch = useDispatch();
   const aviator_login_data = useSelector(
     (state) => state.aviator.aviator_login_data
   );
 
-  const deposit_amount = localStorage.getItem("amount_set");
-  const Deposit_type = localStorage.getItem("Deposit_type");
-  const server_provider = localStorage.getItem("server_provider");
 
   const audioRefMusic = React.useRef(null);
   const login_data =
@@ -57,13 +60,115 @@ function WalletRecharge() {
   const user_name =
     aviator_login_data && JSON.parse(aviator_login_data)?.username;
   const user_id = login_data && JSON.parse(login_data)?.UserID;
-  const [loding, setloding] = React.useState(false);
+  const [Loading, setLoading] = React.useState(false);
   const [amount, setAmount] = React.useState({
     wallet: 0,
     winning: 0,
     cricket_wallet: 0,
   });
+  const [receipt, setReceipt] = React.useState();
 
+  const client = useQueryClient();
+  const { data: wallet } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false
+    }
+  );
+
+  const newdata = wallet?.data?.data || 0;
+
+  const { data: bank_history } = useQuery(
+    ["bank_details"],
+    () => apiConnectorGet(endpoint.node.get_bank_list),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false
+    }
+  );
+  const result = bank_history?.data?.data
+
+  const initialValue = {
+    deposit_type: "Bank",
+    req_amount: "",
+    bank_upi_table_id: "",
+    receipt_image: "",
+    utr_no: ""
+  };
+
+  const fk = useFormik({
+    initialValues: initialValue,
+    enableReinitialize: true,
+    onSubmit: () => {
+      if (!fk.values.req_amount || !fk.values.bank_upi_table_id || !receipt || !fk.values.utr_no) {
+        toast("Please enter all fields");
+        return; 
+      }  
+      setLoading(true);
+      const reqBody = {
+        user_id: user_id,
+        deposit_type: fk.values.deposit_type === "UPI" ? "2" : "1",
+        req_amount: fk.values.req_amount,
+        bank_upi_table_id: fk.values.bank_upi_table_id,
+        receipt_image: receipt,
+        utr_no: fk.values.utr_no
+      };
+      insertFundFn(reqBody);
+    },
+  });
+  async function insertFundFn(reqBody) {
+    try {
+      const res = await apiConnectorPost(endpoint?.node.deposite_request, reqBody);
+      toast(res?.data?.msg);
+      setLoading(false);
+      if ("Request Successfully Accepted." === res?.data?.msg) {
+        fk.handleReset();
+        setReceipt(null);
+
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    client.refetchQueries("wallet_amount");
+    client.refetchQueries("withdrawl_history");
+
+  }
+  const { data: upi_detail } = useQuery(
+    ["upi_details"],
+    () => apiConnectorGet(endpoint.node.get_upi_list),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false
+    }
+  );
+  const upidata = upi_detail?.data?.data;
+
+  const selectedUPIDetails = upidata?.find(
+    (item) => item?.tr45_id === fk.values.bank_upi_table_id
+  );
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setReceipt(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const functionTOCopy = (value) => {
+    copy(value);
+    toast.success("Copied to clipboard!");
+  };
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -90,99 +195,6 @@ function WalletRecharge() {
     }
   };
 
-  const walletamountFn = async () => {
-    try {
-      const response = await axios.get(
-        `${endpoint.userwallet}?userid=${user_id}`
-      );
-
-      setAmount(response?.data?.data);
-      // console.log(response,"response")
-    } catch (e) {
-      toast(e?.message);
-      console.log(e);
-    }
-  };
-
-  React.useEffect(() => {
-    walletamountFn();
-  }, []);
-
-  const initialValues = {
-    amount: deposit_amount || 100,
-    all_data: { t_id: "", amount: "", date: "" },
-  };
-
-  const fk = useFormik({
-    initialValues: initialValues,
-    validationSchema: cashDepositRequestValidationSchema,
-    onSubmit: () => {
-      const transaction_id = `${Date.now()}${user_id}`;
-      setT_id(transaction_id);
-      const fd = new FormData();
-      fd.append("UserID", "7704002732");
-      fd.append("Email", "mailto:sunlottery@gmail.com");
-      fd.append("txtamt", fk.values.amount);
-      fd.append("Name", user_name);
-      fd.append("TransactionID", transaction_id);
-
-      // return toast("We are upgrading for smooth and fast payin please wait...");
-
-      paymentRequest(fd, fk.values.amount);
-      fk.setFieldValue("all_data", {
-        t_id: fd.get("TransactionID") || "",
-        amount: fk.values.amount,
-        date: new Date(),
-      });
-      localStorage.removeItem("amount_set");
-    },
-  });
-
-  // sajid api
-  async function paymentRequest(fd, amnt) {
-    setloding(true);
-    if (!amnt) {
-      toast("Please Enter the amount");
-      return;
-    }
-    const reqbody = {
-      user_id: user_id,
-      amount: amnt || 1000,
-      transection_id: fd.get("TransactionID"),
-    };
-    const fdata = new FormData();
-    fdata.append("user_id", reqbody.user_id);
-    fdata.append("amount", reqbody.amount);
-    fdata.append("transection_id", reqbody.transection_id);
-    fdata.append("Deposit_type", deposit_amount ? Deposit_type : "Null");
-    fdata.append("server_provider", deposit_amount ? server_provider : "Null");
-
-    if (deposit_amount) {
-      fdata.append("game_type", "1");
-    } else {
-      fdata.append("game_type", "2");
-    }
-    try {
-      const res = await axios.post(`${endpoint.payment_request}`, fdata);
-
-      console.log(res);
-      console.log(JSON.parse(res?.data?.data));
-      const all_res = JSON.parse(res?.data?.data);
-      if (all_res?.status_code === 400) {
-        setloding(false);
-        return toast(all_res?.message);
-      }
-      const qr_url = JSON.parse(res?.data?.data)?.upi_deep_link || "";
-      if (qr_url) {
-        window.open(qr_url);
-      } else {
-        toast("Something went wrong");
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    setloding(false);
-  }
 
   const audio = React.useMemo(() => {
     return (
@@ -280,42 +292,42 @@ function WalletRecharge() {
         >
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 500)}
+            onClick={() => fk.setFieldValue("req_amount", 500)}
           >
             {" "}
             500
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 1000)}
+            onClick={() => fk.setFieldValue("req_amount", 1000)}
           >
             {" "}
             1K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 5000)}
+            onClick={() => fk.setFieldValue("req_amount", 5000)}
           >
             {" "}
             5K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 10000)}
+            onClick={() => fk.setFieldValue("req_amount", 10000)}
           >
             {" "}
             10K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 15000)}
+            onClick={() => fk.setFieldValue("req_amount", 15000)}
           >
             {" "}
             15K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 20000)}
+            onClick={() => fk.setFieldValue("req_amount", 20000)}
           >
             {" "}
             20K
@@ -401,10 +413,8 @@ function WalletRecharge() {
               }}
             >
               {" "}
-              {deposit_amount
-                ? Number(amount?.cricket_wallet || 0)?.toFixed(2)
-                : Number(
-                  Number(amount?.wallet || 0) + Number(amount?.winning || 0)
+              {Number(
+                  Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
                 )?.toFixed(2)}
             </Typography>
             <CachedIcon sx={{ color: "white" }} />
@@ -427,180 +437,74 @@ function WalletRecharge() {
             </Typography>
           </Stack>
         </Box>
-        <Box sx={style.paymentBoxOuter}>
-          <Box sx={style.paymentlink} component={NavLink}>
-            <Box
-              component="img"
-              src={payNameIcon2}
-              sx={{ width: "100px", height: "80px", borderRadius: "10px" }}
-            ></Box>
-            <Typography variant="body1" color="initial">
-              UPI
-            </Typography>
-          </Box>
+        <Box sx={{ mt: 2, px: 2 }} >
+          <Stack direction="row">
+            <Stack
+              sx={{
+                background:
+                  "",
+                padding: 2,
+                borderRadius: 2,
+                mr: 2,
+                width: "120px",
+                cursor: "pointer",
+                backgroundColor: fk.values.deposit_type === "Bank" ? zubgbackgrad : starbluegrad 
+              }}
+              onClick={() => fk.setFieldValue("deposit_type", "Bank")} >
+              <Box
+                component="img"
+                src={atmchip}
+                width={40}
+                sx={{ margin: "0px auto" }}
+              ></Box>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "white ",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  textAlign: "center",
+                  mt: 1,
+                }}
+              >
+                BANK CARD
+              </Typography>
+            </Stack>
+            <Stack
+              sx={{
+                background:
+                  zubgback,
+                padding: 2,
+                borderRadius: 2,
+                mr: 2,
+                width: "120px",
+                cursor: "pointer",
+                backgroundColor: fk.values.deposit_type === "UPI" ? zubgbackgrad : starbluegrad
+              }}
+              onClick={() => fk.setFieldValue("deposit_type", "UPI")} >
+              <Box
+                component="img"
+                src={atmchip}
+                width={40}
+                sx={{ margin: "0px auto" }}
+              ></Box>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "white",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  textAlign: "center",
+                  mt: 1,
+                }}
+              >
+                UPI
+              </Typography>
+            </Stack>
+          </Stack>
         </Box>
         <Box>
-          {/* {React.useMemo(() => {
-            return (
-              <>
-                <Box
-                  sx={{
-                    padding: "10px",
-                    width: "95%",
-                    margin: "auto",
-                    mt: "20px",
-                    background: zubgmid,
-                    borderRadius: "10px",
-                    mb: 2,
-                  }}
-                >
-                  <Stack
-                    direction="row"
-                    sx={{ alignItems: "center", mb: "20px" }}
-                  >
-                    <Box component="img" src={quickpay} width={30}></Box>
-                    <Typography
-                      variant="body1"
-                      color="initial"
-                      sx={{ fontSize: "15px ", color: "white", ml: "10px" }}
-                    >
-                      {" "}
-                      Select channel
-                    </Typography>
-                  </Stack>
-                  <Stack
-                    direction="row"
-                    sx={{
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      flexWrap: "wrap",
-                      mt: "10px",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "48%",
-                        background: zubgbackgrad,
-                        padding: "15px 20px",
-                        borderRadius: "10px",
-                        mb: "10px",
-                        "&>p": { fontSize: "14px", color: "white" },
-                      }}
-                    >
-                      <Typography variant="body1" color="initial">
-                        IMpay-QR
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        Balance:100 - 50K
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "48%",
-                        background: zubgback,
-                        padding: "15px 20px",
-                        borderRadius: "10px",
-                        mb: "10px",
-                        "&>p": { fontSize: "14px", color: "white" },
-                      }}
-                    >
-                      <Typography variant="body1" color="initial">
-                        TYpay-QR
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        Balance:500 - 50K
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "48%",
-                        background: zubgback,
-                        padding: "15px 20px",
-                        borderRadius: "10px",
-                        mb: "10px",
-                        "&>p": { fontSize: "14px", color: "white" },
-                      }}
-                    >
-                      <Typography variant="body1" color="initial">
-                        HeyPay-APP
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        Balance:100 - 50K
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "48%",
-                        background: zubgback,
-                        padding: "15px 20px",
-                        borderRadius: "10px",
-                        mb: "10px",
-                        "&>p": { fontSize: "14px", color: "white" },
-                      }}
-                    >
-                      <Typography variant="body1" color="initial">
-                        UPIpay-APP
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        Balance:100 - 50K
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "48%",
-                        background: zubgback,
-                        padding: "15px 20px",
-                        borderRadius: "10px",
-                        mb: "10px",
-                        "&>p": { fontSize: "14px", color: "white" },
-                      }}
-                    >
-                      <Typography variant="body1" color="initial">
-                        BYpay-APP
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        Balance:100 - 50K
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "48%",
-                        background: zubgback,
-                        padding: "15px 20px",
-                        borderRadius: "10px",
-                        mb: "10px",
-                        "&>p": { fontSize: "14px", color: "white" },
-                      }}
-                    >
-                      <Typography variant="body1" color="initial">
-                        OKpay-QR
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        Balance:500 - 50K
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "48%",
-                        background: zubgback,
-                        padding: "15px 20px",
-                        borderRadius: "10px",
-                        mb: "10px",
-                        "&>p": { fontSize: "14px", color: "white" },
-                      }}
-                    >
-                      <Typography variant="body1" color="initial">
-                        MGpay-QR
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        Balance:500 - 100K
-                      </Typography>
-                    </Box>
-                  </Stack>
-                </Box>
-              </>
-            );
-          }, [])} */}
+
           <Box
             sx={{
               padding: "10px",
@@ -613,60 +517,136 @@ function WalletRecharge() {
             }}
           >
             {payment_button}
-            <Stack
-              direction="row"
-              sx={{
-                alignItems: "center",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
-                mt: "10px",
-              }}
-            >
-              <OutlinedInput
-                fullWidth
-                placeholder="Enter amount"
-                className="wallet-textfield"
-                type="number"
-                id="amount"
-                name="amount"
-                value={fk.values.amount}
-                onChange={fk.handleChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton edge="end">
-                      <CloseIcon />
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              {fk.touched.amount && fk.errors.amount && (
-                <div className="error">{fk.errors.amount}</div>
+            <div className="grid grid-cols-2 gap-1 -mt-5 items-center p-5 ">
+              {fk.values.deposit_type === "Bank" && (
+                <>
+                  <span className="!text-white !text-sm">Select Bank </span>
+                  <TextField
+                    id="bank_upi_table_id"
+                    name="bank_upi_table_id"
+                    value={fk.values.bank_upi_table_id}
+                    onChange={fk.handleChange}
+                    placeholder="Select Bank"
+                    className="!w-[100%] !bg-white !mt-5"
+                    select
+                    size="small"
+                  >
+
+                    {result?.map((i, index) => {
+                      return (
+                        <MenuItem value={i?.tr44_id} className="!text-black">
+                          {i?.tr44_bank_name} <br /> ({i?.tr44_account_no})
+                        </MenuItem>
+                      );
+                    })}
+                  </TextField>
+                </>
               )}
-              {/* <Button sx={style.paytmbtntwo} onClick={fk.handleSubmit}> */}
-              <Button sx={style.paytmbtntwo}>
-                Deposit
-              </Button>
-            </Stack>
+              {fk.values.deposit_type === "UPI" && (
+                <>
+                  <span className="!text-white !text-sm">Select UPI </span>
+                  <TextField
+                    id="bank_upi_table_id"
+                    name="bank_upi_table_id"
+                    value={fk.values?.bank_upi_table_id}
+                    onChange={fk.handleChange}
+                    placeholder="Select UPI"
+                    className="!w-[100%] !bg-white !mt-5"
+                    select
+                    size="small"
+                  >
+
+                    {upidata?.map((i) => (
+                      <MenuItem key={i?.tr45_id} value={i?.tr45_id}>
+                        {i?.tr45_upi_id}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                  {selectedUPIDetails && (
+                    <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
+                      <div className="w-72">
+                      <img src={`${baseUrl}/uploads/${selectedUPIDetails?.tr45_qr}`} alt="QR Code" />
+                      </div>
+                      <div className="pt-4 gap-2">
+                        <p className="!bg-white !text-xl font-bold px-8 !text-black">
+                          {selectedUPIDetails?.tr45_upi_name}
+                        </p>
+                        <div className="w-full flex justify-center mt-5">
+                          <Button
+                            size="small !py-1"
+                            className="!bg-[#0ee6ac] !text-white place-items-center"
+                            onClick={() =>
+                              functionTOCopy(
+                                selectedUPIDetails.tr45_upi_name
+                              )
+                            }>
+                            Copy
+                          </Button>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+              <span className="!text-white !text-sm ">Amount</span>
+              <TextField
+                type="text"
+                id="req_amount"
+                name="req_amount"
+                value={fk.values.req_amount}
+                onChange={fk.handleChange}
+                placeholder="amount"
+                className="!w-[100%] !bg-white !mt-5"
+              />
+
+              <span className="!text-white !text-sm ">Transaction Id</span>
+              <TextField
+                type="text"
+                id="utr_no"
+                name="utr_no"
+                value={fk.values.utr_no}
+                onChange={fk.handleChange}
+                placeholder="Transaction"
+                className="!w-[100%] !bg-white !mt-5"
+
+              />
+             
+              <span className="!text-white !text-sm ">Receipt</span>
+              <input
+                type="file"
+                id="receipt_image "
+                name="receipt_image "
+
+                className="!text-sm !mt-5"
+                onChange={handleFileChange}
+                required
+              />
+             
+              {Loading && (
+                <CustomCircularProgress isLoading={Loading} />)}
+            </div>
+            <Stack
+                direction="row"
+                sx={{
+                  alignItems: "center",
+                  // justifyContent: "space-between",
+                  // flexWrap: "wrap",
+                  mt: "10px",
+                }}
+              >
+                <Button sx={style.paytmbtntwo}
+               onClick={(e) => {
+                e.preventDefault();
+                fk.handleSubmit();
+              }}>
+                  Deposit
+                </Button>
+              </Stack>
           </Box>
           {rechargeInstruction}
         </Box>
-        <CustomCircularProgress isLoading={loding} />
-        {/* deposit_req_data */}
-        {/* {true && (
-          <Dialog
-            open={true}
-            className=" !flex !items-center !justify-center lg:!bg-transparent !bg-white"
-          >
-            <div className="!bg-white">
-              <QRCode value={deposit_req_data?.upi_qr_code} />
-              <p className="!text-blue-600  !mt-2 !text-center !font-bold !text-lg">
-                {" "}
-                {show_time.split("_")?.[0]}:
-                {show_time.split("_")?.[1]?.padEnd(2, "0")}
-              </p>
-            </div>
-          </Dialog>
-        )} */}
+        <CustomCircularProgress isLoading={Loading} />
       </Container>
     </Layout>
   );

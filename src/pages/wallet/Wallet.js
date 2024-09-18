@@ -52,144 +52,7 @@ function Wallet() {
   );
 
   const newdata = wallet?.data?.data || 0;
-  // const main_wallet = {
-  //   colors: ["#63BA0E", "red", "green"],
-  //   series: [Number(result?.wallet || 0)?.toFixed(0) || 0],
-  //   options: {
-  //     chart: {
-  //       height: 250,
-  //       type: "radialBar",
-  //       toolbar: {
-  //         show: false,
-  //       },
-  //     },
-  //     plotOptions: {
-  //       radialBar: {
-  //         startAngle: -135,
-  //         endAngle: 225,
-  //         hollow: {
-  //           margin: 0,
-  //           size: "70%",
-  //           background: zubgmid,
-  //           image: undefined,
-  //           imageOffsetX: 0,
-  //           imageOffsetY: 0,
-  //           position: "front",
-  //           dropShadow: {
-  //             enabled: true,
-  //             top: 3,
-  //             left: 0,
-  //             blur: 4,
-  //             opacity: 0.24,
-  //           },
-  //         },
-  //         track: {
-  //           background: "#fff",
-  //           strokeWidth: "67%",
-  //           margin: 0, // margin is in pixels
-  //           dropShadow: {
-  //             enabled: true,
-  //             top: -3,
-  //             left: 0,
-  //             blur: 4,
-  //             opacity: 0.35,
-  //           },
-  //         },
-
-  //         dataLabels: {
-  //           show: true,
-  //           name: {
-  //             offsetY: -10,
-  //             show: true,
-  //             color: "white",
-  //             fontSize: "17px",
-  //           },
-  //           value: {
-  //             formatter: function (val) {
-  //               return parseInt(val);
-  //             },
-  //             color: "white",
-  //             fontSize: "15px",
-  //             show: true,
-  //           },
-  //         },
-  //       },
-  //     },
-  //     stroke: {
-  //       lineCap: "round",
-  //     },
-  //     labels: ["Deposit"],
-  //   },
-  // };
-  // const third_party_wallet = {
-  //   series: [(Number(Number(result?.winning_wallet || 0)) || 0)?.toFixed()],
-  //   colors: ["#63BA0E", "red", "green"],
-  //   options: {
-  //     chart: {
-  //       height: 350,
-  //       type: "radialBar",
-  //       toolbar: {
-  //         show: false,
-  //       },
-  //     },
-  //     plotOptions: {
-  //       radialBar: {
-  //         startAngle: -135,
-  //         endAngle: 225,
-  //         hollow: {
-  //           margin: 0,
-  //           size: "70%",
-  //           image: undefined,
-  //           imageOffsetX: 0,
-  //           imageOffsetY: 0,
-  //           position: "front",
-  //           dropShadow: {
-  //             enabled: true,
-  //             top: 3,
-  //             left: 0,
-  //             blur: 4,
-  //             opacity: 0.24,
-  //           },
-  //         },
-  //         track: {
-  //           background: "red",
-  //           strokeWidth: "67%",
-  //           margin: 0,
-  //           dropShadow: {
-  //             enabled: true,
-  //             top: -3,
-  //             left: 0,
-  //             blur: 4,
-  //             opacity: 0.35,
-  //           },
-  //         },
-
-  //         dataLabels: {
-  //           show: true,
-  //           name: {
-  //             offsetY: -10,
-  //             show: true,
-  //             color: "white",
-  //             fontSize: "17px",
-  //           },
-  //           value: {
-  //             formatter: function (val) {
-  //               return parseInt(val);
-  //             },
-  //             color: "white",
-  //             fontSize: "15px",
-  //             show: true,
-  //           },
-  //         },
-  //       },
-  //     },
-
-  //     stroke: {
-  //       lineCap: "round",
-  //     },
-  //     labels: ["Winning"],
-  //   },
-  // };
+  
   const client = useQueryClient()
 
   function refreshFunctionForRotation() {
@@ -345,9 +208,9 @@ function Wallet() {
               >
                 <Typography variant="body1" color="initial">
                   {" "}
-                  ₹ {(Number(Number(newdata?.winning_wallet || 0)) || 0)?.toFixed(
+                  ₹ {(Number(Number(newdata?.winning || 0)) || 0)?.toFixed(
                     0
-                  )}.00
+                  )}
                 </Typography>
                 <Typography variant="body1" color="initial">
                   Winning Amount
