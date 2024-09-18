@@ -22,7 +22,7 @@ import { apiConnectorPost } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 
-function AddBankDetails() {
+function AddUPI() {
   const login_data = localStorage.getItem("logindataen") && CryptoJS.AES.decrypt(localStorage.getItem("logindataen"), "anand")?.toString(CryptoJS.enc.Utf8) || null
   const user_id = login_data && JSON.parse(login_data)?.UserID;
   const client = useQueryClient()
@@ -49,18 +49,18 @@ function AddBankDetails() {
       }  
       const reqBody ={
         user_id: user_id,
-        u_details_type: fk.values.u_details_type === "UPI" ? "1" : "2",
+        u_details_type: fk.values.u_details_type === "UPI" ? "2" : "1",
         u_holder_name: fk.values.u_holder_name,
         u_bank_name:fk.values.u_bank_name,
         u_account_no:fk.values.u_account_no,
         u_ifsc:fk.values.u_ifsc,
         u_upi_id:fk.values.u_upi_id,
       }
-      addbankDetailsFunction(reqBody);
+      AddUPIFunction(reqBody);
     },
   });
 
-  const addbankDetailsFunction = async (reqBody) => {
+  const AddUPIFunction = async (reqBody) => {
     setloding(true);
     try {
       const response = await apiConnectorPost(`${endpoint.node.add_bank}`, reqBody);
@@ -68,7 +68,7 @@ function AddBankDetails() {
       setloding(false);
       if ("BankAdded Successfully." === response?.data?.msg)
       fk.handleReset();
-      client.refetchQueries("bank_details");
+      client.refetchQueries("upi_details");
       if (response?.data?.msg) {
         // navigate('/add-bank-details/pre-added-bank-details')
       }
@@ -236,7 +236,7 @@ function AddBankDetails() {
   );
 }
 
-export default AddBankDetails;
+export default AddUPI;
 
 const style = {
   header: {

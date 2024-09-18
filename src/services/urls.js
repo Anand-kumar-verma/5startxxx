@@ -36,7 +36,6 @@ export const endpoint = {
   color_winning: `${baseUrl}/api/colour_winning`,
   cash_deposit: `${baseUrl}/api/deposit`,
   payment_url: "https://vpayout.com/Upi_controller/insert_fund_request_online",
-  withdraw_payment: `${baseUrl}/api/payout-request`,
   get_name_by_referral_code: `${baseUrl}/api/get-user-reffral-name`,
   registration_bonus: `${baseUrl}/api/welcom-bonus`,
   deposit_history: `${baseUrl}/api/deposit-history`,
@@ -48,7 +47,7 @@ export const endpoint = {
   daily_salary_income: `${baseUrl}/api/daily-salay-income`,
   team_reward_bonus: `${baseUrl}/api/team-reward-bonus`,
   team_trading_bonus: `${baseUrl}/api/team-trading-bonus`,
-  add_bank_details: `${baseUrl}/api/bank-add`,
+  // add_bank_details: `${baseUrl}/api/bank-add`,
   promotion_data: `https://promotion-page-data-roulete-game.onrender.com/api/v1/promotiondata`,
   all_withdrawl_user_list: `${baseUrl}/api/widthrol-user-list`,
   recharge_call_bakc: `${baseUrl}/api/deposits-user-request`,
@@ -97,6 +96,11 @@ export const endpoint = {
     get_bank_list: domainn + "/api/v1/get-bank-Details",
     get_upi_list: domainn + "/api/v1/get-upi-details",
     deposite_request: domainn + "/api/v1/payin-request",
+    withdraw_payment: domainn + "/api/v1/payout-request",
+    add_bank: domainn + "/api/v1/add-bank-upi",
+    bank_details: domainn + "/api/v1/user-bank-details",
+    
+   
       
   }
 };

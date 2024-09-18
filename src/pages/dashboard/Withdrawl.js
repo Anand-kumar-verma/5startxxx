@@ -32,7 +32,7 @@ import { endpoint, rupees } from "../../services/urls";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CryptoJS from "crypto-js";
-import { apiConnectorGet } from "../../services/apiconnector";
+import { apiConnectorGet, apiConnectorPost } from "../../services/apiconnector";
 import atmchip from "../../assets/cip.png";
 import bankicon from "../../assets/images/bank.png";
 import upi from "../../assets/chip.png";
@@ -44,7 +44,6 @@ function Withdrawl() {
   const aviator_login_data = useSelector(
     (state) => state.aviator.aviator_login_data
   );
-  const { type } = location.state || {};
   const login_data =
     (localStorage.getItem("logindataen") &&
       CryptoJS.AES.decrypt(
@@ -52,15 +51,7 @@ function Withdrawl() {
         "anand"
       )?.toString(CryptoJS.enc.Utf8)) ||
     null;
-  const first_rechange =
-    aviator_login_data && JSON.parse(aviator_login_data)?.first_recharge;
-
   const user_id = login_data && JSON.parse(login_data)?.UserID;
-  const [amount, setAmount] = React.useState({
-    wallet: 0,
-    winning: 0,
-    cricket_wallet: 0,
-  });
   const [Loading, setloding] = React.useState(false);
   const audioRefMusic = React.useRef(null);
   const [openDialogBox, setOpenDialogBox] = React.useState(false);
@@ -100,8 +91,8 @@ const newdata = wallet?.data?.data || 0;
 
 
 const { data:bank_history } = useQuery(
-    ["bank_details"],
-    () => apiConnectorGet(endpoint.node.get_bank_list),
+    ["bank_list_details"],
+    () => apiConnectorGet(endpoint.node.bank_details),
     {
         refetchOnMount: false,
         refetchOnReconnect: false,
@@ -118,22 +109,23 @@ const game_history_data = React.useMemo(
 );
 
 const initialValue = {
-  amount: "",
-  type: "Bank",
+  request_amount : "",
+  req_type: "Bank",
 };
 
 const fk = useFormik({
   initialValues: initialValue,
-  validationSchema: withdraw_amount_validation_schema,
   enableReinitialize: true,
   onSubmit: () => {
-      
-      const reqBody = {
-          userid: user_id,
-          amount: fk.values.amount,
-          type: fk.values.type === "UPI" ? "2" : "1",
+  if (!fk.values.request_amount ) {
+      toast("Please enter amount fields");
+      return; 
+    }  
+    const reqBody = {
+        u_user_id: user_id,
+          request_amount : fk.values.request_amount ,
+          req_type: fk.values.req_type === "UPI" ? "1" : "2",
       };
-      // console.log(reqBody);
       withdraw_payment_Function(reqBody);
   },
 });
@@ -141,14 +133,13 @@ const fk = useFormik({
 async function withdraw_payment_Function(reqBody) {
   setloding(true);
   try {
-      const res = await axios.post(endpoint?.wallet_withdrawl, reqBody);
-      toast(res?.data?.message);
+      const res = await apiConnectorPost(endpoint?.node.withdraw_payment, reqBody);
+      toast(res?.data?.msg);
       setloding(false);
-      if ("Withdrawal Request Placed Successfully" === res?.data?.message)
-          fk.handleReset();
-      client.refetchQueries("wallet_amount");
+      if ("Request Accepted successfully, Your account will be credited within 24 Hrs." === res?.data?.msg)
+      fk.handleReset();
+      client.refetchQueries("walletamount");
       client.refetchQueries("withdrawl_history");
-      client.refetchQueries("wallet_amount_amount");
       client.refetchQueries("profile");
       // navigate("/account");
       console.log(res);
@@ -304,10 +295,10 @@ const client = useQueryClient();
                             mr: 2,
                             width: "120px",
                             cursor: "pointer",
-                            backgroundColor: fk.values.type === "Bank" ? zubgbackgrad : zubgback
+                            backgroundColor: fk.values.req_type === "Bank" ? zubgbackgrad : zubgback
                         }}
                      
-                        onClick={() => fk.setFieldValue("type", "Bank")} >
+                        onClick={() => fk.setFieldValue("req_type", "Bank")} >
                         <Box
                             component="img"
                             src={atmchip}
@@ -336,9 +327,9 @@ const client = useQueryClient();
                         mr: 2,
                         width: "120px",
                         cursor: "pointer",
-                        backgroundColor: fk.values.type === "UPI" ? zubgbackgrad : zubgback
+                        backgroundColor: fk.values.req_type === "UPI" ? zubgbackgrad : zubgback
                     }}
-                        onClick={() => fk.setFieldValue("type", "UPI")} >
+                        onClick={() => fk.setFieldValue("req_type", "UPI")} >
                         <Box
                             component="img"
                             src={upi}
@@ -360,7 +351,7 @@ const client = useQueryClient();
                     </Stack>
                 </Stack>
             </Box>
-            {fk.values.type === "Bank" && (
+            {fk.values.req_type === "Bank" && (
                 <>
                   <Box
                 sx={{
@@ -372,7 +363,7 @@ const client = useQueryClient();
                     borderRadius: '10px'
                 }}
             >
-                <Stack direction="row" component={NavLink} to="/banks-details">
+                <Stack direction="row">
                     <Box sx={{ width: "35%" }}>
                         <Box
                             component="img"
@@ -384,7 +375,7 @@ const client = useQueryClient();
                             variant="body1"
                             sx={{ fontSize: "15px", fontWeight: "500", mt: 1, color: 'white' }}
                         >
-                            {game_history_data?.tr44_holder_name?.substring(0, 8) + "****"}
+                            {game_history_data?.holder_name?.substring(0, 8) + "****"}
                         </Typography>
                     </Box>
                     <Stack
@@ -397,7 +388,7 @@ const client = useQueryClient();
                             variant="body1"
                             sx={{ fontSize: "13px", fontWeight: "600", color: 'white' }}
                         >
-                            {game_history_data?.tr44_account_no?.substring(0, 5) + "****"}
+                            {game_history_data?.account?.substring(0, 5) + "****"}
                         </Typography>
                         <KeyboardArrowRightIcon sx={{ color: 'white' }} />
                     </Stack>
@@ -405,7 +396,7 @@ const client = useQueryClient();
             </Box>
                 </>
             )}
-    {fk.values.type === "UPI" && (
+    {fk.values.req_type === "UPI" && (
                 <>
                   <Box
                 sx={{
@@ -417,7 +408,7 @@ const client = useQueryClient();
                     borderRadius: '10px'
                 }}
             >
-                <Stack direction="row" component={NavLink} to="/banks-upi">
+                <Stack direction="row" >
                     <Box sx={{ width: "35%" }}>
                         <Box
                             component="img"
@@ -465,34 +456,32 @@ const client = useQueryClient();
                 <div className="grid grid-cols-2 gap-1 items-center  p-5 !text-white">
                     <span className="!text-white !text-sm ">Amount </span>
                     <TextField
-                        id="amount"
-                        name="amount"
-                        value={fk.values.amount}
+                        id="request_amount"
+                        name="request_amount"
+                        value={fk.values.request_amount}
                         onChange={fk.handleChange}
                         placeholder="Amount"
                         className="!w-[100%] !bg-white !mt-5 !rounded"
                     />
-                    {fk.touched.amount && fk.errors.amount && (
-                        <div className="error">{fk.errors.amount}</div>
-                    )}
+                   
 
-                  {fk.values.type === "Bank" && (
+                  {fk.values.req_type === "Bank" && (
                         <>
                             {bank_data?.map((item) => {
                                 return <>
                                     <span className="!text-white !text-sm "> Bank Name</span>
-                                    <p>{item?.tr44_bank_name}</p>
+                                    <p>{item?.bank_name}</p>
                                     <span className="!text-white !text-sm "> Account Holder Name</span>
-                                    <p>{item?.tr44_holder_name}</p>
+                                    <p>{item?.holder_name}</p>
                                     <span className="!text-white !text-sm "> Account Number</span>
-                                    <p>{item?.tr44_account_no}</p>
+                                    <p>{item?.account}</p>
                                     <span className="!text-white !text-sm "> IFSC Code </span>
-                                    <p>{item?.tr44_ifsc_code || 0}</p>
+                                    <p>{item?.ifsc || 0}</p>
                                 </>
                             })}
                         </>
                     )}
-                    {fk.values.type === "UPI" && (
+                    {fk.values.req_type === "UPI" && (
                         <>
                             {/* {upidata?.map((item) => {
                                 return <> */}
@@ -511,10 +500,9 @@ const client = useQueryClient();
                  <Button
                 sx={style.paytmbtntwo}
                 type="submit"
-                // onClick={(e) => {
-                //   e.preventDefault();
-                //   fk.handleSubmit();
-                // }}
+                onClick={(e) => {
+                  fk.handleSubmit();
+                }}
               >
                 Withdrawal{" "}
               </Button>

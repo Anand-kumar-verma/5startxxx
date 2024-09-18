@@ -16,6 +16,8 @@ import { zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
 import deposit from "../../../assets/images/history.png";
 import Layout from "../../../component/Layout/Layout";
 import { BankListDetails } from "../../../services/apicalling";
+import { apiConnectorGet } from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
 function AddedBankDetailList() {
   const navigate = useNavigate();
   const goBack = () => {
@@ -27,13 +29,13 @@ function AddedBankDetailList() {
   }, []);
   const { isLoading, data } = useQuery(
     ["bank_list_details"],
-    () => BankListDetails(),
+    () => apiConnectorGet(endpoint?.node?.bank_details),
     {
       refetchOnMount: false,
       refetchOnReconnect: true,
     }
   );
-  const result = React.useMemo(() => data?.data?.data, [data]);
+  const result = data?.data?.data;
 
   console.log(result, "this is result");
 
@@ -132,18 +134,20 @@ function AddedBankDetailList() {
                   <Stack
                     direction="row"
                     sx={{
+                      marginTop: "10px",
                       alignItems: "center",
                       justifyContent: "space-between",
                       "&>p": { color: "white" },
                     }}
                   >
                     <Typography variant="body1" color="initial">
-                      Email
+                     Deposit Type
                     </Typography>
                     <Typography variant="body1" color="initial">
-                      {i?.email}
+                      {i?.details_type}
                     </Typography>
                   </Stack>
+                  
                   <Stack
                     direction="row"
                     sx={{
@@ -159,21 +163,7 @@ function AddedBankDetailList() {
                       {i?.bank_name}
                     </Typography>
                   </Stack>
-                  <Stack
-                    direction="row"
-                    sx={{
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      "&>p": { color: "white" },
-                    }}
-                  >
-                    <Typography variant="body1" color="initial">
-                      Mobile No
-                    </Typography>
-                    <Typography variant="body1" color="initial">
-                      {i?.mobile}
-                    </Typography>
-                  </Stack>
+                
                   <Stack
                     direction="row"
                     sx={{

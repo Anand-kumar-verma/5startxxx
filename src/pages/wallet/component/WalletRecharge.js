@@ -31,6 +31,7 @@ import dot from "../../../assets/images/circle-arrow.png";
 import payment from "../../../assets/wallet2.png";
 import playgame from "../../../assets/images/card.webp";
 import atmchip from "../../../assets/cip.png";
+import chip from "../../../assets/chip.png";
 import balance from "../../../assets/images/send.png";
 import user from "../../../assets/history2.png";
 import payNameIcon2 from "../../../assets/payNameIcon2.png";
@@ -135,8 +136,8 @@ function WalletRecharge() {
     } catch (e) {
       console.log(e);
     }
-    client.refetchQueries("wallet_amount");
-    client.refetchQueries("withdrawl_history");
+    client.refetchQueries("walletamount");
+    client.refetchQueries("deposit_history");
 
   }
   const { data: upi_detail } = useQuery(
@@ -484,7 +485,7 @@ function WalletRecharge() {
               onClick={() => fk.setFieldValue("deposit_type", "UPI")} >
               <Box
                 component="img"
-                src={atmchip}
+                src={chip}
                 width={40}
                 sx={{ margin: "0px auto" }}
               ></Box>
