@@ -1,45 +1,37 @@
 import CachedIcon from "@mui/icons-material/Cached";
-import CloseIcon from "@mui/icons-material/Close";
 import HistoryIcon from "@mui/icons-material/History";
 import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
 import {
   Box,
   Button,
   Container,
-  IconButton,
-  InputAdornment,
   MenuItem,
-  OutlinedInput,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import copy from "clipboard-copy";
-import axios from "axios";
 import CryptoJS from "crypto-js";
 import { useFormik } from "formik";
 import * as React from "react";
 import toast from "react-hot-toast";
+import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
-import { cashDepositRequestValidationSchema } from "../../../Shared/Validation";
 import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
 import audiovoice from "../../../assets/bankvoice.mp3";
-import cip from "../../../assets/cip.png";
-import dot from "../../../assets/images/circle-arrow.png";
-import payment from "../../../assets/wallet2.png";
-import playgame from "../../../assets/images/card.webp";
-import atmchip from "../../../assets/cip.png";
 import chip from "../../../assets/chip.png";
-import balance from "../../../assets/images/send.png";
+import { default as atmchip, default as cip } from "../../../assets/cip.png";
 import user from "../../../assets/history2.png";
-import payNameIcon2 from "../../../assets/payNameIcon2.png";
+import playgame from "../../../assets/images/card.webp";
+import dot from "../../../assets/images/circle-arrow.png";
+import balance from "../../../assets/images/send.png";
+import payment from "../../../assets/wallet2.png";
 import Layout from "../../../component/Layout/Layout";
 import { get_user_data_fn } from "../../../services/apicalling";
-import { baseUrl, endpoint } from "../../../services/urls";
 import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
-import { useQuery, useQueryClient } from "react-query";
+import { baseUrl, endpoint } from "../../../services/urls";
 function WalletRecharge() {
 
 

@@ -1,5 +1,4 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
 import {
   Box,
   Button,
@@ -11,15 +10,15 @@ import {
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
 import deposit from "../../../assets/history2.png";
+import logo2 from "../../../assets/images/5-Star-XXX-8-29-2024.png";
 import Layout from "../../../component/Layout/Layout";
 import {
   withdrawlHistoryFunction
 } from "../../../services/apicalling";
-import logo2 from "../../../assets/images/5-Star-XXX-8-29-2024.png";
 
 function WithdravalHistory() {
   const [filter, setFilter] = React.useState("0")
@@ -38,7 +37,7 @@ function WithdravalHistory() {
 
   const res =
     React.useMemo(() => {
-      return filter === "0" ? data?.data?.data : data?.data?.data?.filter((i) => i?.status === filter)
+      return filter === "0" ? data?.data?.data : data?.data?.data?.filter((i) => i?.tr15_status === filter)
     }, [filter, data?.data?.data])
 
   return (

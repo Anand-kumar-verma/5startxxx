@@ -1,42 +1,36 @@
 import CachedIcon from "@mui/icons-material/Cached";
 import HistoryIcon from "@mui/icons-material/History";
 import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import {
   Box,
   Button,
   Container,
   Dialog,
-  FormControl,
-  MenuItem,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
-import axios from "axios";
+import CryptoJS from "crypto-js";
 import { useFormik } from "formik";
 import * as React from "react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../Shared/CustomCircularProgress";
-import { withdraw_amount_validation_schema } from "../../Shared/Validation";
 import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
-import cip from "../../assets/cip.png";
-import payment from "../../assets/wallet2.png";
+import upi from "../../assets/chip.png";
+import { default as atmchip, default as cip } from "../../assets/cip.png";
+import bankicon from "../../assets/images/bank.png";
 import playgame from "../../assets/images/card.webp";
 import balance from "../../assets/images/send.png";
 import audiovoice from "../../assets/images/withdrawol_voice.mp3";
+import payment from "../../assets/wallet2.png";
 import Layout from "../../component/Layout/Layout";
-import { BankListDetails, get_user_data_fn } from "../../services/apicalling";
-import { endpoint, rupees } from "../../services/urls";
-import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import CryptoJS from "crypto-js";
+import { get_user_data_fn } from "../../services/apicalling";
 import { apiConnectorGet, apiConnectorPost } from "../../services/apiconnector";
-import atmchip from "../../assets/cip.png";
-import bankicon from "../../assets/images/bank.png";
-import upi from "../../assets/chip.png";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { endpoint } from "../../services/urls";
 
 function Withdrawl() {
   const location = useLocation();
@@ -64,91 +58,80 @@ function Withdrawl() {
   const goBack = () => {
     navigate(-1);
   };
-  
-  const { data: upi_detail } = useQuery(
-    ["upi_details"],
-    () => apiConnectorGet(endpoint.node.get_upi_list),
+
+
+  const { data: wallet } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
     {
-        refetchOnMount: false,
-        refetchOnReconnect: false,
-        retry: false,
-        retryOnMount: false,
-        refetchOnWindowFocus: false
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false
     }
-);
+  );
 
-const {data:wallet } = useQuery(
-  ["walletamount"],
-  () => apiConnectorGet(endpoint.node.get_wallet),
-  {
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus:false
-  }
-);
-
-const newdata = wallet?.data?.data || 0;
+  const newdata = wallet?.data?.data || 0;
 
 
-const { data:bank_history } = useQuery(
+  const { data: bank_history } = useQuery(
     ["bank_list_details"],
     () => apiConnectorGet(endpoint.node.bank_details),
     {
-        refetchOnMount: false,
-        refetchOnReconnect: false,
-        retry: false,
-        retryOnMount: false,
-        refetchOnWindowFocus: false
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false
     }
-);
-const bank_data = bank_history?.data?.data 
+  );
+  const bank_data = bank_history?.data?.data
 
-const game_history_data = React.useMemo(
+  const game_history_data = React.useMemo(
     () => bank_history?.data?.data?.[0],
     [bank_history?.data?.data]
-);
+  );
 
-const initialValue = {
-  request_amount : "",
-  req_type: "Bank",
-};
+  const initialValue = {
+    request_amount: "",
+    req_type: "Bank",
+  };
 
-const fk = useFormik({
-  initialValues: initialValue,
-  enableReinitialize: true,
-  onSubmit: () => {
-  if (!fk.values.request_amount ) {
-      toast("Please enter amount fields");
-      return; 
-    }  
-    const reqBody = {
+  const fk = useFormik({
+    initialValues: initialValue,
+    enableReinitialize: true,
+    onSubmit: () => {
+      if (!fk.values.request_amount) {
+        toast("Please enter amount fields");
+        return;
+      }
+      const reqBody = {
         u_user_id: user_id,
-          request_amount : fk.values.request_amount ,
-          req_type: fk.values.req_type === "UPI" ? "1" : "2",
+        request_amount: fk.values.request_amount,
+        req_type: fk.values.req_type === "UPI" ? "1" : "2",
       };
       withdraw_payment_Function(reqBody);
-  },
-});
+    },
+  });
 
-async function withdraw_payment_Function(reqBody) {
-  setloding(true);
-  try {
+  async function withdraw_payment_Function(reqBody) {
+    setloding(true);
+    try {
       const res = await apiConnectorPost(endpoint?.node.withdraw_payment, reqBody);
       toast(res?.data?.msg);
       setloding(false);
       if ("Request Accepted successfully, Your account will be credited within 24 Hrs." === res?.data?.msg)
-      fk.handleReset();
+        fk.handleReset();
       client.refetchQueries("walletamount");
-      client.refetchQueries("withdrawl_history");
+      client.refetchQueries("deposit_history");
       client.refetchQueries("profile");
       // navigate("/account");
       console.log(res);
-  } catch (e) {
+    } catch (e) {
       console.log(e);
+    }
+    setloding(false);
   }
-  setloding(false);
-}
-const client = useQueryClient();
+  const client = useQueryClient();
 
   const handlePlaySound = async () => {
     try {
@@ -187,7 +170,7 @@ const client = useQueryClient();
           mb: 4,
         }}
       >
-        
+
         <Box sx={style.header}>
           <Box component={NavLink} onClick={goBack}>
             <KeyboardArrowLeftOutlinedIcon />
@@ -240,8 +223,8 @@ const client = useQueryClient();
             >
               {" "}
               {Number(
-                  Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
-                )?.toFixed(2)}
+                Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
+              )?.toFixed(2)}
             </Typography>
             <CachedIcon sx={{ color: "white" }} />
           </Stack>
@@ -263,393 +246,408 @@ const client = useQueryClient();
             </Typography>
           </Stack>
         </Box>
-         <Box
-            sx={{
-              padding: "10px",
-              width: "95%",
-              margin: "auto",
-              mt: "20px",
-              background: zubgmid,
-              borderRadius: "10px",
-              mb: 5,
-            }}
-          >
-            <Stack direction="row" sx={{ alignItems: "center", mb: "20px" }}>
-              <Box component="img" src={payment} width={30} sx={{ filter: 'grayscale(1)' }}></Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={{ fontSize: "15px ", color: "white", ml: "10px" }}
-              >
-                Withdrawal amount
-              </Typography>
-            </Stack>
+        <Box
+          sx={{
+            padding: "10px",
+            width: "95%",
+            margin: "auto",
+            mt: "20px",
+            background: zubgmid,
+            borderRadius: "10px",
+            mb: 5,
+          }}
+        >
+          <Stack direction="row" sx={{ alignItems: "center", mb: "20px" }}>
+            <Box component="img" src={payment} width={30} sx={{ filter: 'grayscale(1)' }}></Box>
+            <Typography
+              variant="body1"
+              color="initial"
+              sx={{ fontSize: "15px ", color: "white", ml: "10px" }}
+            >
+              Withdrawal amount
+            </Typography>
+          </Stack>
           <Box sx={{ mt: 2, px: 2 }} >
-                <Stack direction="row">
-                    <Stack
-                        sx={{
-                            background:
-                            "",
-                            padding: 2,
-                            borderRadius: 2,
-                            mr: 2,
-                            width: "120px",
-                            cursor: "pointer",
-                            backgroundColor: fk.values.req_type === "Bank" ? zubgbackgrad : zubgback
-                        }}
-                     
-                        onClick={() => fk.setFieldValue("req_type", "Bank")} >
-                        <Box
-                            component="img"
-                            src={atmchip}
-                            width={40}
-                            sx={{ margin: "0px auto" }}
-                        ></Box>
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                color: "white ",
-                                fontSize: "14px",
-                                fontWeight: "500",
-                                textAlign: "center",
-                                mt: 1,
-                            }}
-                        >
-                            BANK CARD
-                        </Typography>
-                    </Stack>
-                    <Stack
-                       sx={{
-                        background:
-                        zubgback,
-                        padding: 2,
-                        borderRadius: 2,
-                        mr: 2,
-                        width: "120px",
-                        cursor: "pointer",
-                        backgroundColor: fk.values.req_type === "UPI" ? zubgbackgrad : zubgback
-                    }}
-                        onClick={() => fk.setFieldValue("req_type", "UPI")} >
-                        <Box
-                            component="img"
-                            src={upi}
-                            width={40}
-                            sx={{ margin: "0px auto" }}
-                        ></Box>
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                color: "white",
-                                fontSize: "14px",
-                                fontWeight: "500",
-                                textAlign: "center",
-                                mt: 1,
-                            }}
-                        >
-                            UPI
-                        </Typography>
-                    </Stack>
-                </Stack>
-            </Box>
-            {fk.values.req_type === "Bank" && (
-                <>
-                  <Box
+            <Stack direction="row">
+              <Stack
                 sx={{
-                    width: "92%",
-                    margin: "auto",
-                    my: 2,
-                    background: zubgback,
-                    padding: "10px 0px 10px 10px",
-                    borderRadius: '10px'
+                  background:
+                    "",
+                  padding: 2,
+                  borderRadius: 2,
+                  mr: 2,
+                  width: "120px",
+                  cursor: "pointer",
+                  backgroundColor: fk.values.req_type === "Bank" ? zubgbackgrad : zubgback
                 }}
-            >
-                <Stack direction="row">
-                    <Box sx={{ width: "35%" }}>
-                        <Box
-                            component="img"
-                            src={bankicon}
-                            width={30}
-                            sx={{ margin: "auto" }}
-                        ></Box>
-                        <Typography
-                            variant="body1"
-                            sx={{ fontSize: "15px", fontWeight: "500", mt: 1, color: 'white' }}
-                        >
-                            {game_history_data?.holder_name?.substring(0, 8) + "****"}
-                        </Typography>
-                    </Box>
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="space-between"
-                        sx={{ width: "60%", borderLeft: "1px solid gray", pl: "5%" }}
-                    >
-                        <Typography
-                            variant="body1"
-                            sx={{ fontSize: "13px", fontWeight: "600", color: 'white' }}
-                        >
-                            {game_history_data?.account?.substring(0, 5) + "****"}
-                        </Typography>
-                        <KeyboardArrowRightIcon sx={{ color: 'white' }} />
-                    </Stack>
-                </Stack>
-            </Box>
-                </>
-            )}
-    {fk.values.req_type === "UPI" && (
-                <>
-                  <Box
-                sx={{
-                    width: "92%",
-                    margin: "auto",
-                    my: 2,
-                    background: zubgback,
-                    padding: "10px 0px 10px 10px",
-                    borderRadius: '10px'
-                }}
-            >
-                <Stack direction="row" >
-                    <Box sx={{ width: "35%" }}>
-                        <Box
-                            component="img"
-                            src={bankicon}
-                            width={30}
-                            sx={{ margin: "auto" }}
-                        ></Box>
-                        <Typography
-                         className="!text-center"
-                            variant="body1"
-                            sx={{ fontSize: "15px", fontWeight: "500", mt: 1, color: 'white' }}
-                        >
-                            {upi_detail?.data?.data?.[0]?.tr45_upi_id?.substring(0, 8) + "****"}
-                        </Typography>
-                    </Box>
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="space-between"
-                        sx={{ width: "60%", borderLeft: "1px solid gray", pl: "5%" }}
-                    >
-                        <Typography
-                        className="!text-center"
-                            variant="body1"
-                            sx={{ fontSize: "13px", fontWeight: "600", color: 'white' }}
-                        >
-                            {upi_detail?.data?.data?.[0]?.tr45_upi_name?.substring(0, 5) + "****"}
-                        </Typography>
-                        <KeyboardArrowRightIcon sx={{ color: 'white' }} />
-                    </Stack>
-                </Stack>
-            </Box>
-                </>
-            )}
-            <Box
-                sx={{
-                    width: "92%",
-                    margin: "auto",
-                    my: 2,
-                    background: zubgback,
-                    padding: "10px",
-                    borderRadius: '10px'
-                }}
-            >
-                <div className="grid grid-cols-2 gap-1 items-center  p-5 !text-white">
-                    <span className="!text-white !text-sm ">Amount </span>
-                    <TextField
-                        id="request_amount"
-                        name="request_amount"
-                        value={fk.values.request_amount}
-                        onChange={fk.handleChange}
-                        placeholder="Amount"
-                        className="!w-[100%] !bg-white !mt-5 !rounded"
-                    />
-                   
 
-                  {fk.values.req_type === "Bank" && (
-                        <>
-                            {bank_data?.map((item) => {
-                                return <>
-                                    <span className="!text-white !text-sm "> Bank Name</span>
-                                    <p>{item?.bank_name}</p>
-                                    <span className="!text-white !text-sm "> Account Holder Name</span>
-                                    <p>{item?.holder_name}</p>
-                                    <span className="!text-white !text-sm "> Account Number</span>
-                                    <p>{item?.account}</p>
-                                    <span className="!text-white !text-sm "> IFSC Code </span>
-                                    <p>{item?.ifsc || 0}</p>
-                                </>
-                            })}
-                        </>
-                    )}
-                    {fk.values.req_type === "UPI" && (
-                        <>
-                            {/* {upidata?.map((item) => {
-                                return <> */}
-                                    <span className="!text-white !text-sm ">UPI ID</span>
-                                    <p>{upi_detail?.data?.data?.[0]?.tr45_upi_name}</p>
-                                    <span className="!text-white !text-sm ">UPI Number</span>
-                                    <p>{upi_detail?.data?.data?.[0]?.tr45_upi_id}</p>
-                                    {/* <span className="!text-white !text-sm ">UPI Type*</span>
-                                    <p>{item?.Ifsc}</p> */}
-                                {/* </>
-                            })} */}
-                        </>
-                    )}
-                </div>
-                
-                 <Button
-                sx={style.paytmbtntwo}
-                type="submit"
-                onClick={(e) => {
-                  fk.handleSubmit();
+                onClick={() => fk.setFieldValue("req_type", "Bank")} >
+                <Box
+                  component="img"
+                  src={atmchip}
+                  width={40}
+                  sx={{ margin: "0px auto" }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "white ",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    textAlign: "center",
+                    mt: 1,
+                  }}
+                >
+                  BANK CARD
+                </Typography>
+              </Stack>
+              <Stack
+                sx={{
+                  background:
+                    zubgback,
+                  padding: 2,
+                  borderRadius: 2,
+                  mr: 2,
+                  width: "120px",
+                  cursor: "pointer",
+                  backgroundColor: fk.values.req_type === "UPI" ? zubgbackgrad : zubgback
+                }}
+                onClick={() => fk.setFieldValue("req_type", "UPI")} >
+                <Box
+                  component="img"
+                  src={upi}
+                  width={40}
+                  sx={{ margin: "0px auto" }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "white",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    textAlign: "center",
+                    mt: 1,
+                  }}
+                >
+                  UPI
+                </Typography>
+              </Stack>
+            </Stack>
+          </Box>
+          {fk.values.req_type === "Bank" && (
+            <>
+              <Box
+                sx={{
+                  width: "92%",
+                  margin: "auto",
+                  my: 2,
+                  background: zubgback,
+                  padding: "10px 0px 10px 10px",
+                  borderRadius: '10px'
                 }}
               >
-                Withdrawal{" "}
-              </Button>
-                {Loading && (
-                    <CustomCircularProgress isLoading={Loading} />)}
-                <Stack
+                <Stack direction="row">
+                  <Box sx={{ width: "35%" }}>
+                    <Box
+                      component="img"
+                      src={bankicon}
+                      width={30}
+                      sx={{ margin: "auto" }}
+                    ></Box>
+                    <Typography
+                      variant="body1"
+                      sx={{ fontSize: "15px", fontWeight: "500", mt: 1, color: 'white' }}
+                    >
+                      {game_history_data?.holder_name?.substring(0, 8) + "****"}
+                    </Typography>
+                  </Box>
+                  <Stack
                     direction="row"
                     alignItems="center"
                     justifyContent="space-between"
-                    mt={2}
-                >
-                    <Stack direction="row">
-                        <Typography
-                            variant="body1"
-                            sx={{ fontSize: "12px", color: 'white' }}
-                        >
-                            Withdrawable balance{" "}
-                        </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                fontSize: "12px",
-                                color: zubgbackgrad,
-                                ml: 1,
-                            }}
-                        >
-                            ₹{newdata?.winning || 0}
-                        </Typography>
-                    </Stack>
-
-                    <Button
-                        variant="Outlined"
-                        color="primary"
-                        sx={{
-                            border: `1px solid ${zubgback}`,
-                            padding: 0,
-                            fontSize: "12px",
-                            color: 'white',
-                            borderRadius: "8px",
-                        }}
+                    sx={{ width: "60%", borderLeft: "1px solid gray", pl: "5%" }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{ fontSize: "13px", fontWeight: "600", color: 'white' }}
                     >
-                        All
-                    </Button>
+                      {game_history_data?.account?.substring(0, 5) + "****"}
+                    </Typography>
+                    <KeyboardArrowRightIcon sx={{ color: 'white' }} />
+                  </Stack>
                 </Stack>
-             
+              </Box>
+            </>
+          )}
+          {fk.values.req_type === "UPI" && (
+            <>
+              <Box
+                sx={{
+                  width: "92%",
+                  margin: "auto",
+                  my: 2,
+                  background: zubgback,
+                  padding: "10px 0px 10px 10px",
+                  borderRadius: '10px'
+                }}
+              >
+                <Stack direction="row" >
+                  <Box sx={{ width: "35%" }}>
+                    <Box
+                      component="img"
+                      src={bankicon}
+                      width={30}
+                      sx={{ margin: "auto" }}
+                    ></Box>
+                    <Typography
+                      className="!text-center"
+                      variant="body1"
+                      sx={{ fontSize: "15px", fontWeight: "500", mt: 1, color: 'white' }}
+                    >
+                        {bank_data?.map((item) => {
+                    return <>
+                     {item?.details_type === 'UPI' && (
+                <>
+                   {item?.upi_id?.substring(0, 8) + "****"}
+                  
+                </>
+            )}
+            </>
+                  })}
+                       
+                    </Typography>
+                  </Box>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    sx={{ width: "60%", borderLeft: "1px solid gray", pl: "5%" }}
+                  >
+                    <Typography
+                      className="!text-center"
+                      variant="body1"
+                      sx={{ fontSize: "13px", fontWeight: "600", color: 'white' }}
+                    >
+                        {game_history_data?.ifsc?.substring(0, 8) + "****"}
+                    </Typography>
+                    <KeyboardArrowRightIcon sx={{ color: 'white' }} />
+                  </Stack>
+                </Stack>
+              </Box>
+            </>
+          )}
+          <Box
+            sx={{
+              width: "92%",
+              margin: "auto",
+              my: 2,
+              background: zubgback,
+              padding: "10px",
+              borderRadius: '10px'
+            }}
+          >
+            <div className="grid grid-cols-2 gap-1 items-center  p-5 !text-white">
+              <span className="!text-white !text-sm ">Amount </span>
+              <TextField
+                id="request_amount"
+                name="request_amount"
+                value={fk.values.request_amount}
+                onChange={fk.handleChange}
+                placeholder="Amount"
+                className="!w-[100%] !bg-white !mt-5 !rounded"
+              />
 
-                <Box mt={3}>
-                    <Stack direction="row" alignItems="center" mt={1}>
-                        <Box
-                            sx={{
-                                width: "5px",
-                                height: "5px",
-                                background: "white",
-                                transform: "rotate(45deg)",
-                                mr: 1,
-                            }}
-                        ></Box>
-                        <Typography
-                            variant="body1"
-                            sx={{ fontSize: "12px", color: 'white' }}
-                        >
-                            You have to withdrawal upto {" "}
-                        </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                fontSize: "12px",
-                                color: zubgbackgrad,
-                                mx: 0.5,
-                            }}
-                        >
-                            {" "}
-                            ₹   {((newdata?.wallet)* 0.10 )?.toFixed(0,2)|| 0}
-                            
-                        </Typography>
-                     
-                    </Stack>
+
+              {fk.values.req_type === "Bank" && (
+                <>
+                  {bank_data?.map((item) => {
+                    return <>
+                     {item?.details_type === 'BANK' && (
+                <>
+                    <span className="!text-white !text-sm">Bank Name</span>
+                    <p>{item?.bank_name}</p>
+                    <span className="!text-white !text-sm">Account Holder Name</span>
+                    <p>{item?.holder_name}</p>
+                    <span className="!text-white !text-sm">Account Number</span>
+                    <p>{item?.account}</p>
+                    <span className="!text-white !text-sm">IFSC Code</span>
+                    <p>{item?.ifsc || 0}</p>
+                </>
+            )}
+            </>
+                  })}
+                </>
+              )}
+              {fk.values.req_type === "UPI" && (
+                <>
+                  {bank_data?.map((item) => {
+                    return <>
+                     {item?.details_type === 'UPI' && (
+                <>
+                    <span className="!text-white !text-sm">UPI Id</span>
+                    <p>{item?.upi_id}</p>
+                  
+                </>
+            )}
+            </>
+                  })}
+                </>
+              )}
+            </div>
+
+            <Button
+              sx={style.paytmbtntwo}
+              type="submit"
+              onClick={(e) => {
+                fk.handleSubmit();
+              }}
+            >
+              Withdrawal{" "}
+            </Button>
+            {Loading && (
+              <CustomCircularProgress isLoading={Loading} />)}
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              mt={2}
+            >
+              <Stack direction="row">
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: "12px", color: 'white' }}
+                >
+                  Withdrawable balance{" "}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: "12px",
+                    color: zubgbackgrad,
+                    ml: 1,
+                  }}
+                >
+                  ₹{newdata?.winning || 0}
+                </Typography>
+              </Stack>
+
+              <Button
+                variant="Outlined"
+                color="primary"
+                sx={{
+                  border: `1px solid ${zubgback}`,
+                  padding: 0,
+                  fontSize: "12px",
+                  color: 'white',
+                  borderRadius: "8px",
+                }}
+              >
+                All
+              </Button>
+            </Stack>
 
 
-                    <Stack direction="row" alignItems="center" mt={1}>
-                        <Box
-                            sx={{
-                                width: "5px",
-                                height: "5px",
-                                background: "white",
-                                transform: "rotate(45deg)",
-                                mr: 1,
-                            }}
-                        ></Box>
-                        <Typography
-                            variant="body1"
-                            sx={{ fontSize: "12px", color: 'white' }}
-                        >
-                            Withdraw time{" "}
-                        </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                fontSize: "12px",
-                                color: zubgbackgrad,
-                                mx: 0.5,
-                            }}
-                        >
-                            00:00-23:50{" "}
-                        </Typography>
-                    </Stack>
+            <Box mt={3}>
+              <Stack direction="row" alignItems="center" mt={1}>
+                <Box
+                  sx={{
+                    width: "5px",
+                    height: "5px",
+                    background: "white",
+                    transform: "rotate(45deg)",
+                    mr: 1,
+                  }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: "12px", color: 'white' }}
+                >
+                  You have to withdrawal upto {" "}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: "12px",
+                    color: zubgbackgrad,
+                    mx: 0.5,
+                  }}
+                >
+                  {" "}
+                  ₹   {((newdata?.wallet) * 0.10)?.toFixed(0, 2) || 0}
 
-                    <Stack direction="row" alignItems="center" mt={1}>
-                        <Box
-                            sx={{
-                                width: "5px",
-                                height: "5px",
-                                background: "white",
-                                transform: "rotate(45deg)",
-                                mr: 1,
-                            }}
-                        ></Box>
-                        <Typography
-                            variant="body1"
-                            sx={{ fontSize: "12px", color: 'white' }}
-                        >
-                            Please confirm your beneficial account information before
-                            withdrawing. If your information is incorrect, our company will
-                            not be liable for the amount of loss{" "}
-                        </Typography>
-                    </Stack>
-                    <Stack direction="row" alignItems="center" mt={1}>
-                        <Box
-                            sx={{
-                                width: "5px",
-                                height: "5px",
-                                background: "white",
-                                transform: "rotate(45deg)",
-                                mr: 1,
-                            }}
-                        ></Box>
-                        <Typography
-                            variant="body1"
-                            sx={{ fontSize: "12px", color: 'white' }}
-                        >
-                            If your beneficial information is incorrect, please contact
-                            customer service
-                        </Typography>
-                    </Stack>
-                </Box>
-            </Box></Box>
-        
+                </Typography>
+
+              </Stack>
+
+
+              <Stack direction="row" alignItems="center" mt={1}>
+                <Box
+                  sx={{
+                    width: "5px",
+                    height: "5px",
+                    background: "white",
+                    transform: "rotate(45deg)",
+                    mr: 1,
+                  }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: "12px", color: 'white' }}
+                >
+                  Withdraw time{" "}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: "12px",
+                    color: zubgbackgrad,
+                    mx: 0.5,
+                  }}
+                >
+                  00:00-23:50{" "}
+                </Typography>
+              </Stack>
+
+              <Stack direction="row" alignItems="center" mt={1}>
+                <Box
+                  sx={{
+                    width: "5px",
+                    height: "5px",
+                    background: "white",
+                    transform: "rotate(45deg)",
+                    mr: 1,
+                  }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: "12px", color: 'white' }}
+                >
+                  Please confirm your beneficial account information before
+                  withdrawing. If your information is incorrect, our company will
+                  not be liable for the amount of loss{" "}
+                </Typography>
+              </Stack>
+              <Stack direction="row" alignItems="center" mt={1}>
+                <Box
+                  sx={{
+                    width: "5px",
+                    height: "5px",
+                    background: "white",
+                    transform: "rotate(45deg)",
+                    mr: 1,
+                  }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: "12px", color: 'white' }}
+                >
+                  If your beneficial information is incorrect, please contact
+                  customer service
+                </Typography>
+              </Stack>
+            </Box>
+          </Box></Box>
+
         <Dialog open={openDialogBox}>
           <div className="!p-5 !max-w-[300px]">
             <p className="!font-bold text-center flex-col">

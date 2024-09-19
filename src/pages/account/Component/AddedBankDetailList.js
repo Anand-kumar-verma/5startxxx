@@ -27,7 +27,7 @@ function AddedBankDetailList() {
   React.useEffect(() => {
     client?.refetchQueries("bank_list_details");
   }, []);
-  const { isLoading, data } = useQuery(
+  const { data } = useQuery(
     ["bank_list_details"],
     () => apiConnectorGet(endpoint?.node?.bank_details),
     {
@@ -56,7 +56,7 @@ function AddedBankDetailList() {
             <KeyboardArrowLeftOutlinedIcon />
           </Box>
           <Typography variant="body1" color="initial">
-            Added Bank Details
+             Bank / UPI Details
           </Typography>
           <Box></Box>
         </Box>
@@ -81,18 +81,10 @@ function AddedBankDetailList() {
                   color="initial"
                   sx={{ fontSize: "15px ", color: "white", ml: "10px" }}
                 >
-                  Pre Added Banks
+                 Banks
                 </Typography>
               </Stack>
-              <div
-                className="!flex !items-center !cursor-pointer"
-                onClick={() => navigate("/add-bank-details")}
-              >
-                <span className="!text-white">Add New</span>
-                <IconButton>
-                  <Add className="!text-white" />
-                </IconButton>
-              </div>
+             
             </div>
             {result?.map((i, index) => {
               return (
@@ -110,11 +102,10 @@ function AddedBankDetailList() {
                     <IconButton>
                       <AccountBalanceIcon className="!text-white" />
                     </IconButton>
-                    <IconButton onClick={() => navigate("/add-bank-details")}>
-                      <Edit className="!text-white" />
-                    </IconButton>
                   </div>
                   <Divider className="!bg-red-100 !text-red-100 !bg-opacity-20" />
+                  { i?.details_type === 'BANK'
+                          ? 
                   <Stack
                     direction="row"
                     sx={{
@@ -131,6 +122,7 @@ function AddedBankDetailList() {
                       {i?.holder_name}
                     </Typography>
                   </Stack>
+                  :null}
                   <Stack
                     direction="row"
                     sx={{
@@ -141,30 +133,48 @@ function AddedBankDetailList() {
                     }}
                   >
                     <Typography variant="body1" color="initial">
-                     Deposit Type
+                      Deposit Type
                     </Typography>
                     <Typography variant="body1" color="initial">
-                      {i?.details_type}
+                  {i?.details_type}
                     </Typography>
                   </Stack>
-                  
-                  <Stack
-                    direction="row"
-                    sx={{
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      "&>p": { color: "white" },
-                    }}
-                  >
-                    <Typography variant="body1" color="initial">
-                      Bank Name
-                    </Typography>
-                    <Typography variant="body1" color="initial">
-                      {i?.bank_name}
-                    </Typography>
-                  </Stack>
-                
-                  <Stack
+                 { i?.details_type === 'BANK'
+                          ?    <Stack
+                          direction="row"
+                          sx={{
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            "&>p": { color: "white" },
+                          }}
+                        >
+                          <Typography variant="body1" color="initial">
+                            Bank Name
+                          </Typography>
+                          <Typography variant="body1" color="initial">
+                            {i?.bank_name}
+                          </Typography>
+                        </Stack>
+                          : i?.details_type === 'UPI'
+                            ?    <Stack
+                            direction="row"
+                            sx={{
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              "&>p": { color: "white" },
+                            }}
+                          >
+                            <Typography variant="body1" color="initial">
+                              UPI ID
+                            </Typography>
+                            <Typography variant="body1" color="initial">
+                              {i?.upi_id}
+                            </Typography>
+                          </Stack>
+                            : null}
+                      { i?.details_type === 'BANK'
+                          ?         
+                    <Stack
                     direction="row"
                     sx={{
                       alignItems: "center",
@@ -179,6 +189,9 @@ function AddedBankDetailList() {
                       {i?.ifsc}
                     </Typography>
                   </Stack>
+                   : null}
+                    { i?.details_type === 'BANK'
+                          ?   
                   <Stack
                     direction="row"
                     sx={{
@@ -194,6 +207,7 @@ function AddedBankDetailList() {
                       {i?.account}
                     </Typography>
                   </Stack>
+                  :null}
                 </Box>
               );
             })}

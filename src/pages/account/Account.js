@@ -91,13 +91,13 @@ function Account() {
     client.removeQueries("myprofile");
   }
 
-  const {data:wallet } = useQuery(
+  const { data: wallet } = useQuery(
     ["walletamount"],
     () => apiConnectorGet(endpoint.node.get_wallet),
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false
     }
   );
 
@@ -208,15 +208,15 @@ function Account() {
             }}
           >
             <Box component="img" src={cip} sx={style.cardImage} />
-           <div className="!flex flex-col">
-           <Typography variant="body1" color="initial" sx={style.cardNumber}>
-              Rererral Code : {result?.referral_code}
-            </Typography>
-            <Typography variant="body1" color="initial" sx={style.cardNumber}>
-              Mobile No : {result?.mobile}
-            </Typography>
-           </div>
-            
+            <div className="!flex flex-col">
+              <Typography variant="body1" color="initial" sx={style.cardNumber}>
+                Rererral Code : {result?.referral_code}
+              </Typography>
+              <Typography variant="body1" color="initial" sx={style.cardNumber}>
+                Mobile No : {result?.mobile}
+              </Typography>
+            </div>
+
           </Stack>
         </Box>
 
@@ -247,6 +247,13 @@ function Account() {
             <Box component="img" src={edit} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Add Bank
+            </Typography>
+          </Box>
+          <Box sx={style.actionBox} component={NavLink} to="/add-upi-details">
+
+            <Box component="img" src={edit} sx={style.actionImage} />
+            <Typography variant="body1" color="initial" sx={style.actionText}>
+              Add UPI
             </Typography>
           </Box>
         </Box>

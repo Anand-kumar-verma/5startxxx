@@ -43,13 +43,13 @@ function AddUPI() {
   const fk = useFormik({
     initialValues: initialValues,
     onSubmit: () => {
- if (!fk.values.u_account_no ) {
+ if (!fk.values.u_account_no || !fk.values.u_upi_id || !fk.values.u_ifsc || !fk.values.u_holder_name || !fk.values.u_bank_name) {
         toast("Please enter all fields");
         return; 
       }  
       const reqBody ={
         user_id: user_id,
-        u_details_type: fk.values.u_details_type === "UPI" ? "2" : "1",
+        u_details_type: "1",
         u_holder_name: fk.values.u_holder_name,
         u_bank_name:fk.values.u_bank_name,
         u_account_no:fk.values.u_account_no,
@@ -68,9 +68,9 @@ function AddUPI() {
       setloding(false);
       if ("BankAdded Successfully." === response?.data?.msg)
       fk.handleReset();
-      client.refetchQueries("upi_details");
+      client.refetchQueries("bank_list_details");
       if (response?.data?.msg) {
-        // navigate('/add-bank-details/pre-added-bank-details')
+        navigate('/add-bank-details/pre-added-bank-details')
       }
     } catch (e) {
       toast(e?.message);
@@ -96,7 +96,7 @@ function AddUPI() {
             <KeyboardArrowLeftOutlinedIcon />
           </Box>
           <Typography variant="body1" color="initial">
-            Add Bank Details
+            Add UPI Details
           </Typography>
           <Box component={NavLink} to="/add-bank-details/pre-added-bank-details">
             <HistoryIcon />
@@ -121,14 +121,14 @@ function AddUPI() {
                 color="initial"
                 sx={{ fontSize: "15px ", color: "white", ml: "10px" }}
               >
-                Add Bank Details
+                Add UPI Details
               </Typography>
             </Stack>
             <Box mt={2} component="form" onSubmit={fk.handleSubmit}>
               <FormControl fullWidth sx={{ mt: "10px" }}>
                 <Stack direction="row" className="loginlabel">
                   <Typography variant="h3">
-                    Account holder name <span className="!text-red-600">*</span>
+                    Account holder name 
                   </Typography>
                 </Stack>
                 <TextField
@@ -146,42 +146,7 @@ function AddUPI() {
               <FormControl fullWidth sx={{ mt: "10px" }}>
                 <Stack direction="row" className="loginlabel">
                   <Typography variant="h3">
-                    Enter Bank Name <span className="!text-red-600">*</span>
-                  </Typography>
-                </Stack>
-                <TextField
-                  id="u_bank_name"
-                  name="u_bank_name"
-                  value={fk.values.u_bank_name}
-                  onChange={fk.handleChange}
-                  placeholder="Enter Bank Name *"
-                  className="withdrawalfield"
-                  onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
-                />
-             
-              </FormControl>
-              <FormControl fullWidth sx={{ mt: "10px" }}>
-                <Stack direction="row" className="loginlabel">
-                  <Typography variant="h3">
-                    Enter Account Number <span className="!text-red-600">*</span>
-                  </Typography>
-                </Stack>
-                <TextField
-                  id="u_account_no"
-                  name="u_account_no"
-                  value={fk.values.u_account_no}
-                  onChange={fk.handleChange}
-                  placeholder="Enter Account No *"
-                  className="withdrawalfield"
-                  onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
-                />
-               
-              </FormControl>
-
-              <FormControl fullWidth sx={{ mt: "10px" }}>
-                <Stack direction="row" className="loginlabel">
-                  <Typography variant="h3">
-                    IFSC <span className="!text-red-600">*</span>
+                    IFSC 
                   </Typography>
                 </Stack>
                 <TextField
@@ -200,7 +165,7 @@ function AddUPI() {
               <FormControl fullWidth sx={{ mt: "10px" }}>
                 <Stack direction="row" className="loginlabel">
                   <Typography variant="h3">
-                    UPI code <span className="!text-red-600">*</span>
+                    UPI code 
                   </Typography>
                 </Stack>
                 <TextField
@@ -215,6 +180,41 @@ function AddUPI() {
                 />
               
               </FormControl>
+              <FormControl fullWidth sx={{ mt: "10px" }}>
+                <Stack direction="row" className="loginlabel">
+                  <Typography variant="h3">
+                    Enter Account Number 
+                  </Typography>
+                </Stack>
+                <TextField
+                  id="u_account_no"
+                  name="u_account_no"
+                  value={fk.values.u_account_no}
+                  onChange={fk.handleChange}
+                  placeholder="Enter Account No *"
+                  className="withdrawalfield"
+                  onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
+                />
+               
+              </FormControl>
+              <FormControl fullWidth sx={{ mt: "10px" }}>
+                <Stack direction="row" className="loginlabel">
+                  <Typography variant="h3">
+                    Enter Bank Name 
+                  </Typography>
+                </Stack>
+                <TextField
+                  id="u_bank_name"
+                  name="u_bank_name"
+                  value={fk.values.u_bank_name}
+                  onChange={fk.handleChange}
+                  placeholder="Enter Bank Name *"
+                  className="withdrawalfield"
+                  onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
+                />
+             
+              </FormControl>
+             
           
               <Button
                 sx={style.paytmbtntwo}

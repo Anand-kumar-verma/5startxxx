@@ -18,6 +18,7 @@ import Sattagameplay from "../pages/SattaMatka/game/Sattagameplay";
 import Test from "../pages/Test";
 import Account from "../pages/account/Account";
 import AddBankDetails from "../pages/account/Component/AddBankDetails";
+import AddUPI from "../pages/account/Component/AddUpi";
 import AddedBankDetailList from "../pages/account/Component/AddedBankDetailList";
 import BatHistorys from "../pages/account/Component/BatHistory";
 import Feedback from "../pages/account/Component/Feedback";
@@ -254,6 +255,10 @@ export const routes = [
     {
         path: "/add-bank-details",
         component: <AddBankDetails />
+    },
+    {
+        path: "/add-upi-details",
+        component: <AddUPI />
     },
     {
         path: "/add-bank-details/pre-added-bank-details",

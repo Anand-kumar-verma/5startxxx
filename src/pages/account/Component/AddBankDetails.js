@@ -43,13 +43,13 @@ function AddBankDetails() {
   const fk = useFormik({
     initialValues: initialValues,
     onSubmit: () => {
- if (!fk.values.u_account_no ) {
+ if (!fk.values.u_account_no || !fk.values.u_holder_name ||!fk.values.u_bank_name ||!fk.values.u_account_no || !fk.values.u_ifsc) {
         toast("Please enter all fields");
         return; 
       }  
       const reqBody ={
         user_id: user_id,
-        u_details_type: fk.values.u_details_type === "UPI" ? "1" : "2",
+        u_details_type:"2" ,
         u_holder_name: fk.values.u_holder_name,
         u_bank_name:fk.values.u_bank_name,
         u_account_no:fk.values.u_account_no,
@@ -68,9 +68,9 @@ function AddBankDetails() {
       setloding(false);
       if ("BankAdded Successfully." === response?.data?.msg)
       fk.handleReset();
-      client.refetchQueries("bank_details");
+      client.refetchQueries("bank_list_details");
       if (response?.data?.msg) {
-        // navigate('/add-bank-details/pre-added-bank-details')
+        navigate('/add-bank-details/pre-added-bank-details')
       }
     } catch (e) {
       toast(e?.message);
