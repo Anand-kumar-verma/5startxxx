@@ -1,3 +1,4 @@
+import { Cancel } from "@mui/icons-material";
 import {
   Pagination,
   Paper,
@@ -9,6 +10,7 @@ import {
   TableRow,
 } from "@mui/material";
 import React, { useState } from "react";
+import { zubgback } from "../../../Shared/color";
 
 const MyTableComponent = ({ res }) => {
   const [page, setPage] = useState(1);
@@ -25,17 +27,40 @@ const MyTableComponent = ({ res }) => {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table size="small" aria-label="a dense table">
+      <TableContainer
+        component={Paper}
+        sx={{
+          background: zubgback,
+          // width: "100%",
+          // height: "100vh",
+          overflow: "auto",
+          mb: 5,
+        }}
+      >
+        <Table size="small" aria-label="a dense table" className="!text-white">
           <TableHead>
             <TableRow>
-              <TableCell align="center">S.No.</TableCell>
-              <TableCell align="center">BetNumber/Amount</TableCell>
-              <TableCell align="center">Win Amount</TableCell>
-              <TableCell align="center"> Color</TableCell>
-              <TableCell align="center">Result No</TableCell>
-              <TableCell align="center">Win</TableCell>
-              <TableCell align="center">Total Win</TableCell>
+              <TableCell align="center" className="!text-white">
+                S.No.
+              </TableCell>
+              <TableCell align="center" className="!text-white">
+                BetNumber/Amount
+              </TableCell>
+              <TableCell align="center" className="!text-white">
+                Bet Amount
+              </TableCell>
+              <TableCell align="center" className="!text-white">
+                Res. Color
+              </TableCell>
+              <TableCell align="center" className="!text-white">
+                Res. No
+              </TableCell>
+              <TableCell align="center" className="!text-white">
+                Win
+              </TableCell>
+              <TableCell align="center" className="!text-white">
+                Total Win
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -43,52 +68,71 @@ const MyTableComponent = ({ res }) => {
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                className="!text-white"
               >
-                <TableCell align="center">
+                <TableCell align="center" className="!text-white">
                   {(page - 1) * itemsPerPage + index + 1}
                 </TableCell>
-                <TableCell align="center" className="!flex flex-col gap-2">
+                <TableCell align="center" className="!text-white">
                   <div>
-                {row?.number?.split(",")?.map((i)=>{
-                    return <span className="border-2 mr-1 py-[0.5px] px-1 border-gray-600">
-                        {i === "37"
-                          ? "Blue"
-                          : i === "38"
-                          ? "Black"
-                          : i === "39"
-                          ? "Red"
-                          : i}
-                    </span>
-                  }) || " "} 
-                </div>
-                <div> {row?.amount_string?.split(",")?.map((i) => {
-                    return <span className="border-2 mr-1 px-1 border-gray-600">{i}</span>
-                  }) || " "}
+                    <p className="!flex">
+                      {row?.number?.split(",")?.map((j, index) => (
+                        <span
+                          key={index}
+                          className="!text-white !w-[90px] text-center !border-2 !border-white px-1 py-1"
+                        >
+                          {j === "37"
+                            ? "Blue"
+                            : j === "38"
+                            ? "Black"
+                            : j === "39"
+                            ? "Red"
+                            : j}
+                        </span>
+                      ))}
+                    </p>
+                    <p className="!flex">
+                      {row?.amount_string?.split(",")?.map((j, index) => (
+                        <span
+                          key={index}
+                          className="!text-white !w-[90px] text-center !border-2 !border-white px-1 py-1"
+                        >
+                          {j === "37"
+                            ? "Blue"
+                            : j === "38"
+                            ? "Black"
+                            : j === "39"
+                            ? "Red"
+                            : j}
+                        </span>
+                      ))}
+                    </p>
                   </div>
-
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align="center" className="!text-white">
                   {Number(row?.amount || 0)?.toFixed(2) || 0}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align="center" className="!text-white">
                   {row?.result_color}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align="center" className="!text-white">
                   {Number(row?.result_number)?.toFixed(2) || 0}
                 </TableCell>
-                <TableCell align="center">
-                  {row?.win_string?.split(" ")?.map((i) => { return Number(i || 0)?.toFixed(1) + "," }) || ""}
+                <TableCell align="center" className="!text-white">
+                  {row?.win_string?.split(" ")?.map((i) => {
+                    return Number(i || 0)?.toFixed(1) + ",";
+                  }) || ""}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align="center" className="!text-white">
                   {Number(row?.win || 0)?.toFixed(2) || 0}
                 </TableCell>
-
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
       <Pagination
+        className="!text-white !bg-white"
         count={pageCount}
         variant="outlined"
         shape="rounded"

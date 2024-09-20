@@ -110,7 +110,7 @@ function Home() {
   const profileData = data?.data?.data || 0;
 
   const { data: hist } = useQuery(
-    ["history_w"],
+    ["history_rollet"],
     () => apiConnectorGet(endpoint.node.history_my),
     {
       refetchOnMount: false,
@@ -199,7 +199,15 @@ function Home() {
       newelement.style.position = "absolute"; // Make the span position absolute
       newelement.style.top = "50%"; // Center vertically
       newelement.style.left = "50%"; // Center horizontally
-      newelement.style.transform = "translate(-50%, -50%)"; // Adjust position to center
+      if (String(id) === "112")
+        newelement.style.transform = "translate(-50%, -50%) rotate(269deg)";
+      else if (String(id) === "201")
+        newelement.style.transform = "translate(-50%, -50%) rotate(179deg)";
+      else if (String(id) === "312")
+        newelement.style.transform = "translate(-50%, -50%) rotate(270deg)";
+      else {
+        newelement.style.transform = "translate(-50%, -50%)"; // Adjust position to center
+      }
       newelement.style.display = "flex"; // Use flexbox for centering content
       newelement.style.alignItems = "center"; // Center content vertically
       newelement.style.justifyContent = "center"; // Center content horizontally
@@ -212,6 +220,7 @@ function Home() {
       newelement.style.borderRadius = "50%";
       newelement.style.padding = "3px";
       newelement.style.fontSize = "8px"; // Adjust font size for better visibility
+      newelement.style.rotate = "50";
     }
 
     element.appendChild(newelement);
@@ -354,7 +363,7 @@ function Home() {
     const handleOneMinrolletresult = (onemin) => {
       spinFunction(onemin);
       localStorage.setItem("result_rollet", onemin);
-      console.log(onemin,"roulette result function");
+      console.log(onemin, "roulette result function");
       setTimeout(() => {
         handlePlaySound();
       }, 9000);
@@ -498,7 +507,7 @@ function Home() {
             </Typography>
             <Typography className="!text-xs" variant="body1" sx={style.p13}>
               {" "}
-              Bet : {" "}
+              Bet :{" "}
               {bet?.reduce((a, b) => a + Number(b?.amount), 0) ||
                 Number(total_amount_bet)?.toFixed(2)}
             </Typography>

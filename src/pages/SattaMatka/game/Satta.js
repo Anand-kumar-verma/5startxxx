@@ -1,22 +1,22 @@
-import { History, List, Wallet } from "@mui/icons-material";
+import { History, List } from "@mui/icons-material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import FitbitIcon from "@mui/icons-material/Fitbit";
 import { Box, Button, Container, Typography } from "@mui/material";
+import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
+import { useQuery } from "react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useSocket } from "../../../Shared/SocketContext";
 import { stardarkblue, stargrad } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
 import buildings from "../../../pages/SattaMatka/assets/images/buildings.png";
-import { download_app_url, endpoint } from "../../../services/urls";
-import moment from "moment";
-import { useSocket } from "../../../Shared/SocketContext";
-import { useQuery } from "react-query";
 import { apiConnectorGet } from "../../../services/apiconnector";
+import { download_app_url, endpoint } from "../../../services/urls";
 
 function Satta() {
   const socket = useSocket();
