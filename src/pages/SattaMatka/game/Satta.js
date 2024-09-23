@@ -180,7 +180,7 @@ function Satta() {
                   sx={styles.textWhite}
                   className="fp15"
                 >
-                  GAZIABAD
+                  GHAZIABAD
                 </Typography>
                 <Typography
                   variant="body1"
@@ -434,7 +434,7 @@ function Satta() {
                   className="fp15"
                 >
                   {" "}
-                  DISAWAR
+                  DESAWAR
                 </Typography>
                 <Typography
                   variant="body1"

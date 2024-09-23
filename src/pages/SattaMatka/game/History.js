@@ -1,11 +1,5 @@
 import { Cancel } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  Typography
-} from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
@@ -109,12 +103,12 @@ function History() {
                           sx={{ color: "white", textTransform: "capitalize" }}
                         >
                           {item?.satta_type === "satta_gaziabad"
-                            ? "GAZIABAD"
+                            ? "GHAZIABAD"
                             : item?.satta_type === "satta_faridabad"
                             ? "FARIDABAD"
                             : item?.satta_type === "satta_gali"
                             ? "GALI"
-                            : "DISAWAR"}{" "}
+                            : "DESAWAR"}{" "}
                           <span className="!pl-3 !text-yellow-500">
                             {item?.gamesno}
                           </span>{" "}

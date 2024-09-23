@@ -2,7 +2,7 @@
 export const getSattaType = [
     {
         type:1,
-        name:"GAZIABAD"
+        name:"GHAZIABAD"
     },
     {
         type:2,
@@ -14,6 +14,6 @@ export const getSattaType = [
     },
     {
         type:4,
-        name:"DISAWAR"
+        name:"DESAWAR"
     },
 ]
