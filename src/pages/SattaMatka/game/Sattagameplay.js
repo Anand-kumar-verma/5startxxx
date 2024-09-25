@@ -213,7 +213,7 @@ function Sattagameplay() {
               </Box>
             </Box>
           </Box>
-          <Box sx={{ width: "100%", mt: 1 }}>
+          <Box sx={{ width: "100%", mt: 1 }} className={"!w-[100%]"}>
             <Tabs
               value={value}
               onChange={handleChange}
@@ -230,7 +230,9 @@ function Sattagameplay() {
               <AndarBaharTable betArray={betArray} setBetArray={setBetArray} />
             )}
             <Box
-              className="w95 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
+              //  className="w95 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
+
+              className="lg:!w-[48%] !w-[100%] !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
               sx={style.flexbetween}
             >
               <Box className="">

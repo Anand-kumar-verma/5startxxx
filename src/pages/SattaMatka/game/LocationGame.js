@@ -89,7 +89,15 @@ function Jodi({ betArray, setBetArray }) {
               },
             }}
           >
-            {number}
+            <p className="!flex !flex-col !justify-center">
+              <span>{number}</span>
+              <span className="!text-[10px]">
+                {
+                  betArray?.find((i) => Number(i?.number) === Number(number))
+                    ?.amount
+                }
+              </span>
+            </p>
           </Button>
         ))}
       </Box>
