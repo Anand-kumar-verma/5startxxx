@@ -1,4 +1,4 @@
-import { ArrowBackRounded, Wallet } from "@mui/icons-material";
+import { ArrowBackRounded, RuleSharp, Wallet } from "@mui/icons-material";
 import { Box, Button, Container, Tab, Tabs, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -16,8 +16,10 @@ import Jodi from "./LocationGame";
 import { useQuery, useQueryClient } from "react-query";
 import moment from "moment";
 import { useSocket } from "../../../Shared/SocketContext";
+import SattaRule from "./SattaRule";
 function Sattagameplay() {
   const location = useLocation();
+  const [open2, setOpen2] = useState(false);
   const game_type = location?.state?.satta_type;
   const [value, setValue] = useState(0);
   const client = useQueryClient();
@@ -111,11 +113,10 @@ function Sattagameplay() {
         if (i?.amount !== null && Number(i?.amount) < 5)
           return toast(
             "Your Amount is less than 5 on " +
-              `${
-                Number(i?.number) >= 1000 && Number(i?.number) <= 1009
-                  ? "Andar"
-                  : "Bahar"
-              } ${Number(i?.number) % 10}`
+            `${Number(i?.number) >= 1000 && Number(i?.number) <= 1009
+              ? "Andar"
+              : "Bahar"
+            } ${Number(i?.number) % 10}`
           );
       });
       const newArrya = betArray?.filter((i) => i?.amount !== null);
@@ -182,7 +183,9 @@ function Sattagameplay() {
                 >
                   {getSattaType?.find((i) => i?.type === game_type)?.name}{" "}
                 </Typography>
+
               </Box>
+
               <Box
                 sx={{
                   width: "50%",
@@ -191,6 +194,11 @@ function Sattagameplay() {
                   justifyContent: "end",
                 }}
               >
+          <SattaRule setOpen2={setOpen2} open2={open2} style={style} />
+
+              <p className="text-white !mx-2" onClick={() => {
+                  setOpen2(true);
+                }}> Rule</p>
                 <Wallet sx={{ mr: 1, color: "white" }} />
                 <Typography
                   variant="body1"
@@ -248,13 +256,13 @@ function Sattagameplay() {
                 (Number(minut) < 30 && 30 - Number(minut) <= 5) ||
                 (Number(minut) > 30 && 60 - Number(minut) <= 5)
               ) && (
-                <Button
-                  className="!bg-[#24cc3b] !text-white "
-                  onClick={() => placeBet()}
-                >
-                  Place Bid
-                </Button>
-              )}
+                  <Button
+                    className="!bg-[#24cc3b] !text-white "
+                    onClick={() => placeBet()}
+                  >
+                    Place Bid
+                  </Button>
+                )}
             </Box>
           </Box>
         </Container>

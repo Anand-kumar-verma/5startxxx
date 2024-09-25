@@ -13,8 +13,8 @@ const Rule = ({ setOpen2, open2, style }) => {
         sx={{
           "&>div": {
             background: "transparent",
-            width: "370px",
-            height: "90vh",
+            width: "320px",
+           
             ...style.flex,
           },
         }}
@@ -27,11 +27,11 @@ const Rule = ({ setOpen2, open2, style }) => {
         <Box
           className="!overflow-x-scroll !overflow-y-scroll overflow-hidden no-scrollbar"
           sx={{
-            width: "500px",
+            width: "100%",
             height: "100%",
             background: "black",
             // transform: "rotate(90deg)",
-            borderRadius: "10px",
+            // borderRadius: "10px",
             padding: "10px",
             color: "white",
             borderColor: "yellow  !important",
@@ -46,89 +46,45 @@ const Rule = ({ setOpen2, open2, style }) => {
           >
             Back{" "}
           </div>
-          <div className="flex flex-col ">
-            <img src={rule} alt="" id="image" />
-
-            <p className="text-[8px] py-2 ">
-              The goal of the Lucky36 Mini Timer game is to make a gamble on the
-              result of a ball spun around a wheel, which is divided into
-              Lucky36 Mini Timer sections. Each Lucky36 Mini Timer section has a
-              precise number and a specific color. You can play on a particular
-              number being landed on by the ball, or that it will be odd or
-              even, or downfall within a column of figures on the Lucky36 Mini
-              Timer table layout.
-            </p>
-            <p className="text-yellow-600 !text-left font-bold"> Payout</p>
+          <div className="flex flex-col !pl-1">
+          <p className="!text-center"> Jackpot Game Rules</p> 
+            <p className="text-[10px] py-2 ">
+         1. Game Overview <br/>
+          The game "Jackpot" consists of slots numbered from 0 to 36, each assigned one of three colors: Red, Black, or Blue. Players 
+           <br/>can place bets on any of these numbers or colors.
+          </p>
+            <p className="text-[10px] py-2 ">
+            2. Placing Bets
+            <br/>
+            * Players can place bets on numbers (0 to 36) or colors (Red, Black, Blue). 
+           <br/> * The minimum bet is 10, and bets can be increased in increments of 10 (e.g., 10, 20, 30, etc.).
+          </p>
+          <p className="text-[10px] py-2 ">
+          3. Betting Time
+            <br/>
+              * Players can place bets every minute. 
+           <br/> * In the final minute, betting is allowed until 15 seconds before the round ends. The screen will block betting in the last 15 
+           seconds.
+          </p>
+          <p className="text-[10px] py-2 ">
+          4. Winning Conditions
+            <br/>
+            * If the ball lands on 0: The payout is x50 of the bet amount.
+           <br/>  * If the ball lands on any number from 1 to 36: The payout is x35 of the bet amount.
+           <br/> * If the ball lands on a Black slot: The payout is x2 of the bet amount.
+           <br/> * If the ball lands on a Red slot: The payout is x2 of the bet amount.
+           <br/> * If the ball lands on a Blue slot: The payout is x2 of the bet amount.
+          </p>
+          <p className="text-[10px] py-2 ">
+          5. Betting Restrictions
+            <br/>
+            * Bets cannot be placed or adjusted in the last 15 seconds of each round.
+           <br/>
+           <br/>
+           Good luck, and may you hit the Jackpot!
+          </p>
           </div>
-          <div className="flex flex-col justify-start py-1">
-            <div className="flex justify-between border text-[10px]  p-1 border-white text-yellow-500">
-              <p className="">Type</p>
-              <p className=""> Payout</p>
-            </div>
-            <div className="flex justify-between   border-b border-r border-l p-1 border-white  text-[8px]">
-              <p>
-                10 placed on a number only, called a straight-up play, player
-                gets{" "}
-              </p>
-              <p>350</p>
-            </div>
-            <div className="flex   justify-between border-b border-r border-l p-1 text-[8px] border-white  ">
-              <p>
-                10 placed in between two-numbers, called split play, player gets{" "}
-              </p>
-              <p>175</p>
-            </div>
-            <div className="flex   justify-between border-b border-r border-l p-1 text-[8px] border-white  ">
-              <p>
-                10 placed in between three-numbers, called street play, player
-                gets{" "}
-              </p>
-              <p>116.60</p>
-            </div>
-            <div className="flex    justify-between border-b border-r border-l p-1 text-[8px] border-white  ">
-              <p>
-                10 placed in between four-numbers, called corner play, player
-                gets
-              </p>
-              <p>87.50</p>
-            </div>
-            <div className="flex    justify-between border-b border-r border-l p-1 text-[8px] border-white  ">
-              <p>10 placed on the outside dozen or column, player gets </p>
-              <p>30</p>
-            </div>
-            <div className="flex    justify-between border-b border-r border-l p-1 text-[8px] border-white  ">
-              <p>10 placed on Six-numbers, player gets </p>
-              <p>58.30</p>
-            </div>
-            <div className="flex   justify-between border-b border-r border-l p-1 text-[8px] border-white  ">
-              <p>10 placed on Even/odd or red/black, player gets </p>
-              <p>20</p>
-            </div>
-            <p className="text-[8px] pt-1">
-              There are 2 categories of Lucky36 Mini Timer play that you can
-              put, and you may do so in whatever combination or arrangement you
-              wish.
-            </p>
-            <p className="text-[8px] ">
-              These two types of Lucky36 Mini Timer play include:
-            </p>
-            <p className="text-[8px] px-5">
-              * Lucky36 Mini Timer inside play - Lucky36 Mini Timer Inside play
-              are the figures on the internal area of the Lucky36 Mini Timer
-              table layout, where you play.
-            </p>
-            <p className="text-[8px] px-5">
-              * for each particular number. Lucky36 Mini Timer outside play -
-              Around the outside of the board lie a figure of other playing
-              alternatives, and those are collectively referred to as Lucky36 .{" "}
-            </p>
-            <p className="text-[8px] ">Mini Timer outside play.</p>
-            <p className="text-[8px] pt-1">
-              The winners are those play that are on or around the number that
-              comes up. Also the play on the outside of the layout win if the
-              winning number is represented .
-            </p>
-          </div>
+     
         </Box>
       </Drawer>
     </>

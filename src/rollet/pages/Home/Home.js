@@ -614,7 +614,7 @@ function Home() {
           </>
         );
       }, [placeBetMusic])}
-      <Rule setOpen2={setOpen2} open2={open2} style={style} />
+      
       <Box>
         <Box>
           {useMemo(() => {
@@ -638,6 +638,51 @@ function Home() {
           {/* ); */}
           {/* }, [])} */}
           <Rule setOpen2={setOpen2} open2={open2} style={style} />
+         
+              <ButtonGroup
+              variant="outlined"
+              aria-label="Basic button group"
+              sx={{
+                position: "absolute",
+                top: "11%",
+                right: "1%",
+                width: "97%",
+                "&>button": {
+                  py: "10px",
+                  background: "transparent",
+                  "&.Mui-disabled": {
+                    backgroundColor: "transparent",
+                    color: "#757575",
+                    cursor: "not-allowed",
+                    opacity: "0.5",
+                  },
+                  "&:hover": { backgroundColor: "transparent" },
+                },
+                "&>button:nth-child(1)": {
+                  backgroundImage: `url(${btbg1})`,
+                  backgroundSize: "100% 100%",
+                  color: "white",
+                  width: "15%",
+                },
+                }}
+            >
+            <Button
+              variant="contained"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "10px",
+                  // borderRadius: "5px",
+                }}
+                onClick={() => {
+                  setOpen2(true);
+                }}
+              >
+               Rule
+              </Button>
+               </ButtonGroup>
+      
           {/* <Box
             sx={{
               width: "100%",
