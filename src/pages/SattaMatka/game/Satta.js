@@ -50,23 +50,22 @@ function Satta() {
     }
   );
   const statta_matka_staus_result = statta_matka_staus?.data?.data || [];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setMinut(moment(Date.now())?.format("mm"));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
   useEffect(() => {
     const handleOneMin = (onemin) => {
-      setOne_min_time(onemin);
+      const t = Number(String(onemin)?.split("_")?.[1]);
+      const min = Number(String(onemin)?.split("_")?.[0]);
+      const time_to_be_intro = t > 0 ? 60 - t : t;
+      const time_to_be_intro_mid_min = min > 0 ? 60 - min : min;
+      const time_to_be_intro_min = time_to_be_intro_mid_min >= 30 ? time_to_be_intro_mid_min - 30 : time_to_be_intro_mid_min
+
+      setOne_min_time(time_to_be_intro);
+      setMinut(time_to_be_intro_min)
     };
     socket.on("seconds", handleOneMin);
     return () => {
       socket.off("seconds", handleOneMin);
     };
   }, []);
-
   return (
     <Layout>
       <Box sx={styles.root}>
@@ -158,15 +157,12 @@ function Satta() {
           <div className="!text-white !pt-5 !pl-4 !text-sm !w-full !flex !justify-between">
             <span>Time Left:</span>
             <p className="!pr-5">
-              <span>
-                {Number(minut) < 30
-                  ? String(30 - Number(minut))?.padStart(2, "0")
-                  : String(60 - Number(minut))?.padStart(2, "0")}
-              </span>
-              :
-              <span className="!w-[20px]">
-                {String(one_min_time)?.padStart(2, "0")}
-              </span>
+            <span>
+                  {String(minut)?.padStart(2, "0")}  </span>
+
+                :  <span className="!w-[20px]">
+                  {String(one_min_time)?.padStart(2, "0")}
+                </span>
             </p>
           </div>
           <div className="mt-2 w-full" style={styles.contentContainer}>
@@ -192,7 +188,7 @@ function Satta() {
               </Box>
               {!statta_matka_staus_result?.find(
                 (i) => i?.title === "satta_gajiyabad"
-              )?.status ? (
+              )?.status || minut <= 5 ? (
                 <Box sx={styles.buttonContainer}>
                   <Typography
                     variant="body1"
@@ -215,15 +211,12 @@ function Satta() {
                   >
                     <span> Time Left : </span>
                     <p className="!pr-5">
-                      <span>
-                        {Number(minut) < 30
-                          ? String(30 - Number(minut))?.padStart(2, "0")
-                          : String(60 - Number(minut))?.padStart(2, "0")}
-                      </span>
-                      :
-                      <span className="!w-[20px]">
-                        {String(one_min_time)?.padStart(2, "0")}
-                      </span>
+                    <span>
+                  {String(minut)?.padStart(2, "0")}  </span>
+
+                :  <span className="!w-[20px]">
+                  {String(one_min_time)?.padStart(2, "0")}
+                </span>
                     </p>
                   </Typography>
                 </Box>
@@ -253,7 +246,6 @@ function Satta() {
                 </Box>
               )}
             </Box>
-
             <Box sx={styles.contentBox}>
               <Box sx={styles.imageContainer}>
                 <Box sx={styles.image} component="img" src={buildings}></Box>
@@ -277,7 +269,7 @@ function Satta() {
 
               {!statta_matka_staus_result?.find(
                 (i) => i?.title === "satta_faridabad"
-              )?.status ? (
+              )?.status  || minut <= 5 ? (
                 <Box sx={styles.buttonContainer}>
                   <Typography
                     variant="body1"
@@ -300,15 +292,12 @@ function Satta() {
                   >
                     <span> Time Left : </span>
                     <p className="!pr-5">
-                      <span>
-                        {Number(minut) < 30
-                          ? String(30 - Number(minut))?.padStart(2, "0")
-                          : String(60 - Number(minut))?.padStart(2, "0")}
-                      </span>
-                      :
-                      <span className="!w-[20px]">
-                        {String(one_min_time)?.padStart(2, "0")}
-                      </span>
+                    <span>
+                  {String(minut)?.padStart(2, "0")}  </span>
+
+                :  <span className="!w-[20px]">
+                  {String(one_min_time)?.padStart(2, "0")}
+                </span>
                     </p>
                   </Typography>
                 </Box>
@@ -361,7 +350,7 @@ function Satta() {
               {/* <Box sx={styles.buttonContainer}> */}
               {!statta_matka_staus_result?.find(
                 (i) => i?.title === "satta_gali"
-              )?.status ? (
+              )?.status  || minut <= 5 ? (
                 <Box sx={styles.buttonContainer}>
                   <Typography
                     variant="body1"
@@ -384,15 +373,12 @@ function Satta() {
                   >
                     <span> Time Left : </span>
                     <p className="!pr-5">
-                      <span>
-                        {Number(minut) < 30
-                          ? String(30 - Number(minut))?.padStart(2, "0")
-                          : String(60 - Number(minut))?.padStart(2, "0")}
-                      </span>
-                      :
-                      <span className="!w-[20px]">
-                        {String(one_min_time)?.padStart(2, "0")}
-                      </span>
+                    <span>
+                  {String(minut)?.padStart(2, "0")}  </span>
+
+                :  <span className="!w-[20px]">
+                  {String(one_min_time)?.padStart(2, "0")}
+                </span>
                     </p>
                   </Typography>
                 </Box>
@@ -446,7 +432,7 @@ function Satta() {
               </Box>
               {!statta_matka_staus_result?.find(
                 (i) => i?.title === "satta_disawar"
-              )?.status ? (
+              )?.status  || minut <= 5 ? (
                 <Box sx={styles.buttonContainer}>
                   <Typography
                     variant="body1"
@@ -469,15 +455,12 @@ function Satta() {
                   >
                     <span> Time Left : </span>
                     <p className="!pr-5">
-                      <span>
-                        {Number(minut) < 30
-                          ? String(30 - Number(minut))?.padStart(2, "0")
-                          : String(60 - Number(minut))?.padStart(2, "0")}
-                      </span>
-                      :
-                      <span className="!w-[20px]">
-                        {String(one_min_time)?.padStart(2, "0")}
-                      </span>
+                    <span>
+                  {String(minut)?.padStart(2, "0")}  </span>
+
+                :  <span className="!w-[20px]">
+                  {String(one_min_time)?.padStart(2, "0")}
+                </span>
                     </p>
                   </Typography>
                 </Box>

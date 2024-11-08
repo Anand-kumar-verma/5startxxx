@@ -4,7 +4,7 @@ export const baseUrl = "https://admin.5starxxx.com";
 export const fron_end_main_domain = "https://5starxxx.com";
 
 export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
-// export const domain ="http://192.168.18.183:9002/"
+// export const domaindata ="http://192.168.18.183:9000"
 // export const domainn = "http://192.168.18.183:9002"
 // export const domain1 = "http://192.168.18.183:9002"
 

@@ -48,7 +48,6 @@ function Jodi({ betArray, setBetArray }) {
     setAmount(0);
   };
 
-  console.log(betArray);
   return (
     <Box className="w95">
       <Box

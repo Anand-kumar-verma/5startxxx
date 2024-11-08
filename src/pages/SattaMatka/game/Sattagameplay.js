@@ -1,7 +1,8 @@
-import { ArrowBackRounded, RuleSharp, Wallet } from "@mui/icons-material";
-import { Box, Button, Container, Tab, Tabs, Typography } from "@mui/material";
+import { ArrowBackRounded, Wallet } from "@mui/icons-material";
+import { Box, Button, Container, Dialog, Tab, Tabs, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useQuery, useQueryClient } from "react-query";
 import { NavLink, useLocation } from "react-router-dom";
 import Layout from "../../../component/Layout/Layout";
 import {
@@ -11,19 +12,22 @@ import {
 import { endpoint } from "../../../services/urls";
 import { stardarkblue, stargrad } from "../../../Shared/color";
 import { getSattaType } from "../../../Shared/sharedFunction";
+import { useSocket } from "../../../Shared/SocketContext";
 import AndarBaharTable from "./AnderBaherGame";
 import Jodi from "./LocationGame";
-import { useQuery, useQueryClient } from "react-query";
-import moment from "moment";
-import { useSocket } from "../../../Shared/SocketContext";
 import SattaRule from "./SattaRule";
+import WinLossPopup from "./WinLossPopup";
 function Sattagameplay() {
   const location = useLocation();
   const [open2, setOpen2] = useState(false);
   const game_type = location?.state?.satta_type;
   const [value, setValue] = useState(0);
   const client = useQueryClient();
-  const [minut, setMinut] = useState(0);
+  const [minut, setMinut] = useState(6);
+  const [opendialogbox, setOpenDialogBox] = useState(false);
+  const isAppliedbet = localStorage.getItem("betApplied");
+
+  const socket = useSocket();
   const [betArray, setBetArray] = useState([
     {
       number: "1000",
@@ -130,6 +134,7 @@ function Sattagameplay() {
         reqBody
       );
       toast(response?.data?.msg);
+      localStorage.setItem("betApplied", `${game_type}_true`);
       client.refetchQueries("walletamount");
     } catch (e) {
       toast("Something went wrong", e);
@@ -150,12 +155,32 @@ function Sattagameplay() {
   );
 
   const newdata = wallet?.data?.data || 0;
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setMinut(moment(Date.now())?.format("mm"));
-    }, 1000);
-    return () => clearInterval(timer);
+    const handleOneMin = (onemin) => {
+      const min = Number(String(onemin)?.split("_")?.[0]);
+      const time_to_be_intro_mid_min = min > 0 ? 60 - min : min;
+      const time_to_be_intro_min = time_to_be_intro_mid_min >= 30 ? time_to_be_intro_mid_min - 30 : time_to_be_intro_mid_min
+      setMinut(time_to_be_intro_min)
+      client.refetchQueries("my_history")
+    };
+    socket.on("seconds", handleOneMin);
+    return () => {
+    socket.off("seconds", handleOneMin);
+    };
   }, []);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      if (isAppliedbet?.split("_")?.[1] === String(true)) {
+        setOpenDialogBox(true);
+        setTimeout(() => {
+          setOpenDialogBox(false);
+          localStorage.setItem("betApplied", false);
+        }, 5000);
+      }
+    }, 1000);
+  }, []); 
   return (
     <Layout>
       <Box sx={style.root}>
@@ -194,9 +219,9 @@ function Sattagameplay() {
                   justifyContent: "end",
                 }}
               >
-          <SattaRule setOpen2={setOpen2} open2={open2} style={style} />
+                <SattaRule setOpen2={setOpen2} open2={open2} style={style} />
 
-              <p className="text-white !mx-2" onClick={() => {
+                <p className="text-white !mx-2" onClick={() => {
                   setOpen2(true);
                 }}> Rule</p>
                 <Wallet sx={{ mr: 1, color: "white" }} />
@@ -232,7 +257,7 @@ function Sattagameplay() {
             <Box
               //  className="w95 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
 
-              className="lg:!w-[48%] !w-[100%] !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
+              className=" !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
               sx={style.flexbetween}
             >
               <Box className="">
@@ -254,21 +279,36 @@ function Sattagameplay() {
                     ?.toFixed(2) || 0}
                 </Typography>
               </Box>
-              {!(
-                (Number(minut) < 30 && 30 - Number(minut) <= 5) ||
-                (Number(minut) > 30 && 60 - Number(minut) <= 5)
-              ) && (
+              {
+                Number(minut) <= 5 ? (
+                toast("Time Over, Try Again")
+                ) : (
                   <Button
-                    className="!bg-[#24cc3b] !text-white "
+                    className="!bg-[#24cc3b] !ml-10 !text-white "
                     onClick={() => placeBet()}
                   >
-                    Place Bid
+                    Place Bid 
                   </Button>
-                )}
+                 
+                )
+              }
             </Box>
           </Box>
         </Container>
       </Box>
+      {/* {opendialogbox && (
+        <Dialog
+          open={opendialogbox}
+          PaperProps={{
+            style: {
+              backgroundColor: "transparent",
+              boxShadow: "none",
+            },
+          }}
+        >
+          <WinLossPopup game_type={isAppliedbet?.split("_")?.[0]} />
+        </Dialog>
+      )} */}
     </Layout>
   );
 }
