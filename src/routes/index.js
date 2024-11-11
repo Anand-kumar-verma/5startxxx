@@ -55,241 +55,197 @@ import WithdravalHistory from "../pages/wallet/component/WithdravalHistory";
 import Home from "../rollet/pages/Home/Home";
 
 export const routes = [
-    {
-        path: "/rollet",
-        component: <Home />
-    },
-    {
-        path: "/account",
-        component: <Account />
-    },
-    {
-        path: "/withdravalHistory",
-        component: <WithdravalHistory />
-    },
-    {
-        path: "/Withdrawal",
-        component: <Withdrawl />
-    },
-    {
-        path: "/depositHistory",
-        component: <DepositeHistory />
-    },
-    {
-        path: "/wallet/Recharge",
-        component: <WalletRecharge />
-    },
-    {
-        path: "/satta/matka",
-        component: <Satta />
-    },
-    // {
-    //     path: "/trx",
-    //     component: <Trx />
-    // },
-    {
-        path: "/wallet",
-        component: <Wallet />
-    },
-    {
-        path: "/bathistory",
-        component: <BatHistorys />
-    },
-    {
-        path: "/notification",
-        component: <Notification />
-    },
-    {
-        path: "/gamestaticks",
-        component: <Gamestaticks />
-    },
-    {
-        path: "/Language",
-        component: <Languages />
-    },
-    {
-        path: "/SettingCenter",
-        component: <SettingCenter />
-    },
-    {
-        path: "/SettingCenter/LoginPassword",
-        component: <LoginPassword />
-    },
-    {
-        path: "/SettingCenter/mail",
-        component: <Mail />
-    },
-    {
-        path: "/feedback",
-        component: <Feedback />
-    },
-    {
-        path: "/gameNotification",
-        component: <GameNotification />
-    },
-    // {
-    //     path:"/",
-    //     component:<Login/>
-    // },
-    {
-        path: "/test",
-        component: <Test />
-    },
-    {
-        path: "/register",
-        component: <Register />
-    },
-    {
-        path: "/dashboard",
-        component: <Dashboard />
-    },
-    {
-        path: "/activity",
-        component: <Activity />
-    },
-    // {
-    //     path: "/win",
-    //     component: <Win />
-    // },
-    {
-        path: "/promotion",
-        component: <Promotion />
-    },
-    {
-        path: "/promotion/Subordinate",
-        component: <Subordinate />
-    },
-    {
-        path: "/promotion/PromotionShare",
-        component: <Invitaton />
-    },
-    {
-        path: "/promotion/TeamReport/",
-        component: <TeamReports />
-    },
-    {
-        path: "/promotion/TeamReport/data",
-        component: <TeamData />
-    },
-    {
-        path: "/promotion/MyCommission/",
-        component: <MyCommission />
-    },
-    {
-        path: "/promotion/PromotionRule/",
-        component: <PromotionRule />
-    },
-    {
-        path: "/promotion/RebateRatio/",
-        component: <RobateRetio />
-    },
-    {
-        path: "/promotion/customerLine/",
-        component: <CustomerLine />
-    },
-    {
-        path: "/view_fund_request",
-        component: <FundRequest />
-    },
-    // {
-    //     path: "/aviator-login",
-    //     component: <MainPage />
-    // },
-    // {
-    //     path: "/playgame",
-    //     component: <LayoutAviator component={<PlayGame />} />
-    // },
-    // {
-    //     path: "/account/:id",
-    //     component: <LayoutAviator component={<Account />} />
-    // },
-    // {
-    //     path: "/cricket/user-profile",
-    //     component: <CricketUserprofile />
-    // },
-    // {
-    //     path: "/cricket/deposit-history",
-    //     component: <CricketDepositHistory />
-    // },
-    // {
-    //     path: "/cricket/withdrawl-history",
-    //     component: <CricketWithdrawlHistory />
-    // },
-    // {
-    //     path: "/cricket/depositCash",
-    //     component: <DepositCash />
-    // },
-    // {
-    //     path: "/cricket/withdrawlCash",
-    //     component: <WithdrawlCash />
-    // },
-    // {
-    //     path: "/cricket/fund-deposit-request-form",
-    //     component: <CricketWalletFundDepositForm />
-    // },
-    // {
-    //     path: "/cricket/registration",
-    //     component: <CricketRegistrationForm />
-    // },
-    // {
-    //     path: "/cricket",
-    //     component: <Cricket />
-    // },
-    {
-        path: "/account/income-main",
-        component: <MainPageOFIncome />
-    },
-    {
-        path: "/account/income-main/referral-bonus",
-        component: <ReferralBonus />
-    },
-    {
-        path: "/account/income-main/level-income",
-        component: <LevelIncome />
-    },
-    {
-        path: "/account/income-main/cashback-income",
-        component: <CashbackIncome />
-    },
+  {
+    path: "/rollet",
+    component: <Home />,
+  },
+  {
+    path: "/account",
+    component: <Account />,
+  },
+  {
+    path: "/withdravalHistory",
+    component: <WithdravalHistory />,
+  },
+  {
+    path: "/Withdrawal",
+    component: <Withdrawl />,
+  },
+  {
+    path: "/depositHistory",
+    component: <DepositeHistory />,
+  },
+  {
+    path: "/wallet/Recharge",
+    component: <WalletRecharge />,
+  },
+  {
+    path: "/satta/matka",
+    component: <Satta />,
+  },
+  // {
+  //     path: "/trx",
+  //     component: <Trx />
+  // },
+  {
+    path: "/wallet",
+    component: <Wallet />,
+  },
+  {
+    path: "/bathistory",
+    component: <BatHistorys />,
+  },
+  {
+    path: "/notification",
+    component: <Notification />,
+  },
+  {
+    path: "/gamestaticks",
+    component: <Gamestaticks />,
+  },
+  {
+    path: "/Language",
+    component: <Languages />,
+  },
+  {
+    path: "/SettingCenter",
+    component: <SettingCenter />,
+  },
+  {
+    path: "/SettingCenter/LoginPassword",
+    component: <LoginPassword />,
+  },
+  {
+    path: "/SettingCenter/mail",
+    component: <Mail />,
+  },
+  {
+    path: "/feedback",
+    component: <Feedback />,
+  },
+  {
+    path: "/gameNotification",
+    component: <GameNotification />,
+  },
+  // {
+  //     path:"/",
+  //     component:<Login/>
+  // },
+  {
+    path: "/test",
+    component: <Test />,
+  },
+  {
+    path: "/register",
+    component: <Register />,
+  },
+  {
+    path: "/dashboard",
+    component: <Dashboard />,
+  },
+  {
+    path: "/activity",
+    component: <Activity />,
+  },
+  // {
+  //     path: "/win",
+  //     component: <Win />
+  // },
+  {
+    path: "/promotion",
+    component: <Promotion />,
+  },
+  {
+    path: "/promotion/Subordinate",
+    component: <Subordinate />,
+  },
+  {
+    path: "/promotion/PromotionShare",
+    component: <Invitaton />,
+  },
+  {
+    path: "/promotion/TeamReport/",
+    component: <TeamReports />,
+  },
+  {
+    path: "/promotion/TeamReport/data",
+    component: <TeamData />,
+  },
+  {
+    path: "/promotion/MyCommission/",
+    component: <MyCommission />,
+  },
+  {
+    path: "/promotion/PromotionRule/",
+    component: <PromotionRule />,
+  },
+  {
+    path: "/promotion/RebateRatio/",
+    component: <RobateRetio />,
+  },
+  {
+    path: "/promotion/customerLine/",
+    component: <CustomerLine />,
+  },
+  {
+    path: "/view_fund_request",
+    component: <FundRequest />,
+  },
+  {
+    path: "/account/income-main",
+    component: <MainPageOFIncome />,
+  },
+  {
+    path: "/account/income-main/referral-bonus",
+    component: <ReferralBonus />,
+  },
+  {
+    path: "/account/income-main/level-income",
+    component: <LevelIncome />,
+  },
+  {
+    path: "/account/income-main/cashback-income",
+    component: <CashbackIncome />,
+  },
 
-    {
-        path: "/add-bank-details",
-        component: <AddBankDetails />
-    },
-    {
-        path: "/add-upi-details",
-        component: <AddUPI />
-    },
-    {
-        path: "/add-bank-details/pre-added-bank-details",
-        component: <AddedBankDetailList />
-    },
-    {
-        path: "/deposit/qr-screen",
-        component: <QRScreen />
-    },
-    {
-        path: "/SattaChart",
-        component: <SattaChart />
-    },
-    {
-        path: "/satta/play",
-        component: <Sattagameplay />
-    },
-    {
-        path: "/history",
-        component: <History />
-    },
-    {
-        path: "/anderbaher/chart",
-        component: <AnderBaherChart />
-    },
-    {
-        path: "/location/chart/list",
-        component: <LocationListChart />
-    },
-    {
-        path: "/location/chart",
-        component: <LocationChart />
-    },
-]
+  {
+    path: "/add-bank-details",
+    component: <AddBankDetails />,
+  },
+  {
+    path: "/add-upi-details",
+    component: <AddUPI />,
+  },
+  {
+    path: "/add-bank-details/pre-added-bank-details",
+    component: <AddedBankDetailList />,
+  },
+  {
+    path: "/deposit/qr-screen",
+    component: <QRScreen />,
+  },
+  {
+    path: "/SattaChart",
+    component: <SattaChart />,
+  },
+  {
+    path: "/satta/play",
+    component: <Sattagameplay />,
+  },
+  {
+    path: "/history",
+    component: <History />,
+  },
+  {
+    path: "/anderbaher/chart",
+    component: <AnderBaherChart />,
+  },
+  {
+    path: "/location/chart/list",
+    component: <LocationListChart />,
+  },
+  {
+    path: "/location/chart",
+    component: <LocationChart />,
+  },
+];

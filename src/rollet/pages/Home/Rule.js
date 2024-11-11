@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import rule from "../../assets/images/rule.png";
 import { Box, Drawer } from "@mui/material";
+import React, { useEffect } from "react";
 
 const Rule = ({ setOpen2, open2, style }) => {
   useEffect(() => {

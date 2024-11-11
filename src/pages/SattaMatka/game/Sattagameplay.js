@@ -1,5 +1,13 @@
 import { ArrowBackRounded, Wallet } from "@mui/icons-material";
-import { Box, Button, Container, Dialog, Tab, Tabs, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
@@ -25,7 +33,7 @@ function Sattagameplay() {
   const client = useQueryClient();
   const [minut, setMinut] = useState(6);
   const [opendialogbox, setOpenDialogBox] = useState(false);
-  const isAppliedbet = localStorage.getItem("betApplied");
+  const isAppliedbet = localStorage.getItem(`betApplied_${game_type}`);
 
   const socket = useSocket();
   const [betArray, setBetArray] = useState([
@@ -110,17 +118,19 @@ function Sattagameplay() {
       amount: null,
     },
   ]);
-
   async function placeBet() {
+    if (Number(minut) <= 5)
+      return toast("Time Over, Please try in next trade.");
     try {
       betArray?.forEach((i) => {
         if (i?.amount !== null && Number(i?.amount) < 5)
           return toast(
             "Your Amount is less than 5 on " +
-            `${Number(i?.number) >= 1000 && Number(i?.number) <= 1009
-              ? "Andar"
-              : "Bahar"
-            } ${Number(i?.number) % 10}`
+              `${
+                Number(i?.number) >= 1000 && Number(i?.number) <= 1009
+                  ? "Andar"
+                  : "Bahar"
+              } ${Number(i?.number) % 10}`
           );
       });
       const newArrya = betArray?.filter((i) => i?.amount !== null);
@@ -134,7 +144,7 @@ function Sattagameplay() {
         reqBody
       );
       toast(response?.data?.msg);
-      localStorage.setItem("betApplied", `${game_type}_true`);
+      localStorage.setItem(`betApplied_${game_type}`, true);
       client.refetchQueries("walletamount");
     } catch (e) {
       toast("Something went wrong", e);
@@ -159,28 +169,36 @@ function Sattagameplay() {
   useEffect(() => {
     const handleOneMin = (onemin) => {
       const min = Number(String(onemin)?.split("_")?.[0]);
+      const sec = Number(String(onemin)?.split("_")?.[1]);
       const time_to_be_intro_mid_min = min > 0 ? 60 - min : min;
-      const time_to_be_intro_min = time_to_be_intro_mid_min >= 30 ? time_to_be_intro_mid_min - 30 : time_to_be_intro_mid_min
-      setMinut(time_to_be_intro_min)
-      client.refetchQueries("my_history")
+      const time_to_be_intro_min =
+        time_to_be_intro_mid_min >= 30
+          ? time_to_be_intro_mid_min - 30
+          : time_to_be_intro_mid_min;
+      setMinut(time_to_be_intro_min);
+      time_to_be_intro_min === 0 && sec === 0 && setOpenDialogBox(true);
     };
     socket.on("seconds", handleOneMin);
     return () => {
-    socket.off("seconds", handleOneMin);
+      socket.off("seconds", handleOneMin);
     };
   }, []);
+  const { data: history } = useQuery(
+    ["game_history", game_type],
+    () =>
+      apiConnectorPost(endpoint.node.satta_game_gamehistory, {
+        startDate: "",
+        endDate: "",
+        satta_type: game_type,
+      }),
+    {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMount: false,
+    }
+  );
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      if (isAppliedbet?.split("_")?.[1] === String(true)) {
-        setOpenDialogBox(true);
-        setTimeout(() => {
-          setOpenDialogBox(false);
-          localStorage.setItem("betApplied", false);
-        }, 5000);
-      }
-    }, 1000);
-  }, []); 
+  const gaming = history?.data?.data || [];
   return (
     <Layout>
       <Box sx={style.root}>
@@ -208,9 +226,8 @@ function Sattagameplay() {
                 >
                   {getSattaType?.find((i) => i?.type === game_type)?.name}{" "}
                 </Typography>
-
               </Box>
-
+              <p className="!text-white">{Number(gaming?.[0]?.gamesno) + 1}</p>
               <Box
                 sx={{
                   width: "50%",
@@ -221,9 +238,15 @@ function Sattagameplay() {
               >
                 <SattaRule setOpen2={setOpen2} open2={open2} style={style} />
 
-                <p className="text-white !mx-2" onClick={() => {
-                  setOpen2(true);
-                }}> Rule</p>
+                <p
+                  className="text-white !mx-2"
+                  onClick={() => {
+                    setOpen2(true);
+                  }}
+                >
+                  {" "}
+                  Rule
+                </p>
                 <Wallet sx={{ mr: 1, color: "white" }} />
                 <Typography
                   variant="body1"
@@ -279,24 +302,17 @@ function Sattagameplay() {
                     ?.toFixed(2) || 0}
                 </Typography>
               </Box>
-              {
-                Number(minut) <= 5 ? (
-                toast("Time Over, Try Again")
-                ) : (
-                  <Button
-                    className="!bg-[#24cc3b] !ml-10 !text-white "
-                    onClick={() => placeBet()}
-                  >
-                    Place Bid 
-                  </Button>
-                 
-                )
-              }
+              <Button
+                className="!bg-[#24cc3b] !ml-10 !text-white "
+                onClick={() => placeBet()}
+              >
+                Place Bid
+              </Button>
             </Box>
           </Box>
         </Container>
       </Box>
-      {/* {opendialogbox && (
+      {opendialogbox && isAppliedbet === "true" && (
         <Dialog
           open={opendialogbox}
           PaperProps={{
@@ -306,9 +322,9 @@ function Sattagameplay() {
             },
           }}
         >
-          <WinLossPopup game_type={isAppliedbet?.split("_")?.[0]} />
+          <WinLossPopup game_type={game_type} />
         </Dialog>
-      )} */}
+      )}
     </Layout>
   );
 }
@@ -324,6 +340,6 @@ const style = {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    flexWrap: "wrap",
+    // flexWrap: "wrap",
   },
 };

@@ -1,6 +1,4 @@
-import { borderRadius } from "@mui/system";
 import rouletteBORD from "../../assets/images/thumbs_bgs.png";
-import zIndex from "@mui/material/styles/zIndex";
 
 export const style = {
   root: {
@@ -305,9 +303,9 @@ export const style = {
   countdownOuter: {
     position: "absolute",
     width: "55px",
-    height: "55px",
+    height: "50px",
     background: "#BA903Bs",
-    top: "20%",
+    top: "25%",
     left: "4%",
     border: "1px solid white",
     borderRadius: "10px",

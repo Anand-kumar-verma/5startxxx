@@ -160,7 +160,7 @@ export const spinFunction = (id) => {
       document.getElementsByTagName("head")[0].appendChild(animation20);
 
       element.style.animation =
-        "rotatemainnumber20 3s reverse linear 1 forwards";
+        "rotatemainnumber20 4s reverse linear 1 forwards";
 
       // Add event listener for second animation
       element.addEventListener("animationend", handleAnimationEndTwo);
@@ -185,7 +185,7 @@ export const spinFunction = (id) => {
       document.getElementsByTagName("head")[0].appendChild(animation50);
 
       element.style.animation =
-        "rotatemainnumber50 4s reverse linear 1 forwards";
+        "rotatemainnumber50 7s reverse linear 1 forwards";
 
       // Clean up after third animation ends
       setTimeout(() => {
@@ -212,6 +212,7 @@ export const spinFunction = (id) => {
 };
 
 export const confirmBet = async (
+  one_min_time,
   setloding,
   rebet,
   setrebet,
@@ -222,6 +223,12 @@ export const confirmBet = async (
   client
 ) => {
   const isAlreadyAppliedBet = localStorage.getItem("rollet_bet_placed");
+  if (Number(one_min_time || 0) <= 15)
+    return toast(
+      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700  !rounded-full">
+        Tiem Over, Please Try in next trade.
+      </span>
+    );
   if (isAlreadyAppliedBet === "true")
     return toast(
       <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700  !rounded-full">
@@ -236,42 +243,6 @@ export const confirmBet = async (
     );
 
   let updatedBet = [...bet]; // Create a copy of the current bet state
-
-  // updatedBet.forEach((element) => {
-  //   let idInString = String(element?.id);
-  //   let array = element?.number;
-
-  //   if (array?.length > 1) {
-  //     let d_amount = Number(element?.amount) / array?.length;
-
-  //     array.forEach((newelement) => {
-  //       let isContainsPre = updatedBet.find(
-  //         (i) => String(i?.id) === String(newelement)
-  //       );
-
-  //       if (isContainsPre) {
-  //         updatedBet = updatedBet.map((item) => {
-  //           if (String(item.id) === String(newelement)) {
-  //             return { ...item, amount: item.amount + d_amount };
-  //           }
-  //           return item;
-  //         });
-  //       } else {
-  //         const obj = {
-  //           id: Number(newelement),
-  //           number: Number(newelement),
-  //           amount: d_amount,
-  //         };
-  //         updatedBet.push(obj);
-  //       }
-  //     });
-
-  //     updatedBet = updatedBet.filter((i) => String(i?.id) !== idInString);
-  //   }
-  // });
-  // console.log(updatedBet);
-  // setBet(updatedBet);
-
   const reqbody = {
     bet_array: updatedBet,
   };
@@ -317,14 +288,6 @@ export const confirmBet = async (
         }, 1000);
         setrebet(bet);
         localStorage.setItem("betlen", bet?.length || 0);
-        // bet?.forEach((ele) => {
-        //   let element = document.getElementById(`${ele?.id}`);
-        //   let span = element.querySelector("span");
-        //   if (span) {
-        //     element.removeChild(span);
-        //   }
-        // });
-        // setBet([]);
         localStorage.setItem("total_amount_bet", total_amount_bet);
         localStorage?.setItem("rollet_bet_placed", true);
         localStorage?.setItem("isPreBet", true);

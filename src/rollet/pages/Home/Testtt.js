@@ -878,7 +878,7 @@ function Home() {
           </Drawer>
         </Box>
       </Box>
-    </Box >
+    </Box>
   );
 }
 export default Home;
