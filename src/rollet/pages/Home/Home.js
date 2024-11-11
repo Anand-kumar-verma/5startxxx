@@ -89,6 +89,7 @@ function Home() {
   const [amount, setAmount] = useState(10);
   const [rebet, setrebet] = useState([]);
   const [preBetHandle, setIsPreBetHandle] = useState(false);
+  const isAppliedbet = localStorage.getItem("result_rollet");
 
   useEffect(() => {
     localStorage?.setItem("isPreBet", false);
@@ -132,6 +133,17 @@ function Home() {
       refetchOnReconnect: true,
     }
   );
+useEffect(() => {
+    setTimeout(() => {
+      if (isAppliedbet === String(true)) {
+        setOpenDialog(true);
+        setTimeout(() => {
+          setOpenDialog(false);
+          localStorage.setItem("result_rollet", false);
+        }, 5000);
+      }
+    }, 1000);
+  }, []); 
 
   const bet_result_history_Data = useMemo(() => {
     return bet_result_history?.data?.data?.slice(0, 10) || [];
@@ -378,6 +390,7 @@ function Home() {
         client.refetchQueries("history_rollet_result");
         speakMessage(onemin);
         addWinCap(onemin);
+        setOpenDialog(true)
         getWinPopup();
       }, 12000);
     };
@@ -1261,7 +1274,7 @@ function Home() {
             },
           }}
         >
-          <WinLossPopup />
+        <WinLossPopup />
         </Dialog>
       )}
     </Box>

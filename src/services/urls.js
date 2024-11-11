@@ -103,8 +103,5 @@ export const endpoint = {
     withdrawl_history: domainn + "/api/v1/withdrawal-history",
     deposit_history: domainn + "/api/v1/deposit-history",
     
-    
-   
-      
   }
 };
