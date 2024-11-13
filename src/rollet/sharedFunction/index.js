@@ -3,12 +3,11 @@ import win_cap from "../assets/images/pwin.png";
 import { endpoint } from "../../services/urls";
 import { apiConnectorPost } from "../../services/apiconnector";
 
-export const red_array = [
-  1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
-];
+export const red_array = [1, 3, 9, 12, 16, 18, 19, 21, 23, 25, 27, 30, 34, 36];
 export const black_array = [
-  2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35,
+  4, 6, 8, 10, 11, 15, 17, 20, 22, 24, 28, 29, 31, 33, 35,
 ];
+export const blue_array = [2, 5, 7, 13, 14, 26];
 
 export const addWinCap = (id) => {
   let element = document.getElementById(`${String(id)}`);
@@ -160,7 +159,7 @@ export const spinFunction = (id) => {
       document.getElementsByTagName("head")[0].appendChild(animation20);
 
       element.style.animation =
-        "rotatemainnumber20 4s reverse linear 1 forwards";
+        "rotatemainnumber20 3s reverse linear 1 forwards";
 
       // Add event listener for second animation
       element.addEventListener("animationend", handleAnimationEndTwo);
@@ -185,7 +184,7 @@ export const spinFunction = (id) => {
       document.getElementsByTagName("head")[0].appendChild(animation50);
 
       element.style.animation =
-        "rotatemainnumber50 7s reverse linear 1 forwards";
+        "rotatemainnumber50 8s reverse linear 1 forwards";
 
       // Clean up after third animation ends
       setTimeout(() => {

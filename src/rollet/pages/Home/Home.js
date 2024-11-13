@@ -37,6 +37,7 @@ import watch from "../../assets/images/watch.png";
 import {
   addWinCap,
   black_array,
+  blue_array,
   confirmBet,
   justDouble,
   justHalf,
@@ -80,7 +81,7 @@ function Home() {
   const [isSelectedDropBet, setisSelectedDropBet] = useState(false);
   const [openDialogBoxhistory, setopenDialogBoxhistory] = useState(false);
   const [one_min_time, setOne_min_time] = useState(0);
-  const [result_rollet, setresult_rollet] = useState(0);
+  const [result_rollet, setresult_rollet] = useState();
   const show_this_one_min_time = String(one_min_time).padStart(2, "0");
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -133,17 +134,6 @@ function Home() {
       refetchOnReconnect: true,
     }
   );
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (isAppliedbet === String(true)) {
-  //       setOpenDialog(true);
-  //       setTimeout(() => {
-  //         setOpenDialog(false);
-  //         localStorage.setItem("result_rollet", false);
-  //       }, 5000);
-  //     }
-  //   }, 1000);
-  // }, []);
 
   const bet_result_history_Data = useMemo(() => {
     return bet_result_history?.data?.data?.slice(0, 10) || [];
@@ -292,6 +282,8 @@ function Home() {
         newMessage = String(message) + " " + "Red Wins";
       } else if (black_array?.includes(message)) {
         newMessage = String(message) + " " + "Black Wins";
+      } else if (blue_array?.includes(message)) {
+        newMessage = String(message) + " " + "Blue Wins";
       } else {
         newMessage = String(message) + " " + "Special";
       }
@@ -348,6 +340,9 @@ function Home() {
         setOpen3(false);
         setIsPreBetHandle(true);
         localStorage.setItem("total_amount_bet", 0);
+        setTimeout(() => {
+          setresult_rollet();
+        }, 2000);
       }
       // if (onemin === 55) localStorage?.setItem("rollet_bet_placed", false);
       if (onemin === 0) {
@@ -391,7 +386,7 @@ function Home() {
         addWinCap(onemin);
         setOpenDialog(true);
         getWinPopup();
-      }, 12000);
+      }, 15000);
     };
     // oneminrollet
     socket.on("oneminrollet", handleOneMin);
