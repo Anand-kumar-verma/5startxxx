@@ -380,11 +380,11 @@ export const style = {
     },
   },
   winnerlooserouter2: {
-    padding: ' 10px 5px',
+    padding: ' 8px 5px',
     position: 'absolute',
     width: '96%',
     borderRadius: '5px',
-    backgroundColor: '#0A001B',
+    backgroundColor: 'white',
     bottom: 0,
   },
   winnerLooserList: {
@@ -400,12 +400,12 @@ export const style = {
     "&>p:nth-child(2)": {
       fontSize: "15px",
       fontWeight: "600",
-      color: "#F01111",
+      color: "white",
       mb: '1px',
       textAlign: 'center',
       // transform: "rotate(90deg)",
     },
-    "&>p:nth-child(3)": { fontSize: "15px", fontWeight: "600", color: "#6C10ED", mb: '1px', textAlign: 'center', },
+    "&>p:nth-child(3)": { fontSize: "15px", fontWeight: "600", color: "white", mb: '1px', textAlign: 'center', },
   },
   winnerLooserList2: {
     width: "80%",

@@ -375,9 +375,10 @@ function Home() {
       setTimeout(() => {
         handlePlaySound();
       }, 9000);
-
       setTimeout(() => {
         handlePlaySoundStopBall();
+      }, 10000);
+      setTimeout(() => {
         setresult_rollet(onemin);
         client.refetchQueries("history_rollet");
         client.refetchQueries("walletamount");
@@ -386,7 +387,7 @@ function Home() {
         addWinCap(onemin);
         setOpenDialog(true);
         getWinPopup();
-      }, 15000);
+      }, 13000);
     };
     // oneminrollet
     socket.on("oneminrollet", handleOneMin);
@@ -705,11 +706,11 @@ function Home() {
           >
             <Box
               sx={{
-                width: "45px",
+                width: "55px",
                 height: "100%",
                 position: "absolute",
                 right: 0,
-                border: "2px solid white",
+                border: "2px solid purple",
                 borderRadius: "5px",
               }}
             ></Box>
@@ -719,9 +720,21 @@ function Home() {
                   <Typography
                     variant="body1"
                     color="initial"
-                    sx={{ color: "green" }}
+                    className="!text-black"
+                    sx={{ textAlign: "center" }}
                   >
                     {black_array?.includes(
+                      Number(bet_result_history_Data?.[ele]?.number)
+                    ) && Number(bet_result_history_Data?.[ele]?.number)}
+                    {/* {ele} */}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-blue-500"
+                    sx={{ textAlign: "center" }}
+                  >
+                    {blue_array?.includes(
                       Number(bet_result_history_Data?.[ele]?.number)
                     ) && Number(bet_result_history_Data?.[ele]?.number)}
                     {/* {ele} */}
@@ -730,7 +743,8 @@ function Home() {
                   <Typography
                     variant="body1"
                     color="initial"
-                    sx={{ color: "green" }}
+                    className="!text-green-500"
+                    sx={{ textAlign: "center" }}
                   >
                     {0 === Number(bet_result_history_Data?.[ele]?.number) &&
                       Number(bet_result_history_Data?.[ele]?.number)}
@@ -738,9 +752,10 @@ function Home() {
                   </Typography>
 
                   <Typography
+                    sx={{ textAlign: "center" }}
                     variant="body1"
                     color="initial"
-                    sx={{ color: "green" }}
+                    className="!text-rose-500"
                   >
                     {red_array?.includes(
                       Number(bet_result_history_Data?.[ele]?.number)
