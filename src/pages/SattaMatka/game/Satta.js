@@ -102,12 +102,12 @@ function Satta() {
       console.log(e);
     }
   }
-  useEffect(() => {
-    gaziabadgameFunction()
-    faribadgameFunction()
-    galgameFunction()
-    desagameFunction()
-  }, [])
+  // useEffect(() => {
+  //   gaziabadgameFunction()
+  //   faribadgameFunction()
+  //   galgameFunction()
+  //   desagameFunction()
+  // }, [])
   const { data: statta_matka_staus } = useQuery(
     ["status_of_satta_matka"],
     () => apiConnectorGet(endpoint?.node?.getStatusSattaMatka),
