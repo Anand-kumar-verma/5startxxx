@@ -159,7 +159,7 @@ const SattaRule = ({ setOpen2, open2, style }) => {
                             variant="contained"
                             sx={{ marginBottom: "10px", width: "100%" }}
                         >
-                            {language === "hi" ? "Switch to English" : "स्विच टू हिंदी"}
+                            {language === "hi" ? "Switch to English" : "Switch to Hindi"}
                         </Button>
 
                         {language === "hi" ? hindiContent : englishContent}

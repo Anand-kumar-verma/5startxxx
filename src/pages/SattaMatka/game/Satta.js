@@ -4,7 +4,7 @@ import FitbitIcon from "@mui/icons-material/Fitbit";
 import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -17,16 +17,23 @@ import win from "../../../assets/images/win3.f7c86b0db9189cc3c7a6.png";
 import win1 from "../../../assets/images/win3.f7c86b0db9189cc3c7a6 (1).png";
 import win2 from "../../../assets/images/win4.7a69afe7edb7608a715a.png";
 import satta from "../../../assets/images/satta.jpg";
-import { apiConnectorGet } from "../../../services/apiconnector";
+import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
 import { download_app_url, endpoint } from "../../../services/urls";
+import moment from "moment";
+import SattaRule from "./SattaRule";
 
 function Satta() {
   const socket = useSocket();
+  const [open2, setOpen2] = useState(false);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const navigate = useNavigate();
   const [minut, setMinut] = useState(0);
   const [one_min_time, setOne_min_time] = useState(0);
+  const [gazia, setGazia] = useState("");
+  const [fari, setfari] = useState("");
+  const [gal, setGal] = useState("");
+  const [des, setdes] = useState("");
 
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
@@ -42,6 +49,65 @@ function Satta() {
     }
   );
   const game_history = data?.data?.data || 0;
+
+  const gaziabadgameFunction = async () => {
+    const reqBody = {
+      startDate: "",
+      endDate: "",
+      satta_type: 1,
+    }
+    try {
+      const response = await apiConnectorPost(endpoint.node.satta_game_gamehistory, reqBody);
+      setGazia(response?.data?.data)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const faribadgameFunction = async () => {
+    const reqBody = {
+      startDate: "",
+      endDate: "",
+      satta_type: 2,
+    }
+    try {
+      const response = await apiConnectorPost(endpoint.node.satta_game_gamehistory, reqBody);
+      setfari(response?.data?.data)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const galgameFunction = async () => {
+    const reqBody = {
+      startDate: "",
+      endDate: "",
+      satta_type: 3,
+    }
+    try {
+      const response = await apiConnectorPost(endpoint.node.satta_game_gamehistory, reqBody);
+      setGal(response?.data?.data)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const desagameFunction = async () => {
+    const reqBody = {
+      startDate: "",
+      endDate: "",
+      satta_type: 4,
+    }
+    try {
+      const response = await apiConnectorPost(endpoint.node.satta_game_gamehistory, reqBody);
+      setdes(response?.data?.data)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  useEffect(() => {
+    gaziabadgameFunction()
+    faribadgameFunction()
+    galgameFunction()
+    desagameFunction()
+  }, [])
   const { data: statta_matka_staus } = useQuery(
     ["status_of_satta_matka"],
     () => apiConnectorGet(endpoint?.node?.getStatusSattaMatka),
@@ -92,10 +158,20 @@ function Satta() {
               </div>
               <div
                 className="flex gap-1 items-center cursor-pointer"
-                onClick={() => (document.location.href = `${download_app_url}`)}
+
                 style={styles.downloadSection}
               >
-                <CloudDownloadIcon sx={styles.downloadIcon} />
+                <SattaRule setOpen2={setOpen2} open2={open2} style={style} />
+
+                <p
+                  className="text-white !mx-2"
+                  onClick={() => {
+                    setOpen2(true);
+                  }}
+                >
+                  {" "}
+                  Rule
+                </p>
                 <span
                   className="text-[12px]"
                   style={styles.downloadText}
@@ -188,7 +264,47 @@ function Satta() {
                   </Typography>
                 </Box>
               </Box>
-              <Box sx={{ position: "absolute", right: "45px", top: "40px" }}>
+              {/* {Array.isArray(gazia) && gazia?.slice(-6)?.map((item) => (
+                <Button
+                  variant="contained"
+                  sx={{
+                    marginLeft: "2px",
+                    marginRight: "2px",
+                    marginTop: "2px",
+                    // width: "50px",
+                    // height: "50px",
+                    textAlign: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography
+                      sx={{ color: "white" }}
+                      className="!text-xs"
+                      color="initial"
+                    >
+                      {" "}
+                      {String(item?.number).padStart(2, '0')}
+                    </Typography>
+                    <Typography
+                      sx={{ color: "white" }}
+                      className="fp13"
+                      color="initial"
+                    >
+                      {" "}
+                      {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
+                    </Typography>
+                  </Box>
+                </Button>
+              ))} */}
+              <Box sx={{ position: "absolute", right: "45px", top: "22px" }}>
                 <Box
                 // sx={{ width: "100px" }}
                 >
@@ -197,15 +313,25 @@ function Satta() {
                   )?.status || minut < 5 ? (
                     <Box>
                       <Typography
+                        sx={{ color: "red", textAlign: "center", }}
+                      >Closed</Typography>
+                      <Button
+                        variant="text"
+                        // className="fp11"
+                        sx={styles.upcomingButton}
+                      >
+                        Upcoming Result{" "}
+                      </Button>
+                      <Typography
                         sx={{ color: "white", textAlign: "center", }}
                       >
                         <span> Time Left : </span>
-                        <p className="!pr-5">
-                          <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
-                          <span className="!w-[20px]">
-                            {String(one_min_time)?.padStart(2, "0")}
-                          </span>
-                        </p>
+
+                        <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
+                        <span className="!w-[20px]">
+                          {String(one_min_time)?.padStart(2, "0")}
+                        </span>
+
                       </Typography>
                     </Box>
                   ) : (
@@ -217,7 +343,27 @@ function Satta() {
                       });
                     }}
                     >
-                      <ArrowForwardIos/>
+                      <Typography
+                        variant="body1"
+                        // className="fp15"
+                        sx={{ color: "white", textAlign: "center", mb: 1 }}
+                      >
+                        Open
+                      </Typography>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        sx={styles.playButton}
+                        onClick={() => {
+                          navigate("/satta/play", {
+                            state: {
+                              satta_type: 1,
+                            },
+                          });
+                        }}
+                      >
+                        Play
+                      </Button>
                     </Box>
                   )}
                 </Box>
@@ -239,7 +385,46 @@ function Satta() {
                   </Typography>
                 </Box>
               </Box>
-              <Box sx={{ position: "absolute", right: "45px", top: "40px" }}>
+              {/* {Array.isArray(fari) && fari?.slice(-6)?.map((item) => (
+                <Button
+                  variant="contained"
+                  sx={{
+                    marginLeft: "2px",
+                    marginRight: "2px",
+                    marginTop: "2px",
+                    // width: "50px",
+                    // height: "50px",
+                    textAlign: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography
+                      sx={{ color: "white" }}
+                      className="!text-xs"
+                      color="initial"
+                    >
+                      {" "}
+                      {String(item?.number).padStart(2, '0')}
+                    </Typography>
+                    <Typography
+                      sx={{ color: "white" }}
+                      className="fp13"
+                      color="initial"
+                    >
+                      {" "}
+                      {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
+                    </Typography>
+                  </Box>
+                </Button>
+              ))} */}
+              <Box sx={{ position: "absolute", right: "45px", top: "22px" }}>
                 <Box
                 // sx={{ width: "100px" }}
                 >
@@ -248,15 +433,25 @@ function Satta() {
                   )?.status || minut < 5 ? (
                     <Box>
                       <Typography
+                        sx={{ color: "red", textAlign: "center", }}
+                      >Closed</Typography>
+                      <Button
+                        variant="text"
+                        // className="fp11"
+                        sx={styles.upcomingButton}
+                      >
+                        Upcoming Result{" "}
+                      </Button>
+                      <Typography
                         sx={{ color: "white", textAlign: "center", }}
                       >
                         <span> Time Left : </span>
-                        <p className="!pr-5">
-                          <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
-                          <span className="!w-[20px]">
-                            {String(one_min_time)?.padStart(2, "0")}
-                          </span>
-                        </p>
+
+                        <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
+                        <span className="!w-[20px]">
+                          {String(one_min_time)?.padStart(2, "0")}
+                        </span>
+
                       </Typography>
                     </Box>
                   ) : (
@@ -267,7 +462,27 @@ function Satta() {
                         },
                       });
                     }}>
-                        <ArrowForwardIos/>
+                      <Typography
+                        variant="body1"
+                        // className="fp15"
+                        sx={{ color: "white", textAlign: "center", mb: 1 }}
+                      >
+                        Open
+                      </Typography>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        sx={styles.playButton}
+                        onClick={() => {
+                          navigate("/satta/play", {
+                            state: {
+                              satta_type: 2,
+                            },
+                          });
+                        }}
+                      >
+                        Play
+                      </Button>
                     </Box>
                   )}
                 </Box>
@@ -290,7 +505,46 @@ function Satta() {
                   </Typography>
                 </Box>
               </Box>
-              <Box sx={{ position: "absolute", right: "45px", top: "40px" }}>
+              {/* {Array.isArray(gal) && gal?.slice(-6)?.map((item) => (
+                <Button
+                  variant="contained"
+                  sx={{
+                    marginLeft: "2px",
+                    marginRight: "2px",
+                    marginTop: "2px",
+                    // width: "50px",
+                    // height: "50px",
+                    textAlign: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography
+                      sx={{ color: "white" }}
+                      className="!text-xs"
+                      color="initial"
+                    >
+                      {" "}
+                      {String(item?.number).padStart(2, '0')}
+                    </Typography>
+                    <Typography
+                      sx={{ color: "white" }}
+                      className="fp13"
+                      color="initial"
+                    >
+                      {" "}
+                      {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
+                    </Typography>
+                  </Box>
+                </Button>
+              ))} */}
+              <Box sx={{ position: "absolute", right: "45px", top: "22px" }}>
                 <Box
                 // sx={{ width: "100px" }}
                 >
@@ -299,15 +553,25 @@ function Satta() {
                   )?.status || minut < 5 ? (
                     <Box>
                       <Typography
+                        sx={{ color: "red", textAlign: "center", }}
+                      >Closed</Typography>
+                      <Button
+                        variant="text"
+                        // className="fp11"
+                        sx={styles.upcomingButton}
+                      >
+                        Upcoming Result{" "}
+                      </Button>
+                      <Typography
                         sx={{ color: "white", textAlign: "center", }}
                       >
                         <span> Time Left : </span>
-                        <p className="!pr-5">
-                          <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
-                          <span className="!w-[20px]">
-                            {String(one_min_time)?.padStart(2, "0")}
-                          </span>
-                        </p>
+
+                        <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
+                        <span className="!w-[20px]">
+                          {String(one_min_time)?.padStart(2, "0")}
+                        </span>
+
                       </Typography>
                     </Box>
                   ) : (
@@ -320,7 +584,27 @@ function Satta() {
                         });
                       }}
                     >
-                      <ArrowForwardIos />
+                      <Typography
+                        variant="body1"
+                        // className="fp15"
+                        sx={{ color: "white", textAlign: "center", mb: 1 }}
+                      >
+                        Open
+                      </Typography>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        sx={styles.playButton}
+                        onClick={() => {
+                          navigate("/satta/play", {
+                            state: {
+                              satta_type: 3,
+                            },
+                          });
+                        }}
+                      >
+                        Play
+                      </Button>
                     </Box>
                   )}
                 </Box>
@@ -343,7 +627,46 @@ function Satta() {
                   </Typography>
                 </Box>
               </Box>
-              <Box sx={{ position: "absolute", right: "45px", top: "40px" }}>
+              {/* {Array.isArray(des) && des?.slice(-6)?.map((item) => (
+                <Button
+                  variant="contained"
+                  sx={{
+                    marginLeft: "2px",
+                    marginRight: "2px",
+                    marginTop: "2px",
+                    // width: "50px",
+                    // height: "50px",
+                    textAlign: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography
+                      sx={{ color: "white" }}
+                      className="!text-xs"
+                      color="initial"
+                    >
+                      {" "}
+                      {String(item?.number).padStart(2, '0')}
+                    </Typography>
+                    <Typography
+                      sx={{ color: "white" }}
+                      className="fp13"
+                      color="initial"
+                    >
+                      {" "}
+                      {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
+                    </Typography>
+                  </Box>
+                </Button>
+              ))} */}
+              <Box sx={{ position: "absolute", right: "45px", top: "22px" }}>
                 <Box
                 // sx={{ width: "100px" }}
                 >
@@ -352,15 +675,25 @@ function Satta() {
                   )?.status || minut < 5 ? (
                     <Box>
                       <Typography
+                        sx={{ color: "red", textAlign: "center", }}
+                      >Closed</Typography>
+                      <Button
+                        variant="text"
+                        // className="fp11"
+                        sx={styles.upcomingButton}
+                      >
+                        Upcoming Result{" "}
+                      </Button>
+                      <Typography
                         sx={{ color: "white", textAlign: "center", }}
                       >
                         <span> Time Left : </span>
-                        <p className="!pr-5">
-                          <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
-                          <span className="!w-[20px]">
-                            {String(one_min_time)?.padStart(2, "0")}
-                          </span>
-                        </p>
+
+                        <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
+                        <span className="!w-[20px]">
+                          {String(one_min_time)?.padStart(2, "0")}
+                        </span>
+
                       </Typography>
                     </Box>
                   ) : (
@@ -372,8 +705,29 @@ function Satta() {
                           },
                         });
                       }}>
-                      <ArrowForwardIos />
+                      <Typography
+                        variant="body1"
+                        // className="fp15"
+                        sx={{ color: "white", textAlign: "center", mb: 1 }}
+                      >
+                        Open
+                      </Typography>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        sx={styles.playButton}
+                        onClick={() => {
+                          navigate("/satta/play", {
+                            state: {
+                              satta_type: 4,
+                            },
+                          });
+                        }}
+                      >
+                        Play
+                      </Button>
                     </Box>
+
                   )}
                 </Box>
               </Box>
@@ -718,6 +1072,18 @@ function Satta() {
 }
 
 export default Satta;
+const style = {
+  root: { background: stardarkblue, pb: 6 },
+  container: { background: stardarkblue },
+  banner: { background: stargrad, padding: "10px 0px" },
+  bannerText: { color: "white" },
+  flexbetween: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    // flexWrap: "wrap",
+  },
+};
 
 const styles = {
   root: { background: stardarkblue, pb: 6 },

@@ -23,11 +23,9 @@ import { getSattaType } from "../../../Shared/sharedFunction";
 import { useSocket } from "../../../Shared/SocketContext";
 import AndarBaharTable from "./AnderBaherGame";
 import Jodi from "./LocationGame";
-import SattaRule from "./SattaRule";
 import WinLossPopup from "./WinLossPopup";
 function Sattagameplay() {
   const location = useLocation();
-  const [open2, setOpen2] = useState(false);
   const game_type = location?.state?.satta_type;
   const [value, setValue] = useState(0);
   const client = useQueryClient();
@@ -236,17 +234,7 @@ function Sattagameplay() {
                   justifyContent: "end",
                 }}
               >
-                <SattaRule setOpen2={setOpen2} open2={open2} style={style} />
-
-                <p
-                  className="text-white !mx-2"
-                  onClick={() => {
-                    setOpen2(true);
-                  }}
-                >
-                  {" "}
-                  Rule
-                </p>
+                
                 <Wallet sx={{ mr: 1, color: "white" }} />
                 <Typography
                   variant="body1"
