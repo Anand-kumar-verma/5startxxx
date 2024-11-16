@@ -45,7 +45,7 @@ function LevelIncome() {
           <Box component={NavLink} onClick={goBack}>
             <KeyboardArrowLeftOutlinedIcon />
           </Box>
-          <p>Level Income</p>
+          <p>Betting Commission</p>
         </Box>
         <div className="no-scrollbar !mb-10">
           {isLoading ? (

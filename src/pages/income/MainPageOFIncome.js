@@ -24,7 +24,7 @@ function MainPageOFIncome() {
     },
     {
       to: "/account/income-main/level-income",
-      name: "Level Income",
+      name: "Betting Commission",
       logo: (
         <Diversity2Icon
           sx={{ width: "20px", height: "20px", marginRight: "10px", color: 'white', }}
@@ -32,16 +32,16 @@ function MainPageOFIncome() {
         />
       ),
     },
-    {
-      to: "/account/income-main/cashback-income",
-      name: "Cashback Income",
-      logo: (
-        <CallMergeSharp
-          sx={{ width: "20px", height: "20px", marginRight: "10px", color: 'white', }}
-          color="#ffffff"
-        />
-      ),
-    },
+    // {
+    //   to: "/account/income-main/cashback-income",
+    //   name: "Cashback Income",
+    //   logo: (
+    //     <CallMergeSharp
+    //       sx={{ width: "20px", height: "20px", marginRight: "10px", color: 'white', }}
+    //       color="#ffffff"
+    //     />
+    //   ),
+    // },
   ];
   console.log(data_array[0].logo);
   return (

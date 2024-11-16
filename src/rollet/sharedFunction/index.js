@@ -3,7 +3,7 @@ import win_cap from "../assets/images/pwin.png";
 import { endpoint } from "../../services/urls";
 import { apiConnectorPost } from "../../services/apiconnector";
 
-export const red_array = [1, 3, 9, 12, 16, 18, 19, 21, 23, 25, 27, 30, 34, 36];
+export const red_array = [1, 3, 9, 12, 16, 18, 19, 21, 23, 25, 27, 30, 32 ,34, 36];
 export const black_array = [
   4, 6, 8, 10, 11, 15, 17, 20, 22, 24, 28, 29, 31, 33, 35,
 ];

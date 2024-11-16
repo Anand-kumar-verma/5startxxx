@@ -365,7 +365,7 @@ function Home() {
         setisSelectedDropBet(false);
         setopenDialogBoxhistory(false);
         setOpen(false);
-        setOpen2(false);
+        // setOpen2(false);
         setOpenDialogBox(false);
       }
     };
@@ -646,8 +646,8 @@ function Home() {
             aria-label="Basic button group"
             sx={{
               position: "absolute",
-              top: "11%",
-              right: "1%",
+              top: "15%",
+              left: "85%",
               width: "97%",
               "&>button": {
                 py: "10px",

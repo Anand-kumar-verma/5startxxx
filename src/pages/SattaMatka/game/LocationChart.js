@@ -157,7 +157,7 @@ function LocationChart() {
                         color="initial"
                       >
                         {" "}
-                        {item?.number}
+                        {String(item?.number).padStart(2, '0')}
                       </Typography>
                       <Typography
                         sx={{ color: "white" }}

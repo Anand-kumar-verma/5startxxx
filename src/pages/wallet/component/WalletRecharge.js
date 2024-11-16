@@ -551,7 +551,7 @@ function WalletRecharge() {
 
                     {upidata?.map((i) => (
                       <MenuItem key={i?.tr45_id} value={i?.tr45_id}>
-                        {i?.tr45_upi_id}
+                        {i?.tr45_upi_name}
                       </MenuItem>
                     ))}
                   </TextField>
@@ -562,7 +562,7 @@ function WalletRecharge() {
                       </div>
                       <div className="pt-4 gap-2">
                         <p className="!bg-white !text-xl font-bold px-8 !text-black">
-                          {selectedUPIDetails?.tr45_upi_name}
+                          {selectedUPIDetails?.tr45_upi_id}
                         </p>
                         <div className="w-full flex justify-center mt-5">
                           <Button
@@ -570,7 +570,7 @@ function WalletRecharge() {
                             className="!bg-[#0ee6ac] !text-white place-items-center"
                             onClick={() =>
                               functionTOCopy(
-                                selectedUPIDetails.tr45_upi_name
+                                selectedUPIDetails.tr45_upi_id
                               )
                             }>
                             Copy

@@ -1774,47 +1774,47 @@ const Second12 = ({
             background: "#5352FF",
             ...style.flex,
           }}
-        >
-          <NavLink
-            id="201"
-            onClick={(e) => {
-              if (isSelectedDropBet) {
-                removeSingleBetFunction(201);
-                return;
-              }
-              if (amount < 10 || amount > 50000)
+          onClick={(e) => {
+            if (isSelectedDropBet) {
+              removeSingleBetFunction(201);
+              return;
+            }
+            if (amount < 10 || amount > 50000)
+              return toast(
+                <span style={{ marginTop: "10% ", backgroundColor: "black" }}>
+                  Please select amount greater than 10
+                </span>
+              );
+            let isContainsPre = bet?.find((i) => i?.id === 201);
+            if (isContainsPre) {
+              // setOpenDialogBox(201);
+              if (
+                isContainsPre?.amount + amount > 50000 ||
+                isContainsPre?.amount < 10
+              ) {
                 return toast(
-                  <span style={{ marginTop: "10% ", backgroundColor: "black" }}>
-                    Please select amount greater than 10
+                  <span
+                    className="!p-2"
+                    style={{ marginTop: "10% ", backgroundColor: "black" }}
+                  >
+                    Bet must be greater than 10 and less that 50000 Rupees
                   </span>
                 );
-              let isContainsPre = bet?.find((i) => i?.id === 201);
-              if (isContainsPre) {
-                // setOpenDialogBox(201);
-                if (
-                  isContainsPre?.amount + amount > 50000 ||
-                  isContainsPre?.amount < 10
-                ) {
-                  return toast(
-                    <span
-                      className="!p-2"
-                      style={{ marginTop: "10% ", backgroundColor: "black" }}
-                    >
-                      Bet must be greater than 10 and less that 50000 Rupees
-                    </span>
-                  );
-                } else {
-                  setBetFuncton(
-                    201,
-                    37,
-                    Number(isContainsPre?.amount) + amount
-                  );
-                }
               } else {
-                setBetFuncton(201, 37, amount);
+                setBetFuncton(
+                  201,
+                  37,
+                  Number(isContainsPre?.amount) + amount
+                );
               }
-              e.stopPropagation();
-            }}
+            } else {
+              setBetFuncton(201, 37, amount);
+            }
+            e.stopPropagation();
+          }} >
+          <NavLink
+            id="201"
+           
           >
             <Typography
               variant="body1"

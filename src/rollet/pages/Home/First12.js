@@ -2045,62 +2045,62 @@ const First12 = ({
           border: "1px solid white",
           background: 'black',
         }}
-      >
+        onClick={(e) => {
+          if (isSelectedDropBet) {
+            removeSingleBetFunction(112);
+            return;
+          }
+          if (amount < 10 || amount > 50000)
+            return toast(
+              <span
+                className="!p-2"
+                style={{
+                  marginTop: "10% ",
+                  transform: "rotate(90deg)",
+                  backgroundColor: "black",
+                }}
+              >
+                Please select amount greater than 10
+              </span>
+            );
+          let isContainsPre = bet?.find((i) => i?.id === 112);
+          if (isContainsPre) {
+            // setOpenDialogBox(112);
+            if (
+              isContainsPre?.amount + amount > 50000 ||
+              isContainsPre?.amount < 10
+            ) {
+              return toast(
+                <span
+                  className="!p-2"
+                  style={{
+                    marginTop: "10% ",
+                    // transform: "rotate(90deg)",
+                    backgroundColor: "black",
+                  }}
+                >
+                  Bet must be greater than 10 and less that 50000 Rupees
+                </span>
+              );
+            } else {
+              setBetFuncton(
+                112,
+                38,
+                Number(isContainsPre?.amount) + amount
+              );
+            }
+          } else {
+            setBetFuncton(112, 38, amount);
+          }
+          e.stopPropagation();
+        }} >
         <IconButton className="!p-0" style={{ transform: "rotate(270deg)" }}>
           <Typography variant="body1" color="initial">
             <span
               style={{ color: "white", fontWeight: 800 }}
               className="whitespace-nowrap !text-[11px]  "
               id="112"
-              onClick={(e) => {
-                if (isSelectedDropBet) {
-                  removeSingleBetFunction(112);
-                  return;
-                }
-                if (amount < 10 || amount > 50000)
-                  return toast(
-                    <span
-                      className="!p-2"
-                      style={{
-                        marginTop: "10% ",
-                        transform: "rotate(90deg)",
-                        backgroundColor: "black",
-                      }}
-                    >
-                      Please select amount greater than 10
-                    </span>
-                  );
-                let isContainsPre = bet?.find((i) => i?.id === 112);
-                if (isContainsPre) {
-                  // setOpenDialogBox(112);
-                  if (
-                    isContainsPre?.amount + amount > 50000 ||
-                    isContainsPre?.amount < 10
-                  ) {
-                    return toast(
-                      <span
-                        className="!p-2"
-                        style={{
-                          marginTop: "10% ",
-                          // transform: "rotate(90deg)",
-                          backgroundColor: "black",
-                        }}
-                      >
-                        Bet must be greater than 10 and less that 50000 Rupees
-                      </span>
-                    );
-                  } else {
-                    setBetFuncton(
-                      112,
-                      38,
-                      Number(isContainsPre?.amount) + amount
-                    );
-                  }
-                } else {
-                  setBetFuncton(112, 38, amount);
-                }
-                e.stopPropagation();
-              }}
+             
             >
               Black
             </span>
