@@ -190,7 +190,7 @@ function Sattagameplay() {
         satta_type: game_type,
       }),
     {
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       refetchOnReconnect: false,
       refetchOnMount: false,
     }
@@ -234,7 +234,6 @@ function Sattagameplay() {
                   justifyContent: "end",
                 }}
               >
-                
                 <Wallet sx={{ mr: 1, color: "white" }} />
                 <Typography
                   variant="body1"

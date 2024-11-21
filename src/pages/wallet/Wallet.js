@@ -13,7 +13,14 @@ import { useQuery, useQueryClient } from "react-query";
 import { useMediaQuery } from "react-responsive";
 import { NavLink, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../Shared/CustomCircularProgress";
-import { starblue, starbluegrad, stargold, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
+import {
+  starblue,
+  starbluegrad,
+  stargold,
+  zubgback,
+  zubgbackgrad,
+  zubgmid,
+} from "../../Shared/color";
 import withdrow from "../../assets/wallet.png";
 import rechargeIcon from "../../assets/wallet2.png";
 import wdhistory from "../../assets/history2.png";
@@ -29,7 +36,6 @@ import atmbg from "../../assets/atmbg2.jpg";
 import { apiConnectorGet } from "../../services/apiconnector";
 import { endpoint } from "../../services/urls";
 
-
 function Wallet() {
   const isMediumScreen = useMediaQuery({ minWidth: 800 });
   const navigate = useNavigate();
@@ -41,40 +47,39 @@ function Wallet() {
   });
   const result = data?.data?.data;
 
-  const {data:wallet } = useQuery(
+  const { data: wallet } = useQuery(
     ["walletamount"],
     () => apiConnectorGet(endpoint.node.get_wallet),
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false,
     }
   );
 
   const newdata = wallet?.data?.data || 0;
-  
-  const client = useQueryClient()
+
+  const client = useQueryClient();
 
   function refreshFunctionForRotation() {
-    client.refetchQueries = ("walletamount")
-    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    client.refetchQueries = "walletamount";
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
 
     const element = document.getElementById("refresh_button");
     if (!item) {
       element.classList.add("rotate_refresh_image");
     }
     setTimeout(() => {
-      element.classList.remove("rotate_refresh_image")
+      element.classList.remove("rotate_refresh_image");
     }, 2000);
-
   }
   React.useEffect(() => {
     const element = document.getElementById("refresh_button");
-    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
     if (item) {
       element.classList.remove("rotate_refresh_image");
     }
-  }, [])
+  }, []);
 
   return (
     <Layout>
@@ -88,11 +93,7 @@ function Wallet() {
         }}
       >
         <Box sx={style.header} className={"!w-full !flex !justify-center"}>
-          <Box
-            component="img"
-            src={logo2}
-            sx={{ width: '150px' }}
-          ></Box>
+          <Box component="img" src={logo2} sx={{ width: "150px" }}></Box>
         </Box>
 
         {/*  */}
@@ -105,18 +106,30 @@ function Wallet() {
             marginLeft: "2.5%",
             marginTop: "20px",
             borderRadius: "10px ",
-            position: 'relative',
+            position: "relative",
             zIndex: 1,
           }}
         >
-          <Box sx={{ borderRadius: '10px', position: 'absolute', zIndex: '-1', top: 0, left: '0', width: '100%', height: '100%', backgroundImage: `url(${atmbg})`, backgroundSize: '100% 100%', opacity: '0.4' }}></Box>
+          <Box
+            sx={{
+              borderRadius: "10px",
+              position: "absolute",
+              zIndex: "-1",
+              top: 0,
+              left: "0",
+              width: "100%",
+              height: "100%",
+              backgroundImage: `url(${atmbg})`,
+              backgroundSize: "100% 100%",
+              opacity: "0.4",
+            }}
+          ></Box>
 
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-
             }}
           >
             <Box
@@ -125,33 +138,57 @@ function Wallet() {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                width: '100%',
-                filter: 'grayscale(1)'
+                width: "100%",
+                filter: "grayscale(1)",
               }}
               className="walletBox"
             >
-              <Box component="img" src={wallet} width={50} sx={{ filter: 'brightness(0.1)' }}></Box>
+              <Box
+                component="img"
+                src={wallet}
+                width={50}
+                sx={{ filter: "brightness(0.1)" }}
+              ></Box>
               <Box className="!flex justify-center gap-1 walletBox">
                 <Typography variant="h2" color="initial">
                   {" "}
                   {Number(
-                  Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
-                )?.toFixed(2)}
+                    Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
+                  )?.toFixed(2)}
                 </Typography>
-                <img className="rotate_refresh_image w-5 h-6 mt-5" id="refresh_button"
-                  src={refresh} width={25} ml={2} onClick={() => {
-                    refreshFunctionForRotation()
-                  }} />
+                <img
+                  className="rotate_refresh_image w-5 h-6 mt-5"
+                  id="refresh_button"
+                  src={refresh}
+                  width={25}
+                  ml={2}
+                  onClick={() => {
+                    refreshFunctionForRotation();
+                  }}
+                />
               </Box>
               <Typography variant="body1" color="initial">
                 Total balance
               </Typography>
-              <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', padding: '0px 16px 16px' }}>
+              <Stack
+                direction={"row"}
+                alignItems={"center"}
+                justifyContent={"space-between"}
+                sx={{ width: "100%", padding: "0px 16px 16px" }}
+              >
                 <div class="visa_info">
-                  <img style={{ width: '50px' }} src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" alt="" />
+                  <img
+                    style={{ width: "50px" }}
+                    src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png"
+                    alt=""
+                  />
                 </div>
                 <div class="visa_logo">
-                  <Box component={'img'} src={logo2} sx={{ width: '90px' }}></Box>
+                  <Box
+                    component={"img"}
+                    src={logo2}
+                    sx={{ width: "90px" }}
+                  ></Box>
                 </div>
               </Stack>
             </Box>
@@ -179,12 +216,14 @@ function Wallet() {
                 sx={{
                   background: starbluegrad,
                   textAlign: "center",
-                  "&>p": { color: "white", fontSize: "13px", fontWeight: 600, },
-                  padding: '10px 0px', borderRadius: '10px', width: '98%',
+                  "&>p": { color: "white", fontSize: "13px", fontWeight: 600 },
+                  padding: "10px 0px",
+                  borderRadius: "10px",
+                  width: "98%",
                 }}
               >
                 <Typography variant="body1" color="initial">
-                  ₹  {Number(newdata?.wallet || 0)?.toFixed(0)}.00
+                  ₹ {Number(newdata?.wallet || 0)?.toFixed(0)}.00
                 </Typography>
                 <Typography variant="body1" color="initial">
                   Total Deposit
@@ -202,15 +241,16 @@ function Wallet() {
                 sx={{
                   background: starbluegrad,
                   textAlign: "center",
-                  "&>p": { color: "white", fontSize: "13px", fontWeight: 600, },
-                  padding: '10px 0px', borderRadius: '10px', width: '98%', marginLeft: '2%',
+                  "&>p": { color: "white", fontSize: "13px", fontWeight: 600 },
+                  padding: "10px 0px",
+                  borderRadius: "10px",
+                  width: "98%",
+                  marginLeft: "2%",
                 }}
               >
                 <Typography variant="body1" color="initial">
                   {" "}
-                  ₹ {(Number(Number(newdata?.winning || 0)) || 0)?.toFixed(
-                    0
-                  )}
+                  ₹ {(Number(Number(newdata?.winning || 0)) || 0)?.toFixed(0)}
                 </Typography>
                 <Typography variant="body1" color="initial">
                   Winning Amount
@@ -225,8 +265,7 @@ function Wallet() {
               justifyContent: "space-between",
               alignItems: "baseline",
             }}
-          >
-          </Stack>
+          ></Stack>
           <Stack
             direction="row"
             sx={{
@@ -253,8 +292,18 @@ function Wallet() {
               }}
             >
               <NavLink to="/wallet/Recharge">
-                <Box component="img" src={rechargeIcon} width={50} sx={{ filter: 'grayscale(1)' }}></Box>
-                <Typography variant="body1" color="initial" mt={1} className="!text-white">
+                <Box
+                  component="img"
+                  src={rechargeIcon}
+                  width={50}
+                  sx={{ filter: "grayscale(1)" }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  mt={1}
+                  className="!text-white"
+                >
                   Deposit
                 </Typography>
               </NavLink>
@@ -276,8 +325,18 @@ function Wallet() {
               }}
             >
               <NavLink to="/Withdrawal">
-                <Box component="img" src={withdrow} width={50} sx={{ filter: 'grayscale(1)' }}></Box>
-                <Typography variant="body1" color="initial" mt={1} className="!text-white">
+                <Box
+                  component="img"
+                  src={withdrow}
+                  width={50}
+                  sx={{ filter: "grayscale(1)" }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  mt={1}
+                  className="!text-white"
+                >
                   Withdraw
                 </Typography>
               </NavLink>
@@ -299,8 +358,18 @@ function Wallet() {
               }}
             >
               <NavLink to="/depositHistory">
-                <Box component="img" src={wdhistory} width={50} sx={{ filter: 'grayscale(1)' }}></Box>
-                <Typography variant="body1" color="initial" mt={1} className="!text-white">
+                <Box
+                  component="img"
+                  src={wdhistory}
+                  width={50}
+                  sx={{ filter: "grayscale(1)" }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  mt={1}
+                  className="!text-white"
+                >
                   Deposit <br />
                   history
                 </Typography>
@@ -322,87 +391,25 @@ function Wallet() {
               }}
             >
               <NavLink to="/withdravalHistory">
-                <Box component="img" src={deposite} width={50} sx={{ filter: 'grayscale(1)' }}></Box>
-                <Typography variant="body1" color="initial" mt={1} className="!text-white">
+                <Box
+                  component="img"
+                  src={deposite}
+                  width={50}
+                  sx={{ filter: "grayscale(1)" }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  mt={1}
+                  className="!text-white"
+                >
                   Withdrawal history
                 </Typography>
               </NavLink>
             </Box>
           </Stack>
         </Box>
-        <Box
-          sx={{
-            width: "100%",
-            borderRadius: "10px ",
-            padding: "20px",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between",
-            mb: "50px",
-          }}
-        >
-          <Box sx={style.wthui}>
-            <Box>
-              <Typography variant="body1" color="initial">
-                0.000
-              </Typography>
-              <Typography variant="body1" color="initial">
-                5 star xxx
-              </Typography>
-            </Box>
-          </Box>
-          <Box sx={style.wthui}>
-            <Box>
-              <Typography variant="body1" color="initial">
-                0.000
-              </Typography>
-              <Typography variant="body1" color="initial">
-                5 star xxx
-              </Typography>
-            </Box>
-          </Box>
-          <Box sx={style.wthui}>
-            <Box>
-              <Typography variant="body1" color="initial">
-                0.000
-              </Typography>
-              <Typography variant="body1" color="initial">
-                5 star xxx
-              </Typography>
-            </Box>
-          </Box>
-          <Box sx={style.wthui}>
-            <Box>
-              <Typography variant="body1" color="initial">
-                0.000
-              </Typography>
-              <Typography variant="body1" color="initial">
-                5 star xxx
-              </Typography>
-            </Box>
-          </Box>
-          <Box sx={style.wthui}>
-            <Box>
-              <Typography variant="body1" color="initial">
-                0.000
-              </Typography>
-              <Typography variant="body1" color="initial">
-                5 star xxx
-              </Typography>
-            </Box>
-          </Box>
-          <Box sx={style.wthui}>
-            <Box>
-              <Typography variant="body1" color="initial">
-                0.000
-              </Typography>
-              <Typography variant="body1" color="initial">
-                5 star xxx
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
+      
         {openDialogBoxHomeBanner && (
           <Dialog
             PaperProps={{ width: "500px", height: "500px" }}

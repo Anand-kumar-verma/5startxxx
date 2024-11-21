@@ -30,7 +30,7 @@ import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import placebetmusic from "../../assets/images/applybet_music.mp3";
 import mouse_click from "../../assets/images/mouse_click.mp3";
-import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.mp3";
+import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.MP3";
 import stop_ball_music from "../../assets/images/stop_ball_music.mp3";
 import rouletteBORD from "../../assets/images/thumbs_bgs.png";
 import watch from "../../assets/images/watch.png";
@@ -150,6 +150,7 @@ function Home() {
   }
 
   function setBetFuncton(id, number, amount) {
+    console.log(isAlreadyAppliedBet, one_min_time);
     if (isAlreadyAppliedBet === "true") return;
     if (one_min_time <= 10) return;
     handlePlaySoundPlacebet();
@@ -337,14 +338,17 @@ function Home() {
     const handleOneMin = (onemin) => {
       setOne_min_time(onemin);
       if (onemin === 54) {
-        setOpen3(false);
         setIsPreBetHandle(true);
-        localStorage.setItem("total_amount_bet", 0);
+        // localStorage.setItem("total_amount_bet", 0);
         setTimeout(() => {
           setresult_rollet();
         }, 2000);
       }
-      // if (onemin === 55) localStorage?.setItem("rollet_bet_placed", false);
+      if (onemin === 59) {
+        setOpenDialog(false);
+        setOpen3(false);
+        localStorage?.setItem("rollet_bet_placed", false);
+      }
       if (onemin === 0) {
         setOpen3(true);
         handlePlaySound();
@@ -370,14 +374,10 @@ function Home() {
       }
     };
     const handleOneMinrolletresult = (onemin) => {
+      console.log(onemin);
       spinFunction(onemin);
       localStorage.setItem("result_rollet", onemin);
-      setTimeout(() => {
-        handlePlaySound();
-      }, 9000);
-      setTimeout(() => {
-        handlePlaySoundStopBall();
-      }, 10000);
+      handlePlaySound();
       setTimeout(() => {
         setresult_rollet(onemin);
         client.refetchQueries("history_rollet");
@@ -387,7 +387,8 @@ function Home() {
         addWinCap(onemin);
         setOpenDialog(true);
         getWinPopup();
-      }, 13000);
+        handlePlaySoundStopBall();
+      }, 25000);
     };
     // oneminrollet
     socket.on("oneminrollet", handleOneMin);
@@ -397,10 +398,6 @@ function Home() {
       socket.off("rolletresult", handleOneMinrolletresult);
     };
   }, []);
-
-  setTimeout(() => {
-    setOpenDialog(false);
-  }, 5000);
 
   useEffect(() => {
     if (one_min_time <= 10) setisOpenPreRoundDialogBox(true);
@@ -416,7 +413,7 @@ function Home() {
       if (win_amount > 0 && isPlaced === "true") {
         setOpenDialogBox(win_amount);
         setTimeout(() => {
-          localStorage?.setItem("rollet_bet_placed", false);
+          // localStorage?.setItem("rollet_bet_placed", false);
           localStorage?.setItem("betlen", 0);
         }, 2000);
       }

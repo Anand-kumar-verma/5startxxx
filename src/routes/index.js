@@ -1,13 +1,3 @@
-// import LayoutAviator from "../GamePage/Layout";
-// import MainPage from "../GamePage/MainPage";
-// import PlayGame from "../GamePage/PlayGame";
-// import CricketRegistrationForm from "../cricket/cricketauth/CricketRegistrationForm";
-// import CricketUserprofile from "../cricket/profile/CricketUserprofile";
-// import CricketDepositHistory from "../cricket/transactionHistory/CricketDepositHistory";
-// import CricketWithdrawlHistory from "../cricket/transactionHistory/CricketWithdrawlHistory";
-// import CricketWalletFundDepositForm from "../cricket/transacton/CricketWalletFundDepositForm";
-// import DepositCash from "../cricket/transacton/DepositCash";
-// import WithdrawlCash from "../cricket/transacton/WithdrawlCash";
 import AnderBaherChart from "../pages/SattaMatka/game/AnderBaherChart";
 import SattaChart from "../pages/SattaMatka/game/Chart";
 import History from "../pages/SattaMatka/game/History";

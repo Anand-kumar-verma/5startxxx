@@ -4,21 +4,18 @@ export const baseUrl = "https://admin.5starxxx.com";
 export const fron_end_main_domain = "https://5starxxx.com";
 
 export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
-// export const domaindata ="http://192.168.18.183:9000"
 // export const domainn = "http://192.168.18.183:9002"
 // export const domain1 = "http://192.168.18.183:9002"
 
-export const domainn = "https://api.5starxxx.com"
-export const domain1 = "https://api.5starxxx.com"
+export const domainn = "https://api.5starxxx.com";
+export const domain1 = "https://api.5starxxx.com";
 
-
-export const download_app_url = ""
+export const download_app_url = "";
 export const support_mail = "";
 // `support@sunlottrey.fun`;
-export const telegram_url =``;
+export const telegram_url = ``;
 
 export const endpoint = {
-
   login: `${domain1}/api/v1/login`,
   my_hisory: `${domain1}/api/v1/getMyHistory`,
   send_otp: `${baseUrl}/api/forget-password`,
@@ -68,22 +65,21 @@ export const endpoint = {
   wallet_data: `${baseUrl}/api/aviator/userwallet`,
   bet_now: `${baseUrl}/api/aviator/bet_now`,
   cash_out: `${baseUrl}/api/aviator/cash_out`,
-  callback_response:`${baseUrl}/api/deposit-collback`,
-  level_team:`${baseUrl}/api/view-Level-team`,
-  level_income:`${baseUrl}/api/view-Level-income`,
+  callback_response: `${baseUrl}/api/deposit-collback`,
+  level_team: `${baseUrl}/api/view-Level-team`,
+  level_income: `${baseUrl}/api/view-Level-income`,
   rollet: {
-    logout:baseUrl + "/api/roulette-logout",
+    logout: baseUrl + "/api/roulette-logout",
     login: baseUrl + "/api/roulette-login",
     bet_now: domain1 + "/api/v1/betPlacedRoulette",
     profile: baseUrl + "/api/roulette-profile",
     // game_result: baseUrl + "/api/roulette-results-history",
   },
 
-  node:{
-    
-    top_two_winners:domain1+"/api/v1/getTopTwo_winner",
-    top_winners:domain1+"/api/v1/getTopWinners",
-    get_wallet:domain1+"/api/v1/balance",
+  node: {
+    top_two_winners: domain1 + "/api/v1/getTopTwo_winner",
+    top_winners: domain1 + "/api/v1/getTopWinners",
+    get_wallet: domain1 + "/api/v1/balance",
     history_my: domain1 + "/api/v1/getMyHistory",
     game_result: domain1 + "/api/v1/getRouletteGameHistory",
     bet_satta: domain1 + "/api/v1/betPlacedSatta",
@@ -102,6 +98,5 @@ export const endpoint = {
     bank_details: domainn + "/api/v1/user-bank-details",
     withdrawl_history: domainn + "/api/v1/withdrawal-history",
     deposit_history: domainn + "/api/v1/deposit-history",
-    
-  }
+  },
 };

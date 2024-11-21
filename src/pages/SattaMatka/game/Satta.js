@@ -1,25 +1,24 @@
-import { ArrowBackIos, ArrowForwardIos, History, List } from "@mui/icons-material";
-import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import { History, List } from "@mui/icons-material";
 import FitbitIcon from "@mui/icons-material/Fitbit";
 import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useSocket } from "../../../Shared/SocketContext";
 import { stardarkblue, stargrad } from "../../../Shared/color";
+import win1 from "../../../assets/images/win3.f7c86b0db9189cc3c7a6 (1).png";
+import win from "../../../assets/images/win3.f7c86b0db9189cc3c7a6.png";
+import win2 from "../../../assets/images/win4.7a69afe7edb7608a715a.png";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
-import win from "../../../assets/images/win3.f7c86b0db9189cc3c7a6.png";
-import win1 from "../../../assets/images/win3.f7c86b0db9189cc3c7a6 (1).png";
-import win2 from "../../../assets/images/win4.7a69afe7edb7608a715a.png";
-import satta from "../../../assets/images/satta.jpg";
-import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
-import { download_app_url, endpoint } from "../../../services/urls";
-import moment from "moment";
+import {
+  apiConnectorGet
+} from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
 import SattaRule from "./SattaRule";
 
 function Satta() {
@@ -30,10 +29,6 @@ function Satta() {
   const navigate = useNavigate();
   const [minut, setMinut] = useState(0);
   const [one_min_time, setOne_min_time] = useState(0);
-  const [gazia, setGazia] = useState("");
-  const [fari, setfari] = useState("");
-  const [gal, setGal] = useState("");
-  const [des, setdes] = useState("");
 
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
@@ -44,70 +39,12 @@ function Satta() {
     () => apiConnectorGet(endpoint?.node?.satta_game_Lastfour),
     {
       refetchOnMount: false,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       refetchOnReconnect: false,
     }
   );
   const game_history = data?.data?.data || 0;
 
-  const gaziabadgameFunction = async () => {
-    const reqBody = {
-      startDate: "",
-      endDate: "",
-      satta_type: 1,
-    }
-    try {
-      const response = await apiConnectorPost(endpoint.node.satta_game_gamehistory, reqBody);
-      setGazia(response?.data?.data)
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  const faribadgameFunction = async () => {
-    const reqBody = {
-      startDate: "",
-      endDate: "",
-      satta_type: 2,
-    }
-    try {
-      const response = await apiConnectorPost(endpoint.node.satta_game_gamehistory, reqBody);
-      setfari(response?.data?.data)
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  const galgameFunction = async () => {
-    const reqBody = {
-      startDate: "",
-      endDate: "",
-      satta_type: 3,
-    }
-    try {
-      const response = await apiConnectorPost(endpoint.node.satta_game_gamehistory, reqBody);
-      setGal(response?.data?.data)
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  const desagameFunction = async () => {
-    const reqBody = {
-      startDate: "",
-      endDate: "",
-      satta_type: 4,
-    }
-    try {
-      const response = await apiConnectorPost(endpoint.node.satta_game_gamehistory, reqBody);
-      setdes(response?.data?.data)
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  // useEffect(() => {
-  //   gaziabadgameFunction()
-  //   faribadgameFunction()
-  //   galgameFunction()
-  //   desagameFunction()
-  // }, [])
   const { data: statta_matka_staus } = useQuery(
     ["status_of_satta_matka"],
     () => apiConnectorGet(endpoint?.node?.getStatusSattaMatka),
@@ -158,7 +95,6 @@ function Satta() {
               </div>
               <div
                 className="flex gap-1 items-center cursor-pointer"
-
                 style={styles.downloadSection}
               >
                 <SattaRule setOpen2={setOpen2} open2={open2} style={style} />
@@ -254,56 +190,29 @@ function Satta() {
                 sx={{ width: "100%", height: "70%" }}
               ></Box>
               <Box sx={styles.positiongame}>
-
                 <Box sx={{ mt: "15px" }}>
-                  <Typography variant="body1" color="initial" className="!text-xl !font-bold">
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-xl !font-bold"
+                  >
                     GHAZIABAD
                   </Typography>
-                  <Typography variant="body1" color="initial" sx={styles.gameheading} className="!mt-1">
-                    Last result as  : <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black "> {game_history?.[0]?.gaziyabad || 0}</span>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={styles.gameheading}
+                    className="!mt-1"
+                  >
+                    Last result as :{" "}
+                    <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
+                      {" "}
+                      {game_history?.[0]?.gaziyabad || 0}
+                    </span>
                   </Typography>
                 </Box>
               </Box>
-              {/* {Array.isArray(gazia) && gazia?.slice(-6)?.map((item) => (
-                <Button
-                  variant="contained"
-                  sx={{
-                    marginLeft: "2px",
-                    marginRight: "2px",
-                    marginTop: "2px",
-                    // width: "50px",
-                    // height: "50px",
-                    textAlign: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Typography
-                      sx={{ color: "white" }}
-                      className="!text-xs"
-                      color="initial"
-                    >
-                      {" "}
-                      {String(item?.number).padStart(2, '0')}
-                    </Typography>
-                    <Typography
-                      sx={{ color: "white" }}
-                      className="fp13"
-                      color="initial"
-                    >
-                      {" "}
-                      {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
-                    </Typography>
-                  </Box>
-                </Button>
-              ))} */}
+
               <Box sx={{ position: "absolute", right: "45px", top: "22px" }}>
                 <Box
                 // sx={{ width: "100px" }}
@@ -312,9 +221,9 @@ function Satta() {
                     (i) => i?.title === "satta_gajiyabad"
                   )?.status || minut < 5 ? (
                     <Box>
-                      <Typography
-                        sx={{ color: "red", textAlign: "center", }}
-                      >Closed</Typography>
+                      <Typography sx={{ color: "red", textAlign: "center" }}>
+                        Closed
+                      </Typography>
                       <Button
                         variant="text"
                         // className="fp11"
@@ -322,26 +231,24 @@ function Satta() {
                       >
                         Upcoming Result{" "}
                       </Button>
-                      <Typography
-                        sx={{ color: "white", textAlign: "center", }}
-                      >
+                      <Typography sx={{ color: "white", textAlign: "center" }}>
                         <span> Time Left : </span>
-
                         <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
                         <span className="!w-[20px]">
                           {String(one_min_time)?.padStart(2, "0")}
                         </span>
-
                       </Typography>
                     </Box>
                   ) : (
-                    <Box className="!font-bold !text-white" onClick={() => {
-                      navigate("/satta/play", {
-                        state: {
-                          satta_type: 1,
-                        },
-                      });
-                    }}
+                    <Box
+                      className="!font-bold !text-white"
+                      onClick={() => {
+                        navigate("/satta/play", {
+                          state: {
+                            satta_type: 1,
+                          },
+                        });
+                      }}
                     >
                       <Typography
                         variant="body1"
@@ -368,6 +275,15 @@ function Satta() {
                   )}
                 </Box>
               </Box>
+              <div className="pt-2 !w-full !flex justify-evenly">
+                {data?.data?.gaziyabad_result?.slice(1)?.map((item) => {
+                  return (
+                    <p className="!bg-gray-500 !rounded-full !px-2 !text-white !py-1">
+                      {String(item?.number)?.padStart(2, "0")}
+                    </p>
+                  );
+                })}
+              </div>
             </Box>
             <Box sx={styles.winbox}>
               <Box
@@ -377,64 +293,36 @@ function Satta() {
               ></Box>
               <Box sx={styles.positiongame}>
                 <Box sx={{ mt: "15px" }}>
-                  <Typography variant="body1" color="initial" className="!text-xl !font-bold">
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-xl !font-bold"
+                  >
                     FARIDABAD
                   </Typography>
-                  <Typography variant="body1" color="initial" sx={styles.gameheading} className="!mt-1">
-                    Last result as  : <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black "> {game_history?.[0]?.faridabad || 0}</span>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={styles.gameheading}
+                    className="!mt-1"
+                  >
+                    Last result as :{" "}
+                    <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
+                      {" "}
+                      {game_history?.[0]?.faridabad || 0}
+                    </span>
                   </Typography>
                 </Box>
               </Box>
-              {/* {Array.isArray(fari) && fari?.slice(-6)?.map((item) => (
-                <Button
-                  variant="contained"
-                  sx={{
-                    marginLeft: "2px",
-                    marginRight: "2px",
-                    marginTop: "2px",
-                    // width: "50px",
-                    // height: "50px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Typography
-                      sx={{ color: "white" }}
-                      className="!text-xs"
-                      color="initial"
-                    >
-                      {" "}
-                      {String(item?.number).padStart(2, '0')}
-                    </Typography>
-                    <Typography
-                      sx={{ color: "white" }}
-                      className="fp13"
-                      color="initial"
-                    >
-                      {" "}
-                      {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
-                    </Typography>
-                  </Box>
-                </Button>
-              ))} */}
               <Box sx={{ position: "absolute", right: "45px", top: "22px" }}>
-                <Box
-                // sx={{ width: "100px" }}
-                >
+                <Box>
                   {!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_faridabad"
                   )?.status || minut < 5 ? (
                     <Box>
-                      <Typography
-                        sx={{ color: "red", textAlign: "center", }}
-                      >Closed</Typography>
+                      <Typography sx={{ color: "red", textAlign: "center" }}>
+                        Closed
+                      </Typography>
                       <Button
                         variant="text"
                         // className="fp11"
@@ -442,26 +330,25 @@ function Satta() {
                       >
                         Upcoming Result{" "}
                       </Button>
-                      <Typography
-                        sx={{ color: "white", textAlign: "center", }}
-                      >
+                      <Typography sx={{ color: "white", textAlign: "center" }}>
                         <span> Time Left : </span>
-
                         <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
                         <span className="!w-[20px]">
                           {String(one_min_time)?.padStart(2, "0")}
                         </span>
-
                       </Typography>
                     </Box>
                   ) : (
-                    <Box className="!font-bold !text-white" onClick={() => {
-                      navigate("/satta/play", {
-                        state: {
-                          satta_type: 2,
-                        },
-                      });
-                    }}>
+                    <Box
+                      className="!font-bold !text-white"
+                      onClick={() => {
+                        navigate("/satta/play", {
+                          state: {
+                            satta_type: 2,
+                          },
+                        });
+                      }}
+                    >
                       <Typography
                         variant="body1"
                         // className="fp15"
@@ -487,6 +374,15 @@ function Satta() {
                   )}
                 </Box>
               </Box>
+              <div className="pt-2 !w-full !flex justify-evenly">
+                {data?.data?.faridabad_result?.slice(1)?.map((item) => {
+                  return (
+                    <p className="!bg-gray-500 !rounded-full !px-2 !text-white !py-1">
+                      {String(item?.number)?.padStart(2, "0")}
+                    </p>
+                  );
+                })}
+              </div>
             </Box>
             <Box sx={styles.winbox}>
               <Box
@@ -495,66 +391,38 @@ function Satta() {
                 sx={{ width: "100%", height: "70%" }}
               ></Box>
               <Box sx={styles.positiongame}>
-
                 <Box sx={{ mt: "15px" }}>
-                  <Typography variant="body1" color="initial" className="!text-xl !font-bold">
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-xl !font-bold"
+                  >
                     GALI
                   </Typography>
-                  <Typography variant="body1" color="initial" sx={styles.gameheading} className="!mt-1">
-                    Last result as  : <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black "> {game_history?.[0]?.gali || 0}</span>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={styles.gameheading}
+                    className="!mt-1"
+                  >
+                    Last result as :{" "}
+                    <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
+                      {" "}
+                      {game_history?.[0]?.gali || 0}
+                    </span>
                   </Typography>
                 </Box>
               </Box>
-              {/* {Array.isArray(gal) && gal?.slice(-6)?.map((item) => (
-                <Button
-                  variant="contained"
-                  sx={{
-                    marginLeft: "2px",
-                    marginRight: "2px",
-                    marginTop: "2px",
-                    // width: "50px",
-                    // height: "50px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Typography
-                      sx={{ color: "white" }}
-                      className="!text-xs"
-                      color="initial"
-                    >
-                      {" "}
-                      {String(item?.number).padStart(2, '0')}
-                    </Typography>
-                    <Typography
-                      sx={{ color: "white" }}
-                      className="fp13"
-                      color="initial"
-                    >
-                      {" "}
-                      {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
-                    </Typography>
-                  </Box>
-                </Button>
-              ))} */}
+
               <Box sx={{ position: "absolute", right: "45px", top: "22px" }}>
-                <Box
-                // sx={{ width: "100px" }}
-                >
+                <Box>
                   {!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_gali"
                   )?.status || minut < 5 ? (
                     <Box>
-                      <Typography
-                        sx={{ color: "red", textAlign: "center", }}
-                      >Closed</Typography>
+                      <Typography sx={{ color: "red", textAlign: "center" }}>
+                        Closed
+                      </Typography>
                       <Button
                         variant="text"
                         // className="fp11"
@@ -562,20 +430,17 @@ function Satta() {
                       >
                         Upcoming Result{" "}
                       </Button>
-                      <Typography
-                        sx={{ color: "white", textAlign: "center", }}
-                      >
+                      <Typography sx={{ color: "white", textAlign: "center" }}>
                         <span> Time Left : </span>
-
                         <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
                         <span className="!w-[20px]">
                           {String(one_min_time)?.padStart(2, "0")}
                         </span>
-
                       </Typography>
                     </Box>
                   ) : (
-                    <Box className="!font-bold !text-white"
+                    <Box
+                      className="!font-bold !text-white"
                       onClick={() => {
                         navigate("/satta/play", {
                           state: {
@@ -609,6 +474,15 @@ function Satta() {
                   )}
                 </Box>
               </Box>
+              <div className="pt-2 !w-full !flex justify-evenly">
+                {data?.data?.gali_result?.slice(1)?.map((item) => {
+                  return (
+                    <p className="!bg-gray-500 !rounded-full !px-2 !text-white !py-1">
+                      {String(item?.number)?.padStart(2, "0")}
+                    </p>
+                  );
+                })}
+              </div>
             </Box>
             <Box sx={styles.winbox}>
               <Box
@@ -617,66 +491,38 @@ function Satta() {
                 sx={{ width: "100%", height: "70%" }}
               ></Box>
               <Box sx={styles.positiongame}>
-
                 <Box sx={{ mt: "15px" }}>
-                  <Typography variant="body1" color="initial" className="!text-xl !font-bold">
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-xl !font-bold"
+                  >
                     DESAWAR
                   </Typography>
-                  <Typography variant="body1" color="initial" sx={styles.gameheading} className="!mt-1">
-                    Last result as  : <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black "> {game_history?.[0]?.disawar || 0}</span>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={styles.gameheading}
+                    className="!mt-1"
+                  >
+                    Last result as :{" "}
+                    <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
+                      {" "}
+                      {game_history?.[0]?.disawar || 0}
+                    </span>
                   </Typography>
                 </Box>
               </Box>
-              {/* {Array.isArray(des) && des?.slice(-6)?.map((item) => (
-                <Button
-                  variant="contained"
-                  sx={{
-                    marginLeft: "2px",
-                    marginRight: "2px",
-                    marginTop: "2px",
-                    // width: "50px",
-                    // height: "50px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Typography
-                      sx={{ color: "white" }}
-                      className="!text-xs"
-                      color="initial"
-                    >
-                      {" "}
-                      {String(item?.number).padStart(2, '0')}
-                    </Typography>
-                    <Typography
-                      sx={{ color: "white" }}
-                      className="fp13"
-                      color="initial"
-                    >
-                      {" "}
-                      {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
-                    </Typography>
-                  </Box>
-                </Button>
-              ))} */}
+
               <Box sx={{ position: "absolute", right: "45px", top: "22px" }}>
-                <Box
-                // sx={{ width: "100px" }}
-                >
+                <Box>
                   {!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_disawar"
                   )?.status || minut < 5 ? (
                     <Box>
-                      <Typography
-                        sx={{ color: "red", textAlign: "center", }}
-                      >Closed</Typography>
+                      <Typography sx={{ color: "red", textAlign: "center" }}>
+                        Closed
+                      </Typography>
                       <Button
                         variant="text"
                         // className="fp11"
@@ -684,27 +530,25 @@ function Satta() {
                       >
                         Upcoming Result{" "}
                       </Button>
-                      <Typography
-                        sx={{ color: "white", textAlign: "center", }}
-                      >
+                      <Typography sx={{ color: "white", textAlign: "center" }}>
                         <span> Time Left : </span>
-
                         <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
                         <span className="!w-[20px]">
                           {String(one_min_time)?.padStart(2, "0")}
                         </span>
-
                       </Typography>
                     </Box>
                   ) : (
-                    <Box className="!font-bold !text-white"
+                    <Box
+                      className="!font-bold !text-white"
                       onClick={() => {
                         navigate("/satta/play", {
                           state: {
                             satta_type: 4,
                           },
                         });
-                      }}>
+                      }}
+                    >
                       <Typography
                         variant="body1"
                         // className="fp15"
@@ -727,343 +571,19 @@ function Satta() {
                         Play
                       </Button>
                     </Box>
-
                   )}
                 </Box>
               </Box>
+              <div className="pt-2 !w-full !flex justify-evenly">
+                {data?.data?.disawar_result?.slice(1)?.map((item) => {
+                  return (
+                    <p className="!bg-gray-500 !rounded-full !px-2 !text-white !py-1">
+                      {String(item?.number)?.padStart(2, "0")}
+                    </p>
+                  );
+                })}
+              </div>
             </Box>
-            {/* //chck */}
-            {/* <Box sx={styles.contentBox}>
-              <div className="!flex items-center gap-5 !justify-start">
-                <Box>
-                  <Box sx={styles.imageContainer}>
-                    <Box sx={styles.image}>{game_history?.[0]?.gaziyabad}</Box>
-                  </Box>
-                  <Typography
-                    variant="body1"
-                    className="!text-[7px] !mt-1 !ml-1 !text-white"
-                  >
-                    Last result
-                  </Typography>
-                </Box>
-                <Box >
-                  <Typography
-                    variant="body1"
-                    sx={styles.textWhite}
-                    className="!text-2xl w-40 "
-                  >
-                    GHAZIABAD
-                  </Typography>
-
-                </Box>
-              </div>
-              {!statta_matka_staus_result?.find(
-                (i) => i?.title === "satta_gajiyabad"
-              )?.status || minut < 5 ? (
-                <Box sx={styles.buttonContainer}>
-                  <Typography
-                    variant="body1"
-                    className="fp15"
-                    sx={{ color: "red", textAlign: "center", mb: 1 }}
-                  >
-                    Closed
-                  </Typography>
-                  <Button
-                    variant="text"
-                    className="fp11"
-                    sx={styles.upcomingButton}
-                  >
-                    Upcoming Result{" "}
-                  </Button>
-                  <Typography
-                    variant="body1"
-                    className="fp13 !flex !pl-3 !gap-2"
-                    sx={{ color: "white", textAlign: "center", mt: 1 }}
-                  >
-                    <span> Time Left : </span>
-                    <p className="!pr-5">
-                      <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
-                      <span className="!w-[20px]">
-                        {String(one_min_time)?.padStart(2, "0")}
-                      </span>
-                    </p>
-                  </Typography>
-                </Box>
-              ) : (
-                <Box sx={styles.buttonContainer}>
-                  <Typography
-                    variant="body1"
-                    className="fp15"
-                    sx={{ color: "green", textAlign: "center", mb: 1 }}
-                  >
-                    Open
-                  </Typography>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    sx={styles.playButton}
-                    onClick={() => {
-                      navigate("/satta/play", {
-                        state: {
-                          satta_type: 1,
-                        },
-                      });
-                    }}
-                  >
-                    Play
-                  </Button>
-                </Box>
-              )}
-            </Box> */}
-            {/* <Box sx={styles.contentBox}>
-              <div className="!flex items-center gap-5 !justify-start">
-                <Box>
-                  <Box sx={styles.imageContainer}>
-                    <Box sx={styles.image} > {game_history?.[0]?.faridabad}</Box>
-                  </Box>
-                  <Typography
-                    variant="body1"
-                    className="!text-[7px] !mt-1 !ml-1 !text-white"
-                  >
-                    Last result
-                  </Typography>
-                </Box>
-                <Box >
-                  <Typography
-                    variant="body1"
-                    sx={styles.textWhite}
-                    className="!text-2xl w-40 "
-                  >
-                    FARIDABAD
-                  </Typography>
-
-                </Box>
-              </div>
-              {!statta_matka_staus_result?.find(
-                (i) => i?.title === "satta_faridabad"
-              )?.status || minut < 5 ? (
-                <Box sx={styles.buttonContainer}>
-                  <Typography
-                    variant="body1"
-                    className="fp15"
-                    sx={{ color: "red", textAlign: "center", mb: 1 }}
-                  >
-                    Closed
-                  </Typography>
-                  <Button
-                    variant="text"
-                    className="fp11"
-                    sx={styles.upcomingButton}
-                  >
-                    Upcoming Result{" "}
-                  </Button>
-                  <Typography
-                    variant="body1"
-                    className="fp13 !flex !pl-3 !gap-2"
-                    sx={{ color: "white", textAlign: "center", mt: 1 }}
-                  >
-                    <span> Time Left : </span>
-                    <p className="!pr-5">
-                      <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
-                      <span className="!w-[20px]">
-                        {String(one_min_time)?.padStart(2, "0")}
-                      </span>
-                    </p>
-                  </Typography>
-                </Box>
-              ) : (
-                <Box sx={styles.buttonContainer}>
-                  <Typography
-                    variant="body1"
-                    className="fp15"
-                    sx={{ color: "green", textAlign: "center", mb: 1 }}
-                  >
-                    Open
-                  </Typography>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    sx={styles.playButton}
-                    onClick={() => {
-                      navigate("/satta/play", {
-                        state: {
-                          satta_type: 2,
-                        },
-                      });
-                    }}
-                  >
-                    Play
-                  </Button>
-                </Box>
-              )}
-            </Box> */}
-            {/* <Box sx={styles.contentBox}>
-              <div className="!flex items-center gap-5 !justify-start">
-                <Box>
-                  <Box sx={styles.imageContainer}>
-                    <Box sx={styles.image} className="!px-1">{game_history?.[0]?.gali}</Box>
-                  </Box>
-                  <Typography
-                    variant="body1"
-                    className="!text-[7px] !mt-1 !ml-1 !text-white"
-                  >
-                    Last result
-                  </Typography>
-                </Box>
-
-                <Box >
-                  <Typography
-                    variant="body1"
-                    sx={styles.textWhite}
-                    className="!text-2xl w-40 "
-                  >
-                    GALI{" "}
-                  </Typography>
-
-                </Box>
-              </div>
-              {!statta_matka_staus_result?.find(
-                (i) => i?.title === "satta_gali"
-              )?.status || minut < 5 ? (
-                <Box sx={styles.buttonContainer}>
-                  <Typography
-                    variant="body1"
-                    className="fp15"
-                    sx={{ color: "red", textAlign: "center", mb: 1 }}
-                  >
-                    Closed
-                  </Typography>
-                  <Button
-                    variant="text"
-                    className="fp11"
-                    sx={styles.upcomingButton}
-                  >
-                    Upcoming Result{" "}
-                  </Button>
-                  <Typography
-                    variant="body1"
-                    className="fp13 !flex  !gap-2"
-                    sx={{ color: "white", textAlign: "center", mt: 1 }}
-                  >
-                    <span> Time Left : </span>
-                    <p className="!pr-5">
-                      <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
-                      <span className="!w-[20px]">
-                        {String(one_min_time)?.padStart(2, "0")}
-                      </span>
-                    </p>
-                  </Typography>
-                </Box>
-              ) : (
-                <Box sx={styles.buttonContainer}>
-                  <Typography
-                    variant="body1"
-                    className="fp15"
-                    sx={{ color: "green", textAlign: "center", mb: 1 }}
-                  >
-                    Open
-                  </Typography>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    sx={styles.playButton}
-                    onClick={() => {
-                      navigate("/satta/play", {
-                        state: {
-                          satta_type: 3,
-                        },
-                      });
-                    }}
-                  >
-                    Play
-                  </Button>
-                </Box>
-              )}
-            </Box> */}
-            {/* </Box> */}
-            {/* <Box sx={styles.contentBox}>
-              <div className="!flex items-center gap-5 !justify-start">
-                <Box>
-                  <Box sx={styles.imageContainer}>
-                    <Box sx={styles.image} >{game_history?.[0]?.disawar}</Box>
-                  </Box>
-                  <Typography
-                    variant="body1"
-                    className="!text-[7px] !mt-1 !ml-1 !text-white"
-                  >
-                    Last result
-                  </Typography>
-                </Box>
-                <Box >
-                  <Typography
-                    variant="body1"
-                    sx={styles.textWhite}
-                    className="!text-2xl w-40 "
-                  >
-                    {" "}
-                    DESAWAR
-                  </Typography>
-
-                </Box>
-              </div>
-              {!statta_matka_staus_result?.find(
-                (i) => i?.title === "satta_disawar"
-              )?.status || minut < 5 ? (
-                <Box >
-                  <Typography
-                    variant="body1"
-                  // className="fp15"
-                  // sx={{ color: "red", textAlign: "center", mb: 1 }}
-                  >
-                    Closed
-                  </Typography>
-                  <Button
-                    variant="text"
-                  // className="fp11"
-                  // sx={styles.upcomingButton}
-                  >
-                    Upcoming Result{" "}
-                  </Button>
-                  <Typography
-                    variant="body1"
-                    className="fp13 !flex !pl-3 !gap-2"
-                    sx={{ color: "white", textAlign: "center", mt: 1 }}
-                  >
-                    <span> Time Left : </span>
-                    <p className="!pr-5">
-                      <span>{String(minut)?.padStart(2, "0")} </span>:{" "}
-                      <span className="!w-[20px]">
-                        {String(one_min_time)?.padStart(2, "0")}
-                      </span>
-                    </p>
-                  </Typography>
-                </Box>
-              ) : (
-                <Box sx={styles.buttonContainer}>
-                  <Typography
-                    variant="body1"
-                    className="fp15"
-                    sx={{ color: "green", textAlign: "center", mb: 1 }}
-                  >
-                    Open
-                  </Typography>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    sx={styles.playButton}
-                    onClick={() => {
-                      navigate("/satta/play", {
-                        state: {
-                          satta_type: 4,
-                        },
-                      });
-                    }}
-                  >
-                    Play
-                  </Button>
-                </Box>
-              )}
-            </Box> */}
           </div>
         </Container>
       </Box>
