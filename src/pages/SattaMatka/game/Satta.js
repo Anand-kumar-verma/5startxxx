@@ -207,7 +207,8 @@ function Satta() {
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
                       {" "}
-                      {game_history?.[0]?.gaziyabad || 0}
+                      {String(game_history?.[0]?.gaziyabad || 0).padStart(2, '0')}
+                      
                     </span>
                   </Typography>
                 </Box>
@@ -309,7 +310,8 @@ function Satta() {
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
                       {" "}
-                      {game_history?.[0]?.faridabad || 0}
+                      {String(game_history?.[0]?.faridabad || 0).padStart(2, '0')}
+
                     </span>
                   </Typography>
                 </Box>
@@ -407,8 +409,8 @@ function Satta() {
                   >
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
-                      {" "}
-                      {game_history?.[0]?.gali || 0}
+                    {String(game_history?.[0]?.gali || 0).padStart(2, '0')}
+
                     </span>
                   </Typography>
                 </Box>
@@ -507,8 +509,8 @@ function Satta() {
                   >
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
-                      {" "}
-                      {game_history?.[0]?.disawar || 0}
+                    {String(game_history?.[0]?.disawar || 0).padStart(2, '0')}
+
                     </span>
                   </Typography>
                 </Box>
