@@ -483,6 +483,40 @@ function Dashboard() {
               marginLeft: "2.5%",
               marginTop: "20px",
               mb: "20px",
+              mt: '16px',
+            }}
+          >
+            <Box sx={{ ...styles.flexbetween, ...styles.gamemenubox }} className="w95">
+              <Box sx={{ ...styles.gameimgbox }}>
+                <Box component='img' src={satta} sx={{ ...styles.gameimg }}></Box>
+              </Box>
+              <Box sx={{ ...styles.gamenamebox }}>
+                <Box sx={{ ...styles.flexbetween }}>
+                  <Typography variant="h6" sx={{ fontWeight: '700', color: 'white' }} > Satta Matka </Typography>
+                </Box>
+                <Box sx={{ ...styles.flexbetween, my: 1, ...styles.maxwin }}>
+                  <Typography variant="body2" className="kip13" sx={{ textAlign: 'center', color: 'white !important', }}>The Highest Bonus in History</Typography>
+                  <Typography variant="body2" className="kip15" sx={{ color: 'white', fontWeight: '600', textAlign: 'center' }}>₹ {Number(topdata?.[0]?.amount)?.toFixed(2)}</Typography>
+                </Box>
+              </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                className="blinking-button"
+                sx={{ ...styles.playbutton }}
+                onClick={() => navigate('/satta/matka')}
+              >
+                Play Now <StartIcon ml={2} />
+              </Button>
+            </Box>
+          </div>
+          <div
+            className="mt-2 w-full "
+            style={{
+              width: "95%",
+              marginLeft: "2.5%",
+              marginTop: "20px",
+              mb: "20px",
             }}
           >
             <Box
@@ -537,40 +571,7 @@ function Dashboard() {
               </Button>
             </Box>
           </div>
-          <div
-            className="mt-2 w-full "
-            style={{
-              width: "95%",
-              marginLeft: "2.5%",
-              marginTop: "20px",
-              mb: "20px",
-              mt: '16px',
-            }}
-          >
-            <Box sx={{ ...styles.flexbetween, ...styles.gamemenubox }} className="w95">
-              <Box sx={{ ...styles.gameimgbox }}>
-                <Box component='img' src={satta} sx={{ ...styles.gameimg }}></Box>
-              </Box>
-              <Box sx={{ ...styles.gamenamebox }}>
-                <Box sx={{ ...styles.flexbetween }}>
-                  <Typography variant="h6" sx={{ fontWeight: '700', color: 'white' }} > Satta Matka </Typography>
-                </Box>
-                <Box sx={{ ...styles.flexbetween, my: 1, ...styles.maxwin }}>
-                  <Typography variant="body2" className="kip13" sx={{ textAlign: 'center', color: 'white !important', }}>The Highest Bonus in History</Typography>
-                  <Typography variant="body2" className="kip15" sx={{ color: 'white', fontWeight: '600', textAlign: 'center' }}>₹ {Number(topdata?.[0]?.amount)?.toFixed(2)}</Typography>
-                </Box>
-              </Box>
-              <Button
-                variant="contained"
-                color="primary"
-                className="blinking-button"
-                sx={{ ...styles.playbutton }}
-                onClick={() => navigate('/satta/matka')}
-              >
-                Play Now <StartIcon ml={2} />
-              </Button>
-            </Box>
-          </div>
+        
           {isLoadingdata ? (
             <div className="w-[100%] flex justify-center">
               <CircularProgress className="!text-white" />
