@@ -1,4 +1,6 @@
 import axios from "axios";
+import { fron_end_main_domain } from "./urls";
+import toast from "react-hot-toast";
 
 export const apiConnectorGet = async (endpoint, params) => {
   try {
@@ -13,6 +15,13 @@ export const apiConnectorGet = async (endpoint, params) => {
         params: params,
       }
     );
+    if (response?.data?.msg === "Invalid Token.") {
+      toast("Login in another device ", { id: 1 });
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = `${fron_end_main_domain}`;
+      return;
+    }
     return response;
   } catch (e) {
     return {
@@ -31,6 +40,13 @@ export const apiConnectorPost = async (endpoint, reqBody) => {
         },
       }   
     );
+    if (response?.data?.msg === "Invalid Token.") {
+      toast("Login in another device ", { id: 1 });
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = `${fron_end_main_domain}`;
+      return;
+    }
     return response;
   } catch (e) {
     return {

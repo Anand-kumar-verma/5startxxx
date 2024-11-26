@@ -69,9 +69,9 @@ function Satta() {
       setOne_min_time(time_to_be_intro);
       setMinut(time_to_be_intro_min);
     };
-    socket.on("seconds", handleOneMin);
+    socket.on("onemin", handleOneMin);
     return () => {
-      socket.off("seconds", handleOneMin);
+      socket.off("onemin", handleOneMin);
     };
   }, []);
 

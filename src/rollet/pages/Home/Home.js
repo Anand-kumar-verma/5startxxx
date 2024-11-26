@@ -30,7 +30,7 @@ import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import placebetmusic from "../../assets/images/applybet_music.mp3";
 import mouse_click from "../../assets/images/mouse_click.mp3";
-import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.MP3";
+import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.mp3";
 import stop_ball_music from "../../assets/images/stop_ball_music.mp3";
 import rouletteBORD from "../../assets/images/thumbs_bgs.png";
 import watch from "../../assets/images/watch.png";
@@ -337,6 +337,7 @@ function Home() {
   useEffect(() => {
     const handleOneMin = (onemin) => {
       setOne_min_time(onemin);
+      console.log(onemin)
       if (onemin === 54) {
         setIsPreBetHandle(true);
         // localStorage.setItem("total_amount_bet", 0);
@@ -392,10 +393,10 @@ function Home() {
     };
     // oneminrollet
     socket.on("oneminrollet", handleOneMin);
-    socket.on("rolletresult", handleOneMinrolletresult);
+    socket.on("rolletresult_5star", handleOneMinrolletresult);
     return () => {
       socket.off("oneminrollet", handleOneMin);
-      socket.off("rolletresult", handleOneMinrolletresult);
+      socket.off("rolletresult_5star", handleOneMinrolletresult);
     };
   }, []);
 
