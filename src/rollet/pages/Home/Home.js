@@ -337,7 +337,6 @@ function Home() {
   useEffect(() => {
     const handleOneMin = (onemin) => {
       setOne_min_time(onemin);
-      console.log(onemin)
       if (onemin === 54) {
         setIsPreBetHandle(true);
         // localStorage.setItem("total_amount_bet", 0);
@@ -375,7 +374,6 @@ function Home() {
       }
     };
     const handleOneMinrolletresult = (onemin) => {
-      console.log(onemin);
       spinFunction(onemin);
       localStorage.setItem("result_rollet", onemin);
       handlePlaySound();
