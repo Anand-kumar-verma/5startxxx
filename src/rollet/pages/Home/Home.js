@@ -159,9 +159,9 @@ function Home() {
 
     if (
       total_bet_amont >
-      Number(
+      Number(Number(
         Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
-      )?.toFixed(2)
+      )?.toFixed(2))
     )
       return toast(
         <span
