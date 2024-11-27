@@ -29,12 +29,12 @@ const Zero = ({
           if (isContainsPre) {
             // setOpenDialogBox("0");
             if (
-              isContainsPre?.amount + amount > 5000 ||
-              isContainsPre?.amount < 2
+             
+              isContainsPre?.amount < 10
             ) {
               return toast(
                 <span className="!p-2" style={{ marginTop: "10% ",  backgroundColor: 'black' }}>
-                  Bet must be greater than 10 and less that 50000 Rupees
+                 Bet must be greater or equal to 10 Rs
                 </span>
               );
             } else {

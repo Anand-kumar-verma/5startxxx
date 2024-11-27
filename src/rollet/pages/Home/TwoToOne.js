@@ -56,7 +56,7 @@ const TwoToOne = ({
                             backgroundColor: "black",
                           }}
                         >
-                          Bet must be greater than 10 and less that 50000 Rupees
+                         Bet must be greater or equal to 10 Rs
                         </span>
                       );
                     } else {
@@ -112,7 +112,7 @@ const TwoToOne = ({
                             backgroundColor: "black",
                           }}
                         >
-                          Bet must be greater than 10 and less that 50000 Rupees
+                         Bet must be greater or equal to 10 Rs
                         </span>
                       );
                     } else {
@@ -169,7 +169,7 @@ const TwoToOne = ({
                             backgroundColor: "black",
                           }}
                         >
-                          Bet must be greater than 10 and less that 50000 Rupees
+                         Bet must be greater or equal to 10 Rs
                         </span>
                       );
                     } else {

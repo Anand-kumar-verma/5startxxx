@@ -150,7 +150,6 @@ function Home() {
   }
 
   function setBetFuncton(id, number, amount) {
-    console.log(isAlreadyAppliedBet, one_min_time);
     if (isAlreadyAppliedBet === "true") return;
     if (one_min_time <= 10) return;
     handlePlaySoundPlacebet();
@@ -210,6 +209,8 @@ function Home() {
         newelement.style.transform = "translate(-50%, -50%) rotate(179deg)";
       else if (String(id) === "312")
         newelement.style.transform = "translate(-50%, -50%) rotate(270deg)";
+      else if (String(id) === "0")
+        newelement.style.transform = "translate(-50%, -50%)  rotate(-180deg)";
       else {
         newelement.style.transform = "translate(-50%, -50%)"; // Adjust position to center
       }

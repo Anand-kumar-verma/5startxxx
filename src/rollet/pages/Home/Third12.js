@@ -33,8 +33,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(36);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -45,7 +45,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -103,7 +103,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -159,7 +159,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -215,7 +215,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -270,7 +270,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -299,8 +299,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(33);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -311,7 +311,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -369,7 +369,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -425,7 +425,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -481,7 +481,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -536,7 +536,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -565,8 +565,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(30);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -577,7 +577,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -635,7 +635,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -691,7 +691,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -747,7 +747,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -802,7 +802,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -831,8 +831,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(27);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -843,7 +843,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -901,7 +901,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -957,7 +957,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1013,7 +1013,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1068,7 +1068,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1099,8 +1099,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(35);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -1111,7 +1111,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1169,7 +1169,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1225,7 +1225,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1281,7 +1281,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1310,8 +1310,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(32);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -1322,7 +1322,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1380,7 +1380,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1436,7 +1436,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1492,7 +1492,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1521,8 +1521,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(29);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -1533,7 +1533,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1591,7 +1591,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1647,7 +1647,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1703,7 +1703,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1732,8 +1732,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(26);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -1744,7 +1744,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1802,7 +1802,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1858,7 +1858,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1914,7 +1914,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1945,8 +1945,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(34);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -1957,7 +1957,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2015,7 +2015,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2046,8 +2046,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(31);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -2058,7 +2058,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2116,7 +2116,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2147,8 +2147,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(28);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -2159,7 +2159,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2217,7 +2217,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2248,8 +2248,8 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(25);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -2260,7 +2260,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2318,7 +2318,7 @@ const Third12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2380,7 +2380,7 @@ const Third12 = ({
                     backgroundColor: "black",
                   }}
                 >
-                  Bet must be greater than 10 and less that 50000 Rupees
+                 Bet must be greater or equal to 10 Rs
                 </span>
               );
             } else {
