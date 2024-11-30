@@ -15,9 +15,7 @@ import win from "../../../assets/images/win3.f7c86b0db9189cc3c7a6.png";
 import win2 from "../../../assets/images/win4.7a69afe7edb7608a715a.png";
 import Layout from "../../../component/Layout/Layout";
 import one from "../../../pages/SattaMatka/assets/images/Top-Reasons-Why-Satta-Matka-is-so-Famous-1024x538-Photoroom (1).jpg";
-import {
-  apiConnectorGet
-} from "../../../services/apiconnector";
+import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import SattaRule from "./SattaRule";
 
@@ -207,8 +205,10 @@ function Satta() {
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
                       {" "}
-                      {String(game_history?.[0]?.gaziyabad || 0).padStart(2, '0')}
-                      
+                      {String(game_history?.[0]?.gaziyabad || 0).padStart(
+                        2,
+                        "0"
+                      )}
                     </span>
                   </Typography>
                 </Box>
@@ -276,14 +276,26 @@ function Satta() {
                   )}
                 </Box>
               </Box>
-              <div className="pt-2 !w-full !flex justify-evenly">
-                {data?.data?.gaziyabad_result?.slice(1)?.map((item) => {
-                  return (
-                    <p className="!bg-gray-500 !rounded-full !px-2 !text-white !py-1">
-                      {String(item?.number)?.padStart(2, "0")}
-                    </p>
-                  );
-                })}
+              <div className="pt-2 px-[10%] !w-full !flex justify-between !font-bold">
+                <p>
+                  ANDAR
+                  <span className="!rounded-full !bg-gray-600 !bg-opacity-30 px-4 ml-2">
+                    {String(game_history?.[0]?.gaziyabad || 0).padStart(
+                      2,
+                      "0"
+                    )?.[0] + "*"}
+                  </span>
+                </p>
+                <p>
+                  BAHAR
+                  <span className="!rounded-full !bg-gray-600 !bg-opacity-30 px-4 ml-2">
+                    {"*" +
+                      String(game_history?.[0]?.gaziyabad || 0).padStart(
+                        2,
+                        "0"
+                      )?.[1]}
+                  </span>
+                </p>
               </div>
             </Box>
             <Box sx={styles.winbox}>
@@ -310,8 +322,10 @@ function Satta() {
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
                       {" "}
-                      {String(game_history?.[0]?.faridabad || 0).padStart(2, '0')}
-
+                      {String(game_history?.[0]?.faridabad || 0).padStart(
+                        2,
+                        "0"
+                      )}
                     </span>
                   </Typography>
                 </Box>
@@ -376,14 +390,26 @@ function Satta() {
                   )}
                 </Box>
               </Box>
-              <div className="pt-2 !w-full !flex justify-evenly">
-                {data?.data?.faridabad_result?.slice(1)?.map((item) => {
-                  return (
-                    <p className="!bg-gray-500 !rounded-full !px-2 !text-white !py-1">
-                      {String(item?.number)?.padStart(2, "0")}
-                    </p>
-                  );
-                })}
+              <div className="pt-2 px-[10%] !w-full !flex justify-between !font-bold">
+                <p>
+                  ANDAR
+                  <span className="!rounded-full !bg-gray-600 !bg-opacity-30 px-4 ml-2">
+                    {String(game_history?.[0]?.faridabad || 0).padStart(
+                      2,
+                      "0"
+                    )?.[0] + "*"}
+                  </span>
+                </p>
+                <p>
+                  BAHAR
+                  <span className="!rounded-full !bg-gray-600 !bg-opacity-30 px-4 ml-2">
+                    {"*" +
+                      String(game_history?.[0]?.faridabad || 0).padStart(
+                        2,
+                        "0"
+                      )?.[1]}
+                  </span>
+                </p>
               </div>
             </Box>
             <Box sx={styles.winbox}>
@@ -409,8 +435,7 @@ function Satta() {
                   >
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
-                    {String(game_history?.[0]?.gali || 0).padStart(2, '0')}
-
+                      {String(game_history?.[0]?.gali || 0).padStart(2, "0")}
                     </span>
                   </Typography>
                 </Box>
@@ -476,14 +501,26 @@ function Satta() {
                   )}
                 </Box>
               </Box>
-              <div className="pt-2 !w-full !flex justify-evenly">
-                {data?.data?.gali_result?.slice(1)?.map((item) => {
-                  return (
-                    <p className="!bg-gray-500 !rounded-full !px-2 !text-white !py-1">
-                      {String(item?.number)?.padStart(2, "0")}
-                    </p>
-                  );
-                })}
+              <div className="pt-2 px-[10%] !w-full !flex justify-between !font-bold">
+                <p>
+                  ANDAR
+                  <span className="!rounded-full !bg-gray-600 !bg-opacity-30 px-4 ml-2">
+                    {String(game_history?.[0]?.gali || 0).padStart(
+                      2,
+                      "0"
+                    )?.[0] + "*"}
+                  </span>
+                </p>
+                <p>
+                  BAHAR
+                  <span className="!rounded-full !bg-gray-600 !bg-opacity-30 px-4 ml-2">
+                    {"*" +
+                      String(game_history?.[0]?.gali || 0).padStart(
+                        2,
+                        "0"
+                      )?.[1]}
+                  </span>
+                </p>
               </div>
             </Box>
             <Box sx={styles.winbox}>
@@ -509,8 +546,7 @@ function Satta() {
                   >
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
-                    {String(game_history?.[0]?.disawar || 0).padStart(2, '0')}
-
+                      {String(game_history?.[0]?.disawar || 0).padStart(2, "0")}
                     </span>
                   </Typography>
                 </Box>
@@ -576,14 +612,26 @@ function Satta() {
                   )}
                 </Box>
               </Box>
-              <div className="pt-2 !w-full !flex justify-evenly">
-                {data?.data?.disawar_result?.slice(1)?.map((item) => {
-                  return (
-                    <p className="!bg-gray-500 !rounded-full !px-2 !text-white !py-1">
-                      {String(item?.number)?.padStart(2, "0")}
-                    </p>
-                  );
-                })}
+              <div className="pt-2 px-[10%] !w-full !flex justify-between !font-bold">
+                <p>
+                  ANDAR
+                  <span className="!rounded-full !bg-gray-600 !bg-opacity-30 px-4 ml-2">
+                    {String(game_history?.[0]?.disawar || 0).padStart(
+                      2,
+                      "0"
+                    )?.[0] + "*"}
+                  </span>
+                </p>
+                <p>
+                  BAHAR
+                  <span className="!rounded-full !bg-gray-600 !bg-opacity-30 px-4 ml-2">
+                    {"*" +
+                      String(game_history?.[0]?.disawar || 0).padStart(
+                        2,
+                        "0"
+                      )?.[1]}
+                  </span>
+                </p>
               </div>
             </Box>
           </div>

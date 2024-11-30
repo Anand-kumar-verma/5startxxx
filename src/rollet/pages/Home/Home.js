@@ -30,7 +30,7 @@ import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import placebetmusic from "../../assets/images/applybet_music.mp3";
 import mouse_click from "../../assets/images/mouse_click.mp3";
-import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.mp3";
+import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.MP3";
 import stop_ball_music from "../../assets/images/stop_ball_music.mp3";
 import rouletteBORD from "../../assets/images/thumbs_bgs.png";
 import watch from "../../assets/images/watch.png";
@@ -159,9 +159,11 @@ function Home() {
 
     if (
       total_bet_amont >
-      Number(Number(
-        Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
-      )?.toFixed(2))
+      Number(
+        Number(
+          Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
+        )?.toFixed(2)
+      )
     )
       return toast(
         <span

@@ -217,7 +217,7 @@ export const spinFunction = (id) => {
       // Clean up after third animation ends
       setTimeout(() => {
         element.addEventListener("animationend", handleFinalAnimationEnd);
-      }, 27000);
+      }, 29000);
     }
   };
 

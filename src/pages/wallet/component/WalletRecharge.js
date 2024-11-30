@@ -8,7 +8,7 @@ import {
   MenuItem,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import copy from "clipboard-copy";
 import CryptoJS from "crypto-js";
@@ -19,7 +19,12 @@ import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
-import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
+import {
+  starbluegrad,
+  zubgback,
+  zubgbackgrad,
+  zubgmid,
+} from "../../../Shared/color";
 import audiovoice from "../../../assets/bankvoice.mp3";
 import chip from "../../../assets/chip.png";
 import { default as atmchip, default as cip } from "../../../assets/cip.png";
@@ -30,16 +35,16 @@ import balance from "../../../assets/images/send.png";
 import payment from "../../../assets/wallet2.png";
 import Layout from "../../../component/Layout/Layout";
 import { get_user_data_fn } from "../../../services/apicalling";
-import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
+import {
+  apiConnectorGet,
+  apiConnectorPost,
+} from "../../../services/apiconnector";
 import { baseUrl, endpoint } from "../../../services/urls";
 function WalletRecharge() {
-
-
   const dispatch = useDispatch();
   const aviator_login_data = useSelector(
     (state) => state.aviator.aviator_login_data
   );
-
 
   const audioRefMusic = React.useRef(null);
   const login_data =
@@ -49,16 +54,10 @@ function WalletRecharge() {
         "anand"
       )?.toString(CryptoJS.enc.Utf8)) ||
     null;
-  // const aviator_data = localStorage.getItem("aviator_data");
-  const user_name =
-    aviator_login_data && JSON.parse(aviator_login_data)?.username;
+
   const user_id = login_data && JSON.parse(login_data)?.UserID;
   const [Loading, setLoading] = React.useState(false);
-  const [amount, setAmount] = React.useState({
-    wallet: 0,
-    winning: 0,
-    cricket_wallet: 0,
-  });
+
   const [receipt, setReceipt] = React.useState();
 
   const client = useQueryClient();
@@ -68,7 +67,7 @@ function WalletRecharge() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -78,31 +77,33 @@ function WalletRecharge() {
     ["bank_details"],
     () => apiConnectorGet(endpoint.node.get_bank_list),
     {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      retry: false,
-      retryOnMount: false,
-      refetchOnWindowFocus: false
+      refetchOnMount: true,
+      refetchOnReconnect: true,
     }
   );
-  const result = bank_history?.data?.data
+  const result = bank_history?.data?.data || [];
 
   const initialValue = {
     deposit_type: "Bank",
     req_amount: "",
     bank_upi_table_id: "",
     receipt_image: "",
-    utr_no: ""
+    utr_no: "",
   };
 
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
-      if (!fk.values.req_amount || !fk.values.bank_upi_table_id || !receipt || !fk.values.utr_no) {
+      if (
+        !fk.values.req_amount ||
+        !fk.values.bank_upi_table_id ||
+        !receipt ||
+        !fk.values.utr_no
+      ) {
         toast("Please enter all fields");
-        return; 
-      }  
+        return;
+      }
       setLoading(true);
       const reqBody = {
         user_id: user_id,
@@ -110,27 +111,28 @@ function WalletRecharge() {
         req_amount: fk.values.req_amount,
         bank_upi_table_id: fk.values.bank_upi_table_id,
         receipt_image: receipt,
-        utr_no: fk.values.utr_no
+        utr_no: fk.values.utr_no,
       };
       insertFundFn(reqBody);
     },
   });
   async function insertFundFn(reqBody) {
     try {
-      const res = await apiConnectorPost(endpoint?.node.deposite_request, reqBody);
+      const res = await apiConnectorPost(
+        endpoint?.node.deposite_request,
+        reqBody
+      );
       toast(res?.data?.msg);
       setLoading(false);
       if ("Request Successfully Accepted." === res?.data?.msg) {
         fk.handleReset();
         setReceipt(null);
-
       }
     } catch (e) {
       console.log(e);
     }
     client.refetchQueries("walletamount");
     client.refetchQueries("deposit_history");
-
   }
   const { data: upi_detail } = useQuery(
     ["upi_details"],
@@ -140,7 +142,7 @@ function WalletRecharge() {
       refetchOnReconnect: false,
       retry: false,
       retryOnMount: false,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
     }
   );
   const upidata = upi_detail?.data?.data;
@@ -188,7 +190,6 @@ function WalletRecharge() {
     }
   };
 
-
   const audio = React.useMemo(() => {
     return (
       <audio ref={audioRefMusic} hidden>
@@ -211,7 +212,12 @@ function WalletRecharge() {
         }}
       >
         <Stack direction="row" sx={{ alignItems: "center", mb: "20px" }}>
-          <Box component="img" src={user} width={30} sx={{ filter: 'grayscale(1)' }}></Box>
+          <Box
+            component="img"
+            src={user}
+            width={30}
+            sx={{ filter: "grayscale(1)" }}
+          ></Box>
           <Typography
             variant="body1"
             color="initial"
@@ -229,28 +235,48 @@ function WalletRecharge() {
           }}
         >
           <Stack direction="row" sx={style.rechargeinstext}>
-            <Box component="img" src={dot} width={15} sx={{ filter: 'grayscale(1)' }}></Box>
+            <Box
+              component="img"
+              src={dot}
+              width={15}
+              sx={{ filter: "grayscale(1)" }}
+            ></Box>
             <Typography variant="body1" color="initial">
               If the transfer time is up, please fill out the deposit form
               again.
             </Typography>
           </Stack>
           <Stack direction="row" sx={style.rechargeinstext}>
-            <Box component="img" src={dot} width={15} sx={{ filter: 'grayscale(1)' }}></Box>
+            <Box
+              component="img"
+              src={dot}
+              width={15}
+              sx={{ filter: "grayscale(1)" }}
+            ></Box>
             <Typography variant="body1" color="initial">
               The transfer amount must match the order you created, otherwise
               the money cannot be credited successfully.
             </Typography>
           </Stack>
           <Stack direction="row" sx={style.rechargeinstext}>
-            <Box component="img" src={dot} width={15} sx={{ filter: 'grayscale(1)' }}></Box>
+            <Box
+              component="img"
+              src={dot}
+              width={15}
+              sx={{ filter: "grayscale(1)" }}
+            ></Box>
             <Typography variant="body1" color="initial">
               If you transfer the wrong amount, our company will not be
               responsible for the lost amount!
             </Typography>
           </Stack>
           <Stack direction="row" sx={style.rechargeinstext}>
-            <Box component="img" src={dot} width={15} sx={{ filter: 'grayscale(1)' }}></Box>
+            <Box
+              component="img"
+              src={dot}
+              width={15}
+              sx={{ filter: "grayscale(1)" }}
+            ></Box>
             <Typography variant="body1" color="initial">
               Note: do not cancel the deposit order after the money has been
               transferred.
@@ -265,7 +291,12 @@ function WalletRecharge() {
     return (
       <>
         <Stack direction="row" sx={{ alignItems: "center", mb: "20px" }}>
-          <Box component="img" src={payment} width={30} sx={{ filter: 'grayscale(1)' }}></Box>
+          <Box
+            component="img"
+            src={payment}
+            width={30}
+            sx={{ filter: "grayscale(1)" }}
+          ></Box>
           <Typography
             variant="body1"
             color="initial"
@@ -407,8 +438,8 @@ function WalletRecharge() {
             >
               {" "}
               {Number(
-                  Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
-                )?.toFixed(2)}
+                Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
+              )?.toFixed(2)}
             </Typography>
             <CachedIcon sx={{ color: "white" }} />
           </Stack>
@@ -420,7 +451,12 @@ function WalletRecharge() {
               mt: "20px",
             }}
           >
-            <Box component="img" src={cip} width={50} sx={{ filter: 'drop-shadow(2px 4px 6px black)' }}></Box>
+            <Box
+              component="img"
+              src={cip}
+              width={50}
+              sx={{ filter: "drop-shadow(2px 4px 6px black)" }}
+            ></Box>
             <Typography
               variant="body1"
               color="initial"
@@ -430,20 +466,23 @@ function WalletRecharge() {
             </Typography>
           </Stack>
         </Box>
-        <Box sx={{ mt: 2, px: 2 }} >
+        <Box sx={{ mt: 2, px: 2 }}>
           <Stack direction="row">
             <Stack
               sx={{
-                background:
-                  "",
+                background: "",
                 padding: 2,
                 borderRadius: 2,
                 mr: 2,
                 width: "120px",
                 cursor: "pointer",
-                backgroundColor: fk.values.deposit_type === "Bank" ? zubgbackgrad : starbluegrad 
+                backgroundColor:
+                  fk.values.deposit_type === "Bank"
+                    ? zubgbackgrad
+                    : starbluegrad,
               }}
-              onClick={() => fk.setFieldValue("deposit_type", "Bank")} >
+              onClick={() => fk.setFieldValue("deposit_type", "Bank")}
+            >
               <Box
                 component="img"
                 src={atmchip}
@@ -465,16 +504,19 @@ function WalletRecharge() {
             </Stack>
             <Stack
               sx={{
-                background:
-                  zubgback,
+                background: zubgback,
                 padding: 2,
                 borderRadius: 2,
                 mr: 2,
                 width: "120px",
                 cursor: "pointer",
-                backgroundColor: fk.values.deposit_type === "UPI" ? zubgbackgrad : starbluegrad
+                backgroundColor:
+                  fk.values.deposit_type === "UPI"
+                    ? zubgbackgrad
+                    : starbluegrad,
               }}
-              onClick={() => fk.setFieldValue("deposit_type", "UPI")} >
+              onClick={() => fk.setFieldValue("deposit_type", "UPI")}
+            >
               <Box
                 component="img"
                 src={chip}
@@ -497,7 +539,6 @@ function WalletRecharge() {
           </Stack>
         </Box>
         <Box>
-
           <Box
             sx={{
               padding: "10px",
@@ -524,7 +565,6 @@ function WalletRecharge() {
                     select
                     size="small"
                   >
-
                     {result?.map((i, index) => {
                       return (
                         <MenuItem value={i?.tr44_id} className="!text-black">
@@ -548,7 +588,6 @@ function WalletRecharge() {
                     select
                     size="small"
                   >
-
                     {upidata?.map((i) => (
                       <MenuItem key={i?.tr45_id} value={i?.tr45_id}>
                         {i?.tr45_upi_name}
@@ -558,7 +597,10 @@ function WalletRecharge() {
                   {selectedUPIDetails && (
                     <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
                       <div className="w-72">
-                      <img src={`${baseUrl}/uploads/${selectedUPIDetails?.tr45_qr}`} alt="QR Code" />
+                        <img
+                          src={`${baseUrl}/uploads/${selectedUPIDetails?.tr45_qr}`}
+                          alt="QR Code"
+                        />
                       </div>
                       <div className="pt-4 gap-2">
                         <p className="!bg-white !text-xl font-bold px-8 !text-black">
@@ -569,13 +611,11 @@ function WalletRecharge() {
                             size="small !py-1"
                             className="!bg-[#0ee6ac] !text-white place-items-center"
                             onClick={() =>
-                              functionTOCopy(
-                                selectedUPIDetails.tr45_upi_id
-                              )
-                            }>
+                              functionTOCopy(selectedUPIDetails.tr45_upi_id)
+                            }
+                          >
                             Copy
                           </Button>
-                         
                         </div>
                       </div>
                     </div>
@@ -602,40 +642,39 @@ function WalletRecharge() {
                 onChange={fk.handleChange}
                 placeholder="Transaction"
                 className="!w-[100%] !bg-white !mt-5"
-
               />
-             
+
               <span className="!text-white !text-sm ">Receipt</span>
               <input
                 type="file"
                 id="receipt_image "
                 name="receipt_image "
-
                 className="!text-sm !mt-5"
                 onChange={handleFileChange}
                 required
               />
-             
-              {Loading && (
-                <CustomCircularProgress isLoading={Loading} />)}
+
+              {Loading && <CustomCircularProgress isLoading={Loading} />}
             </div>
             <Stack
-                direction="row"
-                sx={{
-                  alignItems: "center",
-                  // justifyContent: "space-between",
-                  // flexWrap: "wrap",
-                  mt: "10px",
+              direction="row"
+              sx={{
+                alignItems: "center",
+                // justifyContent: "space-between",
+                // flexWrap: "wrap",
+                mt: "10px",
+              }}
+            >
+              <Button
+                sx={style.paytmbtntwo}
+                onClick={(e) => {
+                  e.preventDefault();
+                  fk.handleSubmit();
                 }}
               >
-                <Button sx={style.paytmbtntwo}
-               onClick={(e) => {
-                e.preventDefault();
-                fk.handleSubmit();
-              }}>
-                  Deposit
-                </Button>
-              </Stack>
+                Deposit
+              </Button>
+            </Stack>
           </Box>
           {rechargeInstruction}
         </Box>
