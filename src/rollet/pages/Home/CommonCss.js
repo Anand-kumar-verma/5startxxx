@@ -106,6 +106,7 @@ export const style = {
     },
   },
   btn4: {
+    transform: "rotate(-180deg)",
     padding: 0,
     fontSize: "12px",
     fontWeight: 900,
@@ -124,6 +125,7 @@ export const style = {
   "@keyframes rotateInfinite": {
     "0%": { transform: "rotate(0deg)" },
     "100%": { transform: "rotate(360deg)" },
+    
   },
   naiming: {
     background:

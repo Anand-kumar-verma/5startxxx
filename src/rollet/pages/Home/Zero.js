@@ -51,6 +51,7 @@ const Zero = ({
         }}  >
         <IconButton
           sx={{ ...style.btn4, alignItems: 'center' }}
+          
         >
           <span
             id="0"

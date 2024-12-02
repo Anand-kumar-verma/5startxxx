@@ -30,7 +30,7 @@ import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import placebetmusic from "../../assets/images/applybet_music.mp3";
 import mouse_click from "../../assets/images/mouse_click.mp3";
-import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.MP3";
+import wheel_roulette from "../../assets/images/rotate_wheel_ball_music.mp3";
 import stop_ball_music from "../../assets/images/stop_ball_music.mp3";
 import rouletteBORD from "../../assets/images/thumbs_bgs.png";
 import watch from "../../assets/images/watch.png";
@@ -212,9 +212,9 @@ function Home() {
       else if (String(id) === "312")
         newelement.style.transform = "translate(-50%, -50%) rotate(270deg)";
       else if (String(id) === "0")
-        newelement.style.transform = "translate(-50%, -50%)  rotate(-180deg)";
+        newelement.style.transform = "translate(-50%, -50%) rotate(360deg)";
       else {
-        newelement.style.transform = "translate(-50%, -50%)"; // Adjust position to center
+        newelement.style.transform = "translate(-50%, -50%) "; // Adjust position to center
       }
       newelement.style.display = "flex"; // Use flexbox for centering content
       newelement.style.alignItems = "center"; // Center content vertically
@@ -226,7 +226,7 @@ function Home() {
       newelement.style.color = "black";
       newelement.style.border = "1px solid blue";
       newelement.style.borderRadius = "50%";
-      newelement.style.padding = "3px";
+      newelement.style.padding = "10 px";
       newelement.style.fontSize = "8px"; // Adjust font size for better visibility
       newelement.style.rotate = "50";
     }
@@ -361,7 +361,6 @@ function Home() {
         setOpen3(false);
         let id = localStorage.getItem("result_rollet");
         let element = document.getElementById(`${String(id)}_rotate`);
-
         element?.classList.add("hidden");
         setresult_rollet("");
       }
@@ -705,7 +704,7 @@ function Home() {
           >
             <Box
               sx={{
-                width: "55px",
+                width: "45px",
                 height: "100%",
                 position: "absolute",
                 right: 0,
