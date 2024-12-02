@@ -226,7 +226,7 @@ function Home() {
       newelement.style.color = "black";
       newelement.style.border = "1px solid blue";
       newelement.style.borderRadius = "50%";
-      newelement.style.padding = "10 px";
+      newelement.style.padding = "10px";
       newelement.style.fontSize = "8px"; // Adjust font size for better visibility
       newelement.style.rotate = "50";
     }
