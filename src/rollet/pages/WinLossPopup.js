@@ -101,7 +101,7 @@ const WinLossPopup = () => {
                   <span>Results: </span>
 
                   <span className="!bg-green-500 !text-center !p-2 !rounded-md">
-                    {Number(all_result?.number)}
+                    {all_result?.number}
                   </span>
                 </div>
                 <div className="!text-[20px] !mt-4">Bonus</div>
