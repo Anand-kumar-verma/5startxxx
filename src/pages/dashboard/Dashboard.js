@@ -444,7 +444,7 @@ function Dashboard() {
             <Box sx={styles.socialButtonText} className="!text-center" onClick={()=>navigate('/rulereferral')}>
               Referral Income </Box>
             <Box sx={styles.socialButtonText} className="!text-center" onClick={()=>navigate('/rulesponsor')}>
-              Sponsor Income </Box>
+            Sponsor Betting Income </Box>
           </Box>
         
 
