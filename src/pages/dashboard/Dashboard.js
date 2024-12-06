@@ -123,20 +123,20 @@ function Dashboard() {
     },
 
   ];
-  const { isLoadingdata, data:image} = useQuery(["winner"] , ()=>apiConnectorGet(endpoint.node.top_winners) ,{
-    refetchOnMount :false,
-    refetchOnWindowFocus:false,
-    refetchOnReconnect :false
+  const { isLoadingdata, data: image } = useQuery(["winner"], () => apiConnectorGet(endpoint.node.top_winners), {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false
   })
 
   const winnner_data = image?.data?.data || []
 
-  const {data:toptwo}= useQuery(["top"] , ()=>apiConnectorGet(endpoint?.node?.top_two_winners) ,{
-    refetchOnMount:false ,
-    refetchOnReconnect:false ,
-    refetchOnWindowFocus:false
+  const { data: toptwo } = useQuery(["top"], () => apiConnectorGet(endpoint?.node?.top_two_winners), {
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false
   })
-  const topdata = toptwo?.data?.data ||[]
+  const topdata = toptwo?.data?.data || []
 
   const { isLoading, data } = useQuery(
     ["walletamount"],
@@ -144,7 +144,7 @@ function Dashboard() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false
     }
   );
 
@@ -156,7 +156,7 @@ function Dashboard() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false
     }
   );
 
@@ -399,7 +399,7 @@ function Dashboard() {
               Available Balance
             </Typography>
           </Box>
- 
+
 
           <Box sx={styles.referralLinkContainer}>
             <Typography variant="body1" sx={styles.referralLinkTitle}>
@@ -439,94 +439,103 @@ function Dashboard() {
               </Button>
             </Stack>
           </Box>
-          <Box
-          sx={{
-            width: "95%",
-            marginLeft: "2.5%",
-            borderRadius: "10px",
-            background: zubgmid,
-            padding: "10px",
-            mt: "20px",
-            "&>:nth-child(1)": {
-              color: "white",
-              fontSize: "15px",
-              fontWeight: "600",
-              mb: "25px",
-            },
-          }}
-        >
-          <Typography variant="body1" color="initial">
-            Income
-          </Typography>
 
-          <Box sx={style.actionContainertwo}>
-            <Stack
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                flexDirection: "column",
-                background: zubgmid,
-                width: "100%",
-                borderRadius: "10px",
-              }}
-            >
-              {data_array?.map((i) => {
-                return (
-                  // <Box
-                  //   component={NavLink}
-                  //   to={i.to}
-                  //   sx={{
-                  //     display: "flex",
-                  //     flexDirection: "column",
-                  //     alignItems: "center",
-                  //     justifyContent: "center",
-                  //     mb: "10px",
-                  //     "&>p": {
-                  //       color: "white",
-                  //       fontSize: "14px",
-                  //       fontWeight: "500",
-                  //       mt: "5px",
-                  //     },
-                  //   }}
-                  // >
-                  //   <p></p>
-                  //   <p className="lg:!whitespace-nowrap !text-center">{i.name}</p>
-                  // </Box>
-
-                  <Stack
-                    component={NavLink}
-                    to={i.to}
-                    direction="row"
-                    sx={{
-                      borderBottom: "1px solid white",
-                      padding: "10px",
-                      width: "100%",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Stack direction="row" sx={{ alignItems: "center" }}>
-                      {i?.logo}
-                      <Typography
-                        variant="body1"
-                        color="initial"
-                        sx={{ color: "white", fontSize: "13px", fontWeight: "600" }}
-                      >
-                        {i.name}
-                      </Typography>
-                    </Stack>
-                    <Box>
-                      <KeyboardDoubleArrowRightIcon
-                        sx={{ color: "white", fontSize: "23px", fontWeight: "600" }}
-                      />
-                    </Box>
-                  </Stack>
-                );
-              })}
-            </Stack>
+          <Box sx={styles.socialButtonsContainer} className="!cursor-pointer !flex px-10" >
+            <Box sx={styles.socialButtonText} className="!text-center" onClick={()=>navigate('/rulereferral')}>
+              Referral Income </Box>
+            <Box sx={styles.socialButtonText} className="!text-center" onClick={()=>navigate('/rulesponsor')}>
+              Sponsor Income </Box>
           </Box>
-        </Box>
+        
+
+          <Box
+            sx={{
+              width: "95%",
+              marginLeft: "2.5%",
+              borderRadius: "10px",
+              background: zubgmid,
+              padding: "10px",
+              mt: "20px",
+              "&>:nth-child(1)": {
+                color: "white",
+                fontSize: "15px",
+                fontWeight: "600",
+                mb: "25px",
+              },
+            }}
+          >
+            <Typography variant="body1" color="initial">
+              Income
+            </Typography>
+
+            <Box sx={style.actionContainertwo}>
+              <Stack
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  background: zubgmid,
+                  width: "100%",
+                  borderRadius: "10px",
+                }}
+              >
+                {data_array?.map((i) => {
+                  return (
+                    // <Box
+                    //   component={NavLink}
+                    //   to={i.to}
+                    //   sx={{
+                    //     display: "flex",
+                    //     flexDirection: "column",
+                    //     alignItems: "center",
+                    //     justifyContent: "center",
+                    //     mb: "10px",
+                    //     "&>p": {
+                    //       color: "white",
+                    //       fontSize: "14px",
+                    //       fontWeight: "500",
+                    //       mt: "5px",
+                    //     },
+                    //   }}
+                    // >
+                    //   <p></p>
+                    //   <p className="lg:!whitespace-nowrap !text-center">{i.name}</p>
+                    // </Box>
+
+                    <Stack
+                      component={NavLink}
+                      to={i.to}
+                      direction="row"
+                      sx={{
+                        borderBottom: "1px solid white",
+                        padding: "10px",
+                        width: "100%",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Stack direction="row" sx={{ alignItems: "center" }}>
+                        {i?.logo}
+                        <Typography
+                          variant="body1"
+                          color="initial"
+                          sx={{ color: "white", fontSize: "13px", fontWeight: "600" }}
+                        >
+                          {i.name}
+                        </Typography>
+                      </Stack>
+                      <Box>
+                        <KeyboardDoubleArrowRightIcon
+                          sx={{ color: "white", fontSize: "23px", fontWeight: "600" }}
+                        />
+                      </Box>
+                    </Stack>
+                  );
+                })}
+              </Stack>
+            </Box>
+          </Box>
           <div
             className="mt-2 w-full "
             style={{
@@ -622,7 +631,7 @@ function Dashboard() {
               </Button>
             </Box>
           </div>
-        
+
           {isLoadingdata ? (
             <div className="w-[100%] flex justify-center">
               <CircularProgress className="!text-white" />
@@ -673,10 +682,10 @@ function Dashboard() {
                       <p className="!flex !flex-col" style={{ color: "white" }}>
                         {i?.email
                           ? i.email.split("@")[0].substring(0, 2) +
-                            "**" +
-                            (i.email.split("@")[0].length > 2
-                              ? i.email.split("@")[0].substring(2, 4)
-                              : "")
+                          "**" +
+                          (i.email.split("@")[0].length > 2
+                            ? i.email.split("@")[0].substring(2, 4)
+                            : "")
                           : "**"}
                       </p>
                     </Typography>
@@ -724,14 +733,14 @@ function Dashboard() {
                   <Typography variant="body1">
                     {winnner_data?.[0]?.email
                       ? winnner_data?.[0]?.email
+                        ?.split("@")?.[0]
+                        ?.substring(0, 2) +
+                      "**" +
+                      (winnner_data?.[0]?.email?.split("@")?.[0]?.length > 2
+                        ? winnner_data?.[0]?.email
                           ?.split("@")?.[0]
-                          ?.substring(0, 2) +
-                        "**" +
-                        (winnner_data?.[0]?.email?.split("@")?.[0]?.length > 2
-                          ? winnner_data?.[0]?.email
-                              ?.split("@")?.[0]
-                              ?.substring(2, 4)
-                          : "")
+                          ?.substring(2, 4)
+                        : "")
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
@@ -768,14 +777,14 @@ function Dashboard() {
                   <Typography variant="body1">
                     {winnner_data?.[1]?.email
                       ? winnner_data?.[1]?.email
+                        ?.split("@")?.[0]
+                        ?.substring(0, 2) +
+                      "**" +
+                      (winnner_data?.[1]?.email?.split("@")?.[0]?.length > 2
+                        ? winnner_data?.[1]?.email
                           ?.split("@")?.[0]
-                          ?.substring(0, 2) +
-                        "**" +
-                        (winnner_data?.[1]?.email?.split("@")?.[0]?.length > 2
-                          ? winnner_data?.[1]?.email
-                              ?.split("@")?.[0]
-                              ?.substring(2, 4)
-                          : "")
+                          ?.substring(2, 4)
+                        : "")
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
@@ -812,14 +821,14 @@ function Dashboard() {
                   <Typography variant="body1">
                     {winnner_data?.[2]?.email
                       ? winnner_data?.[2]?.email
+                        ?.split("@")?.[0]
+                        ?.substring(0, 2) +
+                      "**" +
+                      (winnner_data?.[2]?.email?.split("@")?.[0]?.length > 2
+                        ? winnner_data?.[2]?.email
                           ?.split("@")?.[0]
-                          ?.substring(0, 2) +
-                        "**" +
-                        (winnner_data?.[2]?.email?.split("@")?.[0]?.length > 2
-                          ? winnner_data?.[2]?.email
-                              ?.split("@")?.[0]
-                              ?.substring(2, 4)
-                          : "")
+                          ?.substring(2, 4)
+                        : "")
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
@@ -861,10 +870,10 @@ function Dashboard() {
                       <p className="!flex !flex-col" style={{ color: "white" }}>
                         {i?.email
                           ? i.email.split("@")[0].substring(0, 2) +
-                            "**" +
-                            (i.email.split("@")[0].length > 2
-                              ? i.email.split("@")[0].substring(2, 4)
-                              : "")
+                          "**" +
+                          (i.email.split("@")[0].length > 2
+                            ? i.email.split("@")[0].substring(2, 4)
+                            : "")
                           : "**"}
                       </p>
                     </Typography>

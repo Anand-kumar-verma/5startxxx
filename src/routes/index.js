@@ -11,6 +11,7 @@ import AddBankDetails from "../pages/account/Component/AddBankDetails";
 import AddUPI from "../pages/account/Component/AddUpi";
 import AddedBankDetailList from "../pages/account/Component/AddedBankDetailList";
 import BatHistorys from "../pages/account/Component/BatHistory";
+import BettingIncomeRule from "../pages/account/Component/BeetingRule";
 import Feedback from "../pages/account/Component/Feedback";
 import GameNotification from "../pages/account/Component/GameNotification";
 import Gamestaticks from "../pages/account/Component/Gamestaticks";
@@ -18,6 +19,7 @@ import Languages from "../pages/account/Component/Language";
 import LoginPassword from "../pages/account/Component/LoginPassword";
 import Mail from "../pages/account/Component/Mail";
 import Notification from "../pages/account/Component/Notification";
+import ReferralIncomeRule from "../pages/account/Component/ReferralRule";
 import SettingCenter from "../pages/account/Component/SettingCenter";
 import Activity from "../pages/activity/Activity";
 import Register from "../pages/auth/register/Register";
@@ -84,6 +86,14 @@ export const routes = [
   {
     path: "/bathistory",
     component: <BatHistorys />,
+  },
+  {
+    path: "/rulesponsor",
+    component: <BettingIncomeRule />,
+  },
+  {
+    path: "/rulereferral",
+    component: <ReferralIncomeRule />,
   },
   {
     path: "/notification",
