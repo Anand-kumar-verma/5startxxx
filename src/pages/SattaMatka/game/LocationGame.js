@@ -39,6 +39,12 @@ function Jodi({ game_type, betArray, setBetArray }) {
       amount: amount,
     };
     placeBet([body]);
+  };
+  const addNumberINBetArraybET = (number, amount) => {
+    const body = {
+      number: number,
+      amount: amount,
+    };
     const existingIndex = betArray.findIndex(
       (item) => Number(item.number) === Number(number)
     );
@@ -57,6 +63,7 @@ function Jodi({ game_type, betArray, setBetArray }) {
     let min = Number(moment(Date.now())?.format("mm"));
     let time = (min >= 25 && min <= 30) || (min >= 55 && min <= 60);
     if (time) return toast("Time Over, Please try in next trade.");
+    addNumberINBetArraybET(betArrayCurrent?.[0]);
     try {
       betArrayCurrent?.forEach((i) => {
         if (i?.amount !== null && Number(i?.amount) < 5)

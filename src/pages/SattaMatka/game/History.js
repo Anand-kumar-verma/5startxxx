@@ -3,7 +3,6 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 import {
   starbluegrad,
@@ -18,8 +17,6 @@ import { apiConnectorGet } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 
 function History() {
-  const navigate = useNavigate();
-
   const { isLoading, data } = useQuery(
     ["my_history"],
     () => apiConnectorGet(endpoint?.node?.satta_game_myhistory),
@@ -171,9 +168,11 @@ function History() {
                       </p>
 
                       <p className="!flex">
-                      {item?.win_string && <span className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1">
-                          Won
-                        </span>}
+                        {item?.win_string && (
+                          <span className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1">
+                            Won
+                          </span>
+                        )}
                         {item?.win_string
                           ?.split(" ")
                           .filter((j) => j.trim() !== "") // Filter out empty strings
