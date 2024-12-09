@@ -1,7 +1,8 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
+import { stargrad } from "../../../Shared/color";
 
-const AndarBaharTable = ({ placeBet , betArray, setBetArray }) => {
+const AndarBaharTable = ({ placeBet, betArray, setBetArray }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const existingIndex = betArray.findIndex(
@@ -166,8 +167,15 @@ const AndarBaharTable = ({ placeBet , betArray, setBetArray }) => {
           {renderRowsb("*")}
         </Box>
       </Box>
-      <div>
-        <Button onClick={placeBet}>Place Bid</Button>
+      <div className="mt-5">
+        <Button sx={{
+          marginTop: "16px",
+          background: stargrad,
+          color: "#fff",
+          borderRadius: "8px",
+          py: 1,
+          mb: 2,
+        }} className="w-full !text-xl" onClick={placeBet}> Bid Placed</Button>
       </div>
     </Box>
   );

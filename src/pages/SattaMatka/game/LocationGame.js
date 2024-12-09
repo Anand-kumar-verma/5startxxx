@@ -168,7 +168,7 @@ function Jodi({ placeBet, betArray, setBetArray }) {
               mb: 2,
             }}
           >
-            ADD BID
+            Bid Placed
           </Button>
           <Button
             fullWidth
