@@ -470,7 +470,7 @@ function Dashboard() {
               onAutoplayTimeLeft={onAutoplayTimeLeft}
               className="mySwiper"
               style={{
-                height: "25vh !important",
+                // height: "25vh !important",
                 borderRadius: "5px",
                 overflow: "hidden",
                 marginBottom: "16px",
@@ -478,7 +478,7 @@ function Dashboard() {
             >
               <SwiperSlide
                 sx={{
-                  height: "25vh !important",
+                  // height: "20vh !important",
                   borderRadius: "5px",
                   overflow: "hidden",
                 }}
@@ -487,12 +487,12 @@ function Dashboard() {
                   component="img"
                   src={referral}
                   alt="Slide 1"
-                  sx={styles.swiperImage}
+                  sx={styles.swiperImageincome}
                 />
               </SwiperSlide>
               <SwiperSlide
                 sx={{
-                  height: "25vh !important",
+                  // height: "20vh !important",
                   borderRadius: "5px",
                   overflow: "hidden",
                 }}
@@ -501,7 +501,7 @@ function Dashboard() {
                   component="img"
                   src={sponsor}
                   alt="Slide 1"
-                  sx={styles.swiperImage}
+                  sx={styles.swiperImageincome}
                 />
               </SwiperSlide>
 
@@ -1112,6 +1112,7 @@ const styles = {
     fontWeight: "500",
   },
   swiperImage: { width: "100%", height: "25vh", objectFit: "fill" },
+  swiperImageincome: { width: "100%", height: "15vh", objectFit: "fill" },
   depositWithdrawContainer: {
     alignItems: "center",
     justifyContent: "space-between",
