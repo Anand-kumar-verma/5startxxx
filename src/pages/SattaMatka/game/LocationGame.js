@@ -211,9 +211,10 @@ function Jodi({ game_type, betArray, setBetArray }) {
               borderRadius: "8px",
               py: 1,
               mb: 2,
+               textTransform: "capitalize"
             }}
           >
-            Bid Placed
+            bid placed
           </Button>
           <Button
             fullWidth

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { apiConnectorPost } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
+import { stargrad } from "../../../Shared/color";
 
 const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
   const client = useQueryClient();
@@ -208,7 +209,7 @@ const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
           {renderRowsb("*")}
         </Box>
       </Box>
-      <div className="mt-5">
+      <div className="mt-2">
         <Button sx={{
           marginTop: "16px",
           background: stargrad,
@@ -216,7 +217,8 @@ const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
           borderRadius: "8px",
           py: 1,
           mb: 2,
-        }} className="w-full !text-xl" onClick={placeBet}> Bid Placed</Button>
+          textTransform: "capitalize"
+        }} className="w-full !text-xl" onClick={placeBet}> bid placed</Button>
       </div>
     </Box>
   );
