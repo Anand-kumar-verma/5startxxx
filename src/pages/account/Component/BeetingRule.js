@@ -1,12 +1,10 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import * as React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { starbluegrad, zubgback, zubgmid } from '../../../Shared/color';
-import Layout from '../../../component/Layout/Layout';
 import logo2 from "../../../assets/images/5-Star-XXX-8-29-2024.png";
+import Layout from '../../../component/Layout/Layout';
 
 function BettingIncomeRule() {
   const navigate = useNavigate();

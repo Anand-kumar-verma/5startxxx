@@ -201,7 +201,7 @@ function Satta() {
                     color="initial"
                     sx={styles.gameheading}
                     className="!mt-1 lg:!text-lg !text-[10px]"
-                  // className="!mt-1"
+                    // className="!mt-1"
                   >
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
@@ -215,12 +215,16 @@ function Satta() {
                 </Box>
               </Box>
 
-              <Box sx={{ position: "absolute", 
-                 right: {
-                  xs: "15px", 
-                  md: "45px", 
-                },
-                top: "22px" }}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  right: {
+                    xs: "15px",
+                    md: "45px",
+                  },
+                  top: "22px",
+                }}
+              >
                 <Box
                 // sx={{ width: "100px" }}
                 >
@@ -341,11 +345,12 @@ function Satta() {
                 sx={{
                   position: "absolute",
                   right: {
-                    xs: "15px", 
-                    md: "45px", 
+                    xs: "15px",
+                    md: "45px",
                   },
-                  top: "22px"
-                }}>
+                  top: "22px",
+                }}
+              >
                 <Box>
                   {!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_faridabad"
@@ -448,7 +453,6 @@ function Satta() {
                     sx={styles.gameheading}
                     // className="!mt-1"
                     className="!mt-1 lg:!text-lg !text-[10px]"
-
                   >
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
@@ -458,12 +462,16 @@ function Satta() {
                 </Box>
               </Box>
 
-              <Box sx={{ position: "absolute", 
-                right: {
-                  xs: "15px", 
-                  md: "45px", 
-                },
-                 top: "22px" }}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  right: {
+                    xs: "15px",
+                    md: "45px",
+                  },
+                  top: "22px",
+                }}
+              >
                 <Box>
                   {!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_gali"
@@ -566,7 +574,6 @@ function Satta() {
                     sx={styles.gameheading}
                     // className="!mt-1"
                     className="!mt-1 lg:!text-lg !text-[10px]"
-
                   >
                     Last result as :{" "}
                     <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
@@ -576,12 +583,16 @@ function Satta() {
                 </Box>
               </Box>
 
-              <Box sx={{ position: "absolute", 
+              <Box
+                sx={{
+                  position: "absolute",
                   right: {
-                    xs: "15px", 
-                    md: "45px", 
+                    xs: "15px",
+                    md: "45px",
                   },
-                top: "22px" }}>
+                  top: "22px",
+                }}
+              >
                 <Box>
                   {!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_disawar"
