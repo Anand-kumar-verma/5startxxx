@@ -40,6 +40,8 @@ import {
   zubgbackgrad,
   zubgmid,
 } from "../../Shared/color";
+import referral from "../../assets/images/ref.jpg";
+import sponsor from "../../assets/images/spon.jpg";
 import one from "../../assets/banner1.png";
 import two from "../../assets/banner2.png";
 import crown1 from "../../assets/crown1.png";
@@ -439,13 +441,80 @@ function Dashboard() {
               </Button>
             </Stack>
           </Box>
+          <Box className="!px-4" pt={2}>
+            <Swiper
+              spaceBetween={30}
+              centeredSlides={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: false,
+              }}
+              navigation={false}
+              modules={[Autoplay, Pagination, Navigation]}
+              onAutoplayTimeLeft={onAutoplayTimeLeft}
+              className="mySwiper"
+              style={{
+                height: "25vh !important",
+                borderRadius: "5px",
+                overflow: "hidden",
+                marginBottom: "16px",
+              }}
+            >
+              <SwiperSlide
+                sx={{
+                  height: "25vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={referral}
+                  alt="Slide 1"
+                  sx={styles.swiperImage}
+                />
+              </SwiperSlide>
+              <SwiperSlide
+                sx={{
+                  height: "25vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={sponsor}
+                  alt="Slide 1"
+                  sx={styles.swiperImage}
+                />
+              </SwiperSlide>
+             
 
-          <Box sx={styles.socialButtonsContainer} className="!cursor-pointer !flex px-10" >
-            <Box sx={styles.socialButtonText} className="!text-center" onClick={()=>navigate('/rulereferral')}>
-              Referral Income Rule</Box>
-            <Box sx={styles.socialButtonText} className="!text-center" onClick={()=>navigate('/rulesponsor')}>
-            Sponsor Betting Income Rule</Box>
+              <div
+                className="autoplay-progress"
+                slot="container-end"
+                style={{ opacity: 0 }}
+              >
+                <svg viewBox="0 0 48 48" ref={progressCircle}>
+                  <circle cx="24" cy="24" r="20"></circle>
+                </svg>
+                <span ref={progressContent}></span>
+              </div>
+            </Swiper>
           </Box>
+          {/* <Box sx={styles.socialButtonsContainer} className="!cursor-pointer" >
+           <Box sx={styles.socialButtonText} className="p-4" >
+              Referral Income
+            <img  src={referral} alt="" className="rounded"/>
+            </Box>
+             <Box sx={styles.socialButtonText} className="p-4" >
+            Sponsor Betting Income 
+            <img  src={sponsor} alt="" className="rounded"/>
+            </Box>
+          </Box> */}
         
 
           <Box
