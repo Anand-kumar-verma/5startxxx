@@ -890,7 +890,10 @@ function Home() {
                   fontWeight: "700",
                   "&:hover": { backgroundColor: "transparent" },
                 }}
-                onClick={() => justHalf(bet, setBet, newdata)}
+                onClick={() =>
+                  localStorage.getItem("rollet_bet_placed") !== "true" &&
+                  justHalf(bet, setBet, newdata)
+                }
               >
                 -
               </Button>
@@ -934,7 +937,10 @@ function Home() {
                   fontWeight: "700",
                   "&:hover": { backgroundColor: "transparent" },
                 }}
-                onClick={() => justDouble(bet, setBet, newdata)}
+                onClick={() => {
+                  localStorage.getItem("rollet_bet_placed") !== "true" &&
+                    justDouble(bet, setBet, newdata);
+                }}
               >
                 +
               </Button>

@@ -11,14 +11,18 @@ const Zero = ({
   amount,
 }) => {
   return (
-    <Stack direction="row" justifyContent="end" sx={{ height: "7%", width: '100%', }}>
+    <Stack
+      direction="row"
+      justifyContent="end"
+      sx={{ height: "7%", width: "100%" }}
+    >
       <Box
         sx={{
-          background: '#2A3E2A',
+          background: "#2A3E2A",
           width: "100%",
           border: "1px solid white",
           position: "relative",
-          borderRadius: '0px 0px 50px 50px',
+          borderRadius: "0px 0px 50px 50px",
         }}
         onClick={(e) => {
           if (isSelectedDropBet) {
@@ -28,36 +32,26 @@ const Zero = ({
           let isContainsPre = bet?.find((i) => i?.id === "0");
           if (isContainsPre) {
             // setOpenDialogBox("0");
-            if (
-             
-              isContainsPre?.amount < 10
-            ) {
+            if (isContainsPre?.amount < 10) {
               return toast(
-                <span className="!p-2" style={{ marginTop: "10% ",  backgroundColor: 'black' }}>
-                 Bet must be greater or equal to 10 Rs
+                <span
+                  className="!p-2"
+                  style={{ marginTop: "10% ", backgroundColor: "black" }}
+                >
+                  Bet must be greater or equal to 10 Rs
                 </span>
               );
             } else {
-              setBetFuncton(
-                "0",
-                0,
-                Number(isContainsPre?.amount) + amount
-              );
+              setBetFuncton("0", 0, Number(isContainsPre?.amount) + amount);
             }
           } else {
             setBetFuncton("0", 0, amount);
           }
           e.stopPropagation();
-        }}  >
-        <IconButton
-          sx={{ ...style.btn4, alignItems: 'center' }}
-          
-        >
-          <span
-            id="0"
-            style={{ fontWeight: "500" }}
-          
-          >
+        }}
+      >
+        <IconButton sx={{ ...style.btn4, alignItems: "center" }}>
+          <span id="0" style={{ fontWeight: "500" }}>
             0
           </span>
         </IconButton>
