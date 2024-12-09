@@ -1,16 +1,7 @@
 import { ArrowBackRounded, Wallet } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Container,
-  Dialog,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Dialog, Tab, Tabs, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { NavLink, useLocation } from "react-router-dom";
 import Layout from "../../../component/Layout/Layout";
 import {
@@ -20,19 +11,17 @@ import {
 import { endpoint } from "../../../services/urls";
 import { stardarkblue, stargrad } from "../../../Shared/color";
 import { getSattaType } from "../../../Shared/sharedFunction";
-import { useSocket } from "../../../Shared/SocketContext";
 import AndarBaharTable from "./AnderBaherGame";
 import Jodi from "./LocationGame";
 import WinLossPopup from "./WinLossPopup";
+import { useSocket } from "../../../Shared/SocketContext";
 function Sattagameplay() {
   const location = useLocation();
   const game_type = location?.state?.satta_type;
   const [value, setValue] = useState(0);
-  const client = useQueryClient();
-  const [minut, setMinut] = useState(6);
+  // const [minut, setMinut] = useState(6);
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem(`betApplied_${game_type}`);
-
   const socket = useSocket();
   const [betArray, setBetArray] = useState([
     {
@@ -116,39 +105,38 @@ function Sattagameplay() {
       amount: null,
     },
   ]);
-  async function placeBet() {
-    if (Number(minut) <= 5)
-      return toast("Time Over, Please try in next trade.");
-    try {
-      betArray?.forEach((i) => {
-        if (i?.amount !== null && Number(i?.amount) < 5)
-          return toast(
-            "Your Amount is less than 5 on " +
-              `${
-                Number(i?.number) >= 1000 && Number(i?.number) <= 1009
-                  ? "Andar"
-                  : "Bahar"
-              } ${Number(i?.number) % 10}`
-          );
-      });
-      const newArrya = betArray?.filter((i) => i?.amount !== null);
-      if (newArrya?.length <= 0) return toast("Please choose no.");
-      const reqBody = {
-        bet_array: JSON.stringify(newArrya),
-        satta_type_user: game_type,
-      };
-      const response = await apiConnectorPost(
-        endpoint?.node?.bet_satta,
-        reqBody
-      );
-      toast(response?.data?.msg);
-      localStorage.setItem(`betApplied_${game_type}`, true);
-      client.refetchQueries("walletamount");
-    } catch (e) {
-      toast("Something went wrong", e);
-    }
-  }
-
+  // async function placeBet() {
+  //   if (Number(minut) <= 5)
+  //     return toast("Time Over, Please try in next trade.");
+  //   try {
+  //     betArray?.forEach((i) => {
+  //       if (i?.amount !== null && Number(i?.amount) < 5)
+  //         return toast(
+  //           "Your Amount is less than 5 on " +
+  //             `${
+  //               Number(i?.number) >= 1000 && Number(i?.number) <= 1009
+  //                 ? "Andar"
+  //                 : "Bahar"
+  //             } ${Number(i?.number) % 10}`
+  //         );
+  //     });
+  //     const newArrya = betArray?.filter((i) => i?.amount !== null);
+  //     if (newArrya?.length <= 0) return toast("Please choose no.");
+  //     const reqBody = {
+  //       bet_array: JSON.stringify(newArrya),
+  //       satta_type_user: game_type,
+  //     };
+  //     const response = await apiConnectorPost(
+  //       endpoint?.node?.bet_satta,
+  //       reqBody
+  //     );
+  //     toast(response?.data?.msg);
+  //     localStorage.setItem(`betApplied_${game_type}`, true);
+  //     client.refetchQueries("walletamount");
+  //   } catch (e) {
+  //     toast("Something went wrong", e);
+  //   }
+  // }
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -173,7 +161,7 @@ function Sattagameplay() {
         time_to_be_intro_mid_min >= 30
           ? time_to_be_intro_mid_min - 30
           : time_to_be_intro_mid_min;
-      setMinut(time_to_be_intro_min);
+      // setMinut(time_to_be_intro_min);
       time_to_be_intro_min === 0 && sec === 0 && setOpenDialogBox(true);
     };
     socket.on("seconds", handleOneMin);
@@ -259,10 +247,18 @@ function Sattagameplay() {
               <Tab label="Andar / Bahar" sx={{ flex: 1, color: "white" }} />
             </Tabs>
             {value === 0 && (
-              <Jodi placeBet={placeBet} betArray={betArray} setBetArray={setBetArray} />
+              <Jodi
+                game_type={game_type}
+                betArray={betArray}
+                setBetArray={setBetArray}
+              />
             )}
             {value === 1 && (
-              <AndarBaharTable placeBet={placeBet} betArray={betArray} setBetArray={setBetArray} />
+              <AndarBaharTable
+                game_type={game_type}
+                betArray={betArray}
+                setBetArray={setBetArray}
+              />
             )}
             {/* <Box
               className=" !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"

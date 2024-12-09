@@ -1,7 +1,14 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
+import { apiConnectorPost } from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
+import { useQueryClient } from "react-query";
+import toast from "react-hot-toast";
+import { number } from "yup";
+import moment from "moment";
 
-const AndarBaharTable = ({ placeBet , betArray, setBetArray }) => {
+const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
+  const client = useQueryClient();
   const handleChange = (e) => {
     const { name, value } = e.target;
     const existingIndex = betArray.findIndex(
@@ -13,6 +20,42 @@ const AndarBaharTable = ({ placeBet , betArray, setBetArray }) => {
     setBetArray(updatedBetArray);
   };
 
+  async function placeBet() {
+    let min = Number(moment(Date.now())?.format("mm"));
+    let time = (min >= 25 && min <= 30) || (min >= 55 && min <= 60);
+    if (time) return toast("Time Over, Please try in next trade.");
+    try {
+      let betArrayCurrent = betArray?.filter(
+        (i) => i?.amount !== null && Number(i.number) >= 1000
+      );
+      betArrayCurrent?.forEach((i) => {
+        if (i?.amount !== null && Number(i?.amount) < 5)
+          return toast(
+            "Your Amount is less than 5 on " +
+              `${
+                Number(i?.number) >= 1000 && Number(i?.number) <= 1009
+                  ? "Andar"
+                  : "Bahar"
+              } ${Number(i?.number) % 10}`
+          );
+      });
+      const newArrya = betArrayCurrent?.filter((i) => i?.amount !== null);
+      if (newArrya?.length <= 0) return toast("Please choose no.");
+      const reqBody = {
+        bet_array: JSON.stringify(newArrya),
+        satta_type_user: game_type,
+      };
+      const response = await apiConnectorPost(
+        endpoint?.node?.bet_satta,
+        reqBody
+      );
+      toast(response?.data?.msg);
+      localStorage.setItem(`betApplied_${game_type}`, true);
+      client.refetchQueries("walletamount");
+    } catch (e) {
+      toast("Something went wrong", e);
+    }
+  }
   const renderRowsa = (labelPrefix) => {
     return Array.from({ length: 10 }, (_, index) => (
       <Grid container key={index} spacing={2}>
@@ -174,4 +217,3 @@ const AndarBaharTable = ({ placeBet , betArray, setBetArray }) => {
 };
 
 export default AndarBaharTable;
-

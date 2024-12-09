@@ -2,8 +2,13 @@ import { Box, Button, Drawer, TextField, Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { stargrad } from "../../../Shared/color";
 import toast from "react-hot-toast";
+import { apiConnectorPost } from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
+import { useQueryClient } from "react-query";
+import moment from "moment";
 
-function Jodi({ placeBet, betArray, setBetArray }) {
+function Jodi({ game_type, betArray, setBetArray }) {
+  const client = useQueryClient();
   const buttons = Array.from({ length: 100 }, (_, i) =>
     String(i).padStart(2, "0")
   );
@@ -33,6 +38,7 @@ function Jodi({ placeBet, betArray, setBetArray }) {
       number: number,
       amount: amount,
     };
+    placeBet([body]);
     const existingIndex = betArray.findIndex(
       (item) => Number(item.number) === Number(number)
     );
@@ -47,6 +53,39 @@ function Jodi({ placeBet, betArray, setBetArray }) {
     }
     setAmount(0);
   };
+  async function placeBet(betArrayCurrent) {
+    let min = Number(moment(Date.now())?.format("mm"));
+    let time = (min >= 25 && min <= 30) || (min >= 55 && min <= 60);
+    if (time) return toast("Time Over, Please try in next trade.");
+    try {
+      betArrayCurrent?.forEach((i) => {
+        if (i?.amount !== null && Number(i?.amount) < 5)
+          return toast(
+            "Your Amount is less than 5 on " +
+              `${
+                Number(i?.number) >= 1000 && Number(i?.number) <= 1009
+                  ? "Andar"
+                  : "Bahar"
+              } ${Number(i?.number) % 10}`
+          );
+      });
+      const newArrya = betArrayCurrent?.filter((i) => i?.amount !== null);
+      if (newArrya?.length <= 0) return toast("Please choose no.");
+      const reqBody = {
+        bet_array: JSON.stringify(newArrya),
+        satta_type_user: game_type,
+      };
+      const response = await apiConnectorPost(
+        endpoint?.node?.bet_satta,
+        reqBody
+      );
+      toast(response?.data?.msg);
+      localStorage.setItem(`betApplied_${game_type}`, true);
+      client.refetchQueries("walletamount");
+    } catch (e) {
+      toast("Something went wrong", e);
+    }
+  }
 
   return (
     <Box className="w95">
@@ -151,7 +190,6 @@ function Jodi({ placeBet, betArray, setBetArray }) {
             variant="contained"
             onClick={() => {
               handleClick();
-              placeBet();
               selectedNumber !== "" &&
                 amount !== "" &&
                 amount !== 0 &&

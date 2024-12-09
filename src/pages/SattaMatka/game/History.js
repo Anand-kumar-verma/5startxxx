@@ -19,9 +19,7 @@ import { endpoint } from "../../../services/urls";
 
 function History() {
   const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
+
   const { isLoading, data } = useQuery(
     ["my_history"],
     () => apiConnectorGet(endpoint?.node?.satta_game_myhistory),
@@ -31,8 +29,6 @@ function History() {
     }
   );
   const res = data?.data?.data;
-
-  console.log(res, "THis is response");
 
   return (
     <Layout>
@@ -135,6 +131,9 @@ function History() {
 
                     <div>
                       <p className="!flex">
+                        <span className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1">
+                          No.
+                        </span>
                         {item?.number?.split(",")?.map((j, index) => (
                           <span
                             key={index}
@@ -148,8 +147,33 @@ function History() {
                           </span>
                         ))}
                       </p>
+                      <p className="!flex">
+                        <span className="!text-white !text-[11px] !w-[90px] text-center !border-2 !border-white px-2 py-1">
+                          Bid Amnt.
+                        </span>
+                        {item?.amount_string
+                          ?.split(",")
+                          .filter((j) => j.trim() !== "") // Filter out empty strings
+                          .map((j, index) => (
+                            <span
+                              key={index}
+                              className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1"
+                            >
+                              {Number(j) === 0 ? (
+                                <Cancel className="!text-red-500" />
+                              ) : (
+                                <span className="!text-white">
+                                  {Number(j)?.toFixed(2)}
+                                </span>
+                              )}
+                            </span>
+                          ))}
+                      </p>
 
                       <p className="!flex">
+                      {item?.win_string && <span className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1">
+                          Won
+                        </span>}
                         {item?.win_string
                           ?.split(" ")
                           .filter((j) => j.trim() !== "") // Filter out empty strings
@@ -173,145 +197,6 @@ function History() {
                 </>
               );
             })}
-
-            {/* {res?.map((i) => {
-              return (
-                <Box
-                  sx={{
-                    mb: 2,
-                    padding: "15px",
-                    borderRadius: "10px",
-                    background: zubgmid,
-                  }}
-                >
-                  <Stack
-                    direction="row"
-                    sx={{
-                      paddingBottom: "10px",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      borderBottom: "1px solid white",
-                    }}
-                  >
-                    <Box>
-                      <Button
-                        sx={{
-                          // background: zubgmid,
-                          background: "white",
-                          color: i?.type === "Paying" ? "green" : "red",
-                          textTransform: "capitalize",
-                        }}
-                      >  {i?.type === "Paying" ? "Deposit" : "Withdrawal"}
-
-                      </Button>
-                    </Box>
-                    <Box>
-                      <Button
-                        sx={{ color: "green", textTransform: "capitalize" }}
-                        className={`${i?.tr15_status === "Success"
-                          ? "!text-green-500"
-                          : "!text-red-500"
-                          }`}
-                      >
-                        {i?.tr15_status}
-                      </Button>
-                      <IconButton>
-                        <ArrowForwardIcon sx={{ color: "white" }} />
-                      </IconButton>
-                    </Box>
-                  </Stack>
-                  .
-                  <Stack
-                    direction="row"
-                    sx={{
-                      mb: "10px",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      "&>p": { color: "white" },
-                    }}
-                  >
-                    <Typography variant="body1" color="initial">
-                      Balance
-                    </Typography>
-                    <Typography variant="body1" color="initial">
-                      {i?.tr15_amt ? (
-                        i?.type === "Paying" ? (
-                          `${i.tr15_amt}`
-                        ) : (
-                          `-${i.tr15_amt}`
-                        )
-                      ) : (
-                        "N/A"
-                      )}
-                    </Typography>
-                  </Stack>
-                  <Stack
-                    direction="row"
-                    sx={{
-                      mb: "10px",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      "&>p": { color: "white" },
-                    }}
-                  >
-                    <Typography variant="body1" color="initial">
-                      Date/Time
-                    </Typography>
-                    <Typography variant="body1" color="initial">
-                      {moment(i?.tr15_date)?.format("DD-MM-YYYY")}{" "}
-                      {moment(i?.tr15_date)?.format("HH:mm:ss")}
-                    </Typography>
-                  </Stack>
-                  {i?.success_date !== "NUll" && <Stack
-                    direction="row"
-                    sx={{
-                      mb: "10px",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      "&>p": { color: "white" },
-                    }}
-                  >
-                    <Typography variant="body1" color="initial">
-                      Success Date/Time
-                    </Typography>
-                    <Typography variant="body1" color="initial" className="!text-green-500">
-                      {moment(i?.success_date)?.format("DD-MM-YYYY")}{" "}
-                      {moment(i?.success_date)?.format("HH:mm:ss")}
-                    </Typography>
-                  </Stack>}
-                  <Stack
-                    direction="row"
-                    sx={{
-                      mb: "10px",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      "&>p": { color: "white" },
-                    }}
-                  >
-                    <Typography variant="body1" color="initial">
-                      Trans number
-                    </Typography>
-                    <Stack
-                      direction="row"
-                      sx={{
-                        mb: "10px",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        "&>p": { color: "white" },
-                      }}
-                    >
-                      <Typography variant="body1" color="initial">
-                        {i?.tr15_trans}
-                      </Typography>
-                      <IconButton>
-                        <ContentCopyIcon sx={{ color: "white" }} />
-                      </IconButton>
-                    </Stack>
-                  </Stack>
-                </Box>
-              );
-            })} */}
-            {/* <Button sx={style.paytmbtntwo}>All history</Button> */}
           </Box>
         </Box>
       </Container>
