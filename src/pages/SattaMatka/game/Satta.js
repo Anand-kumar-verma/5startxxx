@@ -230,7 +230,7 @@ function Satta() {
                         // className="fp11"
                         sx={styles.upcomingButton}
                       >
-                        Upcoming Result{" "}
+                        Upcoming {" "}
                       </Button>
                       <Typography sx={{ color: "white", textAlign: "center" }}>
                         <span> Time Left : </span>
@@ -344,7 +344,7 @@ function Satta() {
                         // className="fp11"
                         sx={styles.upcomingButton}
                       >
-                        Upcoming Result{" "}
+                        Upcoming {" "}
                       </Button>
                       <Typography sx={{ color: "white", textAlign: "center" }}>
                         <span> Time Left : </span>
@@ -455,7 +455,7 @@ function Satta() {
                         // className="fp11"
                         sx={styles.upcomingButton}
                       >
-                        Upcoming Result{" "}
+                        Upcoming {" "}
                       </Button>
                       <Typography sx={{ color: "white", textAlign: "center" }}>
                         <span> Time Left : </span>
@@ -566,7 +566,7 @@ function Satta() {
                         // className="fp11"
                         sx={styles.upcomingButton}
                       >
-                        Upcoming Result{" "}
+                        Upcoming {" "}
                       </Button>
                       <Typography sx={{ color: "white", textAlign: "center" }}>
                         <span> Time Left : </span>

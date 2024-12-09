@@ -1,7 +1,7 @@
-import { Box, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 
-const AndarBaharTable = ({ betArray, setBetArray }) => {
+const AndarBaharTable = ({ placeBet , betArray, setBetArray }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const existingIndex = betArray.findIndex(
@@ -166,6 +166,9 @@ const AndarBaharTable = ({ betArray, setBetArray }) => {
           {renderRowsb("*")}
         </Box>
       </Box>
+      <div>
+        <Button onClick={placeBet}>Place Bid</Button>
+      </div>
     </Box>
   );
 };

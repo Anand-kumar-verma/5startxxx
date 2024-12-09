@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { stargrad } from "../../../Shared/color";
 import toast from "react-hot-toast";
 
-function Jodi({ betArray, setBetArray }) {
+function Jodi({ placeBet, betArray, setBetArray }) {
   const buttons = Array.from({ length: 100 }, (_, i) =>
     String(i).padStart(2, "0")
   );
@@ -151,6 +151,7 @@ function Jodi({ betArray, setBetArray }) {
             variant="contained"
             onClick={() => {
               handleClick();
+              placeBet();
               selectedNumber !== "" &&
                 amount !== "" &&
                 amount !== 0 &&

@@ -259,14 +259,12 @@ function Sattagameplay() {
               <Tab label="Andar / Bahar" sx={{ flex: 1, color: "white" }} />
             </Tabs>
             {value === 0 && (
-              <Jodi betArray={betArray} setBetArray={setBetArray} />
+              <Jodi placeBet={placeBet} betArray={betArray} setBetArray={setBetArray} />
             )}
             {value === 1 && (
-              <AndarBaharTable betArray={betArray} setBetArray={setBetArray} />
+              <AndarBaharTable placeBet={placeBet} betArray={betArray} setBetArray={setBetArray} />
             )}
-            <Box
-              //  className="w95 !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
-
+            {/* <Box
               className=" !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
               sx={style.flexbetween}
             >
@@ -295,7 +293,7 @@ function Sattagameplay() {
               >
                 Place Bid
               </Button>
-            </Box>
+            </Box> */}
           </Box>
         </Container>
       </Box>
