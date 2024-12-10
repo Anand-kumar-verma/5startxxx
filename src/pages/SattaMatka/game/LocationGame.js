@@ -7,7 +7,8 @@ import { endpoint } from "../../../services/urls";
 import { useQueryClient } from "react-query";
 import moment from "moment";
 
-function Jodi({ game_type, betArray, setBetArray }) {
+function Jodi({ game_type }) {
+  const [betArray, setBetArray] = useState([]);
   const client = useQueryClient();
   const buttons = Array.from({ length: 100 }, (_, i) =>
     String(i).padStart(2, "0")
@@ -211,7 +212,7 @@ function Jodi({ game_type, betArray, setBetArray }) {
               borderRadius: "8px",
               py: 1,
               mb: 2,
-               textTransform: "capitalize"
+              textTransform: "capitalize",
             }}
           >
             bid placed

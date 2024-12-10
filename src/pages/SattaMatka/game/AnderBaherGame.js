@@ -1,13 +1,95 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { apiConnectorPost } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 import { stargrad } from "../../../Shared/color";
 
-const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
+const AndarBaharTable = ({ game_type }) => {
+  const [betArray, setBetArray] = useState([
+    {
+      number: "1000",
+      amount: null,
+    },
+    {
+      number: "1001",
+      amount: null,
+    },
+    {
+      number: "1002",
+      amount: null,
+    },
+    {
+      number: "1003",
+      amount: null,
+    },
+    {
+      number: "1004",
+      amount: null,
+    },
+    {
+      number: "1005",
+      amount: null,
+    },
+    {
+      number: "1006",
+      amount: null,
+    },
+    {
+      number: "1007",
+      amount: null,
+    },
+    {
+      number: "1008",
+      amount: null,
+    },
+    {
+      number: "1009",
+      amount: null,
+    },
+    {
+      number: "2000",
+      amount: null,
+    },
+    {
+      number: "2001",
+      amount: null,
+    },
+    {
+      number: "2002",
+      amount: null,
+    },
+    {
+      number: "2003",
+      amount: null,
+    },
+    {
+      number: "2004",
+      amount: null,
+    },
+    {
+      number: "2005",
+      amount: null,
+    },
+    {
+      number: "2006",
+      amount: null,
+    },
+    {
+      number: "2007",
+      amount: null,
+    },
+    {
+      number: "2008",
+      amount: null,
+    },
+    {
+      number: "2009",
+      amount: null,
+    },
+  ]);
   const client = useQueryClient();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,10 +105,14 @@ const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
   async function placeBet() {
     let min = Number(moment(Date.now())?.format("mm"));
     let time = (min >= 25 && min <= 30) || (min >= 55 && min <= 60);
-    if (time) return toast("Time Over, Please try in next trade.");
+    if (time)
+      return toast("Time Over, Please try in next trade.", {
+        id: 1,
+      });
     try {
       let betArrayCurrent = betArray?.filter(
-        (i) => i?.amount !== null && Number(i.number) >= 1000
+        (i) =>
+          i?.amount !== "" && i?.amount !== null && Number(i.number) >= 1000
       );
       betArrayCurrent?.forEach((i) => {
         if (i?.amount !== null && Number(i?.amount) < 5)
@@ -36,11 +122,17 @@ const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
                 Number(i?.number) >= 1000 && Number(i?.number) <= 1009
                   ? "Andar"
                   : "Bahar"
-              } ${Number(i?.number) % 10}`
+              } ${Number(i?.number) % 10}`,
+            {
+              id: 2,
+            }
           );
       });
       const newArrya = betArrayCurrent?.filter((i) => i?.amount !== null);
-      if (newArrya?.length <= 0) return toast("Please choose no.");
+      if (newArrya?.length <= 0)
+        return toast("Please choose no.", {
+          id: 1,
+        });
       const reqBody = {
         bet_array: JSON.stringify(newArrya),
         satta_type_user: game_type,
@@ -49,13 +141,24 @@ const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
         endpoint?.node?.bet_satta,
         reqBody
       );
-      toast(response?.data?.msg);
-      localStorage.setItem(`betApplied_${game_type}`, true);
-      client.refetchQueries("walletamount");
+      if (response?.data?.msg === "Bid placed Successfully1") {
+        toast(response?.data?.msg);
+        localStorage.setItem(`betApplied_${game_type}`, true);
+        client.refetchQueries("walletamount");
+        setBetArray(
+          betArray?.map((i) => {
+            return {
+              ...i,
+              amount: "",
+            };
+          })
+        );
+      }
     } catch (e) {
       toast("Something went wrong", e);
     }
   }
+  console.log(betArray);
   const renderRowsa = (labelPrefix) => {
     return Array.from({ length: 10 }, (_, index) => (
       <Grid container key={index} spacing={2}>
@@ -210,15 +313,22 @@ const AndarBaharTable = ({ game_type, betArray, setBetArray }) => {
         </Box>
       </Box>
       <div className="mt-2">
-        <Button sx={{
-          marginTop: "16px",
-          background: stargrad,
-          color: "#fff",
-          borderRadius: "8px",
-          py: 1,
-          mb: 2,
-          textTransform: "capitalize"
-        }} className="w-full !text-xl" onClick={placeBet}> bid placed</Button>
+        <Button
+          sx={{
+            marginTop: "16px",
+            background: stargrad,
+            color: "#fff",
+            borderRadius: "8px",
+            py: 1,
+            mb: 2,
+            textTransform: "capitalize",
+          }}
+          className="w-full !text-xl"
+          onClick={placeBet}
+        >
+          {" "}
+          bid placed
+        </Button>
       </div>
     </Box>
   );

@@ -19,124 +19,10 @@ function Sattagameplay() {
   const location = useLocation();
   const game_type = location?.state?.satta_type;
   const [value, setValue] = useState(0);
-  // const [minut, setMinut] = useState(6);
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem(`betApplied_${game_type}`);
   const socket = useSocket();
-  const [betArray, setBetArray] = useState([
-    {
-      number: "1000",
-      amount: null,
-    },
-    {
-      number: "1001",
-      amount: null,
-    },
-    {
-      number: "1002",
-      amount: null,
-    },
-    {
-      number: "1003",
-      amount: null,
-    },
-    {
-      number: "1004",
-      amount: null,
-    },
-    {
-      number: "1005",
-      amount: null,
-    },
-    {
-      number: "1006",
-      amount: null,
-    },
-    {
-      number: "1007",
-      amount: null,
-    },
-    {
-      number: "1008",
-      amount: null,
-    },
-    {
-      number: "1009",
-      amount: null,
-    },
-    {
-      number: "2000",
-      amount: null,
-    },
-    {
-      number: "2001",
-      amount: null,
-    },
-    {
-      number: "2002",
-      amount: null,
-    },
-    {
-      number: "2003",
-      amount: null,
-    },
-    {
-      number: "2004",
-      amount: null,
-    },
-    {
-      number: "2005",
-      amount: null,
-    },
-    {
-      number: "2006",
-      amount: null,
-    },
-    {
-      number: "2007",
-      amount: null,
-    },
-    {
-      number: "2008",
-      amount: null,
-    },
-    {
-      number: "2009",
-      amount: null,
-    },
-  ]);
-  // async function placeBet() {
-  //   if (Number(minut) <= 5)
-  //     return toast("Time Over, Please try in next trade.");
-  //   try {
-  //     betArray?.forEach((i) => {
-  //       if (i?.amount !== null && Number(i?.amount) < 5)
-  //         return toast(
-  //           "Your Amount is less than 5 on " +
-  //             `${
-  //               Number(i?.number) >= 1000 && Number(i?.number) <= 1009
-  //                 ? "Andar"
-  //                 : "Bahar"
-  //             } ${Number(i?.number) % 10}`
-  //         );
-  //     });
-  //     const newArrya = betArray?.filter((i) => i?.amount !== null);
-  //     if (newArrya?.length <= 0) return toast("Please choose no.");
-  //     const reqBody = {
-  //       bet_array: JSON.stringify(newArrya),
-  //       satta_type_user: game_type,
-  //     };
-  //     const response = await apiConnectorPost(
-  //       endpoint?.node?.bet_satta,
-  //       reqBody
-  //     );
-  //     toast(response?.data?.msg);
-  //     localStorage.setItem(`betApplied_${game_type}`, true);
-  //     client.refetchQueries("walletamount");
-  //   } catch (e) {
-  //     toast("Something went wrong", e);
-  //   }
-  // }
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -161,7 +47,6 @@ function Sattagameplay() {
         time_to_be_intro_mid_min >= 30
           ? time_to_be_intro_mid_min - 30
           : time_to_be_intro_mid_min;
-      // setMinut(time_to_be_intro_min);
       time_to_be_intro_min === 0 && sec === 0 && setOpenDialogBox(true);
     };
     socket.on("seconds", handleOneMin);
@@ -249,47 +134,10 @@ function Sattagameplay() {
             {value === 0 && (
               <Jodi
                 game_type={game_type}
-                betArray={betArray}
-                setBetArray={setBetArray}
               />
             )}
-            {value === 1 && (
-              <AndarBaharTable
-                game_type={game_type}
-                betArray={betArray}
-                setBetArray={setBetArray}
-              />
-            )}
-            {/* <Box
-              className=" !fixed !bottom-14 bg-[#0A001B] !py-2 !px-3  !flex !justify-between"
-              sx={style.flexbetween}
-            >
-              <Box className="">
-                <Typography
-                  variant="body1"
-                  className="fp13"
-                  sx={{ color: "white" }}
-                >
-                  Total Amount:
-                </Typography>
-                <Typography
-                  variant="body1"
-                  className="fp18"
-                  sx={{ color: "white" }}
-                >
-                  ₹{" "}
-                  {betArray
-                    ?.reduce((a, b) => a + Number(b?.amount || 0), 0)
-                    ?.toFixed(2) || 0}
-                </Typography>
-              </Box>
-              <Button
-                className="!bg-[#24cc3b] !ml-10 !text-white "
-                onClick={() => placeBet()}
-              >
-                Place Bid
-              </Button>
-            </Box> */}
+            {value === 1 && <AndarBaharTable game_type={game_type} />}
+            
           </Box>
         </Container>
       </Box>
