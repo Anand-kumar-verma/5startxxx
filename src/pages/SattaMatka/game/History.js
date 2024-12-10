@@ -20,16 +20,16 @@ import { endpoint } from "../../../services/urls";
 function History() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(0);
- const [loading , setLoading] = React.useState(false)
-  const [start , setStart] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
-  const [end , setEnd] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
+  const [loading, setLoading] = React.useState(false)
+  const [start, setStart] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
+  const [end, setEnd] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
 
   const { data } = useQuery(
     ["my_history", start, end],
     () =>
       apiConnectorPost(endpoint.node.satta_game_myhistory, {
         startDate: start || moment(Date?.now())?.format("YYYY-MM-DD"),
-        endDate : end ||  moment(Date?.now())?.format("YYYY-MM-DD"),
+        endDate: end || moment(Date?.now())?.format("YYYY-MM-DD"),
       }),
     {
       refetchOnWindowFocus: false,
@@ -97,30 +97,30 @@ function History() {
               </Typography>
             </Stack> */}
             <Box sx={style.filterContainer} className="w95 !text-white" mb={4}>
-            <Box
-              sx={{ display: "flex", width: "100%", gap: "8px" }}
-              className="!text-white"
-            >
-              <TextField
-                label="Start Date"
-                placeholder="Select start date"
-                type="date"
-                value={start}
-                onChange={(e) => setStart(e.target.value)}
-                InputLabelProps={{ shrink: true }}
-                sx={style.dateField}
-              />
-              <TextField
-                label="End Date"
-                placeholder="Select end date"
-                type="date"
-                value={end}
-                onChange={(e) => setEnd(e.target.value)}
-                InputLabelProps={{ shrink: true }}
-                sx={style.dateField}
-              />
+              <Box
+                sx={{ display: "flex", width: "100%", gap: "8px" }}
+                className="!text-white"
+              >
+                <TextField
+                  label="Start Date"
+                  placeholder="Select start date"
+                  type="date"
+                  value={start}
+                  onChange={(e) => setStart(e.target.value)}
+                  InputLabelProps={{ shrink: true }}
+                  sx={style.dateField}
+                />
+                <TextField
+                  label="End Date"
+                  placeholder="Select end date"
+                  type="date"
+                  value={end}
+                  onChange={(e) => setEnd(e.target.value)}
+                  InputLabelProps={{ shrink: true }}
+                  sx={style.dateField}
+                />
+              </Box>
             </Box>
-          </Box>
 
             {visibleRows?.map((item) => {
               return (
@@ -149,20 +149,20 @@ function History() {
                           {item?.satta_type === "satta_gaziabad"
                             ? "GHAZIABAD"
                             : item?.satta_type === "satta_faridabad"
-                            ? "FARIDABAD"
-                            : item?.satta_type === "satta_gali"
-                            ? "GALI"
-                            : "DESAWAR"}{" "}
+                              ? "FARIDABAD"
+                              : item?.satta_type === "satta_gali"
+                                ? "GALI"
+                                : "DESAWAR"}{" "}
                           <span className="!pl-3 !text-yellow-500">
                             {item?.gamesno}
                           </span>{" "}
-                         
+
                         </Button>
                         <span className="!pl-3 !text-yellow-500">
-                            {moment(item?.datetime)?.format(
-                              "YYYY-MM-DD HH:mm:ss"
-                            )}
-                          </span>
+                          {moment(item?.datetime)?.format(
+                            "YYYY-MM-DD HH:mm:ss"
+                          )}
+                        </span>
                       </Box>
                       <Box>
                         <Button
@@ -177,8 +177,74 @@ function History() {
                         </Button>
                       </Box>
                     </Stack>
-
                     <div className="!overflow-scroll">
+                      {/* Section for 'No.' */}
+                      <p className="!flex">
+                        <span className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border">
+                          No.
+                        </span>
+                        {item?.number?.split(",")?.map((j, index) => (
+                          <span
+                            key={index}
+                            className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border overflow-x-auto"
+                          >
+                            {Number(j) >= 1000 && Number(j) <= 1009
+                              ? (Number(j) % 10) + "*"
+                              : Number(j) >= 2000 && Number(j) <= 2009
+                                ? "*" + (Number(j) % 10)
+                                : Number(j)}
+                          </span>
+                        ))}
+                      </p>
+
+                      {/* Section for 'Bid Amnt.' */}
+                      <p className="!flex">
+                        <span className="!text-white !text-[11px] min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border">
+                          Bid Amnt.
+                        </span>
+                        {item?.amount_string
+                          ?.split(",")
+                          .filter((j) => j.trim() !== "") // Filter out empty strings
+                          .map((j, index) => (
+                            <span
+                              key={index}
+                              className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border overflow-x-auto"
+                            >
+                              {Number(j) === 0 ? (
+                                <Cancel className="!text-red-500" />
+                              ) : (
+                                <span className="!text-white">{Number(j)?.toFixed(2)}</span>
+                              )}
+                            </span>
+                          ))}
+                      </p>
+
+                      {/* Section for 'Won' */}
+                      <p className="!flex">
+                        {item?.win_string && (
+                          <span className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border">
+                            Won
+                          </span>
+                        )}
+                        {item?.win_string
+                          ?.split(" ")
+                          .filter((j) => j.trim() !== "") // Filter out empty strings
+                          .map((j, index) => (
+                            <span
+                              key={index}
+                              className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border overflow-x-auto"
+                            >
+                              {Number(j) === 0 ? (
+                                <Cancel className="!text-red-500" />
+                              ) : (
+                                <span className="!text-green-500">{Number(j)?.toFixed(2)}</span>
+                              )}
+                            </span>
+                          ))}
+                      </p>
+                    </div>
+
+                    {/* <div className="!overflow-scroll">
                       <p className="!flex">
                         <span className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1">
                           No.
@@ -243,28 +309,28 @@ function History() {
                             </span>
                           ))}
                       </p>
-                    </div>
+                    </div> */}
                   </Box>
                 </>
               );
             })}
           </Box>
           <Box sx={{ background: "white", }} >
-        <Stack spacing={2}>
-          <TablePagination
-          className="!fixed !bottom-14 w-full"
-            sx={{ background: starblue, color: "white" }}
-            rowsPerPageOptions={[5 ,10, 15, 20]}
-            component="div"
-            count={myhistory?.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            labelRowsPerPage="Rows"
-          />
-        </Stack>
-      </Box>
+            <Stack spacing={2}>
+              <TablePagination
+                className="!fixed !bottom-14 w-full"
+                sx={{ background: starblue, color: "white" }}
+                rowsPerPageOptions={[5, 10, 15, 20]}
+                component="div"
+                count={myhistory?.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                labelRowsPerPage="Rows"
+              />
+            </Stack>
+          </Box>
         </Box>
       </Container>
     </Layout>
