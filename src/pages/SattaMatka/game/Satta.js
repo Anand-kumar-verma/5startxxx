@@ -2,7 +2,7 @@ import { History, List } from "@mui/icons-material";
 import FitbitIcon from "@mui/icons-material/Fitbit";
 import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -27,7 +27,7 @@ function Satta() {
   const navigate = useNavigate();
   const [minut, setMinut] = useState(0);
   const [one_min_time, setOne_min_time] = useState(0);
-
+  const client = useQueryClient();
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
@@ -66,6 +66,10 @@ function Satta() {
 
       setOne_min_time(time_to_be_intro);
       setMinut(time_to_be_intro_min);
+      if (minut === 0 && one_min_time === 0) {
+        client.refetchQueries("game")
+        client.refetchQueries("my_history")
+      }
     };
     socket.on("onemin", handleOneMin);
     return () => {
@@ -201,7 +205,7 @@ function Satta() {
                     color="initial"
                     sx={styles.gameheading}
                     className="!mt-1 lg:!text-lg !text-[10px]"
-                    // className="!mt-1"
+                  // className="!mt-1"
                   >
                     Last result as :{" "}
                     <span className="!font-bold  !text-4xl !ml-2 px-2 rounded-full !bg-[#fbab0b] !text-white ">
