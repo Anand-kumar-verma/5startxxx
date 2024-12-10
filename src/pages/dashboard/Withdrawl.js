@@ -122,7 +122,7 @@ function Withdrawl() {
       if ("Request Accepted successfully, Your account will be credited within 24 Hrs." === res?.data?.msg)
         fk.handleReset();
       client.refetchQueries("walletamount");
-      client.refetchQueries("deposit_history");
+      client.refetchQueries("withdrawal_history");
       client.refetchQueries("profile");
       // navigate("/account");
       console.log(res);
