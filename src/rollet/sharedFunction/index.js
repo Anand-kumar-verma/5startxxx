@@ -43,7 +43,6 @@ export const addWinCap = (id) => {
   }
 };
 
-
 export const spinFunction = (id) => {
   const angle =
     String(id) === "20"
@@ -115,7 +114,7 @@ export const spinFunction = (id) => {
       : String(id) === "24"
       ? "331"
       : String(id) === "16"
-      ? "340"
+      ? "s"
       : String(id) === "33"
       ? "350"
       : "0";
@@ -152,15 +151,14 @@ export const spinFunction = (id) => {
     if (progress < 1) {
       requestAnimationFrame(animate);
     } else {
-      setTimeout(()=>{
+      setTimeout(() => {
         element.classList.add("hidden");
-      },3000)
+      }, 3000);
     }
   };
 
   requestAnimationFrame(animate);
 };
-
 
 export const confirmBet = async (
   one_min_time,
