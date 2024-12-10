@@ -8,7 +8,6 @@ export const domain = "https://zupeeter-win-timer.onrender.com";
 
 export const domainn = "http://192.168.18.183:9002";
 export const domain1 = "http://192.168.18.183:9002";
-
 // export const domainn = "https://api.5starxxx.com";
 // export const domain1 = "https://api.5starxxx.com";
 

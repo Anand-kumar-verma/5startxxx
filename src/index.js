@@ -26,7 +26,7 @@ root.render(
             <Toaster
               position="top-center"
               toastOptions={{
-                duration: 1000,
+                duration: 2000,
                 className: "",
                 style: {
                   color: "white",
