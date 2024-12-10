@@ -864,10 +864,7 @@ function Home() {
               }}
             >
               <Button
-                disabled={
-                  one_min_time < 10 ||
-                  !(bet?.length > 0 && isAlreadyAppliedBet === "false")
-                }
+                disabled={(bet?.length===0)}
                 variant="contained"
                 sx={{
                   display: "flex",

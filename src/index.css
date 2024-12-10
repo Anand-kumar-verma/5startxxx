@@ -762,28 +762,25 @@ input::-webkit-inner-spin-button {
 }
 
 /* ////////////////////// animation /////////////////// */
-/* .animation_image_8_h {
-  animation: rotatemainnumber8h 2s reverse linear 3;
-  animation-fill-mode: forwards;
-}
-.animation_image_8_l {
-  animation: rotatemainnumber8l 3s reverse linear 1;
+
+
+.slider {
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  position: absolute;
+  top: 50%; /* Vertically centers the element */
+  left: 0;
+  transform: translateY(-50%);
+  animation: slide 5s ease-out forwards; /* Ease-out for smooth deceleration */
 }
 
-@keyframes rotatemainnumber8h {
+@keyframes slide {
   0% {
-    transform: rotate(9deg); 
+    left: 0; /* Start on the left */
   }
   100% {
-    transform: rotate(369deg);
+    left: calc(100vw - 50px); /* End on the right */
   }
 }
 
-@keyframes rotatemainnumber8l {
-  0% {
-    transform: rotate(9deg);
-  }
-  100% {
-    transform: rotate(369deg);
-  }
-} */

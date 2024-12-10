@@ -1,4 +1,3 @@
-import CachedIcon from "@mui/icons-material/Cached";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import {
@@ -14,45 +13,44 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../Shared/CustomCircularProgress";
-import { starblue, starbluegrad, stargold, stargrad, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
+import {
+  starbluegrad,
+  stargrad,
+  zubgback,
+  zubgmid
+} from "../../Shared/color";
 import cip from "../../assets/cip.png";
 import dp1 from "../../assets/dp1.png";
 import dp2 from "../../assets/dp2.png";
 import dp3 from "../../assets/dp3.png";
 import dp4 from "../../assets/dp4.png";
-import card from "../../assets/images/card-payment.png";
 
-import casino from "../../assets/images/casino.png";
 import customer from "../../assets/images/customer-service.png";
 
-
-import gift from "../../assets/images/gift-box.png";
+import { BorderColor } from "@mui/icons-material";
+import axios from "axios";
 import atmbg from "../../assets/atmbg.jpeg";
+import wtd from "../../assets/history2.png";
+import edit from "../../assets/histoty.png";
+import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
 import hand from "../../assets/images/hand.png";
 import notification from "../../assets/images/notification.png";
 import user2 from "../../assets/images/password (1).png";
 import Rank from "../../assets/images/rank.png";
+import refresh from "../../assets/images/refresh.png";
 import balance from "../../assets/images/send.png";
 import setting from "../../assets/images/settings (1).png";
 import trans from "../../assets/images/translation.png";
+import sunlotteryhomebanner from "../../assets/sunlotteryhomebanner.jpg";
 import s from "../../assets/wallet.png";
 import dpt from "../../assets/wallet2.png";
-import wtd from "../../assets/history2.png";
-import edit from "../../assets/histoty.png";
-import sunlotteryhomebanner from "../../assets/sunlotteryhomebanner.jpg";
 import Layout from "../../component/Layout/Layout";
-import refresh from "../../assets/images/refresh.png";
-import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
 import {
-  MyProfileDataFn,
-  logOutFunctoinRoulette,
+  MyProfileDataFn
 } from "../../services/apicalling";
-import axios from "axios";
+import { apiConnectorGet } from "../../services/apiconnector";
 import { endpoint, fron_end_main_domain } from "../../services/urls";
 import Image from "./Image";
-import { BorderColor } from "@mui/icons-material";
-import zIndex from "@mui/material/styles/zIndex";
-import { apiConnectorGet } from "../../services/apiconnector";
 function Account() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -97,7 +95,7 @@ function Account() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -107,7 +105,7 @@ function Account() {
     "https://mui.com/static/images/avatar/3.jpg",
     "https://mui.com/static/images/avatar/4.jpg",
     "https://mui.com/static/images/avatar/1.jpg",
-    "https://mui.com/static/images/avatar/5.jpg"
+    "https://mui.com/static/images/avatar/5.jpg",
   ];
 
   useEffect(() => {
@@ -119,48 +117,54 @@ function Account() {
   const [selectedImages, setselectedImages] = useState("");
   const [opend, setOpend] = useState(false);
   function refreshFunctionForRotation() {
-    client.refetchQueries = ("walletamount")
-    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    client.refetchQueries = "walletamount";
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
 
     const element = document.getElementById("refresh_button");
     if (!item) {
       element.classList.add("rotate_refresh_image");
     }
     setTimeout(() => {
-      element.classList.remove("rotate_refresh_image")
+      element.classList.remove("rotate_refresh_image");
     }, 2000);
-
   }
   useEffect(() => {
     const element = document.getElementById("refresh_button");
-    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
     if (item) {
       element.classList.remove("rotate_refresh_image");
     }
-  }, [])
+  }, []);
 
   return (
     <Layout>
       <Container sx={style.container}>
+        <div class="slider"></div>
         <Box sx={style.header1} className={"!w-full !flex !justify-center"}>
-          <Box
-            component="img"
-            src={logo2}
-            sx={{ width: '150px' }}
-          ></Box>
+          <Box component="img" src={logo2} sx={{ width: "150px" }}></Box>
         </Box>
         <Stack direction="row" sx={style.header}>
           <Box sx={style.profileBox} onClick={() => setOpend(true)}>
-            <img src={selectedImages[0] || imge_array[Number(Number(imageNumber) - 1 || 0)]?.img} alt="" className='!rounded-full  w-[72px] h-[72px]' />
-            <BorderColor fontSize="small" className="!text-white !-mt-10 !ml-10 !rounded-full !bg-gray-400  " />
-
+            <img
+              src={
+                selectedImages[0] ||
+                imge_array[Number(Number(imageNumber) - 1 || 0)]?.img
+              }
+              alt=""
+              className="!rounded-full  w-[72px] h-[72px]"
+            />
+            <BorderColor
+              fontSize="small"
+              className="!text-white !-mt-10 !ml-10 !rounded-full !bg-gray-400  "
+            />
           </Box>
           <Image
             setOpend={setOpend}
             setselectedImages={setselectedImages}
             open={opend}
             onClose={() => setOpend(false)}
-            images={images} />
+            images={images}
+          />
           <Box sx={style.userInfo}>
             <Typography variant="" color="initial">
               {result?.full_name}
@@ -174,7 +178,20 @@ function Account() {
           </Box>
         </Stack>
         <Box sx={style.balanceContainer}>
-          <Box sx={{ borderRadius: '10px', position: 'absolute', zIndex: '-1', top: 0, left: '0', width: '100%', height: '100%', backgroundImage: `url(${atmbg})`, backgroundSize: '100% 100%', opacity: '0.5' }}></Box>
+          <Box
+            sx={{
+              borderRadius: "10px",
+              position: "absolute",
+              zIndex: "-1",
+              top: 0,
+              left: "0",
+              width: "100%",
+              height: "100%",
+              backgroundImage: `url(${atmbg})`,
+              backgroundSize: "100% 100%",
+              opacity: "0.5",
+            }}
+          ></Box>
           <Stack direction="row" sx={{ alignItems: "center" }}>
             <Box component="img" src={balance} sx={style.cardImage} />
             <Typography variant="body1" color="initial" sx={style.balanceText}>
@@ -185,15 +202,20 @@ function Account() {
             <Typography variant="body1" color="initial" sx={style.totalBalance}>
               {(
                 Number(
-                  Number(newdata?.winning || 0) +
-                  Number(newdata?.wallet || 0)
+                  Number(newdata?.winning || 0) + Number(newdata?.wallet || 0)
                 ) || 0
               )?.toFixed(0)}
             </Typography>
-            <img className="rotate_refresh_image w-8" id="refresh_button"
-              src={refresh} width={25} ml={2} onClick={() => {
-                refreshFunctionForRotation()
-              }} />
+            <img
+              className="rotate_refresh_image w-8"
+              id="refresh_button"
+              src={refresh}
+              width={25}
+              ml={2}
+              onClick={() => {
+                refreshFunctionForRotation();
+              }}
+            />
             {/* <CachedIcon
               onClick={() => client.refetchQueries("myprofile")}
               sx={style.cachedIcon}
@@ -216,41 +238,35 @@ function Account() {
                 Mobile No : {result?.mobile}
               </Typography>
             </div>
-
           </Stack>
         </Box>
 
         <Box sx={style.actionContainer}>
           <Box sx={style.actionBox} component={NavLink} to="/wallet">
-
             <Box component="img" src={s} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Wallet
             </Typography>
           </Box>
           <Box sx={style.actionBox} component={NavLink} to="/wallet/Recharge">
-
             <Box component="img" src={dpt} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Deposit
             </Typography>
           </Box>
           <Box sx={style.actionBox} component={NavLink} to="/Withdrawal">
-
             <Box component="img" src={wtd} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Withdraw
             </Typography>
           </Box>
           <Box sx={style.actionBox} component={NavLink} to="/add-bank-details">
-
             <Box component="img" src={edit} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Add Bank
             </Typography>
           </Box>
           <Box sx={style.actionBox} component={NavLink} to="/add-upi-details">
-
             <Box component="img" src={edit} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Add UPI
@@ -330,7 +346,6 @@ function Account() {
         <Box sx={style.actionContainertwo}>
           <Stack
             sx={{
-
               background: zubgmid,
               width: "100%",
               borderRadius: "10px",
@@ -368,7 +383,6 @@ function Account() {
                 />
               </Box>
             </Stack>
-
 
             <Stack
               component={NavLink}
@@ -498,7 +512,7 @@ function Account() {
               color: "white",
               // padding: "10px",
               borderRadius: "10px",
-              textTransform: 'capitalize',
+              textTransform: "capitalize",
             }}
             onClick={() => {
               localStorage.clear();
@@ -580,7 +594,7 @@ const style = {
     padding: "20px",
     width: "95%",
     margin: "auto",
-    position: 'relative',
+    position: "relative",
     marginTop: "2px",
     zIndex: 1,
   },
@@ -611,16 +625,20 @@ const style = {
     justifyContent: "space-between",
   },
   actionBox: { width: "20%" },
-  actionImage: { width: "30px", height: "30px", margin: "auto", filter: 'grayscale(1)' },
+  actionImage: {
+    width: "30px",
+    height: "30px",
+    margin: "auto",
+    filter: "grayscale(1)",
+  },
   actionText: {
     color: "white",
     textAlign: "center",
     fontSize: "13px",
     fontWeight: "500",
-    mt: '5px',
+    mt: "5px",
   },
   actionContainertwo: {
-
     flexDirection: "column",
     borderRadius: "10px",
     width: "95%",

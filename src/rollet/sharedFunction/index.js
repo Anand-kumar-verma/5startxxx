@@ -119,9 +119,13 @@ export const spinFunction = (id) => {
       ? "350"
       : "0";
 
-  let element = document.getElementById(`${String(id)}_rotate`);
+  const startAngle = Number(angle);
+  const totalRotation = 1440; // 4 full spins
 
-  // Ensure element exists
+  const duration = 26000; // Total animation duration in milliseconds
+
+  const element = document.getElementById(`${String(id)}_rotate`);
+
   if (!element) {
     console.error(`Element with ID ${String(id)}_rotate not found.`);
     return;
@@ -129,114 +133,33 @@ export const spinFunction = (id) => {
 
   element.classList.remove("hidden");
 
-  // First Animation (rotatemainnumber30)
-  const animation30 = document.createElement("style");
-  animation30.type = "text/css";
-  const keyframes30 = `
-    @keyframes rotatemainnumber30 {
-      0% { transform: rotate(${0 + Number(angle)}deg); }
-      100% { transform: rotate(${360 + Number(angle)}deg); }
-    }
-  `;
-  animation30.innerHTML = keyframes30;
-  document.getElementsByTagName("head")[0].appendChild(animation30);
+  let startTime;
 
-  element.style.animation = "rotatemainnumber30 2s reverse linear 1 forwards";
+  const animate = (currentTime) => {
+    if (!startTime) startTime = currentTime;
 
-  // First Animation End Handler
-  const handleAnimationEnd = (event) => {
-    if (event.animationName === "rotatemainnumber30") {
-      element.style.animation = "";
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
 
-      // Second Animation (rotatemainnumber20)
-      const animation20 = document.createElement("style");
-      animation20.type = "text/css";
-      const keyframes20 = `
-        @keyframes rotatemainnumber20 {
-          0% { transform: rotate(${0 + Number(angle)}deg); }
-          100% { transform: rotate(${360 + Number(angle)}deg); }
-        }
-      `;
-      animation20.innerHTML = keyframes20;
-      document.getElementsByTagName("head")[0].appendChild(animation20);
+    // Apply ease-out effect
+    const easedProgress = Math.pow(1 - progress, 2);
 
-      element.style.animation =
-        "rotatemainnumber20 3s reverse linear 1 forwards";
+    const currentRotation = startAngle + totalRotation * easedProgress;
 
-      // Add event listener for second animation
-      element.addEventListener("animationend", handleAnimationEndTwo);
+    element.style.transform = `rotate(${currentRotation}deg)`;
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      setTimeout(()=>{
+        element.classList.add("hidden");
+      },3000)
     }
   };
 
-  // Second Animation End Handler
-  const handleAnimationEndTwo = (event) => {
-    if (event.animationName === "rotatemainnumber20") {
-      element.style.animation = "";
-
-      // Third Animation (rotatemainnumber50)
-      const animation50 = document.createElement("style");
-      animation50.type = "text/css";
-      const keyframes50 = `
-        @keyframes rotatemainnumber50 {
-          0% { transform: rotate(${0 + Number(angle)}deg); }
-          100% { transform: rotate(${360 + Number(angle)}deg); }
-        }
-      `;
-      animation50.innerHTML = keyframes50;
-      document.getElementsByTagName("head")[0].appendChild(animation50);
-
-      element.style.animation =
-        "rotatemainnumber50 8s reverse linear 1 forwards";
-
-      // Clean up after third animation ends
-      // setTimeout(() => {
-      element.addEventListener("animationend", handleAnimationEndThree);
-      // }, 16000);
-    }
-  };
-  // Second Animation End Handler
-  const handleAnimationEndThree = (event) => {
-    if (event.animationName === "rotatemainnumber50") {
-      element.style.animation = "";
-
-      // Third Animation (rotatemainnumber50)
-      const animation50 = document.createElement("style");
-      animation50.type = "text/css";
-      const keyframes50 = `
-        @keyframes rotatemainnumber500 {
-          0% { transform: rotate(${0 + Number(angle)}deg); }
-          100% { transform: rotate(${360 + Number(angle)}deg); }
-        }
-      `;
-      animation50.innerHTML = keyframes50;
-      document.getElementsByTagName("head")[0].appendChild(animation50);
-
-      element.style.animation =
-        "rotatemainnumber500 12s reverse linear 1 forwards";
-
-      // Clean up after third animation ends
-      setTimeout(() => {
-        element.addEventListener("animationend", handleFinalAnimationEnd);
-      }, 29000);
-    }
-  };
-
-  // Final Animation End Handler
-  const handleFinalAnimationEnd = (event) => {
-    if (event.animationName === "rotatemainnumber500") {
-      element.style.animation = "";
-      element.classList.add("hidden");
-
-      // Cleanup event listeners
-      element.removeEventListener("animationend", handleAnimationEnd);
-      element.removeEventListener("animationend", handleAnimationEndTwo);
-      element.removeEventListener("animationend", handleFinalAnimationEnd);
-    }
-  };
-
-  // Attach the first animation end listener
-  element.addEventListener("animationend", handleAnimationEnd);
+  requestAnimationFrame(animate);
 };
+
 
 export const confirmBet = async (
   one_min_time,
