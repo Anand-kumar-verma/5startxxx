@@ -43,6 +43,7 @@ export const addWinCap = (id) => {
   }
 };
 
+
 export const spinFunction = (id) => {
   const angle =
     String(id) === "20"

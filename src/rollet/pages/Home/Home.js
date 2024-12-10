@@ -865,8 +865,9 @@ function Home() {
             >
               <Button
                 disabled={
-                  one_min_time < 10 ||
-                  !(bet?.length > 0 && isAlreadyAppliedBet === "false")
+                  !(bet?.length > 0)
+                  // one_min_time < 10 ||
+                  // !(bet?.length > 0 && isAlreadyAppliedBet === "false")
                 }
                 variant="contained"
                 sx={{
