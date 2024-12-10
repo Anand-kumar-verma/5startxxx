@@ -1,10 +1,11 @@
 import { Cancel } from "@mui/icons-material";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, TablePagination, TextField, Typography } from "@mui/material";
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 import {
+  starblue,
   starbluegrad,
   zubgback,
   zubgbackgrad,
@@ -13,20 +14,44 @@ import {
 import deposit from "../../../assets/history2.png";
 import logo2 from "../../../assets/images/5-Star-XXX-8-29-2024.png";
 import Layout from "../../../component/Layout/Layout";
-import { apiConnectorGet } from "../../../services/apiconnector";
+import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 
 function History() {
-  const { isLoading, data } = useQuery(
-    ["my_history"],
-    () => apiConnectorGet(endpoint?.node?.satta_game_myhistory),
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(0);
+ const [loading , setLoading] = React.useState(false)
+  const [start , setStart] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
+  const [end , setEnd] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
+
+  const { data } = useQuery(
+    ["my_history", start, end],
+    () =>
+      apiConnectorPost(endpoint.node.satta_game_myhistory, {
+        startDate: start || moment(Date?.now())?.format("YYYY-MM-DD"),
+        endDate : end ||  moment(Date?.now())?.format("YYYY-MM-DD"),
+      }),
     {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
       refetchOnMount: false,
-      refetchOnReconnect: true,
     }
   );
-  const res = data?.data?.data;
+  const myhistory = data?.data?.data || [];
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const visibleRows = React.useMemo(
+    () =>
+      myhistory?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+    [page, rowsPerPage, myhistory]
+  );
   return (
     <Layout>
       <Container
@@ -39,7 +64,7 @@ function History() {
         }}
         className="no-scrollbar"
       >
-        <CustomCircularProgress isLoading={isLoading} />
+        <CustomCircularProgress isLoading={loading} />
         <Box sx={style.header} className={"!w-full !flex !justify-center"}>
           <Box component="img" src={logo2} sx={{ width: "150px" }}></Box>
         </Box>
@@ -56,7 +81,7 @@ function History() {
               mt: 2,
             }}
           >
-            <Stack direction="row" sx={{ alignItems: "center", mb: "20px" }}>
+            {/* <Stack direction="row" sx={{ alignItems: "center", mb: "20px" }}>
               <Box
                 component="img"
                 src={deposit}
@@ -70,8 +95,34 @@ function History() {
               >
                 My history
               </Typography>
-            </Stack>
-            {res?.map((item) => {
+            </Stack> */}
+            <Box sx={style.filterContainer} className="w95 !text-white" mb={4}>
+            <Box
+              sx={{ display: "flex", width: "100%", gap: "8px" }}
+              className="!text-white"
+            >
+              <TextField
+                label="Start Date"
+                placeholder="Select start date"
+                type="date"
+                value={start}
+                onChange={(e) => setStart(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+                sx={style.dateField}
+              />
+              <TextField
+                label="End Date"
+                placeholder="Select end date"
+                type="date"
+                value={end}
+                onChange={(e) => setEnd(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+                sx={style.dateField}
+              />
+            </Box>
+          </Box>
+
+            {visibleRows?.map((item) => {
               return (
                 <>
                   <Box
@@ -105,12 +156,13 @@ function History() {
                           <span className="!pl-3 !text-yellow-500">
                             {item?.gamesno}
                           </span>{" "}
-                          <span className="!pl-3 !text-yellow-500">
+                         
+                        </Button>
+                        <span className="!pl-3 !text-yellow-500">
                             {moment(item?.datetime)?.format(
                               "YYYY-MM-DD HH:mm:ss"
                             )}
                           </span>
-                        </Button>
                       </Box>
                       <Box>
                         <Button
@@ -126,7 +178,7 @@ function History() {
                       </Box>
                     </Stack>
 
-                    <div>
+                    <div className="!overflow-scroll">
                       <p className="!flex">
                         <span className="!text-white !w-[90px] text-center !border-2 !border-white px-2 py-1">
                           No.
@@ -197,6 +249,22 @@ function History() {
               );
             })}
           </Box>
+          <Box sx={{ background: "white", }} >
+        <Stack spacing={2}>
+          <TablePagination
+          className="!fixed !bottom-14 w-full"
+            sx={{ background: starblue, color: "white" }}
+            rowsPerPageOptions={[5 ,10, 15, 20]}
+            component="div"
+            count={myhistory?.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage="Rows"
+          />
+        </Stack>
+      </Box>
         </Box>
       </Container>
     </Layout>
@@ -247,6 +315,39 @@ const style = {
       fontWeight: "500",
       textAlign: "center",
       mt: "5px",
+    },
+  },
+  dateField: {
+    width: "50%",
+    padding: "5px",
+    borderRadius: "4px",
+    backgroundColor: starblue,
+    "& .MuiInputBase-root": {
+      borderRadius: "4px",
+      backgroundColor: starblue,
+    },
+    "& .MuiInputBase-input": {
+      fontSize: "14px",
+      color: "#ffffff",
+      padding: "8px",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        border: "none",
+      },
+      "&:hover fieldset": {
+        border: "none",
+      },
+      "&.Mui-focused fieldset": {
+        border: "none",
+      },
+    },
+    "& .MuiInputLabel-root": {
+      color: "#ffffff",
+    },
+    "& .MuiInputBase-input::placeholder": {
+      color: "#e0e0e0",
+      opacity: 1,
     },
   },
   paymentBoxOuter: {
