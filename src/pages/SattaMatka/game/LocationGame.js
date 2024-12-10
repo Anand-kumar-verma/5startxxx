@@ -25,9 +25,9 @@ function Jodi({ game_type }) {
   const handleClick = () => {
     toggleDrawer(false);
 
-    if (myElementRef.current) {
-      myElementRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
+    // if (myElementRef.current) {
+    //   myElementRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    // }
   };
 
   const handleClickbtn = (number) => {
