@@ -173,7 +173,7 @@ function History() {
                             textTransform: "capitalize",
                           }}
                         >
-                          {item?.result_number}
+                          {item?.result_number && String(item?.result_number)?.padStart(2, "0")}
                         </Button>
                       </Box>
                     </Stack>
@@ -201,9 +201,9 @@ function History() {
                             className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border overflow-x-auto"
                           >
                             {Number(j) >= 1000 && Number(j) <= 1009
-                              ? (Number(j) % 10).toString().padStart(2, "0") + "*" 
+                              ? (Number(j) % 10) + "*" 
                               : Number(j) >= 2000 && Number(j) <= 2009
-                                ? "*" + (Number(j) % 10).toString().padStart(2, "0")
+                                ? "*" + (Number(j) % 10)
                                 : Number(j).toString().padStart(2, "0")} 
                           </span>
                         ))}
