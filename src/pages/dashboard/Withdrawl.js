@@ -512,7 +512,7 @@ function Withdrawl() {
               justifyContent="space-between"
               mt={2}
             >
-              <Stack direction="row">
+              {/* <Stack direction="row">
                 <Typography
                   variant="body1"
                   sx={{ fontSize: "12px", color: 'white' }}
@@ -529,7 +529,7 @@ function Withdrawl() {
                 >
                   ₹{newdata?.winning || 0}
                 </Typography>
-              </Stack>
+              </Stack> */}
 
               <Button
                 variant="Outlined"
@@ -548,7 +548,7 @@ function Withdrawl() {
 
 
             <Box mt={3}>
-              <Stack direction="row" alignItems="center" mt={1}>
+              {/* <Stack direction="row" alignItems="center" mt={1}>
                 <Box
                   sx={{
                     width: "5px",
@@ -577,7 +577,7 @@ function Withdrawl() {
 
                 </Typography>
 
-              </Stack>
+              </Stack> */}
 
 
               <Stack direction="row" alignItems="center" mt={1}>

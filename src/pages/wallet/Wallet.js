@@ -226,7 +226,7 @@ function Wallet() {
                   ₹ {Number(newdata?.wallet || 0)?.toFixed(0)}.00
                 </Typography>
                 <Typography variant="body1" color="initial">
-                  Total Deposit
+                  Main Wallet
                 </Typography>
               </Box>
             </Box>
@@ -253,7 +253,7 @@ function Wallet() {
                   ₹ {(Number(Number(newdata?.winning || 0)) || 0)?.toFixed(0)}
                 </Typography>
                 <Typography variant="body1" color="initial">
-                  Winning Amount
+                  Winning Wallet
                 </Typography>
               </Box>
             </Box>
