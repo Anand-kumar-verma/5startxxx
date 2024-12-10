@@ -13,12 +13,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../Shared/CustomCircularProgress";
-import {
-  starbluegrad,
-  stargrad,
-  zubgback,
-  zubgmid
-} from "../../Shared/color";
+import { starbluegrad, stargrad, zubgback, zubgmid } from "../../Shared/color";
 import cip from "../../assets/cip.png";
 import dp1 from "../../assets/dp1.png";
 import dp2 from "../../assets/dp2.png";
@@ -45,9 +40,7 @@ import sunlotteryhomebanner from "../../assets/sunlotteryhomebanner.jpg";
 import s from "../../assets/wallet.png";
 import dpt from "../../assets/wallet2.png";
 import Layout from "../../component/Layout/Layout";
-import {
-  MyProfileDataFn
-} from "../../services/apicalling";
+import { MyProfileDataFn } from "../../services/apicalling";
 import { apiConnectorGet } from "../../services/apiconnector";
 import { endpoint, fron_end_main_domain } from "../../services/urls";
 import Image from "./Image";
@@ -139,7 +132,6 @@ function Account() {
   return (
     <Layout>
       <Container sx={style.container}>
-        <div class="slider"></div>
         <Box sx={style.header1} className={"!w-full !flex !justify-center"}>
           <Box component="img" src={logo2} sx={{ width: "150px" }}></Box>
         </Box>

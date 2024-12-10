@@ -864,7 +864,7 @@ function Home() {
               }}
             >
               <Button
-                disabled={(bet?.length===0)}
+                disabled={bet?.length === 0}
                 variant="contained"
                 sx={{
                   display: "flex",

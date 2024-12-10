@@ -763,24 +763,3 @@ input::-webkit-inner-spin-button {
 
 /* ////////////////////// animation /////////////////// */
 
-
-.slider {
-  width: 50px;
-  height: 50px;
-  background-color: red;
-  position: absolute;
-  top: 50%; /* Vertically centers the element */
-  left: 0;
-  transform: translateY(-50%);
-  animation: slide 5s ease-out forwards; /* Ease-out for smooth deceleration */
-}
-
-@keyframes slide {
-  0% {
-    left: 0; /* Start on the left */
-  }
-  100% {
-    left: calc(100vw - 50px); /* End on the right */
-  }
-}
-
