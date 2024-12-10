@@ -204,7 +204,7 @@ function Satta() {
                     // className="!mt-1"
                   >
                     Last result as :{" "}
-                    <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
+                    <span className="!font-bold  !text-4xl !ml-2 px-2 rounded-full !bg-[#fbab0b] !text-white ">
                       {" "}
                       {String(game_history?.[0]?.gaziyabad || 0).padStart(
                         2,
@@ -331,7 +331,7 @@ function Satta() {
                     className="!mt-1 lg:!text-lg !text-[10px]"
                   >
                     Last result as :{" "}
-                    <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
+                    <span className="!font-bold  !text-4xl !ml-2 px-2 rounded-full !bg-green-500 !text-white ">
                       {" "}
                       {String(game_history?.[0]?.faridabad || 0).padStart(
                         2,
@@ -455,7 +455,7 @@ function Satta() {
                     className="!mt-1 lg:!text-lg !text-[10px]"
                   >
                     Last result as :{" "}
-                    <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
+                    <span className="!font-bold  !text-4xl !ml-2 px-2 rounded-full !bg-[#FF0000] !text-white ">
                       {String(game_history?.[0]?.gali || 0).padStart(2, "0")}
                     </span>
                   </Typography>
@@ -572,11 +572,10 @@ function Satta() {
                     variant="body1"
                     color="initial"
                     sx={styles.gameheading}
-                    // className="!mt-1"
                     className="!mt-1 lg:!text-lg !text-[10px]"
                   >
                     Last result as :{" "}
-                    <span className="!font-bold !text-xl !ml-2 px-2 rounded-full !bg-white !text-black ">
+                    <span className="!font-bold !text-4xl !ml-2 px-2 rounded-full !bg-[#761ebc] !text-white ">
                       {String(game_history?.[0]?.disawar || 0).padStart(2, "0")}
                     </span>
                   </Typography>
