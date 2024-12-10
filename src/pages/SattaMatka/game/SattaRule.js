@@ -49,9 +49,9 @@ const SattaRule = ({ setOpen2, open2, style }) => {
             <p className="text-[10px] py-2 ">
                 3. जीतने की शर्तें
                 <br />
-                - यदि जीतने वाली संख्या 00 से 99 के बीच है: पayout x97 होगी।
+                - यदि जीतने वाली संख्या 00 से 99 के बीच है: payout x97 होगी।
                 <br />
-                - यदि जीतने वाला संयोजन अंदर/बाहर है: पayout x100 होगी।
+                - यदि जीतने वाला संयोजन अंदर/बाहर है: payout x10 होगी।
             </p>
             <p className="text-[10px] py-2 ">
                 4. बेटिंग की सीमाएँ
@@ -102,7 +102,7 @@ const SattaRule = ({ setOpen2, open2, style }) => {
                 <br />
                 - If the winning number is between 00 and 99: The payout is x97 of the bet amount.
                 <br />
-                - If the winning combination is Andar/Bahar: The payout is x100 of the bet amount.
+                - If the winning combination is Andar/Bahar: The payout is x10 of the bet amount.
             </p>
             <p className="text-[10px] py-2 ">
                 4. Betting Restrictions

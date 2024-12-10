@@ -27,7 +27,7 @@ function WithdravalHistory() {
     navigate(-1);
   };
   const { isLoading, data } = useQuery(
-    ["deposit_history"],
+    ["withdrawal_history"],
     () => withdrawlHistoryFunction(),
     {
       refetchOnMount: false,
