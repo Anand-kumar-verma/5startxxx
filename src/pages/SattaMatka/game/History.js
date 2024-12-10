@@ -183,7 +183,7 @@ function History() {
                         <span className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border">
                           No.
                         </span>
-                        {item?.number?.split(",")?.map((j, index) => (
+                        {/* {item?.number?.split(",")?.map((j, index) => (
                           <span
                             key={index}
                             className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border overflow-x-auto"
@@ -194,7 +194,20 @@ function History() {
                                 ? "*" + (Number(j) % 10)
                                 : Number(j)}
                           </span>
+                        ))} */}
+                        {item?.number?.split(",")?.map((j, index) => (
+                          <span
+                            key={index}
+                            className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border overflow-x-auto"
+                          >
+                            {Number(j) >= 1000 && Number(j) <= 1009
+                              ? (Number(j) % 10).toString().padStart(2, "0") + "*" 
+                              : Number(j) >= 2000 && Number(j) <= 2009
+                                ? "*" + (Number(j) % 10).toString().padStart(2, "0")
+                                : Number(j).toString().padStart(2, "0")} 
+                          </span>
                         ))}
+
                       </p>
 
                       {/* Section for 'Bid Amnt.' */}
