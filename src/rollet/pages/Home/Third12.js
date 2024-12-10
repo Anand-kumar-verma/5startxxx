@@ -1,8 +1,7 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
-import { style } from "./CommonCss";
 import toast from "react-hot-toast";
-import { NavLink } from "react-router-dom";
+import { style } from "./CommonCss";
 const Third12 = ({
   isSelectedDropBet,
   removeSingleBetFunction,
@@ -34,30 +33,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(36);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       36,
-                      [36],
+                      36,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(36, [36], amount);
+                  setBetFuncton(36, 36, amount);
                 }
                 e.stopPropagation();
               }}
@@ -81,7 +80,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -100,11 +99,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -137,7 +136,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -156,11 +155,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -193,7 +192,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -212,11 +211,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -248,7 +247,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -267,11 +266,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -300,30 +299,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(33);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       33,
-                      [33],
+                      33,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(33, [33], amount);
+                  setBetFuncton(33, 33, amount);
                 }
                 e.stopPropagation();
               }}
@@ -347,7 +346,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -366,11 +365,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -403,7 +402,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -422,11 +421,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -459,7 +458,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -478,11 +477,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -514,7 +513,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -533,11 +532,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -566,30 +565,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(30);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       30,
-                      [30],
+                      30,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(30, [30], amount);
+                  setBetFuncton(30, 30, amount);
                 }
                 e.stopPropagation();
               }}
@@ -613,7 +612,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -632,11 +631,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -669,7 +668,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -688,11 +687,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -725,7 +724,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -744,11 +743,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -780,7 +779,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -799,11 +798,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -832,30 +831,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(27);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       27,
-                      [27],
+                      27,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(27, [27], amount);
+                  setBetFuncton(27, 27, amount);
                 }
                 e.stopPropagation();
               }}
@@ -879,7 +878,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -898,11 +897,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -935,7 +934,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -954,11 +953,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -991,7 +990,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1010,11 +1009,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1046,7 +1045,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1065,11 +1064,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1100,19 +1099,19 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(35);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1147,7 +1146,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1166,11 +1165,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1203,7 +1202,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1222,11 +1221,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1259,7 +1258,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1278,11 +1277,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1311,30 +1310,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(32);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       32,
-                      [32],
+                      32,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(32, [32], amount);
+                  setBetFuncton(32, 32, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1358,7 +1357,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1377,11 +1376,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1414,7 +1413,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1433,11 +1432,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1470,7 +1469,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1489,11 +1488,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1510,7 +1509,7 @@ const Third12 = ({
               }}
             ></span>
           </p> */}
-          <IconButton sx={{ ...style.btn2, ...style.blue }}>
+          <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="29"
               onClick={(e) => {
@@ -1522,30 +1521,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(29);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       29,
-                      [29],
+                      29,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(29, [29], amount);
+                  setBetFuncton(29, 29, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1569,7 +1568,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1588,11 +1587,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1625,7 +1624,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1644,11 +1643,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1681,7 +1680,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1700,11 +1699,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1733,30 +1732,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(26);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       26,
-                      [26],
+                      26,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(26, [26], amount);
+                  setBetFuncton(26, 26, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1780,7 +1779,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1799,11 +1798,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1836,7 +1835,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1855,11 +1854,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1892,7 +1891,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -1911,11 +1910,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1946,19 +1945,19 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(34);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1969,7 +1968,7 @@ const Third12 = ({
                     );
                   }
                 } else {
-                  setBetFuncton(34, [34], amount);
+                  setBetFuncton(34, 34, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1993,7 +1992,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2012,11 +2011,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2047,30 +2046,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(31);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       31,
-                      [31],
+                      31,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(31, [31], amount);
+                  setBetFuncton(31, 31, amount);
                 }
                 e.stopPropagation();
               }}
@@ -2094,7 +2093,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2113,11 +2112,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2148,30 +2147,30 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(28);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       28,
-                      [28],
+                      28,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(28, [28], amount);
+                  setBetFuncton(28, 28, amount);
                 }
                 e.stopPropagation();
               }}
@@ -2195,7 +2194,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2214,11 +2213,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2249,19 +2248,19 @@ const Third12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(25);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2296,7 +2295,7 @@ const Third12 = ({
                       className="!p-2"
                       style={{
                         marginTop: "10% ",
-                        transform: "rotate(90deg)",
+                        
                         backgroundColor: "black",
                       }}
                     >
@@ -2315,11 +2314,11 @@ const Third12 = ({
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2347,62 +2346,63 @@ const Third12 = ({
           background: 'red',
           borderRadius: '0px 20px 0px 0px'
         }}
-      >
-        <IconButton className="!p-0" style={{ transform: "rotate(270deg)" }}>
+        onClick={(e) => {
+          if (isSelectedDropBet) {
+            removeSingleBetFunction(312);
+            return;
+          }
+          if (amount < 10 || amount > 50000)
+            return toast(
+              <span
+                className="!p-2"
+                style={{
+                  marginTop: "10% ",
+                  
+                  backgroundColor: "black",
+                }}
+              >
+                Please select amount greater than 10
+              </span>
+            );
+          let isContainsPre = bet?.find((i) => i?.id === 312);
+          if (isContainsPre) {
+            // setOpenDialogBox(312);
+            if (
+              isContainsPre?.amount + amount > 50000 ||
+              isContainsPre?.amount < 10
+            ) {
+              return toast(
+                <span
+                  className="!p-2"
+                  style={{
+                    marginTop: "10% ",
+                    
+                    backgroundColor: "black",
+                  }}
+                >
+                 Bet must be greater or equal to 10 Rs
+                </span>
+              );
+            } else {
+              setBetFuncton(
+                312,
+                39,
+                Number(isContainsPre?.amount) + amount
+              );
+            }
+          } else {
+            setBetFuncton(312, 39, amount);
+          }
+          e.stopPropagation();
+        }}>
+        <IconButton className="!p-0" style={{ transform: "rotate(270deg)" }} 
+       >
           <Typography variant="body1" color="initial">
             <span
               style={{ color: "white", fontWeight: 800 }}
               className="whitespace-nowrap !text-[12px] !text-white"
               id="312"
-              onClick={(e) => {
-                if (isSelectedDropBet) {
-                  removeSingleBetFunction(312);
-                  return;
-                }
-                if (amount < 10 || amount > 50000)
-                  return toast(
-                    <span
-                      className="!p-2"
-                      style={{
-                        marginTop: "10% ",
-                        transform: "rotate(90deg)",
-                        backgroundColor: "black",
-                      }}
-                    >
-                      Please select amount greater than 10
-                    </span>
-                  );
-                let isContainsPre = bet?.find((i) => i?.id === 312);
-                if (isContainsPre) {
-                  // setOpenDialogBox(312);
-                  if (
-                    isContainsPre?.amount + amount > 50000 ||
-                    isContainsPre?.amount < 10
-                  ) {
-                    return toast(
-                      <span
-                        className="!p-2"
-                        style={{
-                          marginTop: "10% ",
-                          transform: "rotate(90deg)",
-                          backgroundColor: "black",
-                        }}
-                      >
-                        Bet must be greater than 10 and less that 50000 Rupees
-                      </span>
-                    );
-                  } else {
-                    setBetFuncton(
-                      312,
-                      [312],
-                      Number(isContainsPre?.amount) + amount
-                    );
-                  }
-                } else {
-                  setBetFuncton(312, [312], amount);
-                }
-                e.stopPropagation();
-              }}
+             
             >
               {/* 3rd 12 */}
               Red

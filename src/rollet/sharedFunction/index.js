@@ -1,14 +1,15 @@
 import toast from "react-hot-toast";
 import win_cap from "../assets/images/pwin.png";
-import axios from "axios";
 import { endpoint } from "../../services/urls";
+import { apiConnectorPost } from "../../services/apiconnector";
 
 export const red_array = [
-  1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
+  1, 3, 9, 12, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
 ];
 export const black_array = [
-  2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35,
+  4, 6, 8, 10, 11, 15, 17, 20, 22, 24, 28, 29, 31, 33, 35,
 ];
+export const blue_array = [2, 5, 7, 13, 14, 26];
 
 export const addWinCap = (id) => {
   let element = document.getElementById(`${String(id)}`);
@@ -117,10 +118,18 @@ export const spinFunction = (id) => {
       : String(id) === "33"
       ? "350"
       : "0";
+
   let element = document.getElementById(`${String(id)}_rotate`);
+
+  // Ensure element exists
+  if (!element) {
+    console.error(`Element with ID ${String(id)}_rotate not found.`);
+    return;
+  }
 
   element.classList.remove("hidden");
 
+  // First Animation (rotatemainnumber30)
   const animation30 = document.createElement("style");
   animation30.type = "text/css";
   const keyframes30 = `
@@ -132,12 +141,14 @@ export const spinFunction = (id) => {
   animation30.innerHTML = keyframes30;
   document.getElementsByTagName("head")[0].appendChild(animation30);
 
-  element.style.animation = "rotatemainnumber30 2s reverse linear 2 forwards";
+  element.style.animation = "rotatemainnumber30 2s reverse linear 1 forwards";
 
+  // First Animation End Handler
   const handleAnimationEnd = (event) => {
     if (event.animationName === "rotatemainnumber30") {
       element.style.animation = "";
 
+      // Second Animation (rotatemainnumber20)
       const animation20 = document.createElement("style");
       animation20.type = "text/css";
       const keyframes20 = `
@@ -150,19 +161,85 @@ export const spinFunction = (id) => {
       document.getElementsByTagName("head")[0].appendChild(animation20);
 
       element.style.animation =
-        "rotatemainnumber20 3s reverse linear 2 forwards";
-    } else if (event.animationName === "rotatemainnumber20") {
-      element.style.animation = "";
-      // element.classList.add("hidden");
+        "rotatemainnumber20 3s reverse linear 1 forwards";
 
-      element.removeEventListener("animationend", handleAnimationEnd);
+      // Add event listener for second animation
+      element.addEventListener("animationend", handleAnimationEndTwo);
     }
   };
 
+  // Second Animation End Handler
+  const handleAnimationEndTwo = (event) => {
+    if (event.animationName === "rotatemainnumber20") {
+      element.style.animation = "";
+
+      // Third Animation (rotatemainnumber50)
+      const animation50 = document.createElement("style");
+      animation50.type = "text/css";
+      const keyframes50 = `
+        @keyframes rotatemainnumber50 {
+          0% { transform: rotate(${0 + Number(angle)}deg); }
+          100% { transform: rotate(${360 + Number(angle)}deg); }
+        }
+      `;
+      animation50.innerHTML = keyframes50;
+      document.getElementsByTagName("head")[0].appendChild(animation50);
+
+      element.style.animation =
+        "rotatemainnumber50 8s reverse linear 1 forwards";
+
+      // Clean up after third animation ends
+      // setTimeout(() => {
+      element.addEventListener("animationend", handleAnimationEndThree);
+      // }, 16000);
+    }
+  };
+  // Second Animation End Handler
+  const handleAnimationEndThree = (event) => {
+    if (event.animationName === "rotatemainnumber50") {
+      element.style.animation = "";
+
+      // Third Animation (rotatemainnumber50)
+      const animation50 = document.createElement("style");
+      animation50.type = "text/css";
+      const keyframes50 = `
+        @keyframes rotatemainnumber500 {
+          0% { transform: rotate(${0 + Number(angle)}deg); }
+          100% { transform: rotate(${360 + Number(angle)}deg); }
+        }
+      `;
+      animation50.innerHTML = keyframes50;
+      document.getElementsByTagName("head")[0].appendChild(animation50);
+
+      element.style.animation =
+        "rotatemainnumber500 12s reverse linear 1 forwards";
+
+      // Clean up after third animation ends
+      setTimeout(() => {
+        element.addEventListener("animationend", handleFinalAnimationEnd);
+      }, 29000);
+    }
+  };
+
+  // Final Animation End Handler
+  const handleFinalAnimationEnd = (event) => {
+    if (event.animationName === "rotatemainnumber500") {
+      element.style.animation = "";
+      element.classList.add("hidden");
+
+      // Cleanup event listeners
+      element.removeEventListener("animationend", handleAnimationEnd);
+      element.removeEventListener("animationend", handleAnimationEndTwo);
+      element.removeEventListener("animationend", handleFinalAnimationEnd);
+    }
+  };
+
+  // Attach the first animation end listener
   element.addEventListener("animationend", handleAnimationEnd);
 };
 
 export const confirmBet = async (
+  one_min_time,
   setloding,
   rebet,
   setrebet,
@@ -173,60 +250,28 @@ export const confirmBet = async (
   client
 ) => {
   const isAlreadyAppliedBet = localStorage.getItem("rollet_bet_placed");
+  if (Number(one_min_time || 0) <= 15)
+    return toast(
+      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700  !rounded-full">
+        Tiem Over, Please Try in next trade.
+      </span>
+    );
   if (isAlreadyAppliedBet === "true")
     return toast(
-      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700 !rotate-90 !rounded-full">
+      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700  !rounded-full">
         Bid Already Placed.
       </span>
     );
   if (bet?.length <= 0)
     return toast(
-      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700 !rotate-90 !rounded-full">
+      <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700  !rounded-full">
         Please Select Your Bet First.
       </span>
     );
 
   let updatedBet = [...bet]; // Create a copy of the current bet state
-
-  updatedBet.forEach((element) => {
-    let idInString = String(element?.id);
-    let array = element?.number;
-
-    if (array?.length > 1) {
-      let d_amount = Number(element?.amount) / array?.length;
-
-      array.forEach((newelement) => {
-        let isContainsPre = updatedBet.find(
-          (i) => String(i?.id) === String(newelement)
-        );
-
-        if (isContainsPre) {
-          updatedBet = updatedBet.map((item) => {
-            if (String(item.id) === String(newelement)) {
-              return { ...item, amount: item.amount + d_amount };
-            }
-            return item;
-          });
-        } else {
-          const obj = {
-            id: Number(newelement),
-            number: [Number(newelement)],
-            amount: d_amount,
-          };
-          updatedBet.push(obj);
-        }
-      });
-
-      updatedBet = updatedBet.filter((i) => String(i?.id) !== idInString);
-    }
-  });
-  // console.log(updatedBet);
-  // setBet(updatedBet);
-
   const reqbody = {
-    number: updatedBet,
-    userid: user_id,
-    amount: 10,
+    bet_array: updatedBet,
   };
   const total_amount_bet = updatedBet?.reduce(
     (a, b) => a + Number(b?.amount || 0),
@@ -252,26 +297,24 @@ export const confirmBet = async (
   } else {
     setloding(true);
     try {
-      const res = await axios.post(endpoint?.rollet?.bet_now, reqbody);
+      const res = await apiConnectorPost(endpoint?.rollet?.bet_now, {
+        bet_array: JSON.stringify(reqbody),
+      });
       toast(
         <span
-          className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
-          style={{ display: "inline-block", transform: "rotate(90deg)" }}
+          className=" !text-white  !rounded-full"
+          style={{ display: "inline-block" }}
         >
           {res?.data?.msg}
         </span>
       );
-      if (res?.data?.msg === "Bet Successfully") {
+      if (res?.data?.msg === "Bid placed Successfully1") {
+        setTimeout(() => {
+          client.refetchQueries("history_rollet");
+          client.refetchQueries("walletamount");
+        }, 1000);
         setrebet(bet);
         localStorage.setItem("betlen", bet?.length || 0);
-        // bet?.forEach((ele) => {
-        //   let element = document.getElementById(`${ele?.id}`);
-        //   let span = element.querySelector("span");
-        //   if (span) {
-        //     element.removeChild(span);
-        //   }
-        // });
-        // setBet([]);
         localStorage.setItem("total_amount_bet", total_amount_bet);
         localStorage?.setItem("rollet_bet_placed", true);
         localStorage?.setItem("isPreBet", true);
@@ -280,7 +323,6 @@ export const confirmBet = async (
       //   client.refetchQueries("history_rollet");
       // }, 5000);
 
-      client.refetchQueries("walletamount");
       // if (res?.data?.error === "200") removeBetFunctonAll();
     } catch (e) {
       console.log(e);
@@ -305,7 +347,15 @@ export const forPlaceCoin = (id, amount) => {
     newelement.style.position = "absolute"; // Make the span position absolute
     newelement.style.top = "50%"; // Center vertically
     newelement.style.left = "50%"; // Center horizontally
-    newelement.style.transform = "translate(-50%, -50%)"; // Adjust position to center
+    if (String(id) === "112")
+      newelement.style.transform = "translate(-50%, -50%) rotate(269deg)";
+    else if (String(id) === "201")
+      newelement.style.transform = "translate(-50%, -50%) rotate(179deg)";
+    else if (String(id) === "312")
+      newelement.style.transform = "translate(-50%, -50%) rotate(270deg)";
+    else {
+      newelement.style.transform = "translate(-50%, -50%)"; // Adjust position to center
+    }
     newelement.style.display = "flex"; // Use flexbox for centering content
     newelement.style.alignItems = "center"; // Center content vertically
     newelement.style.justifyContent = "center"; // Center content horizontally
@@ -328,12 +378,12 @@ export const justDouble = (bet, setBet, wallet_amount_data) => {
     return {
       ...ele,
       amount: [...black_array, ...red_array]?.includes(Number(ele?.id))
-        ? Number(ele?.amount) * 2 > 5000
+        ? Number(ele?.amount) + 10 > 5000
           ? ele?.amount
-          : Number(ele?.amount) * 2
-        : Number(ele?.amount) * 2 > 50000
+          : Number(ele?.amount) + 10
+        : Number(ele?.amount) + 10 > 50000
         ? ele?.amount
-        : Number(ele?.amount) * 2,
+        : Number(ele?.amount) + 10,
     };
   });
   const total_bet_amont = newUpdateAmountArray?.reduce(
@@ -350,8 +400,8 @@ export const justDouble = (bet, setBet, wallet_amount_data) => {
   )
     return toast(
       <span
-        className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
-        style={{ display: "inline-block", transform: "rotate(90deg)" }}
+        className="!py-2 !px-4 !text-white !border-2  !rounded-full"
+        style={{ display: "inline-block" }}
       >
         Insufficient Wallet Amount
       </span>
@@ -365,6 +415,58 @@ export const justDouble = (bet, setBet, wallet_amount_data) => {
     }
   });
 
+  newUpdateAmountArray?.forEach((ele) => {
+    forPlaceCoin(ele?.id, ele?.amount);
+  });
+  setBet(newUpdateAmountArray);
+};
+export const justHalf = (bet, setBet, wallet_amount_data) => {
+  let newUpdateAmountArray = bet?.map((ele) => {
+    let initialAmount = Number(ele?.amount);
+    let newAmount = initialAmount > 10 ? initialAmount - 10 : initialAmount;
+    if (newAmount < 1) {
+      newAmount = initialAmount;
+    }
+    let finalAmount = Math.max(
+      10,
+      [...black_array, ...red_array]?.includes(Number(ele?.id))
+        ? newAmount > 5000
+          ? initialAmount
+          : newAmount
+        : newAmount > 50000
+        ? initialAmount
+        : newAmount
+    );
+    return {
+      ...ele,
+      amount: finalAmount,
+    };
+  });
+  const total_bet_amount = newUpdateAmountArray?.reduce(
+    (a, b) => a + Number(b?.amount),
+    0
+  );
+  if (
+    total_bet_amount >
+    Number(wallet_amount_data?.wallet || 0) +
+      Number(wallet_amount_data?.winning || 0)
+  ) {
+    return toast(
+      <span
+        className=" !py-2 !px-4 !text-white !border-2  !rounded-full"
+        style={{ display: "inline-block" }}
+      >
+        Insufficient Wallet Amount
+      </span>
+    );
+  }
+  bet?.forEach((ele) => {
+    let element = document.getElementById(`${ele?.id}`);
+    let span = element?.querySelector("span");
+    if (span) {
+      element.removeChild(span);
+    }
+  });
   newUpdateAmountArray?.forEach((ele) => {
     forPlaceCoin(ele?.id, ele?.amount);
   });
@@ -392,8 +494,8 @@ export const rebetFuncton = (bet, rebet, setBet, wallet_amount_data) => {
   )
     return toast(
       <span
-        className="!bg-blue-800 !py-2 !px-4 !text-white !border-2 !border-red-800 !rounded-full"
-        style={{ display: "inline-block", transform: "rotate(90deg)" }}
+        className=" !py-2 !px-4 !text-white"
+        style={{ display: "inline-block" }}
       >
         Insufficient Wallet Amount
       </span>

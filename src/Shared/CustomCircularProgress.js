@@ -3,7 +3,10 @@ import React from 'react';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
 const CustomCircularProgress = ({ isLoading }) => {
+
+
   return (
     <Dialog
       open={isLoading}
@@ -23,5 +26,6 @@ const CustomCircularProgress = ({ isLoading }) => {
     </Dialog>
   )
 }
+
 
 export default CustomCircularProgress

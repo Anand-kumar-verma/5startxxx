@@ -1,6 +1,9 @@
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import StartIcon from "@mui/icons-material/ArrowRightAlt";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import Diversity2Icon from "@mui/icons-material/Diversity2";
 import FitbitIcon from "@mui/icons-material/Fitbit";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import {
   Box,
@@ -14,14 +17,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import copy from "clipboard-copy";
 import { useFormik } from "formik";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { RxCross2 } from "react-icons/rx";
 import { useQuery, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -37,6 +39,8 @@ import {
   zubgbackgrad,
   zubgmid,
 } from "../../Shared/color";
+import referral from "../../assets/images/ref.jpg";
+import sponsor from "../../assets/images/spon.jpg";
 import one from "../../assets/banner1.png";
 import two from "../../assets/banner2.png";
 import crown1 from "../../assets/crown1.png";
@@ -56,8 +60,10 @@ import profile2 from "../../assets/profile2.png";
 import profile3 from "../../assets/profile3.png";
 import winning_bg from "../../assets/winning_bg-d9c728ae.png";
 import Layout from "../../component/Layout/Layout";
+import satta from "../../pages/SattaMatka/assets/images/satta.jpg";
 import game from "../../rollet/assets/images/casino.png";
 
+import CustomCircularProgress from "../../Shared/CustomCircularProgress";
 import megaphone from "../../rollet/assets/images/megaphone.png";
 import { MyProfileDataFn } from "../../services/apicalling";
 import { apiConnectorGet } from "../../services/apiconnector";
@@ -69,7 +75,6 @@ import {
   telegram_url,
 } from "../../services/urls";
 import Notification from "./Notification";
-import CustomCircularProgress from "../../Shared/CustomCircularProgress";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -88,8 +93,6 @@ const imageSources = [
 function Dashboard() {
   const navigate = useNavigate();
   const [poicy, setpoicy] = React.useState(false);
-  const [winnner_data, setwinnerdata] = useState([]);
-  const [loding, setloding] = useState(false);
 
   const client = useQueryClient();
 
@@ -97,22 +100,60 @@ function Dashboard() {
     copy(value);
     toast.success("Copied to clipboard!");
   };
-
-  const top11WinnerFunction = async () => {
-    setloding(true);
-    try {
-      const response = await axios.get(`${endpoint.top11winner}`);
-      setwinnerdata(response?.data?.data);
-    } catch (e) {
-      toast(e?.message);
-      console.log(e);
+  const data_array = [
+    {
+      to: "/account/income-main/referral-bonus",
+      name: "Referral Bonus",
+      logo: (
+        <AccountTreeIcon
+          sx={{
+            width: "20px",
+            height: "20px",
+            marginRight: "10px",
+            color: "white",
+          }}
+          color="#ffffff"
+        />
+      ),
+    },
+    {
+      to: "/account/income-main/level-income",
+      name: "Betting Commission",
+      logo: (
+        <Diversity2Icon
+          sx={{
+            width: "20px",
+            height: "20px",
+            marginRight: "10px",
+            color: "white",
+          }}
+          color="#ffffff"
+        />
+      ),
+    },
+  ];
+  const { isLoadingdata, data: image } = useQuery(
+    ["winner"],
+    () => apiConnectorGet(endpoint.node.top_winners),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
     }
-    setloding(false);
-  };
+  );
 
-  useEffect(() => {
-    // top11WinnerFunction();
-  }, []);
+  const winnner_data = image?.data?.data || [];
+
+  const { data: toptwo } = useQuery(
+    ["top"],
+    () => apiConnectorGet(endpoint?.node?.top_two_winners),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+  const topdata = toptwo?.data?.data || [];
 
   const { isLoading, data } = useQuery(
     ["walletamount"],
@@ -120,12 +161,11 @@ function Dashboard() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false,
     }
   );
 
   const newdata = data?.data?.data || 0;
-
 
   const { isLoading: profile_loding, data: profile } = useQuery(
     ["myprofile"],
@@ -133,15 +173,13 @@ function Dashboard() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false,
     }
   );
 
-  const result = [];
-  // profile?.data?.data || [];
-
+  const result = profile?.data?.data || [];
   const initialValues = {
-    referrel_code: `${fron_end_main_domain}/register?ref=${result?.referral_code}`,
+    referral_code: `${fron_end_main_domain}/register?ref=${result?.referral_code}`,
   };
 
   const fk = useFormik({
@@ -159,7 +197,6 @@ function Dashboard() {
   function refreshFunctionForRotation() {
     client.refetchQueries = "walletamount";
     const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
-
     const element = document.getElementById("refresh_button");
     if (!item) {
       element.classList.add("rotate_refresh_image");
@@ -351,72 +388,6 @@ function Dashboard() {
             </Box>
           </Box>
 
-          {/* <Stack direction="row" sx={styles.depositWithdrawContainer}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Box className="serv-item cursor-pointer">
-                <Box
-                  component="img"
-                  src={deposit}
-                  alt="Deposit"
-                  sx={styles.depositWithdrawIcon}
-                  // onClick={() => navigate("/wallet/Recharge")}
-                />
-              </Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                className="db-header"
-                sx={{ xolor: "white", textAlign: "center" }}
-              >
-                Deposit
-              </Typography>
-            </Box>
-            <Box sx={{ textAlign: "center" }}>
-             <div className="!flex !justify-center gap-1">
-             <Typography variant="body1" color="initial" className="b-val ">
-                {" "}
-                {Number(
-                  Number(newdata?.wallet || 0) + Number(newdata?.winning || 0)
-                )?.toFixed(2)}
-               </Typography>
-               <img className="rotate_refresh_image w-8" id="refresh_button"
-                src={refresh} width={25} ml={2} onClick={() => {
-                refreshFunctionForRotation()
-              }} />
-             </div>
-              <Typography variant="body1" color="initial" className="b-valp ">
-                Available Balance
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Box className="serv-item">
-                <Box
-                  // onClick={() => navigate("/Withdrawal")}
-                  component="img"
-                  src={cash}
-                  alt="Withdraw"
-                  sx={styles.depositWithdrawIcon}
-                  className="!cursor-pointer"
-                />
-              </Box>
-              <Typography variant="body1" color="initial" className="db-header">
-                Withdraw
-              </Typography>
-            </Box>
-          </Stack> */}
-
           <Box sx={styles.depositWithdrawContainer}>
             <div className="!flex !justify-center gap-1">
               <Typography
@@ -453,9 +424,9 @@ function Dashboard() {
               <TextField
                 className="dbinput"
                 fullWidth
-                id="referrel_code"
-                name="referrel_code"
-                value={fk.values.referrel_code}
+                id="referral_code"
+                name="referral_code"
+                value={fk.values.referral_code}
                 // onChange={fk.handleChange}
                 sx={styles.referralLinkInput}
               />
@@ -463,7 +434,7 @@ function Dashboard() {
                 variant="contained"
                 className="whitebtn"
                 sx={styles.referralLinkButton}
-                onClick={() => functionTOCopy(fk.values.referrel_code)}
+                onClick={() => functionTOCopy(fk.values.referral_code)}
               >
                 Copy
               </Button>
@@ -483,6 +454,239 @@ function Dashboard() {
               </Button>
             </Stack>
           </Box>
+          <Box className="!px-4" pt={2}>
+            <Swiper
+              spaceBetween={30}
+              centeredSlides={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: false,
+              }}
+              navigation={false}
+              modules={[Autoplay, Pagination, Navigation]}
+              onAutoplayTimeLeft={onAutoplayTimeLeft}
+              className="mySwiper"
+              style={{
+                // height: "25vh !important",
+                borderRadius: "5px",
+                overflow: "hidden",
+                marginBottom: "16px",
+              }}
+            >
+              <SwiperSlide
+                sx={{
+                  // height: "20vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={referral}
+                  alt="Slide 1"
+                  sx={styles.swiperImageincome}
+                />
+              </SwiperSlide>
+              <SwiperSlide
+                sx={{
+                  // height: "20vh !important",
+                  borderRadius: "5px",
+                  overflow: "hidden",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={sponsor}
+                  alt="Slide 1"
+                  sx={styles.swiperImageincome}
+                />
+              </SwiperSlide>
+
+              <div
+                className="autoplay-progress"
+                slot="container-end"
+                style={{ opacity: 0 }}
+              >
+                <svg viewBox="0 0 48 48" ref={progressCircle}>
+                  <circle cx="24" cy="24" r="20"></circle>
+                </svg>
+                <span ref={progressContent}></span>
+              </div>
+            </Swiper>
+          </Box>
+          {/* <Box sx={styles.socialButtonsContainer} className="!cursor-pointer" >
+           <Box sx={styles.socialButtonText} className="p-4" >
+              Referral Income
+            <img  src={referral} alt="" className="rounded"/>
+            </Box>
+             <Box sx={styles.socialButtonText} className="p-4" >
+            Sponsor Betting Income 
+            <img  src={sponsor} alt="" className="rounded"/>
+            </Box>
+          </Box> */}
+
+          <Box
+            sx={{
+              width: "95%",
+              marginLeft: "2.5%",
+              borderRadius: "10px",
+              background: zubgmid,
+              padding: "10px",
+              mt: "20px",
+              "&>:nth-child(1)": {
+                color: "white",
+                fontSize: "15px",
+                fontWeight: "600",
+                mb: "25px",
+              },
+            }}
+          >
+            <Typography variant="body1" color="initial">
+              Income
+            </Typography>
+
+            <Box sx={style.actionContainertwo}>
+              <Stack
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  background: zubgmid,
+                  width: "100%",
+                  borderRadius: "10px",
+                }}
+              >
+                {data_array?.map((i) => {
+                  return (
+                    // <Box
+                    //   component={NavLink}
+                    //   to={i.to}
+                    //   sx={{
+                    //     display: "flex",
+                    //     flexDirection: "column",
+                    //     alignItems: "center",
+                    //     justifyContent: "center",
+                    //     mb: "10px",
+                    //     "&>p": {
+                    //       color: "white",
+                    //       fontSize: "14px",
+                    //       fontWeight: "500",
+                    //       mt: "5px",
+                    //     },
+                    //   }}
+                    // >
+                    //   <p></p>
+                    //   <p className="lg:!whitespace-nowrap !text-center">{i.name}</p>
+                    // </Box>
+
+                    <Stack
+                      component={NavLink}
+                      to={i.to}
+                      direction="row"
+                      sx={{
+                        borderBottom: "1px solid white",
+                        padding: "10px",
+                        width: "100%",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Stack direction="row" sx={{ alignItems: "center" }}>
+                        {i?.logo}
+                        <Typography
+                          variant="body1"
+                          color="initial"
+                          sx={{
+                            color: "white",
+                            fontSize: "13px",
+                            fontWeight: "600",
+                          }}
+                        >
+                          {i.name}
+                        </Typography>
+                      </Stack>
+                      <Box>
+                        <KeyboardDoubleArrowRightIcon
+                          sx={{
+                            color: "white",
+                            fontSize: "23px",
+                            fontWeight: "600",
+                          }}
+                        />
+                      </Box>
+                    </Stack>
+                  );
+                })}
+              </Stack>
+            </Box>
+          </Box>
+          <div
+            className="mt-2 w-full "
+            style={{
+              width: "95%",
+              marginLeft: "2.5%",
+              marginTop: "20px",
+              mb: "20px",
+              mt: "16px",
+            }}
+          >
+            <Box
+              sx={{ ...styles.flexbetween, ...styles.gamemenubox }}
+              className="w95"
+            >
+              <Box sx={{ ...styles.gameimgbox }}>
+                <Box
+                  component="img"
+                  src={satta}
+                  sx={{ ...styles.gameimg }}
+                ></Box>
+              </Box>
+              <Box sx={{ ...styles.gamenamebox }}>
+                <Box sx={{ ...styles.flexbetween }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: "700", color: "white" }}
+                  >
+                    {" "}
+                    Satta Matka{" "}
+                  </Typography>
+                </Box>
+                <Box sx={{ ...styles.flexbetween, my: 1, ...styles.maxwin }}>
+                  <Typography
+                    variant="body2"
+                    className="kip13"
+                    sx={{ textAlign: "center", color: "white !important" }}
+                  >
+                    The Highest Bonus in History
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    className="kip15"
+                    sx={{
+                      color: "white",
+                      fontWeight: "600",
+                      textAlign: "center",
+                    }}
+                  >
+                    ₹ {Number(topdata?.[0]?.amount)?.toFixed(2)}
+                  </Typography>
+                </Box>
+              </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                className="blinking-button"
+                sx={{ ...styles.playbutton }}
+                onClick={() => navigate("/satta/matka")}
+              >
+                Play Now <StartIcon ml={2} />
+              </Button>
+            </Box>
+          </div>
           <div
             className="mt-2 w-full "
             style={{
@@ -529,7 +733,7 @@ function Dashboard() {
                       textAlign: "center",
                     }}
                   >
-                    98456.66
+                    ₹ {Number(topdata?.[1]?.amount)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
@@ -544,7 +748,8 @@ function Dashboard() {
               </Button>
             </Box>
           </div>
-          {loding ? (
+
+          {isLoadingdata ? (
             <div className="w-[100%] flex justify-center">
               <CircularProgress className="!text-white" />
             </div>
@@ -570,7 +775,7 @@ function Dashboard() {
                   Winning information
                 </Typography>
               </Stack>
-              {winnner_data.slice(3, 8)?.map((i, index) => {
+              {winnner_data?.slice(3, 8)?.map((i, index) => {
                 return (
                   <Stack key={index} direction="row" sx={styles.winnerslider}>
                     <div style={{ position: "relative" }}>
@@ -611,7 +816,10 @@ function Dashboard() {
                     </Box>
                     <Box>
                       <Typography variant="body1" sx={styles.winneramout || 0}>
-                        Receive ₹{Number(Number(i?.win || 0) * 200).toFixed(2)}
+                        Receive ₹
+                        {Number(Number(i?.winning_amount || 0) * 200).toFixed(
+                          2
+                        )}
                       </Typography>
                       <Typography variant="body1" sx={styles.winnertitle}>
                         Winning amount
@@ -656,7 +864,7 @@ function Dashboard() {
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
-                    ₹ {Number(winnner_data?.[0]?.win)?.toFixed(2)}
+                    ₹ {Number(winnner_data?.[0]?.winning_amount)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
@@ -687,7 +895,7 @@ function Dashboard() {
                 ></Box>
                 <Box sx={styles.winner2amt}>
                   <Typography variant="body1">
-                    {winnner_data?.[2]?.email
+                    {winnner_data?.[1]?.email
                       ? winnner_data?.[1]?.email
                           ?.split("@")?.[0]
                           ?.substring(0, 2) +
@@ -700,7 +908,7 @@ function Dashboard() {
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
-                    ₹ {Number(winnner_data?.[1]?.win)?.toFixed(2)}
+                    ₹ {Number(winnner_data?.[1]?.winning_amount)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
@@ -744,14 +952,14 @@ function Dashboard() {
                       : "**"}
                   </Typography>
                   <Typography variant="body1" sx={styles.winningamount}>
-                    ₹ {Number(winnner_data?.[2]?.win)?.toFixed(2)}
+                    ₹ {Number(winnner_data?.[2]?.winning_amount)?.toFixed(2)}
                   </Typography>
                 </Box>
               </Box>
             </Stack>
           </Box>
 
-          {loding ? (
+          {isLoadingdata ? (
             <div className="w-[100%] flex justify-center">
               {" "}
               <CircularProgress className="!text-white" />
@@ -799,7 +1007,10 @@ function Dashboard() {
                     </Box>
                     <Box>
                       <Typography variant="body1" sx={styles.winneramout || 0}>
-                        Receive ₹{Number(Number(i?.win || 0) * 200).toFixed(2)}
+                        Receive ₹
+                        {Number(Number(i?.winning_amount || 0) * 200).toFixed(
+                          2
+                        )}
                       </Typography>
                       <Typography variant="body1" sx={styles.winnertitle}>
                         Winning amount
@@ -893,7 +1104,7 @@ function Dashboard() {
 export default Dashboard;
 
 const styles = {
-  root: { background: "#202020", pb: 6 },
+  root: { background: stardarkblue, pb: 6 },
   dashboardTitle: {
     textAlign: "center",
     color: "white !important",
@@ -901,6 +1112,7 @@ const styles = {
     fontWeight: "500",
   },
   swiperImage: { width: "100%", height: "25vh", objectFit: "fill" },
+  swiperImageincome: { width: "100%", height: "15vh", objectFit: "fill" },
   depositWithdrawContainer: {
     alignItems: "center",
     justifyContent: "space-between",
@@ -1261,5 +1473,97 @@ const styles = {
     background: stargold,
     marginLeft: "5%",
     width: "90%",
+  },
+};
+
+const style = {
+  header: {
+    padding: "0px 8px",
+    background: starbluegrad,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    "& > p": {
+      fontSize: "20px",
+      fontWeight: "600",
+      textAlign: "center",
+      color: "white",
+    },
+  },
+  wthui: {
+    textAlign: "center",
+    width: "32%",
+    minHeight: "15vh",
+    background: zubgmid,
+    borderRadius: "10px",
+    mb: "10px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    "&>div>p": { color: "white" },
+  },
+  paymentlink: {
+    width: "32%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "15vh",
+    background: zubgmid,
+    borderRadius: "10px",
+    mb: "10px",
+    "&>p": {
+      color: "white",
+      fontSize: "12px",
+      fontWeight: "500",
+      textAlign: "center",
+      mt: "5px",
+    },
+  },
+  paymentBoxOuter: {
+    width: "95%",
+    margin: "auto",
+    my: "10px",
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  paytmbtn: {
+    mb: 2,
+    background: zubgback,
+    color: "white !important",
+    width: "31%",
+    border: "1px solid white",
+    padding: "10px",
+    "&:hover": { background: zubgbackgrad, border: "1px solid transparent" },
+  },
+  paytmbtntwo: {
+    borderRadius: "5px",
+    textTransform: "capitalize",
+    mb: 2,
+    background: zubgbackgrad,
+    color: "white !important",
+    width: "100%",
+    mt: 2,
+    border: "1px solid white",
+    padding: "10px",
+    "&:hover": { background: zubgbackgrad, border: "1px solid transparent" },
+  },
+  rechargeinstext: {
+    mb: "10px",
+    alignItems: "center",
+    justifyContent: "start",
+    "&>p": { marginLeft: "10px", color: "white !important", fontSize: "14px" },
+  },
+  actionContainertwo: {
+    flexDirection: "column",
+    borderRadius: "10px",
+    width: "95%",
+    margin: "auto",
+    marginTop: "20px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 };

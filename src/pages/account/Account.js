@@ -52,6 +52,7 @@ import { endpoint, fron_end_main_domain } from "../../services/urls";
 import Image from "./Image";
 import { BorderColor } from "@mui/icons-material";
 import zIndex from "@mui/material/styles/zIndex";
+import { apiConnectorGet } from "../../services/apiconnector";
 function Account() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -61,6 +62,7 @@ function Account() {
   const profile_data = localStorage.getItem("profile_data");
   const [openDialogBoxHomeBanner, setopenDialogBoxHomeBanner] = useState(false);
   const [imageNumber, setImageNumber] = useState(profile_data || "1");
+
   const { isLoading, data } = useQuery(["myprofile"], () => MyProfileDataFn(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
@@ -88,6 +90,18 @@ function Account() {
     }
     client.removeQueries("myprofile");
   }
+
+  const { data: wallet } = useQuery(
+    ["walletamount"],
+    () => apiConnectorGet(endpoint.node.get_wallet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false
+    }
+  );
+
+  const newdata = wallet?.data?.data || 0;
   const images = [
     "https://mui.com/static/images/avatar/2.jpg",
     "https://mui.com/static/images/avatar/3.jpg",
@@ -171,8 +185,8 @@ function Account() {
             <Typography variant="body1" color="initial" sx={style.totalBalance}>
               {(
                 Number(
-                  Number(result?.winning_wallet || 0) +
-                  Number(result?.wallet || 0)
+                  Number(newdata?.winning || 0) +
+                  Number(newdata?.wallet || 0)
                 ) || 0
               )?.toFixed(0)}
             </Typography>
@@ -194,9 +208,15 @@ function Account() {
             }}
           >
             <Box component="img" src={cip} sx={style.cardImage} />
-            <Typography variant="body1" color="initial" sx={style.cardNumber}>
-              Rererral Code: {result?.referral_code}
-            </Typography>
+            <div className="!flex flex-col">
+              <Typography variant="body1" color="initial" sx={style.cardNumber}>
+                Rererral Code : {result?.referral_code}
+              </Typography>
+              <Typography variant="body1" color="initial" sx={style.cardNumber}>
+                Mobile No : {result?.mobile}
+              </Typography>
+            </div>
+
           </Stack>
         </Box>
 
@@ -227,6 +247,13 @@ function Account() {
             <Box component="img" src={edit} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Add Bank
+            </Typography>
+          </Box>
+          <Box sx={style.actionBox} component={NavLink} to="/add-upi-details">
+
+            <Box component="img" src={edit} sx={style.actionImage} />
+            <Typography variant="body1" color="initial" sx={style.actionText}>
+              Add UPI
             </Typography>
           </Box>
         </Box>
@@ -474,7 +501,9 @@ function Account() {
               textTransform: 'capitalize',
             }}
             onClick={() => {
-              logOutFunctoinRoulette(navigate);
+              localStorage.clear();
+              sessionStorage.clear();
+              window.location.href = "/";
             }}
           >
             Logout

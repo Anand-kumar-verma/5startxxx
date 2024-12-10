@@ -9,68 +9,65 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import CryptoJS from 'crypto-js';
 import { useFormik } from "formik";
 import * as React from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { NavLink, useNavigate } from "react-router-dom";
-import { withdrawAmountSchemaValidaton } from "../../../Shared/Validation";
 import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
-import cip from "../../../assets/cip.png";
 import payment from "../../../assets/wallet2.png";
-import playgame from "../../../assets/images/playgame.jpg";
 import Layout from "../../../component/Layout/Layout";
+import { apiConnectorPost } from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
+import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
+
 function AddBankDetails() {
   const login_data = localStorage.getItem("logindataen") && CryptoJS.AES.decrypt(localStorage.getItem("logindataen"), "anand")?.toString(CryptoJS.enc.Utf8) || null
   const user_id = login_data && JSON.parse(login_data)?.UserID;
   const client = useQueryClient()
+  const [Loading, setloding] = React.useState(false);
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
-
-
-
   const initialValues = {
-    email: "",
-    mobile: "",
-    bank_name: "",
-    name: "",
-    ifsc: "",
-    account_number: "",
+    u_details_type: "",
+    u_holder_name: "",
+    u_bank_name: "",
+    u_account_no: "",
+    u_ifsc: "",
+    u_upi_id: "",
   };
 
   const fk = useFormik({
     initialValues: initialValues,
-    validationSchema: withdrawAmountSchemaValidaton,
     onSubmit: () => {
-      console.log(fk.values);
-      const fd = new FormData();
-      fd.append("email", fk.values.email);
-      fd.append("mobile", fk.values.mobile);
-      fd.append("bank_name", fk.values.bank_name);
-      fd.append("name", fk.values.name);
-      fd.append("ifsc_code", fk.values.ifsc);
-      fd.append("account_number", fk.values.account_number);
-      fd.append("user_id", user_id);
-
-      addbankDetailsFunction(fd);
-      // paymentRequest(fd, fk.values.amount);
-      // fk.setFieldValue("all_data", {
-      //   t_id: fd.get("TransactionID") || "",
-      //   amount: fk.values.amount,
-      //   date: new Date(),
-      // });
+ if (!fk.values.u_account_no || !fk.values.u_holder_name ||!fk.values.u_bank_name ||!fk.values.u_account_no || !fk.values.u_ifsc) {
+        toast("Please enter all fields");
+        return; 
+      }  
+      const reqBody ={
+        user_id: user_id,
+        u_details_type:"2" ,
+        u_holder_name: fk.values.u_holder_name,
+        u_bank_name:fk.values.u_bank_name,
+        u_account_no:fk.values.u_account_no,
+        u_ifsc:fk.values.u_ifsc,
+        u_upi_id:fk.values.u_upi_id,
+      }
+      addbankDetailsFunction(reqBody);
     },
   });
 
-  const addbankDetailsFunction = async (fd) => {
+  const addbankDetailsFunction = async (reqBody) => {
+    setloding(true);
     try {
-      const response = await axios.post(`${endpoint.add_bank_details}`, fd);
+      const response = await apiConnectorPost(`${endpoint.node.add_bank}`, reqBody);
       toast(response?.data?.msg)
+      setloding(false);
+      if ("BankAdded Successfully." === response?.data?.msg)
+      fk.handleReset();
       client.refetchQueries("bank_list_details");
       if (response?.data?.msg) {
         navigate('/add-bank-details/pre-added-bank-details')
@@ -79,6 +76,7 @@ function AddBankDetails() {
       toast(e?.message);
       console.log(e);
     }
+    setloding(false);
   };
 
   return (
@@ -134,122 +132,90 @@ function AddBankDetails() {
                   </Typography>
                 </Stack>
                 <TextField
-                  id="name"
-                  name="name"
+                  id="u_holder_name"
+                  name="u_holder_name"
                   type="text"
-                  value={fk.values.name}
+                  value={fk.values.u_holder_name}
                   onChange={fk.handleChange}
                   placeholder="Enter account holder name *"
                   className="withdrawalfield"
                   onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
                 />
-                {fk.touched.name && fk.errors.name && (
-                  <div className="error">{fk.errors.name}</div>
-                )}
+               
               </FormControl>
               <FormControl fullWidth sx={{ mt: "10px" }}>
                 <Stack direction="row" className="loginlabel">
                   <Typography variant="h3">
-                    Enter Email <span className="!text-red-600">*</span>
+                    Enter Bank Name <span className="!text-red-600">*</span>
                   </Typography>
                 </Stack>
                 <TextField
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={fk.values.email}
+                  id="u_bank_name"
+                  name="u_bank_name"
+                  value={fk.values.u_bank_name}
                   onChange={fk.handleChange}
-                  placeholder="Enter email *"
+                  placeholder="Enter Bank Name *"
                   className="withdrawalfield"
                   onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
                 />
-                {fk.touched.email && fk.errors.email && (
-                  <div className="error">{fk.errors.email}</div>
-                )}
+             
               </FormControl>
               <FormControl fullWidth sx={{ mt: "10px" }}>
                 <Stack direction="row" className="loginlabel">
                   <Typography variant="h3">
-                    Enter Mobile <span className="!text-red-600">*</span>
+                    Enter Account Number <span className="!text-red-600">*</span>
                   </Typography>
                 </Stack>
                 <TextField
-                  id="mobile"
-                  name="mobile"
-                  type="number"
-                  value={fk.values.mobile}
+                  id="u_account_no"
+                  name="u_account_no"
+                  value={fk.values.u_account_no}
                   onChange={fk.handleChange}
-                  placeholder="Enter mobile *"
+                  placeholder="Enter Account No *"
                   className="withdrawalfield"
                   onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
                 />
-                {fk.touched.mobile && fk.errors.mobile && (
-                  <div className="error">{fk.errors.mobile}</div>
-                )}
+               
               </FormControl>
 
               <FormControl fullWidth sx={{ mt: "10px" }}>
                 <Stack direction="row" className="loginlabel">
                   <Typography variant="h3">
-                    Bank name <span className="!text-red-600">*</span>
+                    IFSC <span className="!text-red-600">*</span>
                   </Typography>
                 </Stack>
                 <TextField
-                  id="bank_name"
-                  name="bank_name"
+                  id="u_ifsc"
+                  name="u_ifsc"
                   type="text"
-                  value={fk.values.bank_name}
+                  value={fk.values.u_ifsc}
                   onChange={fk.handleChange}
-                  placeholder="Enter bank name *"
+                  placeholder="Enter IFSC *"
                   className="withdrawalfield"
                   onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
                 />
-                {fk.touched.bank_name && fk.errors.bank_name && (
-                  <div className="error">{fk.errors.bank_name}</div>
-                )}
+                
               </FormControl>
 
               <FormControl fullWidth sx={{ mt: "10px" }}>
                 <Stack direction="row" className="loginlabel">
                   <Typography variant="h3">
-                    IFSC code <span className="!text-red-600">*</span>
+                    UPI code <span className="!text-red-600">*</span>
                   </Typography>
                 </Stack>
                 <TextField
-                  id="ifsc"
-                  name="ifsc"
+                  id="u_upi_id"
+                  name="u_upi_id"
                   type="text"
-                  value={fk.values.ifsc}
+                  value={fk.values.u_upi_id}
                   onChange={fk.handleChange}
-                  placeholder="Enter IFSC code *"
+                  placeholder="Enter UPI code *"
                   className="withdrawalfield"
                   onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
                 />
-                {fk.touched.ifsc && fk.errors.ifsc && (
-                  <div className="error">{fk.errors.ifsc}</div>
-                )}
+              
               </FormControl>
-              <FormControl fullWidth sx={{ mt: "10px" }}>
-                <Stack direction="row" className="loginlabel">
-                  <Typography variant="h3">
-                    Account number <span className="!text-red-600">*</span>
-                  </Typography>
-                </Stack>
-                <TextField
-                  id="account_number"
-                  name="account_number"
-                  type="text"
-                  value={fk.values.account_number}
-                  onChange={fk.handleChange}
-                  placeholder="Enter account number *"
-                  className="withdrawalfield"
-                  onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
-                />
-                {fk.touched.account_number && fk.errors.account_number && (
-                  <div className="error">{fk.errors.account_number}</div>
-                )}
-              </FormControl>
-
+          
               <Button
                 sx={style.paytmbtntwo}
                 type="submit"
@@ -260,6 +226,8 @@ function AddBankDetails() {
               >
                 Submit{" "}
               </Button>
+              {Loading && (
+                    <CustomCircularProgress isLoading={Loading} />)}
             </Box>
           </Box>
         </Box>

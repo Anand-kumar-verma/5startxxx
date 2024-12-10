@@ -290,13 +290,21 @@ function Register() {
                       onChange={fk.handleChange}
                       onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
                     />
-                    {fk.touched.referral_code && fk.errors.referral_code ? (
+                    {/* {fk.touched.referral_code && fk.errors.referral_code ? (
                       <div className="error">{fk.errors.referral_code}</div>
                     ) : result ? (
                       <div className="no-error">Referral From: {result}</div>
                     ) : (
                       <div className="error">Invalid Referral Id</div>
-                    )}
+                    )} */}
+                    {result !== "false" ? (
+              <div className="no-error">{result}</div>
+            ) : (
+              fk.touched.referral_code &&
+              fk.errors.referral_code && (
+                <div className="error">{fk.errors.referral_code}</div>
+              )
+            )}
                   </FormControl>
                 </Box>
                 <Box mt={2}>

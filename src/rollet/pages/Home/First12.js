@@ -1,8 +1,7 @@
+import { IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
-import { Box, IconButton, Stack, Typography } from "@mui/material";
-import { style } from "./CommonCss";
 import toast from "react-hot-toast";
-import { NavLink } from "react-router-dom";
+import { style } from "./CommonCss";
 const First12 = ({
   isSelectedDropBet,
   removeSingleBetFunction,
@@ -37,30 +36,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(12);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       12,
-                      [12],
+                      12,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(12, [12], amount);
+                  setBetFuncton(12, 12, amount);
                 }
                 e.stopPropagation();
               }}
@@ -106,7 +105,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -161,7 +160,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -216,7 +215,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -271,7 +270,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -300,30 +299,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(9);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       9,
-                      [9],
+                      9,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(9, [9], amount);
+                  setBetFuncton(9, 9, amount);
                 }
                 e.stopPropagation();
               }}
@@ -369,7 +368,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -424,7 +423,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -479,7 +478,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -534,7 +533,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -563,30 +562,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(6);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       6,
-                      [6],
+                      6,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(6, [6], amount);
+                  setBetFuncton(6, 6, amount);
                 }
                 e.stopPropagation();
               }}
@@ -632,7 +631,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -687,7 +686,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -742,7 +741,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -797,7 +796,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -826,30 +825,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(3);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       3,
-                      [3],
+                      3,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(3, [3], amount);
+                  setBetFuncton(3, 3, amount);
                 }
                 e.stopPropagation();
               }}
@@ -895,7 +894,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -950,7 +949,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -982,30 +981,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(11);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       11,
-                      [11],
+                      11,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(11, [11], amount);
+                  setBetFuncton(11, 11, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1051,7 +1050,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1106,7 +1105,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1161,7 +1160,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1190,8 +1189,8 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(8);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -1202,18 +1201,18 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       8,
-                      [8],
+                      8,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(8, [8], amount);
+                  setBetFuncton(8, 8, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1259,7 +1258,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1314,7 +1313,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1369,7 +1368,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1386,7 +1385,7 @@ const First12 = ({
               }}
             ></span>
           </p> */}
-          <IconButton sx={{ ...style.btn2, ...style.red }}>
+          <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="5"
               onClick={(e) => {
@@ -1398,30 +1397,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(5);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       5,
-                      [5],
+                      5,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(5, [5], amount);
+                  setBetFuncton(5, 5, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1467,7 +1466,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1522,7 +1521,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1577,7 +1576,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1606,19 +1605,19 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(2);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1676,7 +1675,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1696,7 +1695,7 @@ const First12 = ({
           {/* <p style={{ height: '100% !important' }} className="absolute top-[92%] left-[80%] h-4 w-4 !rounded-full !z-50 !cursor-pointer !flex !justify-center !items-center"></p> */}
         </span>
         <span className="!grid grid-rows-4 !w-full !h-full relative">
-          <IconButton sx={{ ...style.btn2, ...style.blue }}>
+          <IconButton sx={{ ...style.btn2, ...style.black }}>
             <p
               id="10"
               onClick={(e) => {
@@ -1708,8 +1707,8 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(10);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
@@ -1720,18 +1719,18 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       10,
-                      [10],
+                      10,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(10, [10], amount);
+                  setBetFuncton(10, 10, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1777,7 +1776,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1795,7 +1794,7 @@ const First12 = ({
             ></span>
           </p> */}
 
-          <IconButton sx={{ ...style.btn2, ...style.red }}>
+          <IconButton sx={{ ...style.btn2, ...style.blue }}>
             <p
               id="7"
               onClick={(e) => {
@@ -1807,30 +1806,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(7);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       7,
-                      [7],
+                      7,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(7, [7], amount);
+                  setBetFuncton(7, 7, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1876,7 +1875,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -1906,30 +1905,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(4);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       4,
-                      [4],
+                      4,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(4, [4], amount);
+                  setBetFuncton(4, 4, amount);
                 }
                 e.stopPropagation();
               }}
@@ -1975,7 +1974,7 @@ const First12 = ({
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 10 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
@@ -2005,30 +2004,30 @@ const First12 = ({
                 if (isContainsPre) {
                   // setOpenDialogBox(1);
                   if (
-                    isContainsPre?.amount + amount > 5000 ||
-                    isContainsPre?.amount < 2
+                   
+                    isContainsPre?.amount < 10
                   ) {
                     return toast(
                       <span
                         className="!p-2"
                         style={{
                           marginTop: "10% ",
-                          transform: "rotate(90deg)",
+                          // transform: "rotate(90deg)",
                           backgroundColor: "black",
                         }}
                       >
-                        Bet must be greater than 2 and less that 50000 Rupees
+                       Bet must be greater or equal to 10 Rs
                       </span>
                     );
                   } else {
                     setBetFuncton(
                       1,
-                      [1],
+                      1,
                       Number(isContainsPre?.amount) + amount
                     );
                   }
                 } else {
-                  setBetFuncton(1, [1], amount);
+                  setBetFuncton(1, 1, amount);
                 }
                 e.stopPropagation();
               }}
@@ -2044,66 +2043,66 @@ const First12 = ({
         style={{
           ...style.flex,
           border: "1px solid white",
-          background: '#5352FF',
+          background: 'black',
         }}
-      >
+        onClick={(e) => {
+          if (isSelectedDropBet) {
+            removeSingleBetFunction(112);
+            return;
+          }
+          if (amount < 10 || amount > 50000)
+            return toast(
+              <span
+                className="!p-2"
+                style={{
+                  marginTop: "10% ",
+                  transform: "rotate(90deg)",
+                  backgroundColor: "black",
+                }}
+              >
+                Please select amount greater than 10
+              </span>
+            );
+          let isContainsPre = bet?.find((i) => i?.id === 112);
+          if (isContainsPre) {
+            // setOpenDialogBox(112);
+            if (
+              isContainsPre?.amount + amount > 50000 ||
+              isContainsPre?.amount < 10
+            ) {
+              return toast(
+                <span
+                  className="!p-2"
+                  style={{
+                    marginTop: "10% ",
+                    // transform: "rotate(90deg)",
+                    backgroundColor: "black",
+                  }}
+                >
+                 Bet must be greater or equal to 10 Rs
+                </span>
+              );
+            } else {
+              setBetFuncton(
+                112,
+                38,
+                Number(isContainsPre?.amount) + amount
+              );
+            }
+          } else {
+            setBetFuncton(112, 38, amount);
+          }
+          e.stopPropagation();
+        }} >
         <IconButton className="!p-0" style={{ transform: "rotate(270deg)" }}>
           <Typography variant="body1" color="initial">
             <span
               style={{ color: "white", fontWeight: 800 }}
               className="whitespace-nowrap !text-[11px]  "
               id="112"
-              onClick={(e) => {
-                if (isSelectedDropBet) {
-                  removeSingleBetFunction(112);
-                  return;
-                }
-                if (amount < 10 || amount > 50000)
-                  return toast(
-                    <span
-                      className="!p-2"
-                      style={{
-                        marginTop: "10% ",
-                        transform: "rotate(90deg)",
-                        backgroundColor: "black",
-                      }}
-                    >
-                      Please select amount greater than 10
-                    </span>
-                  );
-                let isContainsPre = bet?.find((i) => i?.id === 112);
-                if (isContainsPre) {
-                  // setOpenDialogBox(112);
-                  if (
-                    isContainsPre?.amount + amount > 50000 ||
-                    isContainsPre?.amount < 10
-                  ) {
-                    return toast(
-                      <span
-                        className="!p-2"
-                        style={{
-                          marginTop: "10% ",
-                          transform: "rotate(90deg)",
-                          backgroundColor: "black",
-                        }}
-                      >
-                        Bet must be greater than 10 and less that 50000 Rupees
-                      </span>
-                    );
-                  } else {
-                    setBetFuncton(
-                      112,
-                      [112],
-                      Number(isContainsPre?.amount) + amount
-                    );
-                  }
-                } else {
-                  setBetFuncton(112, [112], amount);
-                }
-                e.stopPropagation();
-              }}
+             
             >
-              Blue
+              Black
             </span>
           </Typography>
         </IconButton>

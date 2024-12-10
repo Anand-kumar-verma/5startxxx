@@ -70,12 +70,21 @@ function LoginWithEmail() {
 
       toast.success(response?.data?.msg);
       if (response?.data?.msg === "Login Successfully") {
-        const value = CryptoJS.AES.encrypt(JSON.stringify(1), "anand")?.toString();
-        localStorage.setItem("singh" ,response?.data?.token)
-        localStorage.setItem("logindataen", value);
+        const value = response?.data?.token;
+        localStorage.setItem(
+          "logindataen",
+          CryptoJS.AES.encrypt(
+            JSON.stringify({ UserID: response?.data?.UserID }),
+            "anand"
+          )?.toString()
+        );
+        localStorage.setItem("token",value)
+        sessionStorage.setItem("isAvailableUser", true);
+        sessionStorage.setItem("isAvailableCricketUser", true);
         setloding(false);
-        navigate("/dash");
-        // window.location.reload();
+        storeCookies();
+        navigate("/dashboard");
+        window.location.reload();
       }
     } catch (e) {
       toast.error(e?.message);
@@ -198,7 +207,7 @@ function LoginWithEmail() {
         </FormControl>
       </Box>
       <Box >
-        <FormControl fullWidth>
+        {/* <FormControl fullWidth>
           <FormControlLabel
             onClick={() =>
               fk.setFieldValue("isAllowCheckBox", !fk.values.isAllowCheckBox)
@@ -212,7 +221,7 @@ function LoginWithEmail() {
             label={<Typography className="fp13" >Remember password</Typography>}
             sx={{ color: "white" }}
           />
-        </FormControl>
+        </FormControl> */}
       </Box>
 
       <Button

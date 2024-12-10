@@ -24,7 +24,7 @@ root.render(
           <ThemeProvider theme={theme}>
             <App />
             <Toaster
-              position="top-right"
+              position="top-center"
               toastOptions={{
                 duration: 1000,
                 className: "",
@@ -33,13 +33,10 @@ root.render(
                   fontSize: "15px",
                   marginTop: "100px",
                   borderRadius: "10px",
-                  background: '#6C10ED',
-
+                  background: "#6C10ED",
                 },
-
               }}
               limit={1}
-
             />
           </ThemeProvider>
         </BrowserRouter>

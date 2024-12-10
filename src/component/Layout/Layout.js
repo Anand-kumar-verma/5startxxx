@@ -8,11 +8,10 @@ function Layout(props) {
     window.scrollTo(0, 0);
   }, [])
   return (
+    
     <Box
-      // background: '#202020',
       sx={{
-        background: "#174119",
-        // backgroundImage: 'url("https://res.cloudinary.com/do7kimovl/image/upload/v1709834065/mobielTheme1_dbtwmp.jpg")',
+        background: "#0A001B",
         backgroundSize: "cover", // You can adjust the background size as needed
         backgroundPosition: "center", // You can adjust the background position as needed
         backgroundRepeat: "no-repeat", // You can adjust the background repeat as needed

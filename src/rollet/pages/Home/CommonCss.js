@@ -1,6 +1,4 @@
-import { borderRadius } from "@mui/system";
 import rouletteBORD from "../../assets/images/thumbs_bgs.png";
-import zIndex from "@mui/material/styles/zIndex";
 
 export const style = {
   root: {
@@ -108,6 +106,7 @@ export const style = {
     },
   },
   btn4: {
+    transform: "rotate(-180deg)",
     padding: 0,
     fontSize: "12px",
     fontWeight: 900,
@@ -126,6 +125,7 @@ export const style = {
   "@keyframes rotateInfinite": {
     "0%": { transform: "rotate(0deg)" },
     "100%": { transform: "rotate(360deg)" },
+    
   },
   naiming: {
     background:
@@ -305,9 +305,9 @@ export const style = {
   countdownOuter: {
     position: "absolute",
     width: "55px",
-    height: "55px",
+    height: "50px",
     background: "#BA903Bs",
-    top: "20%",
+    top: "25%",
     left: "4%",
     border: "1px solid white",
     borderRadius: "10px",
@@ -382,11 +382,11 @@ export const style = {
     },
   },
   winnerlooserouter2: {
-    padding: ' 10px 5px',
+    padding: ' 8px 5px',
     position: 'absolute',
     width: '96%',
     borderRadius: '5px',
-    backgroundColor: '#0A001B',
+    backgroundColor: 'white',
     bottom: 0,
   },
   winnerLooserList: {
@@ -397,17 +397,17 @@ export const style = {
       color: "white",
       mb: '1px',
       textAlign: 'center',
-      transform: "rotate(90deg)",
+      // transform: "rotate(90deg)",
     },
     "&>p:nth-child(2)": {
       fontSize: "15px",
       fontWeight: "600",
-      color: "#F01111",
+      color: "white",
       mb: '1px',
       textAlign: 'center',
-      transform: "rotate(90deg)",
+      // transform: "rotate(90deg)",
     },
-    "&>p:nth-child(3)": { fontSize: "15px", fontWeight: "600", color: "#6C10ED", mb: '1px', textAlign: 'center', transform: "rotate(90deg)", },
+    "&>p:nth-child(3)": { fontSize: "15px", fontWeight: "600", color: "white", mb: '1px', textAlign: 'center', },
   },
   winnerLooserList2: {
     width: "80%",
@@ -442,10 +442,12 @@ export const style = {
   },
 
   naiming10: {
-    transform: "rotate(90deg)",
+    // transform: "rotate(90deg)",
     position: "absolute",
-    top: "21.2%",
-    left: "-14.5%",
+    bottom: "16.2%",
+    left: "-5.5%",
+    // top: "21.2%",
+    // left: "-14.5%",
 
     borderRadius: "5px",
     textAlign: "center",
@@ -465,10 +467,10 @@ export const style = {
   },
 
   naiming11: {
-    transform: "rotate(90deg)",
+    // transform: "rotate(90deg)",
     position: "absolute",
-    top: "31.2%",
-    left: "-21%",
+    bottom: "16.2%",
+    right: "3%",
     borderRadius: "5px",
     textAlign: "center",
     border: '3px solid #CEAE5E',

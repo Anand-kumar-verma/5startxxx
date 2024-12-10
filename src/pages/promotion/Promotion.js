@@ -221,10 +221,9 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink>
-            <NavLink to="/promotion/TeamReport/data">
+            {/* <NavLink to="/promotion/TeamReport/data">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
-                  {/* <Box component='img' src={team_port}></Box> */}
                   <Box component="img" src={donut}></Box>
                   <Typography variant="body1" color="initial">
                     Team data
@@ -234,7 +233,7 @@ function Promotion() {
                   <ArrowForwardIosOutlinedIcon />
                 </Stack>
               </Box>
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/account/income-main">
               <Box sx={style.invitbox}>
                 <Stack direction="row">

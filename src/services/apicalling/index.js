@@ -3,6 +3,7 @@ import CryptoJS from "crypto-js";
 import toast from "react-hot-toast";
 import { aviator_login_data_fn } from "../../redux/slices/counterSlice";
 import { endpoint } from "../urls";
+import { apiConnectorGet } from "../apiconnector";
 const value =
   (localStorage.getItem("logindataen") &&
     CryptoJS.AES.decrypt(
@@ -37,28 +38,8 @@ export const getProfileRollet = async () => {
     console.log(e);
   }
 };
-export const getHistoryRollet = async () => {
-  try {
-    const response = await axios.get(
-      endpoint?.rollet?.history + `?userid=${user_id}&limit=0`
-    );
-    return response;
-  } catch (e) {
-    toast(e?.message);
-    console.log(e);
-  }
-};
-export const getResultOfRollet = async () => {
-  try {
-    const response = await axios.get(
-      endpoint?.rollet?.game_result + "?limit=10"
-    );
-    return response;
-  } catch (e) {
-    toast(e?.message);
-    console.log(e);
-  }
-};
+
+
 
 export const MyProfileDataFn = async () => {
   try {
@@ -249,8 +230,8 @@ export const top11WinnerFunction = async () => {
 };
 export const depositHistoryFunction = async () => {
   try {
-    const response = await axios.get(
-      `${endpoint.deposit_history}?user_id=${user_id}`
+    const response = await apiConnectorGet(
+      `${endpoint.node.deposit_history}?user_id=${user_id}`
     );
     return response;
   } catch (e) {
@@ -260,8 +241,8 @@ export const depositHistoryFunction = async () => {
 };
 export const withdrawlHistoryFunction = async () => {
   try {
-    const response = await axios.get(
-      `${endpoint.withdrawl_history}?user_id=${user_id}`
+    const response = await apiConnectorGet(
+      `${endpoint?.node?.withdrawl_history}?user_id=${user_id}`
     );
     return response;
   } catch (e) {
@@ -304,17 +285,17 @@ export const depositBonusFn = async () => {
     console.log(e);
   }
 };
-export const referralBonusFn = async () => {
-  try {
-    const response = await axios.get(
-      `${endpoint.referral_bonus}?user_id=${user_id}`
-    );
-    return response;
-  } catch (e) {
-    toast(e?.message);
-    console.log(e);
-  }
-};
+// export const referralBonusFn = async () => {
+//   try {
+//     const response = await axios.get(
+//       `${endpoint.referral_bonus}?user_id=${user_id}`
+//     );
+//     return response;
+//   } catch (e) {
+//     toast(e?.message);
+//     console.log(e);
+//   }
+// };
 export const referralBetFn = async () => {
   try {
     const response = await axios.get(
@@ -360,18 +341,7 @@ export const dailySalaryIncomeFn = async () => {
     console.log(e);
   }
 };
-export const teamRewartBonus = async () => {
-  //
-  try {
-    const response = await axios.get(
-      `${endpoint.team_reward_bonus}?user_id=${user_id}`
-    );
-    return response;
-  } catch (e) {
-    toast(e?.message);
-    console.log(e);
-  }
-};
+
 
 export const BankListDetails = async () => {
   try {
