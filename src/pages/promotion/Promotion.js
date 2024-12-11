@@ -16,7 +16,15 @@ import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
 import CustomCircularProgress from "../../Shared/CustomCircularProgress";
-import { starblue, starbluegrad, stardarkblue, stargold, stargrad, zubgback, zubgmid } from "../../Shared/color";
+import {
+  starblue,
+  starbluegrad,
+  stardarkblue,
+  stargold,
+  stargrad,
+  zubgback,
+  zubgmid,
+} from "../../Shared/color";
 import copyIimage from "../../assets/images/copy.png";
 import donut from "../../assets/images/database.png";
 import sunlotteryhomebanner from "../../assets/sunlotteryhomebanner.jpg";
@@ -24,7 +32,6 @@ import Layout from "../../component/Layout/Layout";
 import { MypromotionDataFn } from "../../services/apicalling";
 import { fron_end_main_domain } from "../../services/urls";
 import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
-
 
 function Promotion() {
   const [openDialogBoxHomeBanner, setopenDialogBoxHomeBanner] = useState(false);
@@ -35,13 +42,13 @@ function Promotion() {
     {
       refetchOnMount: false,
       refetchOnReconnect: true,
+      refetchOnWindowFocus: false,
     }
   );
 
   const result = data?.data?.data?.[0];
 
   const functionTOCopy = (value) => {
-    console.log("function hit");
     copy(value);
     toast.success("Copied to clipboard!");
   };
@@ -50,11 +57,7 @@ function Promotion() {
       <Container>
         <CustomCircularProgress isLoading={isLoading} />
         <Box sx={style.header} className={"!w-full !flex !justify-center"}>
-          <Box
-            component="img"
-            src={logo2}
-            sx={{ width: '150px' }}
-          ></Box>
+          <Box component="img" src={logo2} sx={{ width: "150px" }}></Box>
         </Box>
         <Box sx={style.commitionboxOuter}>
           <Box sx={style.subcordinateBox}>
@@ -76,46 +79,28 @@ function Promotion() {
             <Box sx={style.boxStyles}>
               <Box sx={style.innerBoxStyles}>
                 <Box sx={style.subcordinatelist}>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                  >
+                  <Typography variant="body1" color="initial">
                     {result?.direct_member || 0}
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                  >
+                  <Typography variant="body1" color="initial">
                     {" "}
                     Number of register
                   </Typography>
                 </Box>
                 <Box sx={style.subcordinatelist}>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                  >
+                  <Typography variant="body1" color="initial">
                     {result?.topup_member || 0}
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                  >
+                  <Typography variant="body1" color="initial">
                     {" "}
                     Number of Deposit Members
                   </Typography>
                 </Box>
                 <Box sx={style.subcordinatelist}>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                  >
+                  <Typography variant="body1" color="initial">
                     {Number(result?.topup_amount || 0)?.toFixed(2) || 0}
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                  >
+                  <Typography variant="body1" color="initial">
                     {" "}
                     Deposit amount
                   </Typography>

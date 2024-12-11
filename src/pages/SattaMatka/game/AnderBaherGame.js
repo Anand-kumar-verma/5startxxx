@@ -114,20 +114,11 @@ const AndarBaharTable = ({ game_type }) => {
         (i) =>
           i?.amount !== "" && i?.amount !== null && Number(i.number) >= 1000
       );
-      betArrayCurrent?.forEach((i) => {
-        if (i?.amount !== null && Number(i?.amount) < 5)
-          return toast(
-            "Your Amount is less than 5 on " +
-              `${
-                Number(i?.number) >= 1000 && Number(i?.number) <= 1009
-                  ? "Andar"
-                  : "Bahar"
-              } ${Number(i?.number) % 10}`,
-            {
-              id: 2,
-            }
-          );
-      });
+      const checkIfAmountLessThan5 = betArrayCurrent?.filter(
+        (i) => Number(i?.amount) < 5
+      );
+      if (checkIfAmountLessThan5?.length > 0)
+        return toast("Amount on all number should be grater or equal to 5");
       const newArrya = betArrayCurrent?.filter((i) => i?.amount !== null);
       if (newArrya?.length <= 0)
         return toast("Please choose no.", {

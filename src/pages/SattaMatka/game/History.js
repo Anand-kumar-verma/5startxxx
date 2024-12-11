@@ -1,5 +1,13 @@
 import { Cancel } from "@mui/icons-material";
-import { Box, Button, Container, Stack, TablePagination, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  TablePagination,
+  TextField,
+  Typography,
+} from "@mui/material";
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
@@ -14,15 +22,22 @@ import {
 import deposit from "../../../assets/history2.png";
 import logo2 from "../../../assets/images/5-Star-XXX-8-29-2024.png";
 import Layout from "../../../component/Layout/Layout";
-import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
+import {
+  apiConnectorGet,
+  apiConnectorPost,
+} from "../../../services/apiconnector";
 import { endpoint } from "../../../services/urls";
 
 function History() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
-  const [loading, setLoading] = React.useState(false)
-  const [start, setStart] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
-  const [end, setEnd] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
+  const [loading, setLoading] = React.useState(false);
+  const [start, setStart] = React.useState(
+    moment(Date?.now())?.format("YYYY-MM-DD")
+  );
+  const [end, setEnd] = React.useState(
+    moment(Date?.now())?.format("YYYY-MM-DD")
+  );
 
   const { data } = useQuery(
     ["my_history", start, end],
@@ -149,14 +164,13 @@ function History() {
                           {item?.satta_type === "satta_gaziabad"
                             ? "GHAZIABAD"
                             : item?.satta_type === "satta_faridabad"
-                              ? "FARIDABAD"
-                              : item?.satta_type === "satta_gali"
-                                ? "GALI"
-                                : "DESAWAR"}{" "}
+                            ? "FARIDABAD"
+                            : item?.satta_type === "satta_gali"
+                            ? "GALI"
+                            : "DESAWAR"}{" "}
                           <span className="!pl-3 !text-yellow-500">
                             {item?.gamesno}
                           </span>{" "}
-
                         </Button>
                         <span className="!pl-3 !text-yellow-500">
                           {moment(item?.datetime)?.format(
@@ -173,8 +187,10 @@ function History() {
                             textTransform: "capitalize",
                           }}
                         >
-                          {item?.result_number === 0 ? "00"
-                            : String(item?.result_number).padStart(2, "0")}
+                          {item?.result_number === 0
+                            ? "00"
+                            : item?.result_number &&
+                              String(item?.result_number).padStart(2, "0")}
 
                           {/* {item?.result_number && String(item?.result_number)?.padStart(2, "0")} */}
                         </Button>
@@ -206,11 +222,10 @@ function History() {
                             {Number(j) >= 1000 && Number(j) <= 1009
                               ? (Number(j) % 10) + "*"
                               : Number(j) >= 2000 && Number(j) <= 2009
-                                ? "*" + (Number(j) % 10)
-                                : Number(j).toString().padStart(2, "0")}
+                              ? "*" + (Number(j) % 10)
+                              : Number(j).toString().padStart(2, "0")}
                           </span>
                         ))}
-
                       </p>
 
                       {/* Section for 'Bid Amnt.' */}
@@ -229,7 +244,9 @@ function History() {
                               {Number(j) === 0 ? (
                                 <Cancel className="!text-red-500" />
                               ) : (
-                                <span className="!text-white">{Number(j)?.toFixed(2)}</span>
+                                <span className="!text-white">
+                                  {Number(j)?.toFixed(2)}
+                                </span>
                               )}
                             </span>
                           ))}
@@ -253,7 +270,9 @@ function History() {
                               {Number(j) === 0 ? (
                                 <Cancel className="!text-red-500" />
                               ) : (
-                                <span className="!text-green-500">{Number(j)?.toFixed(2)}</span>
+                                <span className="!text-green-500">
+                                  {Number(j)?.toFixed(2)}
+                                </span>
                               )}
                             </span>
                           ))}
@@ -331,12 +350,12 @@ function History() {
               );
             })}
           </Box>
-          <Box sx={{ background: "white", }} >
+          <Box sx={{ background: "white" }}>
             <Stack spacing={2}>
               <TablePagination
                 className="!fixed !bottom-14 "
                 sx={{ background: starblue, color: "white" }}
-                rowsPerPageOptions={[ 10, 15, 20]}
+                rowsPerPageOptions={[10, 15, 20]}
                 component="div"
                 count={myhistory?.length}
                 rowsPerPage={rowsPerPage}
