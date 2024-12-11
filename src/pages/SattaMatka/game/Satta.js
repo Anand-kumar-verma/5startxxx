@@ -63,10 +63,10 @@ function Satta() {
         time_to_be_intro_mid_min >= 30
           ? time_to_be_intro_mid_min - 30
           : time_to_be_intro_mid_min;
-
       setOne_min_time(time_to_be_intro);
       setMinut(time_to_be_intro_min);
-      if (minut === 0 && one_min_time === 0) {
+
+      if (String(minut) === 0 && String(one_min_time) === 0) {
         client.refetchQueries("game")
         client.refetchQueries("my_history")
       }
