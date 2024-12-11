@@ -18,7 +18,7 @@ import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnecto
 import { endpoint } from "../../../services/urls";
 
 function History() {
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const [loading, setLoading] = React.useState(false)
   const [start, setStart] = React.useState(moment(Date?.now())?.format("YYYY-MM-DD"))
@@ -173,7 +173,10 @@ function History() {
                             textTransform: "capitalize",
                           }}
                         >
-                          {item?.result_number && String(item?.result_number)?.padStart(2, "0")}
+                          {item?.result_number === 0 ? "00"
+                            : String(item?.result_number).padStart(2, "0")}
+
+                          {/* {item?.result_number && String(item?.result_number)?.padStart(2, "0")} */}
                         </Button>
                       </Box>
                     </Stack>
@@ -201,10 +204,10 @@ function History() {
                             className="!text-white min-w-[90px] text-center !border-2 !border-white px-2 py-1 box-border overflow-x-auto"
                           >
                             {Number(j) >= 1000 && Number(j) <= 1009
-                              ? (Number(j) % 10) + "*" 
+                              ? (Number(j) % 10) + "*"
                               : Number(j) >= 2000 && Number(j) <= 2009
                                 ? "*" + (Number(j) % 10)
-                                : Number(j).toString().padStart(2, "0")} 
+                                : Number(j).toString().padStart(2, "0")}
                           </span>
                         ))}
 
@@ -331,9 +334,9 @@ function History() {
           <Box sx={{ background: "white", }} >
             <Stack spacing={2}>
               <TablePagination
-                className="!fixed !bottom-14 w-full"
+                className="!fixed !bottom-14 "
                 sx={{ background: starblue, color: "white" }}
-                rowsPerPageOptions={[5, 10, 15, 20]}
+                rowsPerPageOptions={[ 10, 15, 20]}
                 component="div"
                 count={myhistory?.length}
                 rowsPerPage={rowsPerPage}
