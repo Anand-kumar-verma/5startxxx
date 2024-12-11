@@ -6,7 +6,7 @@ export const fron_end_main_domain = "https://5starxxx.com";
 // export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
 export const domain = "https://zupeeter-win-timer.onrender.com";
 
-// export const domainn = "http://192.168.18.183:9002";
+export const doma = "http://192.168.18.183:9002";
 // export const domain1 = "http://192.168.18.183:9002";
 
 export const domainn = "https://api.5starxxx.com";
@@ -24,6 +24,8 @@ export const endpoint = {
   veryfy_otp: `${baseUrl}/api/user-otp-verify`,
   signup: `${baseUrl}/api/user_register`,
   userwallet: `${baseUrl}/api/userwallet`,
+  promotion_data: `${doma}/api/v1/promotion-data`,
+  get_team_data: `${doma}/api/v1/get-team`,
   // top11winner: `https://game-zone-sql.onrender.com/api/v1/topw11winningInformation`,
   top11winner: `${baseUrl}/api/winning-list`,
   openbannerUrl: `${baseUrl}/popup`,
@@ -48,7 +50,6 @@ export const endpoint = {
   team_reward_bonus: `${baseUrl}/api/team-reward-bonus`,
   team_trading_bonus: `${baseUrl}/api/team-trading-bonus`,
   // add_bank_details: `${baseUrl}/api/bank-add`,
-  promotion_data: `https://promotion-page-data-roulete-game.onrender.com/api/v1/promotiondata`,
   all_withdrawl_user_list: `${baseUrl}/api/widthrol-user-list`,
   recharge_call_bakc: `${baseUrl}/api/deposits-user-request`,
   cricket_get_url_id_pass: `${baseUrl}/api/cricket-details`,

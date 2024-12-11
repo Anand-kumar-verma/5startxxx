@@ -1,22 +1,20 @@
-import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
 import {
   Box,
-  Container,
-  Typography
+  Container
 } from "@mui/material";
 import * as React from "react";
 import { useQuery } from "react-query";
-import { NavLink } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
-import { starblue, starbluegrad, zubgback, zubgmid } from "../../../Shared/color";
-import Layout from "../../../component/Layout/Layout";
-import { MypromotionDataFn } from "../../../services/apicalling";
+import { starblue, starbluegrad, zubgback } from "../../../Shared/color";
 import logo2 from "../../../assets/images/5-Star-XXX-8-29-2024.png";
+import Layout from "../../../component/Layout/Layout";
+import { apiConnectorGet } from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
 
 function TeamReports() {
   const { isLoading, data } = useQuery(
-    ["promotion_data"],
-    () => MypromotionDataFn(),
+    ["team_data"],
+   async () =>await apiConnectorGet(endpoint?.get_team_data),
     {
       refetchOnMount: false,
       refetchOnReconnect: true,
@@ -43,7 +41,7 @@ function TeamReports() {
             sx={{ width: '150px' }}
           ></Box>
         </Box>
-        <Box sx={{ paddingTop: 2 }}>
+        <Box sx={{ paddingTop: 2 }} className="mb-10">
           <Box
             sx={{
               background: starblue,
@@ -63,20 +61,24 @@ function TeamReports() {
               },
             }}
           >
-            <div className="!grid !grid-cols-6 !text-white pl-2 !place-items-center  !bg-opacity-5" >
+            <div className="!grid !grid-cols-10 !text-white !text-xs pl-2 !place-items-center !bg-opacity-5" >
               <span>S.No.</span>
-              <span>User Id</span>
+              <span>User </span>
               <span className="!col-span-2">Name</span>
               <span className="!col-span-2">Mobile No</span>
+              <span className="!col-span-2">Amount</span>
+              <span className="!col-span-2">Win Amnt</span>
             </div>
             <div className="h-[2px] w-full !bg-[#281970]"></div>
-            {result?.directReferrals?.map((i, index) => {
+            {result?.map((i, index) => {
               return (
-                <div className="!grid !grid-cols-6 !text-white pl-2 !place-items-center">
+                <div className="!grid !grid-cols-10 !text-white !text-xs !place-items-center">
                   <span >{index + 1}</span>
-                  <span>{i?.id}</span>
-                  <span className="!text-center !col-span-2">{i?.user_name || "No data found"}</span>
+                  <span>{i?.username}</span>
+                  <span className="!text-center !col-span-2">{i?.full_name || "No data found"}</span>
                   <span className="!col-span-2">{i?.mobile || "987654210"}</span>
+                  <span className="!col-span-2">{Number(i?.wallet)?.toFixed(2) || 0}</span>
+                  <span className="!col-span-2">{Number(i?.winning_wallet)?.toFixed(2) || 0}</span>
                 </div>
               );
             })}

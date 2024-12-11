@@ -38,7 +38,7 @@ function Promotion() {
     }
   );
 
-  const result = data?.data?.data;
+  const result = data?.data?.data?.[0];
 
   const functionTOCopy = (value) => {
     console.log("function hit");
@@ -80,7 +80,7 @@ function Promotion() {
                     variant="body1"
                     color="initial"
                   >
-                    {result?.count || 0}
+                    {result?.direct_member || 0}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -95,7 +95,7 @@ function Promotion() {
                     variant="body1"
                     color="initial"
                   >
-                    {result?.deposit_member || 0}
+                    {result?.topup_member || 0}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -110,7 +110,7 @@ function Promotion() {
                     variant="body1"
                     color="initial"
                   >
-                    {Number(result?.deposit_recharge || 0)?.toFixed(2) || 0}
+                    {Number(result?.topup_amount || 0)?.toFixed(2) || 0}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -142,7 +142,7 @@ function Promotion() {
               <Box sx={style.innerBoxStylestwo}>
                 <Box sx={style.subcordinatelist}>
                   <Typography variant="body1" color="initial">
-                    {result?.teamcount || 0}
+                    {result?.direct_member || 0}
                   </Typography>
                   <Typography variant="body1" color="initial">
                     {" "}
@@ -151,7 +151,7 @@ function Promotion() {
                 </Box>
                 <Box sx={style.subcordinatelist}>
                   <Typography variant="body1" color="initial">
-                    {result?.deposit_member_team || 0}
+                    {result?.topup_member || 0}
                   </Typography>
                   <Typography variant="body1" color="initial">
                     {" "}
@@ -160,7 +160,7 @@ function Promotion() {
                 </Box>
                 <Box sx={style.subcordinatelist}>
                   <Typography variant="body1" color="initial">
-                    {Number(result?.deposit_recharge_team || 0)?.toFixed(2) || 0}
+                    {Number(result?.topup_amount || 0)?.toFixed(2) || 0}
                   </Typography>
                   <Typography variant="body1" color="initial">
                     {" "}
