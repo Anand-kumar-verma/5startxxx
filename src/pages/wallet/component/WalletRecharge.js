@@ -603,10 +603,10 @@ function WalletRecharge() {
                         />
                       </div>
                       <div className="pt-4 gap-2">
-                        <p className="!bg-white !text-xl font-bold px-8 !text-black">
+                        {/* <p className="!bg-white !text-xl font-bold px-8 !text-black">
                           {selectedUPIDetails?.tr45_upi_id}
-                        </p>
-                        <div className="w-full flex justify-center mt-5">
+                        </p> */}
+                        {/* <div className="w-full flex justify-center mt-5">
                           <Button
                             size="small !py-1"
                             className="!bg-[#0ee6ac] !text-white place-items-center"
@@ -616,7 +616,7 @@ function WalletRecharge() {
                           >
                             Copy
                           </Button>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   )}
