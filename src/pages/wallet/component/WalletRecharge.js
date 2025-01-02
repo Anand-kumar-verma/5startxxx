@@ -598,7 +598,7 @@ function WalletRecharge() {
                     <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
                       <div className="w-72">
                         <img
-                          src={`${baseUrl}/uploads/${selectedUPIDetails?.tr45_qr}`}
+                          src={`${baseUrl}/public/uploads/${selectedUPIDetails?.tr45_qr}`}
                           alt="QR Code"
                         />
                       </div>
