@@ -167,7 +167,7 @@ function DepositeHistory() {
                     </Typography>
                     <Typography variant="body1" color="initial">
                       {moment(i?.tr15_date)?.format("DD-MM-YYYY")}{" "}
-                      {moment(i?.tr15_date)?.format("HH:mm:ss")}
+                      {moment?.utc(i?.tr15_date)?.format("HH:mm:ss")}
                     </Typography>
                   </Stack>
                   {i?.success_date !== "NUll" && <Stack

@@ -175,7 +175,7 @@ export const confirmBet = async (
   if (Number(one_min_time || 0) <= 15)
     return toast(
       <span className="!px-4 !py-2 !bg-blue-700 !text-white !border-2 !border-red-700  !rounded-full">
-        Tiem Over, Please Try in next trade.
+        Time Over, Please Try in next trade.
       </span>
     );
   if (isAlreadyAppliedBet === "true")

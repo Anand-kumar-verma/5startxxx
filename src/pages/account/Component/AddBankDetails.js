@@ -32,12 +32,11 @@ function AddBankDetails() {
     navigate(-1);
   };
   const initialValues = {
-    u_details_type: "",
     u_holder_name: "",
     u_bank_name: "",
     u_account_no: "",
     u_ifsc: "",
-    u_upi_id: "",
+    u_upi_id:"",
   };
 
   const fk = useFormik({
@@ -54,7 +53,7 @@ function AddBankDetails() {
         u_bank_name:fk.values.u_bank_name,
         u_account_no:fk.values.u_account_no,
         u_ifsc:fk.values.u_ifsc,
-        u_upi_id:fk.values.u_upi_id,
+        u_upi_id:"abcd",
       }
       addbankDetailsFunction(reqBody);
     },
@@ -196,26 +195,6 @@ function AddBankDetails() {
                 />
                 
               </FormControl>
-
-              <FormControl fullWidth sx={{ mt: "10px" }}>
-                <Stack direction="row" className="loginlabel">
-                  <Typography variant="h3">
-                    UPI code <span className="!text-red-600">*</span>
-                  </Typography>
-                </Stack>
-                <TextField
-                  id="u_upi_id"
-                  name="u_upi_id"
-                  type="text"
-                  value={fk.values.u_upi_id}
-                  onChange={fk.handleChange}
-                  placeholder="Enter UPI code *"
-                  className="withdrawalfield"
-                  onKeyDown={(e) => e.key === "Enter" && fk.handleSubmit()}
-                />
-              
-              </FormControl>
-          
               <Button
                 sx={style.paytmbtntwo}
                 type="submit"

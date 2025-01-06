@@ -258,83 +258,14 @@ function Account() {
               Add Bank
             </Typography>
           </Box>
-          <Box sx={style.actionBox} component={NavLink} to="/add-upi-details">
+          {/* <Box sx={style.actionBox} component={NavLink} to="/add-upi-details">
             <Box component="img" src={edit} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Add UPI
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
-        {/* <Box sx={style.actionContainer} component={NavLink} to={"/bathistory"}>
-          <Box
-            sx={{
-              width: "49%",
-              background: zubgbackgrad,
-              padding: "10px",
-              borderRadius: "10px",
-              height: "100%",
-            }}
-          >
-            <Stack direction="row" sx={{ alignItems: "center" }}>
-              <Box
-                component="img"
-                src={casino}
-                sx={{ width: "40px", height: "40px", marginRight: "20px" }}
-              ></Box>
-              <Box
-                sx={{
-                  "&>:nth-child(1)": {
-                    fontSize: "15px",
-                    fontWeight: "500",
-                    color: "white",
-                  },
-                  "&>:nth-child(2)": {
-                    fontSize: "12px",
-                    fontWeight: "500",
-                    color: "white",
-                  },
-                }}
-              >
-                <p className="!text-sm">Bet</p>
-                <p className="!text-[10px]">My betting history</p>
-              </Box>
-            </Stack>
-          </Box>
-          <Box
-            sx={{
-              width: "49%",
-              background: zubgbackgrad,
-              padding: "10px",
-              borderRadius: "10px",
-              height: "100%",
-            }}
-          >
-            <Stack direction="row" sx={{ alignItems: "center" }}>
-              <Box
-                component="img"
-                src={card}
-                sx={{ width: "40px", height: "40px", marginRight: "20px" }}
-              ></Box>
-              <Box
-                sx={{
-                  "&>:nth-child(1)": {
-                    fontSize: "15px",
-                    fontWeight: "500",
-                    color: "white",
-                  },
-                  "&>:nth-child(2)": {
-                    fontSize: "10px",
-                    fontWeight: "500",
-                    color: "white",
-                  },
-                }}
-              >
-                <p className="!text-sm">Transaction</p>
-                <p className="!text-[10px]">My Transaction history</p>
-              </Box>
-            </Stack>
-          </Box>
-        </Box> */}
+
         <Box sx={style.actionContainertwo}>
           <Stack
             sx={{

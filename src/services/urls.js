@@ -6,11 +6,11 @@ export const fron_end_main_domain = "https://5starxxx.com";
 // export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
 export const domain = "https://zupeeter-win-timer.onrender.com";
 
-// export const doma = "http://192.168.18.183:9002";
-// export const domain1 = "http://192.168.18.183:9002";
+export const domainn = "http://192.168.18.183:9002";
+export const domain1 = "http://192.168.18.183:9002";
 
-export const domainn = "https://api.5starxxx.com";
-export const domain1 = "https://api.5starxxx.com";
+// export const domainn = "https://api.5starxxx.com";
+// export const domain1 = "https://api.5starxxx.com";
 
 export const download_app_url = "";
 export const support_mail = "";
@@ -101,5 +101,8 @@ export const endpoint = {
     bank_details: domainn + "/api/v1/user-bank-details",
     withdrawl_history: domainn + "/api/v1/withdrawal-history",
     deposit_history: domainn + "/api/v1/deposit-history",
+    paying_request: domainn + "/api/v1/inr-payin-request",
+    payout_request: domainn + "/api/v1/inr-payout-request",
+    call_back_user: domainn + "/api/v1/call-back-to-user-screen",
   },
 };

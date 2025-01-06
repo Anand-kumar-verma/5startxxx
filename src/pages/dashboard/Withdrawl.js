@@ -33,11 +33,7 @@ import { apiConnectorGet, apiConnectorPost } from "../../services/apiconnector";
 import { endpoint } from "../../services/urls";
 
 function Withdrawl() {
-  const location = useLocation();
-  const dispatch = useDispatch();
-  const aviator_login_data = useSelector(
-    (state) => state.aviator.aviator_login_data
-  );
+
   const login_data =
     (localStorage.getItem("logindataen") &&
       CryptoJS.AES.decrypt(
@@ -49,10 +45,6 @@ function Withdrawl() {
   const [Loading, setloding] = React.useState(false);
   const audioRefMusic = React.useRef(null);
   const [openDialogBox, setOpenDialogBox] = React.useState(false);
-
-  React.useEffect(() => {
-    !aviator_login_data && get_user_data_fn(dispatch);
-  }, []);
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -92,22 +84,21 @@ function Withdrawl() {
   );
 
   const initialValue = {
-    request_amount: "",
-    req_type: "Bank",
+    u_req_amount: "",
+    bank_id: "",
   };
 
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
-      if (!fk.values.request_amount) {
+      if (!fk.values.u_req_amount) {
         toast("Please enter amount fields");
         return;
       }
       const reqBody = {
-        u_user_id: user_id,
-        request_amount: fk.values.request_amount,
-        req_type: fk.values.req_type === "UPI" ? "1" : "2",
+        u_req_amount: fk.values.u_req_amount,
+        bank_id: bank_data?.[0]?.id,
       };
       withdraw_payment_Function(reqBody);
     },
@@ -116,15 +107,14 @@ function Withdrawl() {
   async function withdraw_payment_Function(reqBody) {
     setloding(true);
     try {
-      const res = await apiConnectorPost(endpoint?.node.withdraw_payment, reqBody);
+      const res = await apiConnectorPost(endpoint?.node.payout_request, reqBody);
       toast(res?.data?.msg);
       setloding(false);
-      if ("Request Accepted successfully, Your account will be credited within 24 Hrs." === res?.data?.msg)
+      if ("Request accepted Successfully" === res?.data?.msg)
         fk.handleReset();
       client.refetchQueries("walletamount");
       client.refetchQueries("withdrawal_history");
       client.refetchQueries("profile");
-      // navigate("/account");
       console.log(res);
     } catch (e) {
       console.log(e);
@@ -278,10 +268,10 @@ function Withdrawl() {
                   mr: 2,
                   width: "120px",
                   cursor: "pointer",
-                  backgroundColor: fk.values.req_type === "Bank" ? zubgbackgrad : zubgback
+                  backgroundColor: zubgbackgrad
                 }}
 
-                onClick={() => fk.setFieldValue("req_type", "Bank")} >
+              >
                 <Box
                   component="img"
                   src={atmchip}
@@ -301,141 +291,51 @@ function Withdrawl() {
                   BANK CARD
                 </Typography>
               </Stack>
-              <Stack
-                sx={{
-                  background:
-                    zubgback,
-                  padding: 2,
-                  borderRadius: 2,
-                  mr: 2,
-                  width: "120px",
-                  cursor: "pointer",
-                  backgroundColor: fk.values.req_type === "UPI" ? zubgbackgrad : zubgback
-                }}
-                onClick={() => fk.setFieldValue("req_type", "UPI")} >
+
+            </Stack>
+          </Box>
+          <Box
+            sx={{
+              width: "92%",
+              margin: "auto",
+              my: 2,
+              background: zubgback,
+              padding: "10px 0px 10px 10px",
+              borderRadius: '10px'
+            }}
+          >
+            <Stack direction="row">
+              <Box sx={{ width: "35%" }}>
                 <Box
                   component="img"
-                  src={upi}
-                  width={40}
-                  sx={{ margin: "0px auto" }}
+                  src={bankicon}
+                  width={30}
+                  sx={{ margin: "auto" }}
                 ></Box>
                 <Typography
                   variant="body1"
-                  sx={{
-                    color: "white",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    textAlign: "center",
-                    mt: 1,
-                  }}
+                  sx={{ fontSize: "15px", fontWeight: "500", mt: 1, color: 'white' }}
                 >
-                  UPI
+                  {game_history_data?.holder_name?.substring(0, 8) + "****"}
                 </Typography>
+              </Box>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                sx={{ width: "60%", borderLeft: "1px solid gray", pl: "5%" }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: "13px", fontWeight: "600", color: 'white' }}
+                >
+                  {game_history_data?.account?.substring(0, 5) + "****"}
+                </Typography>
+                <KeyboardArrowRightIcon sx={{ color: 'white' }} />
               </Stack>
             </Stack>
           </Box>
-          {fk.values.req_type === "Bank" && (
-            <>
-              <Box
-                sx={{
-                  width: "92%",
-                  margin: "auto",
-                  my: 2,
-                  background: zubgback,
-                  padding: "10px 0px 10px 10px",
-                  borderRadius: '10px'
-                }}
-              >
-                <Stack direction="row">
-                  <Box sx={{ width: "35%" }}>
-                    <Box
-                      component="img"
-                      src={bankicon}
-                      width={30}
-                      sx={{ margin: "auto" }}
-                    ></Box>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontSize: "15px", fontWeight: "500", mt: 1, color: 'white' }}
-                    >
-                      {game_history_data?.holder_name?.substring(0, 8) + "****"}
-                    </Typography>
-                  </Box>
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    sx={{ width: "60%", borderLeft: "1px solid gray", pl: "5%" }}
-                  >
-                    <Typography
-                      variant="body1"
-                      sx={{ fontSize: "13px", fontWeight: "600", color: 'white' }}
-                    >
-                      {game_history_data?.account?.substring(0, 5) + "****"}
-                    </Typography>
-                    <KeyboardArrowRightIcon sx={{ color: 'white' }} />
-                  </Stack>
-                </Stack>
-              </Box>
-            </>
-          )}
-          {fk.values.req_type === "UPI" && (
-            <>
-              <Box
-                sx={{
-                  width: "92%",
-                  margin: "auto",
-                  my: 2,
-                  background: zubgback,
-                  padding: "10px 0px 10px 10px",
-                  borderRadius: '10px'
-                }}
-              >
-                <Stack direction="row" >
-                  <Box sx={{ width: "35%" }}>
-                    <Box
-                      component="img"
-                      src={bankicon}
-                      width={30}
-                      sx={{ margin: "auto" }}
-                    ></Box>
-                    <Typography
-                      className="!text-center"
-                      variant="body1"
-                      sx={{ fontSize: "15px", fontWeight: "500", mt: 1, color: 'white' }}
-                    >
-                        {bank_data?.map((item) => {
-                    return <>
-                     {item?.details_type === 'UPI' && (
-                <>
-                   {item?.upi_id?.substring(0, 8) + "****"}
-                  
-                </>
-            )}
-            </>
-                  })}
-                       
-                    </Typography>
-                  </Box>
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    sx={{ width: "60%", borderLeft: "1px solid gray", pl: "5%" }}
-                  >
-                    <Typography
-                      className="!text-center"
-                      variant="body1"
-                      sx={{ fontSize: "13px", fontWeight: "600", color: 'white' }}
-                    >
-                        {game_history_data?.ifsc?.substring(0, 8) + "****"}
-                    </Typography>
-                    <KeyboardArrowRightIcon sx={{ color: 'white' }} />
-                  </Stack>
-                </Stack>
-              </Box>
-            </>
-          )}
+
           <Box
             sx={{
               width: "92%",
@@ -446,54 +346,15 @@ function Withdrawl() {
               borderRadius: '10px'
             }}
           >
-            <div className="grid grid-cols-2 gap-1 items-center  p-5 !text-white">
-              <span className="!text-white !text-sm ">Amount </span>
-              <TextField
-                id="request_amount"
-                name="request_amount"
-                value={fk.values.request_amount}
-                onChange={fk.handleChange}
-                placeholder="Amount"
-                className="!w-[100%] !bg-white !mt-5 !rounded"
-              />
-
-
-              {fk.values.req_type === "Bank" && (
-                <>
-                  {bank_data?.map((item) => {
-                    return <>
-                     {item?.details_type === 'BANK' && (
-                <>
-                    <span className="!text-white !text-sm">Bank Name</span>
-                    <p>{item?.bank_name}</p>
-                    <span className="!text-white !text-sm">Account Holder Name</span>
-                    <p>{item?.holder_name}</p>
-                    <span className="!text-white !text-sm">Account Number</span>
-                    <p>{item?.account}</p>
-                    <span className="!text-white !text-sm">IFSC Code</span>
-                    <p>{item?.ifsc || 0}</p>
-                </>
-            )}
-            </>
-                  })}
-                </>
-              )}
-              {fk.values.req_type === "UPI" && (
-                <>
-                  {bank_data?.map((item) => {
-                    return <>
-                     {item?.details_type === 'UPI' && (
-                <>
-                    <span className="!text-white !text-sm">UPI Id</span>
-                    <p>{item?.upi_id}</p>
-                  
-                </>
-            )}
-            </>
-                  })}
-                </>
-              )}
-            </div>
+            <span className="!text-white !text-sm ">Amount </span>
+            <TextField
+              id="u_req_amount"
+              name="u_req_amount"
+              value={fk.values.u_req_amount}
+              onChange={fk.handleChange}
+              placeholder=" Enter your Amount"
+              className="!w-[100%] !bg-white !mt-1 !rounded"
+            />
 
             <Button
               sx={style.paytmbtntwo}

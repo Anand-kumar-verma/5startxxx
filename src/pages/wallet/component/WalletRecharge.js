@@ -5,18 +5,14 @@ import {
   Box,
   Button,
   Container,
-  MenuItem,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
-import copy from "clipboard-copy";
-import CryptoJS from "crypto-js";
 import { useFormik } from "formik";
 import * as React from "react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 import {
@@ -26,7 +22,6 @@ import {
   zubgmid,
 } from "../../../Shared/color";
 import audiovoice from "../../../assets/bankvoice.mp3";
-import chip from "../../../assets/chip.png";
 import { default as atmchip, default as cip } from "../../../assets/cip.png";
 import user from "../../../assets/history2.png";
 import playgame from "../../../assets/images/card.webp";
@@ -34,32 +29,20 @@ import dot from "../../../assets/images/circle-arrow.png";
 import balance from "../../../assets/images/send.png";
 import payment from "../../../assets/wallet2.png";
 import Layout from "../../../component/Layout/Layout";
-import { get_user_data_fn } from "../../../services/apicalling";
 import {
   apiConnectorGet,
   apiConnectorPost,
 } from "../../../services/apiconnector";
-import { baseUrl, endpoint } from "../../../services/urls";
+import { endpoint } from "../../../services/urls";
+import QRScreen from "./QRScreen";
+
 function WalletRecharge() {
-  const dispatch = useDispatch();
-  const aviator_login_data = useSelector(
-    (state) => state.aviator.aviator_login_data
-  );
-
+  const [deposit_req_data, setDeposit_req_data] = React.useState();
+  const [address, setAddress] = React.useState();
+  const [amount, setAmount] = React.useState();
+  const [orderID, setOrderId] = React.useState();
   const audioRefMusic = React.useRef(null);
-  const login_data =
-    (localStorage.getItem("logindataen") &&
-      CryptoJS.AES.decrypt(
-        localStorage.getItem("logindataen"),
-        "anand"
-      )?.toString(CryptoJS.enc.Utf8)) ||
-    null;
-
-  const user_id = login_data && JSON.parse(login_data)?.UserID;
   const [Loading, setLoading] = React.useState(false);
-
-  const [receipt, setReceipt] = React.useState();
-
   const client = useQueryClient();
   const { data: wallet } = useQuery(
     ["walletamount"],
@@ -73,22 +56,9 @@ function WalletRecharge() {
 
   const newdata = wallet?.data?.data || 0;
 
-  const { data: bank_history } = useQuery(
-    ["bank_details"],
-    () => apiConnectorGet(endpoint.node.get_bank_list),
-    {
-      refetchOnMount: true,
-      refetchOnReconnect: true,
-    }
-  );
-  const result = bank_history?.data?.data || [];
-
   const initialValue = {
-    deposit_type: "Bank",
-    req_amount: "",
-    bank_upi_table_id: "",
-    receipt_image: "",
-    utr_no: "",
+    u_gateway_type: "",
+    u_req_amount: "",
   };
 
   const fk = useFormik({
@@ -96,22 +66,15 @@ function WalletRecharge() {
     enableReinitialize: true,
     onSubmit: () => {
       if (
-        !fk.values.req_amount ||
-        !fk.values.bank_upi_table_id ||
-        !receipt ||
-        !fk.values.utr_no
+        !fk.values.u_req_amount 
       ) {
-        toast("Please enter all fields");
+        toast("Please enter Amount");
         return;
       }
       setLoading(true);
       const reqBody = {
-        user_id: user_id,
-        deposit_type: fk.values.deposit_type === "UPI" ? "2" : "1",
-        req_amount: fk.values.req_amount,
-        bank_upi_table_id: fk.values.bank_upi_table_id,
-        receipt_image: receipt,
-        utr_no: fk.values.utr_no,
+        u_gateway_type: 1,
+        u_req_amount: fk.values.u_req_amount,
       };
       insertFundFn(reqBody);
     },
@@ -119,14 +82,17 @@ function WalletRecharge() {
   async function insertFundFn(reqBody) {
     try {
       const res = await apiConnectorPost(
-        endpoint?.node.deposite_request,
+        endpoint?.node.paying_request,
         reqBody
       );
       toast(res?.data?.msg);
       setLoading(false);
-      if ("Request Successfully Accepted." === res?.data?.msg) {
+      if ("PayIn Successfully" === res?.data?.msg) {
+        setDeposit_req_data(res?.data?.data?.payment_link);
+        setAddress(res?.data?.data?.address);
+        setAmount(res?.data?.data?.amount);
+        setOrderId(res?.data?.order_id);
         fk.handleReset();
-        setReceipt(null);
       }
     } catch (e) {
       console.log(e);
@@ -134,36 +100,6 @@ function WalletRecharge() {
     client.refetchQueries("walletamount");
     client.refetchQueries("deposit_history");
   }
-  const { data: upi_detail } = useQuery(
-    ["upi_details"],
-    () => apiConnectorGet(endpoint.node.get_upi_list),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      retry: false,
-      retryOnMount: false,
-      refetchOnWindowFocus: false,
-    }
-  );
-  const upidata = upi_detail?.data?.data;
-
-  const selectedUPIDetails = upidata?.find(
-    (item) => item?.tr45_id === fk.values.bank_upi_table_id
-  );
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setReceipt(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const functionTOCopy = (value) => {
-    copy(value);
-    toast.success("Copied to clipboard!");
-  };
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -173,9 +109,7 @@ function WalletRecharge() {
     handlePlaySound();
   }, []);
 
-  React.useEffect(() => {
-    !aviator_login_data && get_user_data_fn(dispatch);
-  }, []);
+ 
 
   const handlePlaySound = async () => {
     try {
@@ -316,42 +250,42 @@ function WalletRecharge() {
         >
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 500)}
+            onClick={() => fk.setFieldValue("u_req_amount", 500)}
           >
             {" "}
             500
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 1000)}
+            onClick={() => fk.setFieldValue("u_req_amount", 1000)}
           >
             {" "}
             1K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 5000)}
+            onClick={() => fk.setFieldValue("u_req_amount", 5000)}
           >
             {" "}
             5K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 10000)}
+            onClick={() => fk.setFieldValue("u_req_amount", 10000)}
           >
             {" "}
             10K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 15000)}
+            onClick={() => fk.setFieldValue("u_req_amount", 15000)}
           >
             {" "}
             15K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 20000)}
+            onClick={() => fk.setFieldValue("u_req_amount", 20000)}
           >
             {" "}
             20K
@@ -361,6 +295,11 @@ function WalletRecharge() {
     );
   }, []);
 
+  if (deposit_req_data) {
+    return (
+      <QRScreen deposit_req_data={deposit_req_data} address={address} amount={amount} orderID={orderID}/>
+    );
+  }
   return (
     <Layout>
       {audio}
@@ -476,12 +415,8 @@ function WalletRecharge() {
                 mr: 2,
                 width: "120px",
                 cursor: "pointer",
-                backgroundColor:
-                  fk.values.deposit_type === "Bank"
-                    ? zubgbackgrad
-                    : starbluegrad,
+                backgroundColor: zubgbackgrad
               }}
-              onClick={() => fk.setFieldValue("deposit_type", "Bank")}
             >
               <Box
                 component="img"
@@ -502,40 +437,7 @@ function WalletRecharge() {
                 BANK CARD
               </Typography>
             </Stack>
-            <Stack
-              sx={{
-                background: zubgback,
-                padding: 2,
-                borderRadius: 2,
-                mr: 2,
-                width: "120px",
-                cursor: "pointer",
-                backgroundColor:
-                  fk.values.deposit_type === "UPI"
-                    ? zubgbackgrad
-                    : starbluegrad,
-              }}
-              onClick={() => fk.setFieldValue("deposit_type", "UPI")}
-            >
-              <Box
-                component="img"
-                src={chip}
-                width={40}
-                sx={{ margin: "0px auto" }}
-              ></Box>
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "white",
-                  fontSize: "14px",
-                  fontWeight: "500",
-                  textAlign: "center",
-                  mt: 1,
-                }}
-              >
-                UPI
-              </Typography>
-            </Stack>
+
           </Stack>
         </Box>
         <Box>
@@ -551,111 +453,20 @@ function WalletRecharge() {
             }}
           >
             {payment_button}
-            <div className="grid grid-cols-2 gap-1 -mt-5 items-center p-5 ">
-              {fk.values.deposit_type === "Bank" && (
-                <>
-                  <span className="!text-white !text-sm">Select Bank </span>
-                  <TextField
-                    id="bank_upi_table_id"
-                    name="bank_upi_table_id"
-                    value={fk.values.bank_upi_table_id}
-                    onChange={fk.handleChange}
-                    placeholder="Select Bank"
-                    className="!w-[100%] !bg-white !mt-5"
-                    select
-                    size="small"
-                  >
-                    {result?.map((i, index) => {
-                      return (
-                        <MenuItem value={i?.tr44_id} className="!text-black">
-                          {i?.tr44_bank_name} <br /> ({i?.tr44_account_no})
-                        </MenuItem>
-                      );
-                    })}
-                  </TextField>
-                </>
-              )}
-              {fk.values.deposit_type === "UPI" && (
-                <>
-                  <span className="!text-white !text-sm">Select UPI </span>
-                  <TextField
-                    id="bank_upi_table_id"
-                    name="bank_upi_table_id"
-                    value={fk.values?.bank_upi_table_id}
-                    onChange={fk.handleChange}
-                    placeholder="Select UPI"
-                    className="!w-[100%] !bg-white !mt-5"
-                    select
-                    size="small"
-                  >
-                    {upidata?.map((i) => (
-                      <MenuItem key={i?.tr45_id} value={i?.tr45_id}>
-                        {i?.tr45_upi_name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                  {selectedUPIDetails && (
-                    <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
-                      <div className="w-72">
-                        <img
-                          src={`${baseUrl}/public/uploads/${selectedUPIDetails?.tr45_qr}`}
-                          alt="QR Code"
-                        />
-                      </div>
-                      <div className="pt-4 gap-2">
-                        {/* <p className="!bg-white !text-xl font-bold px-8 !text-black">
-                          {selectedUPIDetails?.tr45_upi_id}
-                        </p> */}
-                        {/* <div className="w-full flex justify-center mt-5">
-                          <Button
-                            size="small !py-1"
-                            className="!bg-[#0ee6ac] !text-white place-items-center"
-                            onClick={() =>
-                              functionTOCopy(selectedUPIDetails.tr45_upi_id)
-                            }
-                          >
-                            Copy
-                          </Button>
-                        </div> */}
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-              <span className="!text-white !text-sm ">Amount</span>
-              <TextField
-                type="text"
-                id="req_amount"
-                name="req_amount"
-                value={fk.values.req_amount}
-                onChange={fk.handleChange}
-                placeholder="amount"
-                className="!w-[100%] !bg-white !mt-5"
-              />
 
-              <span className="!text-white !text-sm ">Transaction Id</span>
-              <TextField
-                type="text"
-                id="utr_no"
-                name="utr_no"
-                value={fk.values.utr_no}
-                onChange={fk.handleChange}
-                placeholder="Transaction"
-                className="!w-[100%] !bg-white !mt-5"
-              />
+            <span className="!text-white !text-sm ">Amount</span>
+            <TextField
+              type="text"
+              id="u_req_amount"
+              name="u_req_amount"
+              value={fk.values.u_req_amount}
+              onChange={fk.handleChange}
+              placeholder="Enter your Amount"
+              className="!w-[100%] !bg-white !mt-1"
+            />
 
-              <span className="!text-white !text-sm ">Receipt</span>
-              <input
-                type="file"
-                id="receipt_image "
-                name="receipt_image "
-                className="!text-sm !mt-5"
-                onChange={handleFileChange}
-                required
-              />
+            {Loading && <CustomCircularProgress isLoading={Loading} />}
 
-              {Loading && <CustomCircularProgress isLoading={Loading} />}
-            </div>
             <Stack
               direction="row"
               sx={{

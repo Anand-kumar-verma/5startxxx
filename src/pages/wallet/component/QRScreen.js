@@ -3,20 +3,67 @@ import * as React from "react";
 import QRCode from "react-qr-code";
 import { zubgback } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
-import { rupees } from "../../../services/urls";
+import { endpoint, rupees } from "../../../services/urls";
+import { useNavigate } from "react-router-dom";
+import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
+import toast from "react-hot-toast";
 
-const QRScreen = ({ callBackResponse, deposit_req_data, show_time }) => {
+const QRScreen = ({ deposit_req_data, address, amount, orderID }) => {
+
+  const [timeRemaining, setTimeRemaining] = React.useState(300)
+  const navigate = useNavigate()
+  const callbackFn = async () => {
+    try {
+      const response = await apiConnectorGet(endpoint.node?.call_back_user + `?order_id=${orderID}`)
+      if (response?.data?.data?.tr15_status !== "Pending")
+        navigate("/account");
+    }
+    catch (e) {
+      toast("something went wrong")
+    }
+  }
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/wallet/Recharge");
+    }, 300000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeRemaining((prevTime) => {
+        if (prevTime <= 0) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      callbackFn()
+    }, 30000);
+    return () => clearInterval(timer);
+  }, [])
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  };
+
   return (
-    <Layout footer={false}>
+    <Layout header={false} footer={false}>
       <Container
         className="no-scrollbar"
         sx={{
-          //   background: zubgback,
           background: "white",
           width: "100%",
-          height: "100vh",
           overflow: "auto",
-          mb: 4,
         }}
       >
         <Box sx={style.header}>
@@ -26,42 +73,21 @@ const QRScreen = ({ callBackResponse, deposit_req_data, show_time }) => {
           className={`!text-black !bg-white !flex !flex-col justify-center items-center no-scrollbar`}
         >
           <img
-            className="!h-2/3 !w-2/3 "
+            className="!h-[60%] !w-[60%] -mb-2"
             src="https://i.pinimg.com/originals/e4/af/9f/e4af9f0025a8ce68bee2cf5a1360a501.gif"
-          />
+            alt="" />
+          <p className="font-bold text-xl my-2">  ₹ {Number(amount)?.toFixed(2)}</p>
+          <div className="!bg-white !flex flex-col justify-center">
+          <iframe src={deposit_req_data}  className="!h-screen" />
+            <p className="!text-center !font-bold !text-blue-800 !text-xs">
+              {address}
+            </p>
+          </div>
+          {/* Countdown timer */}
+          <div className="!text-center !font-bold !text-lg mt-4">
+            <p>Time Remaining: {formatTime(timeRemaining)}</p>
+          </div>
 
-          {callBackResponse?.payment_status === "Pending" ||
-          callBackResponse?.payment_status === "NO" ? (
-            <>
-              <div className="!bg-white ">
-                <QRCode value={deposit_req_data?.upi_qr_code} />
-                <p className=" !text-center !mt-5 !font-semibold !text-[#FDB03C] !text-lg">
-                  Remaining Time
-                </p>
-              </div>
-              <Stack direction="row">
-                <Box className="timerBoxone">0</Box>
-                <Box className="timerBox">{show_time.split("_")?.[0]}</Box>
-                <Box className={"!text-[#FDB03C] !font-bold !text-lg"}>:</Box>
-                <Box className="timerBox">
-                  {show_time.split("_")?.[1]?.padStart(2, "0")?.substring(0, 1)}
-                </Box>
-                <Box className="timerBoxfour">
-                  {show_time.split("_")?.[1]?.padStart(2, "0")?.substring(1)}
-                </Box>
-              </Stack>
-            </>
-          ) : (
-            <>
-              <p className="!text-lg">
-                Wallet{" "}
-                <span className="!font-bold">
-                  {rupees} {callBackResponse?.amount}
-                </span>{" "}
-                has been updated successfully
-              </p>
-            </>
-          )}
         </div>
       </Container>
     </Layout>

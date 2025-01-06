@@ -56,7 +56,7 @@ function AddedBankDetailList() {
             <KeyboardArrowLeftOutlinedIcon />
           </Box>
           <Typography variant="body1" color="initial">
-             Bank / UPI Details
+             Bank 
           </Typography>
           <Box></Box>
         </Box>
@@ -104,8 +104,7 @@ function AddedBankDetailList() {
                     </IconButton>
                   </div>
                   <Divider className="!bg-red-100 !text-red-100 !bg-opacity-20" />
-                  { i?.details_type === 'BANK'
-                          ? 
+               
                   <Stack
                     direction="row"
                     sx={{
@@ -122,25 +121,8 @@ function AddedBankDetailList() {
                       {i?.holder_name}
                     </Typography>
                   </Stack>
-                  :null}
-                  <Stack
-                    direction="row"
-                    sx={{
-                      marginTop: "10px",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      "&>p": { color: "white" },
-                    }}
-                  >
-                    <Typography variant="body1" color="initial">
-                      Deposit Type
-                    </Typography>
-                    <Typography variant="body1" color="initial">
-                  {i?.details_type}
-                    </Typography>
-                  </Stack>
-                 { i?.details_type === 'BANK'
-                          ?    <Stack
+           
+                <Stack
                           direction="row"
                           sx={{
                             alignItems: "center",
@@ -155,25 +137,7 @@ function AddedBankDetailList() {
                             {i?.bank_name}
                           </Typography>
                         </Stack>
-                          : i?.details_type === 'UPI'
-                            ?    <Stack
-                            direction="row"
-                            sx={{
-                              alignItems: "center",
-                              justifyContent: "space-between",
-                              "&>p": { color: "white" },
-                            }}
-                          >
-                            <Typography variant="body1" color="initial">
-                              UPI ID
-                            </Typography>
-                            <Typography variant="body1" color="initial">
-                              {i?.upi_id}
-                            </Typography>
-                          </Stack>
-                            : null}
-                      { i?.details_type === 'BANK'
-                          ?         
+                           
                     <Stack
                     direction="row"
                     sx={{
@@ -189,9 +153,8 @@ function AddedBankDetailList() {
                       {i?.ifsc}
                     </Typography>
                   </Stack>
-                   : null}
-                    { i?.details_type === 'BANK'
-                          ?   
+                  
+                 
                   <Stack
                     direction="row"
                     sx={{
@@ -207,7 +170,7 @@ function AddedBankDetailList() {
                       {i?.account}
                     </Typography>
                   </Stack>
-                  :null}
+                 
                 </Box>
               );
             })}
