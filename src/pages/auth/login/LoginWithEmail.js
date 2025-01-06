@@ -3,15 +3,13 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
   Box,
   Button,
-  Checkbox,
   FormControl,
-  FormControlLabel,
   IconButton,
   InputAdornment,
   OutlinedInput,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
@@ -19,12 +17,11 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink, useNavigate } from "react-router-dom";
 // import * as uuid from "uuid";
+import CryptoJS from "crypto-js";
+import { storeCookies } from "../../../Shared/CookieStorage";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
-import { LoginEmailSchemaValidaton } from "../../../Shared/Validation";
 import { stargreen, } from "../../../Shared/color";
 import { endpoint } from "../../../services/urls";
-import { storeCookies } from "../../../Shared/CookieStorage";
-import CryptoJS from "crypto-js";
 function LoginWithEmail() {
   // const device_id = uuid.v4();
   const [loding, setloding] = useState(false);

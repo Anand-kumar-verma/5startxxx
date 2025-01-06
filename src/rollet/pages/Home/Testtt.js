@@ -338,11 +338,11 @@ function Home() {
         getWinPopup();
       }, 12000);
     };
-    socket.on("oneminrollet", handleOneMin);
-    socket.on("rolletresult", handleOneMinrolletresult);
+    socket.on("oneminrollet_5star", handleOneMin);
+    socket.on("rolletresult_5star", handleOneMinrolletresult);
     return () => {
-      socket.off("oneminrollet", handleOneMin);
-      socket.off("rolletresult", handleOneMinrolletresult);
+      socket.off("oneminrollet_5star", handleOneMin);
+      socket.off("rolletresult_5star", handleOneMinrolletresult);
     };
   }, []);
 

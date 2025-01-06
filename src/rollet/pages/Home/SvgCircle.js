@@ -83,9 +83,9 @@ const SvgCircle = () => {
         handlePlaySoundPlaceBet();
       }
     };
-    socket.on("oneminrollet", handleOneMin);
+    socket.on("oneminrollet_5star", handleOneMin);
     return () => {
-      socket.off("oneminrollet", handleOneMin);
+      socket.off("oneminrollet_5star", handleOneMin);
     };
   }, []);
 

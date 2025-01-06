@@ -3,15 +3,13 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
   Box,
   Button,
-  Checkbox,
   FormControl,
-  FormControlLabel,
   IconButton,
   InputAdornment,
   OutlinedInput,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";

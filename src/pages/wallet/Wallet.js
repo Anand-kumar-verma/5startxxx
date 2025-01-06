@@ -1,4 +1,4 @@
-import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
   Container,
@@ -8,37 +8,29 @@ import {
   Typography,
 } from "@mui/material";
 import * as React from "react";
-import ReactApexChart from "react-apexcharts";
 import { useQuery, useQueryClient } from "react-query";
-import { useMediaQuery } from "react-responsive";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import CustomCircularProgress from "../../Shared/CustomCircularProgress";
 import {
   starblue,
   starbluegrad,
-  stargold,
   zubgback,
-  zubgbackgrad,
-  zubgmid,
+  zubgmid
 } from "../../Shared/color";
-import withdrow from "../../assets/wallet.png";
-import rechargeIcon from "../../assets/wallet2.png";
+import atmbg from "../../assets/atmbg2.jpg";
 import wdhistory from "../../assets/history2.png";
 import deposite from "../../assets/histoty.png";
-import wallet from "../../assets/wallet.png";
+import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
+import refresh from "../../assets/images/refresh.png";
+import sunlotteryhomebanner from "../../assets/sunlotteryhomebanner.jpg";
+import withdrow from "../../assets/wallet.png";
+import rechargeIcon from "../../assets/wallet2.png";
 import Layout from "../../component/Layout/Layout";
 import { MyProfileDataFn } from "../../services/apicalling";
-import CloseIcon from "@mui/icons-material/Close";
-import sunlotteryhomebanner from "../../assets/sunlotteryhomebanner.jpg";
-import refresh from "../../assets/images/refresh.png";
-import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
-import atmbg from "../../assets/atmbg2.jpg";
 import { apiConnectorGet } from "../../services/apiconnector";
 import { endpoint } from "../../services/urls";
 
 function Wallet() {
-  const isMediumScreen = useMediaQuery({ minWidth: 800 });
-  const navigate = useNavigate();
   const [openDialogBoxHomeBanner, setopenDialogBoxHomeBanner] =
     React.useState(false);
   const { isLoading, data } = useQuery(["myprofile"], () => MyProfileDataFn(), {

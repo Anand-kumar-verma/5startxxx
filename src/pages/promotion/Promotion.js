@@ -25,13 +25,12 @@ import {
   zubgback,
   zubgmid,
 } from "../../Shared/color";
-import copyIimage from "../../assets/images/copy.png";
+import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
 import donut from "../../assets/images/database.png";
 import sunlotteryhomebanner from "../../assets/sunlotteryhomebanner.jpg";
 import Layout from "../../component/Layout/Layout";
 import { MypromotionDataFn } from "../../services/apicalling";
 import { fron_end_main_domain } from "../../services/urls";
-import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
 
 function Promotion() {
   const [openDialogBoxHomeBanner, setopenDialogBoxHomeBanner] = useState(false);

@@ -16,7 +16,6 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import CryptoJS from "crypto-js";
-import output from "../../../assets/images/reg.jpg";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -25,8 +24,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { storeCookies } from "../../../Shared/CookieStorage";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
 import { signupSchemaValidataon } from "../../../Shared/Validation";
-import { stargreen, zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
+import { stargreen } from "../../../Shared/color";
 import logo from "../../../assets/images/logo.png";
+import output from "../../../assets/images/reg.jpg";
 import { CandidateNameFn } from "../../../services/apicalling";
 import { endpoint } from "../../../services/urls";
 
