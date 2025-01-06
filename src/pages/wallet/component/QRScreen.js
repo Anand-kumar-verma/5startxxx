@@ -24,7 +24,7 @@ const QRScreen = ({ deposit_req_data, address, amount, orderID }) => {
   }
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/wallet/Recharge");
+      navigate("/account");
     }, 300000);
     return () => clearTimeout(timer);
   }, [navigate]);
@@ -84,7 +84,7 @@ const QRScreen = ({ deposit_req_data, address, amount, orderID }) => {
             </p>
           </div>
           {/* Countdown timer */}
-          <div className="!text-center !font-bold !text-lg mt-4">
+          <div className="!text-center !font-bold !text-lg ">
             <p>Time Remaining: {formatTime(timeRemaining)}</p>
           </div>
 
