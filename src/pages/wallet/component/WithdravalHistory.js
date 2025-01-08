@@ -96,9 +96,9 @@ function WithdravalHistory() {
               <select onChange={(e) => setFilter(e.target.value)} className="mb-5 px-5 rounded">
                 <option value={"0"}>All</option>
                 <option value={"Pending"}>Pending</option>
-                <option value={"Approve"}>Approved </option>
+                <option value={"Success"}>Success </option>
                 <option value={"Procesing"}>Proccesing</option>
-                <option value={"Reject"}>Reject</option>
+                <option value={"Failed"}>Failed</option>
               </select>
             </Stack>
 
@@ -178,7 +178,7 @@ function WithdravalHistory() {
                       Balance
                     </Typography>
                     <Typography variant="body1" color="initial">
-                      {i?.tr15_amt}
+                      {Number(i?.tr15_amt)?.toFixed(2)}
                     </Typography>
                   </Stack>
                   <Stack
@@ -195,7 +195,7 @@ function WithdravalHistory() {
                     </Typography>
                     <Typography variant="body1" color="initial">
                       {moment(i?.tr15_date)?.format("DD-MM-YYYY")}{" "}
-                      {moment(i?.tr15_date)?.format("HH:mm:ss")}
+                      {moment?.utc(i?.tr15_date)?.format("HH:mm:ss")}
                     </Typography>
                   </Stack>
                   <Stack
