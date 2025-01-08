@@ -19,6 +19,7 @@ const QRScreen = ({ deposit_req_data, address, orderID }) => {
     }
     catch (e) {
       toast("something went wrong")
+      navigate("/account");
     }
   }
   React.useEffect(() => {
@@ -45,7 +46,7 @@ const QRScreen = ({ deposit_req_data, address, orderID }) => {
   React.useEffect(() => {
     const timer = setInterval(() => {
       callbackFn()
-    }, 30000);
+    }, 50000);
     return () => clearInterval(timer);
   }, [])
 
