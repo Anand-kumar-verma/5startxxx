@@ -1,14 +1,13 @@
-import { Box, Container, Stack } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import * as React from "react";
-import QRCode from "react-qr-code";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { zubgback } from "../../../Shared/color";
 import Layout from "../../../component/Layout/Layout";
-import { endpoint, rupees } from "../../../services/urls";
-import { useNavigate } from "react-router-dom";
-import { apiConnectorGet, apiConnectorPost } from "../../../services/apiconnector";
-import toast from "react-hot-toast";
+import { apiConnectorGet } from "../../../services/apiconnector";
+import { endpoint } from "../../../services/urls";
 
-const QRScreen = ({ deposit_req_data, address, amount, orderID }) => {
+const QRScreen = ({ deposit_req_data, address, orderID }) => {
 
   const [timeRemaining, setTimeRemaining] = React.useState(300)
   const navigate = useNavigate()
@@ -76,7 +75,7 @@ const QRScreen = ({ deposit_req_data, address, amount, orderID }) => {
             className="!h-[60%] !w-[60%] -mb-2"
             src="https://i.pinimg.com/originals/e4/af/9f/e4af9f0025a8ce68bee2cf5a1360a501.gif"
             alt="" />
-          <p className="font-bold text-xl my-2">  ₹ {Number(amount)?.toFixed(2)}</p>
+      
           <div className="!bg-white !flex flex-col justify-center">
           <iframe src={deposit_req_data}  className="!h-screen" />
             <p className="!text-center !font-bold !text-blue-800 !text-xs">

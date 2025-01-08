@@ -39,7 +39,6 @@ import QRScreen from "./QRScreen";
 function WalletRecharge() {
   const [deposit_req_data, setDeposit_req_data] = React.useState();
   const [address, setAddress] = React.useState();
-  const [amount, setAmount] = React.useState();
   const [orderID, setOrderId] = React.useState();
   const audioRefMusic = React.useRef(null);
   const [Loading, setLoading] = React.useState(false);
@@ -66,7 +65,7 @@ function WalletRecharge() {
     enableReinitialize: true,
     onSubmit: () => {
       if (
-        !fk.values.u_req_amount 
+        !fk.values.u_req_amount
       ) {
         toast("Please enter Amount");
         return;
@@ -88,9 +87,8 @@ function WalletRecharge() {
       toast(res?.data?.msg);
       setLoading(false);
       if ("PayIn Successfully" === res?.data?.msg) {
-        setDeposit_req_data(res?.data?.data?.payment_link);
+        setDeposit_req_data(res?.data?.data?.upi_deep_link);
         setAddress(res?.data?.data?.address);
-        setAmount(res?.data?.data?.amount);
         setOrderId(res?.data?.order_id);
         fk.handleReset();
       }
@@ -109,7 +107,7 @@ function WalletRecharge() {
     handlePlaySound();
   }, []);
 
- 
+
 
   const handlePlaySound = async () => {
     try {
@@ -297,7 +295,7 @@ function WalletRecharge() {
 
   if (deposit_req_data) {
     return (
-      <QRScreen deposit_req_data={deposit_req_data} address={address} amount={amount} orderID={orderID}/>
+      <QRScreen deposit_req_data={deposit_req_data} address={address}  orderID={orderID} />
     );
   }
   return (
