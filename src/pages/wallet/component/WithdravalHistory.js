@@ -97,7 +97,7 @@ function WithdravalHistory() {
                 <option value={"0"}>All</option>
                 <option value={"Pending"}>Pending</option>
                 <option value={"Success"}>Success </option>
-                <option value={"Procesing"}>Proccesing</option>
+                <option value={"Processing"}>Processing</option>
                 <option value={"Failed"}>Failed</option>
               </select>
             </Stack>
