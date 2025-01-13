@@ -8,6 +8,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
+import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import moment from "moment";
 import theme from "../../utils/theme";
@@ -21,12 +22,14 @@ import logo2 from "../../assets/images/5-Star-XXX-8-29-2024.png";
 import Layout from "../../component/Layout/Layout";
 import { apiConnectorGet, apiConnectorPost } from "../../services/apiconnector";
 import { endpoint } from "../../services/urls";
+import { useNavigate } from "react-router-dom";
 
 function TicketGenerate() {
   const [isAllValue, setIsAllValue] = React.useState(false);
   const [visibleData, setvisibleData] = React.useState([]);
   const [isvisible, setisvisible] = React.useState(false);
   const client = useQueryClient();
+  const navigate = useNavigate();
   const [image, setImage] = React.useState(null);
   const [loding, setloding] = React.useState(false);
 
@@ -96,6 +99,7 @@ function TicketGenerate() {
     <Layout>
       <Container sx={style.container}>
         <Box sx={style.header1} className={"!w-full !flex !justify-center"}>
+       
           <Box component="img" src={logo2} sx={{ width: "150px" }}></Box>
         </Box>
        
@@ -116,13 +120,12 @@ function TicketGenerate() {
           }}
         >
          
-
-          <div className="grid grid-cols-2 gap-1 items-center w-[400px] p-5">
-            <span className="col-span-2 justify-end">
-              <div className="flex justify-between">
-                <span className="font-bold">Ticket Generate</span>
+         <div className="flex justify-start gap-1">
+            <KeyboardArrowLeftOutlinedIcon className="!text-white !cursor-pointer"  onClick={()=>navigate("/promotion/customerLine/")}/>
+        <span className="font-bold">Ticket Generate</span>
               </div>
-            </span>
+          <div className="grid grid-cols-2 gap-1 items-center w-[400px] p-5">
+        
             <span className="!text-white !my-3 !text-sm">
               Select Ticket Type*
             </span>
@@ -253,8 +256,8 @@ function TicketGenerate() {
                 <Typography variant="body1" color="initial">
                   Status
                 </Typography>
-                <Typography variant="body1">
-                  {i?.status === 0 ? "Pending" : "Success"}
+                <Typography variant="body1" className="">
+                  {i?.status === 0 ? "Pending" : "Resolved"}
                 </Typography>
               </Stack>
               <Stack
@@ -338,16 +341,16 @@ function TicketGenerate() {
                   <Typography variant="body1" color="initial">
                     {i?.ticket_id}
                   </Typography>
-                  <IconButton sx={{ padding: 0 }}>
+                  {/* <IconButton sx={{ padding: 0 }}>
                     <ContentCopyIcon
                       sx={{ color: "#888", width: "15px", ml: 1 }}
                     />
-                  </IconButton>
+                  </IconButton> */}
                 </Stack>
               </Stack>
               <div>
                 <p className="!text-blue-500">Query:</p>
-                <p className="!px-5 p-2 !w-full !overflow-auto border-2 text-white !border-gray-400  !min-h-[100px]">
+                <p className="p-2 !w-full !overflow-auto border-2 text-white !border-gray-400  !min-h-[100px]">
                   {i?.description}
                 </p>
               </div>
@@ -362,7 +365,7 @@ function TicketGenerate() {
                       )}
                     </span>
                   </p>
-                  <p className="!px-5 !w-full !overflow-auto border-2 !border-gray-400 !min-h-[100px] !text-black">
+                  <p className="!px-5 !w-full !overflow-auto border-2 !border-gray-400 !min-h-[100px] !text-white">
                     {i?.resolution}
                   </p>
                 </div>
