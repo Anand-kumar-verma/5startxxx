@@ -82,7 +82,7 @@ function Account() {
     client.removeQueries("myprofile");
   }
 
-  const { data: wallet } = useQuery(
+  const {Loading,data: wallet } = useQuery(
     ["walletamount"],
     () => apiConnectorGet(endpoint.node.get_wallet),
     {
@@ -463,7 +463,7 @@ function Account() {
             </div>
           </Dialog>
         )}
-        <CustomCircularProgress isLoading={isLoading} />
+        <CustomCircularProgress isLoading={isLoading || Loading} />
       </Container>
     </Layout>
   );
