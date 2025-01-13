@@ -21,6 +21,7 @@ import Mail from "../pages/account/Component/Mail";
 import Notification from "../pages/account/Component/Notification";
 import ReferralIncomeRule from "../pages/account/Component/ReferralRule";
 import SettingCenter from "../pages/account/Component/SettingCenter";
+import TicketGenerate from "../pages/account/TicketGenerate";
 import Activity from "../pages/activity/Activity";
 import Register from "../pages/auth/register/Register";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -247,5 +248,9 @@ export const routes = [
   {
     path: "/location/chart",
     component: <LocationChart />,
+  },
+  {
+    path: "/query",
+    component: <TicketGenerate />,
   },
 ];

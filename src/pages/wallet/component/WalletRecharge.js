@@ -246,6 +246,13 @@ function WalletRecharge() {
             mt: "10px",
           }}
         >
+           <Button
+            sx={style.paytmbtn}
+            onClick={() => fk.setFieldValue("u_req_amount", 100)}
+          >
+            {" "}
+            100
+          </Button>
           <Button
             sx={style.paytmbtn}
             onClick={() => fk.setFieldValue("u_req_amount", 500)}

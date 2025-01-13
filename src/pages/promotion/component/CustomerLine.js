@@ -2,13 +2,14 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import { Box, Container, Stack, Typography, } from '@mui/material';
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { zubgback, zubgmid } from '../../../Shared/color';
 import customer from '../../../assets/images/supportgirls.png';
 import Layout from '../../../component/Layout/Layout';
 
 
 function Subordinate() {
+  const navigate = useNavigate()
   return (
     <Layout>
       <Container sx={{ background: zubgback, width: '100%', height: '100vh', overflow: 'auto' }}>
@@ -25,7 +26,7 @@ function Subordinate() {
             <Box component='img' src={customer} sx={{ mt: 3, width: '100%', height: '100%', margin: 'auto', objectFit: 'cover', objectPosition: 'top', }}></Box>
           </Box>
         </Box>
-        <Box component={NavLink}>
+        <Box onClick={()=>navigate('/query')}>
           <Stack direction='row' sx={{ background: zubgmid, width: '95%', marginLeft: '2.5%', borderRadius: '5px', marginTop: '10px', padding: '20px', alignItems: 'center', justifyContent: 'space-between' }}>
             <Typography variant="body1" sx={{ color: 'white', fontSize: '20px', fontWeight: '400', }}>
               Live Now

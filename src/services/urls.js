@@ -6,7 +6,7 @@ export const fron_end_main_domain = "https://5starxxx.com";
 // export const domain = "https://fivestar-timer-roulette-satta.onrender.com/";
 export const domain = "https://zupeeter-win-timer.onrender.com";
 
-// export const domainn = "http://192.168.18.183:9002";
+// export const game_domain = "http://192.168.18.26:9002";
 // export const domain1 = "http://192.168.18.183:9002";
 
 export const domainn = "https://api.5starxxx.com";
@@ -20,6 +20,8 @@ export const telegram_url = ``;
 export const endpoint = {
   login: `${domain1}/api/v1/login`,
   my_hisory: `${domain1}/api/v1/getMyHistory`,
+  ticket_raised: `${domainn}/api/v1/ticket-raised`,
+  ticket_raised_history: `${domainn}/api/v1/ticket-raised-history`,
   send_otp: `${baseUrl}/api/forget-password`,
   veryfy_otp: `${baseUrl}/api/user-otp-verify`,
   signup: `${baseUrl}/api/user_register`,
