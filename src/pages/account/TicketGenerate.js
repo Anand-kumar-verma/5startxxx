@@ -41,7 +41,11 @@ function TicketGenerate() {
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
-      if (fk.values.type === "Select Type") return "Select Type of issues.";
+      if (fk.values.type === "Select Type") 
+        return  toast("Select Type of issues.") ;
+      if(!image || !fk.values.description){
+        return toast("Enter all fields")
+      }
       const reqBody = {
         files: image,
         type: Number(fk.values.type),
@@ -365,13 +369,13 @@ function TicketGenerate() {
                       )}
                     </span>
                   </p>
-                  <p className="!px-5 !w-full !overflow-auto border-2 !border-gray-400 !min-h-[100px] !text-white">
+                  <p className="!p-2 !w-full !overflow-auto border-2 !border-gray-400 !min-h-[100px] !text-white">
                     {i?.resolution}
                   </p>
                 </div>
               )}
               <p
-                onClick={() => setisvisible(index)}
+               onClick={() => setisvisible(isvisible === index ? null : index)}
                 className="!cursor-pointer !text-white"
               >
                 View Image
