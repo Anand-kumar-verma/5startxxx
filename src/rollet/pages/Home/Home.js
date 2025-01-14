@@ -577,9 +577,9 @@ function Home() {
             >
               <div className=" !flex !justify-center !items-center animation_image z-50">
                 <img
-                  src={roulette}
+                  src={roulette || 'https://s3-anand-media-bucket-file-system.s3.eu-north-1.amazonaws.com/roulette_image.png'}
                   alt=""
-                  className="!h-full !w-full !bg-no-repeat "
+                  className="!h-full !w-full !bg-no-repeat"
                 />
                 <Rolletball />
               </div>
