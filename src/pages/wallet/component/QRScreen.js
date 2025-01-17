@@ -29,7 +29,7 @@ const QRScreen = ({ deposit_req_data, address, orderID }) => {
     return () => clearTimeout(timer);
   }, [navigate]);
 
-
+ 
   React.useEffect(() => {
     const interval = setInterval(() => {
       setTimeRemaining((prevTime) => {
@@ -46,7 +46,7 @@ const QRScreen = ({ deposit_req_data, address, orderID }) => {
   React.useEffect(() => {
     const timer = setInterval(() => {
       callbackFn()
-    }, 50000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [])
 
