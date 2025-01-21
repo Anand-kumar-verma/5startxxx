@@ -1,29 +1,29 @@
-import { ArrowBackRounded, Wallet } from "@mui/icons-material";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import moment from "moment";
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import { NavLink, useLocation } from "react-router-dom";
-import Layout from "../../../component/Layout/Layout";
+import { ArrowBackRounded, Wallet } from '@mui/icons-material';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import moment from 'moment';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import { NavLink, useLocation } from 'react-router-dom';
+import Layout from '../../../component/Layout/Layout';
 import {
   apiConnectorGet,
   apiConnectorPost,
-} from "../../../services/apiconnector";
-import { endpoint } from "../../../services/urls";
+} from '../../../services/apiconnector';
+import { endpoint } from '../../../services/urls';
 import {
   starblue,
   starbluegrad,
   stardarkblue,
   stargrad,
-} from "../../../Shared/color";
+} from '../../../Shared/color';
 
 function LocationChart() {
   const location = useLocation();
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
 
   const { data } = useQuery(
-    ["game_history", fromDate, toDate, location?.state?.satta_type],
+    ['game_history', fromDate, toDate, location?.state?.satta_type],
     () =>
       apiConnectorPost(endpoint.node.satta_game_gamehistory, {
         startDate: fromDate,
@@ -39,7 +39,7 @@ function LocationChart() {
 
   const gaming = data?.data?.data || [];
   const { data: wallet } = useQuery(
-    ["walletamount"],
+    ['walletamount'],
     () => apiConnectorGet(endpoint.node.get_wallet),
     {
       refetchOnMount: false,
@@ -61,36 +61,36 @@ function LocationChart() {
             <Box className="w95" sx={style.flexbetween}>
               <Box
                 sx={{
-                  width: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "start",
+                  width: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'start',
                 }}
               >
                 <Box component={NavLink} to="/SattaChart">
-                  <ArrowBackRounded sx={{ mr: 1, color: "white" }} />
+                  <ArrowBackRounded sx={{ mr: 1, color: 'white' }} />
                 </Box>
                 <Typography
                   variant="body1"
                   className="fp15"
-                  sx={{ color: "white" }}
+                  sx={{ color: 'white' }}
                 >
-                  Andar/ Bahar Chart{" "}
+                  Andar/ Bahar Chart{' '}
                 </Typography>
               </Box>
               <Box
                 sx={{
-                  width: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "end",
+                  width: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'end',
                 }}
               >
-                <Wallet sx={{ mr: 1, color: "white" }} />
+                <Wallet sx={{ mr: 1, color: 'white' }} />
                 <Typography
                   variant="body1"
                   className="fp15"
-                  sx={{ color: "white" }}
+                  sx={{ color: 'white' }}
                 >
                   ₹ {newdata?.wallet}
                 </Typography>
@@ -99,7 +99,7 @@ function LocationChart() {
           </Box>
           <Box sx={style.filterContainer} className="w95 !text-white" mt={4}>
             <Box
-              sx={{ display: "flex", width: "100%", gap: "8px" }}
+              sx={{ display: 'flex', width: '100%', gap: '8px' }}
               className="!text-white"
             >
               <TextField
@@ -122,15 +122,15 @@ function LocationChart() {
               />
             </Box>
           </Box>
-          <Box sx={{ width: "100%", mt: 1 }}>
+          <Box sx={{ width: '100%', mt: 1 }}>
             <Box className="w95">
               <Box
                 sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "10px",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '10px',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
                   my: 5,
                 }}
               >
@@ -138,34 +138,34 @@ function LocationChart() {
                   <Button
                     variant="contained"
                     sx={{
-                      width: "50px",
-                      height: "50px",
-                      textAlign: "center",
+                      width: '50px',
+                      height: '50px',
+                      textAlign: 'center',
                     }}
                   >
                     <Box
                       sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexDirection: "column",
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
                       }}
                     >
                       <Typography
-                        sx={{ color: "white" }}
+                        sx={{ color: 'white' }}
                         className="fp18"
                         color="initial"
                       >
-                        {" "}
+                        {' '}
                         {String(item?.number).padStart(2, '0')}
                       </Typography>
                       <Typography
-                        sx={{ color: "white" }}
+                        sx={{ color: 'white' }}
                         className="fp13"
                         color="initial"
                       >
-                        {" "}
-                        {moment?.utc(item?.datetime)?.format("HH:mm:ss")}
+                        {' '}
+                        {moment(item?.datetime)?.format('HH:mm:ss')}
                       </Typography>
                     </Box>
                   </Button>
@@ -185,71 +185,71 @@ export default LocationChart;
 const style = {
   root: { background: stardarkblue, pb: 6 },
   flexbetween: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   openButton: {
-    width: "100%",
-    background: "#24cc3b",
-    textTransform: "capitalize",
-    borderRadius: "5px",
-    color: "white",
+    width: '100%',
+    background: '#24cc3b',
+    textTransform: 'capitalize',
+    borderRadius: '5px',
+    color: 'white',
     mb: 1,
     py: 1,
-    "&:hover": { backgroundColor: "#24cc3b" },
+    '&:hover': { backgroundColor: '#24cc3b' },
   },
 
   dateField: {
-    width: "50%",
-    padding: "5px",
-    borderRadius: "4px",
+    width: '50%',
+    padding: '5px',
+    borderRadius: '4px',
     backgroundColor: starblue,
-    "& .MuiInputBase-root": {
-      borderRadius: "4px",
+    '& .MuiInputBase-root': {
+      borderRadius: '4px',
       backgroundColor: starblue,
     },
-    "& .MuiInputBase-input": {
-      fontSize: "14px",
-      color: "#ffffff",
-      padding: "8px",
+    '& .MuiInputBase-input': {
+      fontSize: '14px',
+      color: '#ffffff',
+      padding: '8px',
     },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        border: "none",
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        border: 'none',
       },
-      "&:hover fieldset": {
-        border: "none",
+      '&:hover fieldset': {
+        border: 'none',
       },
-      "&.Mui-focused fieldset": {
-        border: "none",
+      '&.Mui-focused fieldset': {
+        border: 'none',
       },
     },
-    "& .MuiInputLabel-root": {
-      color: "#ffffff",
+    '& .MuiInputLabel-root': {
+      color: '#ffffff',
     },
-    "& .MuiInputBase-input::placeholder": {
-      color: "#e0e0e0",
+    '& .MuiInputBase-input::placeholder': {
+      color: '#e0e0e0',
       opacity: 1,
     },
   },
   filterButton: {
-    width: "100%",
+    width: '100%',
     backgroundColor: starbluegrad,
-    color: "white",
-    textTransform: "none",
-    borderRadius: "5px",
-    padding: "8px 16px",
-    "&:hover": {
+    color: 'white',
+    textTransform: 'none',
+    borderRadius: '5px',
+    padding: '8px 16px',
+    '&:hover': {
       backgroundColor: starbluegrad,
     },
-    marginTop: "8px",
+    marginTop: '8px',
   },
   filterContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    alignItems: 'center',
   },
 };
