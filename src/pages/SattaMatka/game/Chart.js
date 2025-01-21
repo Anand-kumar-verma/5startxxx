@@ -191,7 +191,7 @@ function SattaChart() {
                   className="fp13"
                 >
                   Winner Result:{' '}
-                  {String(game_history?.[0]?.gaziyabad)?.padStart(2, '0')}
+                  {String(game_history?.[0]?.faridabad)?.padStart(2, '0')}
                 </Typography>
               </Box>
               <Box sx={styles.imageContainer}>
@@ -200,7 +200,7 @@ function SattaChart() {
                   className="fp18"
                   sx={{ color: 'white' }}
                 >
-                  {String(game_history?.[0]?.gaziyabad)?.padStart(2, '0')}
+                  {String(game_history?.[0]?.faridabad)?.padStart(2, '0')}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
@@ -233,7 +233,7 @@ function SattaChart() {
                   className="fp13"
                 >
                   Winner Result:{' '}
-                  {String(game_history?.[0]?.gaziyabad)?.padStart(2, '0')}
+                  {String(game_history?.[0]?.gali)?.padStart(2, '0')}
                 </Typography>
               </Box>
               <Box sx={styles.imageContainer}>
@@ -242,7 +242,7 @@ function SattaChart() {
                   className="fp18"
                   sx={{ color: 'white' }}
                 >
-                  {String(game_history?.[0]?.gaziyabad)?.padStart(2, '0')}
+                  {String(game_history?.[0]?.gali)?.padStart(2, '0')}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
@@ -275,7 +275,7 @@ function SattaChart() {
                   className="fp13"
                 >
                   Winner Result:{' '}
-                  {String(game_history?.[0]?.gaziyabad)?.padStart(2, '0')}
+                  {String(game_history?.[0]?.disawar)?.padStart(2, '0')}
                 </Typography>
               </Box>
               <Box sx={styles.imageContainer}>
@@ -284,7 +284,7 @@ function SattaChart() {
                   className="fp18"
                   sx={{ color: 'white' }}
                 >
-                  {String(game_history?.[0]?.gaziyabad)?.padStart(2, '0')}
+                  {String(game_history?.[0]?.disawar)?.padStart(2, '0')}
                 </Typography>
               </Box>
               <Box sx={styles.buttonContainer}>
