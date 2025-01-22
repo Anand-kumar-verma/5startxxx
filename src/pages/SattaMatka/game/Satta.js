@@ -66,10 +66,10 @@ function Satta() {
       setOne_min_time(time_to_be_intro);
       setMinut(time_to_be_intro_min);
 
-      if (Number(minut) === 0 && Number(one_min_time) === 0) {
-        client.refetchQueries('game');
-        client.refetchQueries('my_history');
-      }
+      // if (Number(minut) === 0 && Number(one_min_time) === 0) {
+      //   client.refetchQueries('game');
+      //   client.refetchQueries('my_history');
+      // }
     };
     socket.on('onemin', handleOneMin);
     return () => {
