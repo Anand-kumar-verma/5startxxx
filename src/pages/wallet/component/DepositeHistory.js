@@ -24,20 +24,16 @@ import {
 
 function DepositeHistory() {
   const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
+
   const { isLoading, data } = useQuery(
     ["deposit_history"],
     () => depositHistoryFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: true, 
     }
   );
   const res = data?.data?.data
-
-  console.log(res, "THis is response");
 
   return (
     <Layout>

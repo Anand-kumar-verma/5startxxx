@@ -16,11 +16,9 @@ import { useFormik } from "formik";
 import * as React from "react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../Shared/CustomCircularProgress";
 import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../Shared/color";
-import upi from "../../assets/chip.png";
 import { default as atmchip, default as cip } from "../../assets/cip.png";
 import bankicon from "../../assets/images/bank.png";
 import playgame from "../../assets/images/card.webp";
@@ -28,7 +26,6 @@ import balance from "../../assets/images/send.png";
 import audiovoice from "../../assets/images/withdrawol_voice.mp3";
 import payment from "../../assets/wallet2.png";
 import Layout from "../../component/Layout/Layout";
-import { get_user_data_fn } from "../../services/apicalling";
 import { apiConnectorGet, apiConnectorPost } from "../../services/apiconnector";
 import { endpoint } from "../../services/urls";
 
@@ -41,7 +38,6 @@ function Withdrawl() {
         "anand"
       )?.toString(CryptoJS.enc.Utf8)) ||
     null;
-  const user_id = login_data && JSON.parse(login_data)?.UserID;
   const [Loading, setloding] = React.useState(false);
   const audioRefMusic = React.useRef(null);
   const [openDialogBox, setOpenDialogBox] = React.useState(false);
