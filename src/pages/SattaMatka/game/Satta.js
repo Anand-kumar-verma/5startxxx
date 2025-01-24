@@ -60,16 +60,17 @@ function Satta() {
       const time_to_be_intro = t > 0 ? 60 - t : t;
       const time_to_be_intro_mid_min = min > 0 ? 60 - min : min;
       const time_to_be_intro_min =
-        time_to_be_intro_mid_min >= 30
+        time_to_be_intro_mid_min > 30
           ? time_to_be_intro_mid_min - 30
           : time_to_be_intro_mid_min;
       setOne_min_time(time_to_be_intro);
-      setMinut(time_to_be_intro_min);
+      const newmin = time_to_be_intro_min < 0 ? time_to_be_intro_min : time_to_be_intro_min - 1
+      setMinut(newmin);
 
-      // if (Number(minut) === 0 && Number(one_min_time) === 0) {
-      //   client.refetchQueries('game');
-      //   client.refetchQueries('my_history');
-      // }
+      if (newmin === 29 && time_to_be_intro === 59) {
+        client.refetchQueries("game")
+        client.refetchQueries("my_history")
+      }
     };
     socket.on('onemin', handleOneMin);
     return () => {
@@ -236,34 +237,39 @@ function Satta() {
                   top: '22px',
                 }}
               >
-                <Box
-                // sx={{ width: "100px" }}
-                >
-
-                  {!statta_matka_staus_result?.find((i) => i?.title === 'satta_gajiyabad')?.status || isClosedTime ? (
-
+                <Box>
+                  {(!statta_matka_staus_result?.find((i) => i?.title === 'satta_gajiyabad')?.status || minut < 5 || isClosedTime) ? (
+                    // Show Closed state with countdown
                     <Box>
-                      <Typography className='bg-red-700 p-1 rounded-xl text-white' sx={{  textAlign: 'center' }}>
-                        Closed
-                      </Typography>
-                      {/* <Button
-                        variant="text"
-                        // className="fp11"
-                        sx={styles.upcomingButton}
-                      >
-                       Closed
-                        
-                      </Button> */}
-                      <div className='flex flex-col justify-center items-center text-white my-2' sx={{ color: 'white', textAlign: 'center' }}>
-                      <p className="!text-[10px]">
-                        Open Timing  
-                        </p>
-                        <p className="!text-[10px]">
-                        8:30 AM to 11:59 PM
-                        </p>
-                      </div>
+                      {minut < 5 && (
+                        <Box>
+                          <Typography sx={{ color: "red", textAlign: "center" }}>
+                            Closed
+                          </Typography>
+                          <Button variant="text" sx={styles.upcomingButton}>
+                            Upcoming Result
+                          </Button>
+                          <Typography sx={{ color: "white", textAlign: "center" }}>
+                            <span> Time Left: </span>
+                            <span>{String(minut)?.padStart(2, "0")}</span>:
+                            <span>{String(one_min_time)?.padStart(2, "0")}</span>
+                          </Typography>
+                        </Box>
+                      )}
+                      {isClosedTime && (
+                        <Box>
+                          <Typography className="bg-red-700 p-1 rounded-xl text-white" sx={{ textAlign: 'center' }}>
+                            Closed
+                          </Typography>
+                          <div className="flex flex-col justify-center items-center text-white my-2" sx={{ color: 'white', textAlign: 'center' }}>
+                            <p className="!text-[10px]">Open Timing</p>
+                            <p className="!text-[10px]">8:30 AM to 11:59 PM</p>
+                          </div>
+                        </Box>
+                      )}
                     </Box>
                   ) : (
+                    // Show Open state and Play button
                     <Box
                       className="!font-bold !text-white"
                       onClick={() => {
@@ -274,11 +280,7 @@ function Satta() {
                         });
                       }}
                     >
-                      <Typography
-                        variant="body1"
-                        // className="fp15"
-                        sx={{ color: 'white', textAlign: 'center', mb: 1 }}
-                      >
+                      <Typography variant="body1" sx={{ color: 'white', textAlign: 'center', mb: 1 }}>
                         Open
                       </Typography>
                       <Button
@@ -298,6 +300,8 @@ function Satta() {
                     </Box>
                   )}
                 </Box>
+
+
               </Box>
               <div className="pt-2 px-[10%] !w-full !flex justify-between !font-bold">
                 <p>
@@ -365,21 +369,34 @@ function Satta() {
                 }}
               >
                 <Box>
-                  {!statta_matka_staus_result?.find(
-                    (i) => i?.title === 'satta_faridabad'
-                  )?.status || isClosedTime ? (
+                  {(!statta_matka_staus_result?.find((i) => i?.title === 'satta_faridabad')?.status || minut < 5 || isClosedTime) ? (
                     <Box>
-                          <Typography className='bg-red-700 p-1 rounded-xl text-white' sx={{  textAlign: 'center' }}>
-                        Closed
-                      </Typography>
-                        <div className='flex flex-col justify-center items-center text-white my-2' sx={{ color: 'white', textAlign: 'center' }}>
-                      <p className="!text-[10px]">
-                        Open Timing  
-                        </p>
-                        <p className="!text-[10px]">
-                        8:30 AM to 11:59 PM
-                        </p>
-                      </div>
+                      {minut < 5 && (
+                        <Box>
+                          <Typography sx={{ color: "red", textAlign: "center" }}>
+                            Closed
+                          </Typography>
+                          <Button variant="text" sx={styles.upcomingButton}>
+                            Upcoming Result
+                          </Button>
+                          <Typography sx={{ color: "white", textAlign: "center" }}>
+                            <span> Time Left: </span>
+                            <span>{String(minut)?.padStart(2, "0")}</span>:
+                            <span>{String(one_min_time)?.padStart(2, "0")}</span>
+                          </Typography>
+                        </Box>
+                      )}
+                      {isClosedTime && (
+                        <Box>
+                          <Typography className="bg-red-700 p-1 rounded-xl text-white" sx={{ textAlign: 'center' }}>
+                            Closed
+                          </Typography>
+                          <div className="flex flex-col justify-center items-center text-white my-2" sx={{ color: 'white', textAlign: 'center' }}>
+                            <p className="!text-[10px]">Open Timing</p>
+                            <p className="!text-[10px]">8:30 AM to 11:59 PM</p>
+                          </div>
+                        </Box>
+                      )}
                     </Box>
                   ) : (
                     <Box
@@ -480,21 +497,34 @@ function Satta() {
                 }}
               >
                 <Box>
-                  {!statta_matka_staus_result?.find(
-                    (i) => i?.title === 'satta_gali'
-                  )?.status || isClosedTime ? (
+                  {(!statta_matka_staus_result?.find((i) => i?.title === 'satta_gali')?.status || minut < 5 || isClosedTime) ? (
                     <Box>
-                          <Typography className='bg-red-700 p-1 rounded-xl text-white' sx={{  textAlign: 'center' }}>
-                        Closed
-                      </Typography>
-                         <div className='flex flex-col justify-center items-center text-white my-2' sx={{ color: 'white', textAlign: 'center' }}>
-                      <p className="!text-[10px]">
-                        Open Timing  
-                        </p>
-                        <p className="!text-[10px]">
-                        8:30 AM to 11:59 PM
-                        </p>
-                      </div>
+                      {minut < 5 && (
+                        <Box>
+                          <Typography sx={{ color: "red", textAlign: "center" }}>
+                            Closed
+                          </Typography>
+                          <Button variant="text" sx={styles.upcomingButton}>
+                            Upcoming Result
+                          </Button>
+                          <Typography sx={{ color: "white", textAlign: "center" }}>
+                            <span> Time Left: </span>
+                            <span>{String(minut)?.padStart(2, "0")}</span>:
+                            <span>{String(one_min_time)?.padStart(2, "0")}</span>
+                          </Typography>
+                        </Box>
+                      )}
+                      {isClosedTime && (
+                        <Box>
+                          <Typography className="bg-red-700 p-1 rounded-xl text-white" sx={{ textAlign: 'center' }}>
+                            Closed
+                          </Typography>
+                          <div className="flex flex-col justify-center items-center text-white my-2" sx={{ color: 'white', textAlign: 'center' }}>
+                            <p className="!text-[10px]">Open Timing</p>
+                            <p className="!text-[10px]">8:30 AM to 11:59 PM</p>
+                          </div>
+                        </Box>
+                      )}
                     </Box>
                   ) : (
                     <Box
@@ -594,21 +624,34 @@ function Satta() {
                 }}
               >
                 <Box>
-                  {!statta_matka_staus_result?.find(
-                    (i) => i?.title === 'satta_disawar'
-                  )?.status || isClosedTime ? (
+                  {(!statta_matka_staus_result?.find((i) => i?.title === 'satta_disawar')?.status || minut < 5 || isClosedTime) ? (
                     <Box>
-                          <Typography className='bg-red-700 p-1 rounded-xl text-white' sx={{  textAlign: 'center' }}>
-                        Closed
-                      </Typography>
-                         <div className='flex flex-col justify-center items-center text-white my-2' sx={{ color: 'white', textAlign: 'center' }}>
-                      <p className="!text-[10px]">
-                        Open Timing  
-                        </p>
-                        <p className="!text-[10px]">
-                        8:30 AM to 11:59 PM
-                        </p>
-                      </div>
+                      {minut < 5 && (
+                        <Box>
+                          <Typography sx={{ color: "red", textAlign: "center" }}>
+                            Closed
+                          </Typography>
+                          <Button variant="text" sx={styles.upcomingButton}>
+                            Upcoming Result
+                          </Button>
+                          <Typography sx={{ color: "white", textAlign: "center" }}>
+                            <span> Time Left: </span>
+                            <span>{String(minut)?.padStart(2, "0")}</span>:
+                            <span>{String(one_min_time)?.padStart(2, "0")}</span>
+                          </Typography>
+                        </Box>
+                      )}
+                      {isClosedTime && (
+                        <Box>
+                          <Typography className="bg-red-700 p-1 rounded-xl text-white" sx={{ textAlign: 'center' }}>
+                            Closed
+                          </Typography>
+                          <div className="flex flex-col justify-center items-center text-white my-2" sx={{ color: 'white', textAlign: 'center' }}>
+                            <p className="!text-[10px]">Open Timing</p>
+                            <p className="!text-[10px]">8:30 AM to 11:59 PM</p>
+                          </div>
+                        </Box>
+                      )}
                     </Box>
                   ) : (
                     <Box
