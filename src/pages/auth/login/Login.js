@@ -1,38 +1,27 @@
-import {
-  Box,
-  Container,
-  Stack,
-  Typography
-} from "@mui/material";
+import { Box, Container, Stack, Typography } from '@mui/material';
 import CryptoJS from 'crypto-js';
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { starblue, stardarkblue } from "../../../Shared/color";
-import logo from "../../../assets/images/logo.png";
-import LoginWithEmail from "./LoginWithEmail";
-import LoginWithMobile from "./LoginWithMobile";
-import output from "../../../assets/images/21782191820.jpg";
-
-
-
+import { starblue, stardarkblue } from '../../../Shared/color';
+import logo from '../../../assets/images/logo.png';
+import LoginWithEmail from './LoginWithEmail';
+import LoginWithMobile from './LoginWithMobile';
+import output from '../../../assets/images/21782191820.jpg';
 
 function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [Nav, setNav] = useState(1);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const aviator_login_data = useSelector(
     (state) => state.aviator.aviator_login_data
   );
-
-
- 
 
   // useEffect(() => {
   //   !aviator_login_data && get_user_data_fn(dispatch);
@@ -53,11 +42,13 @@ function Login() {
     <Container
       sx={{
         height: '100%',
-
-        position: 'absolute',
+        position: 'relative',
         top: 0,
-        left: 0,
+        // left: 0,
         zIndex: -1,
+        alignItems: 'center',
+        justifyItems: 'center',
+        // border: 'red',
       }}
     >
       <Box
@@ -81,23 +72,22 @@ function Login() {
           }}
         />
 
-
         <Box sx={{}}>
           <Box
             sx={{
-              width: "95%",
-              marginLeft: "2.5%",
-              borderRadius: "10px",
+              width: '95%',
+              marginLeft: '2.5%',
+              borderRadius: '10px',
             }}
           >
-            <Box sx={{ width: "100%", pt: "3vh" }}>
+            <Box sx={{ width: '100%', pt: '3vh' }}>
               <Box
                 component="img"
                 src={logo}
-                sx={{ width: "130px", margin: "auto" }}
+                sx={{ width: '130px', margin: 'auto' }}
               ></Box>
             </Box>
-            <Box >
+            <Box>
               {/* <Swiper
               spaceBetween={30}
               centeredSlides={true}
@@ -139,40 +129,39 @@ function Login() {
             </Box>
             <Box
               sx={{
-                mt: "10vh",
+                mt: '10vh',
 
-                borderRadius: "10px",
-                padding: "0px 10px 20px 10px",
-                "& > p:nth-child(1)": {
-                  fontSize: "20px",
-                  fontWeight: "500",
-                  color: "white",
+                borderRadius: '10px',
+                padding: '0px 10px 20px 10px',
+                '& > p:nth-child(1)': {
+                  fontSize: '20px',
+                  fontWeight: '500',
+                  color: 'white',
                 },
-                "& > p:nth-child(2)": {
-                  fontSize: "12px",
-                  fontWeight: "400",
-                  color: "white",
+                '& > p:nth-child(2)': {
+                  fontSize: '12px',
+                  fontWeight: '400',
+                  color: 'white',
                 },
                 // WebkitBackdropFilter: "blur(6px)",
-                backdropFilter: "blur(3px)",
-                border: "1px solid #7330fa75",
+                backdropFilter: 'blur(3px)',
+                border: '1px solid #7330fa75',
                 background: '#0000006e !important',
               }}
-
             >
               <Box>
                 <Stack direction="row">
                   <Box
                     component={NavLink}
                     onClick={() => setNav(1)}
-                    className={Nav === 1 ? "activeNav nav" : "nav"}
+                    className={Nav === 1 ? 'activeNav nav' : 'nav'}
                   >
                     <Typography variant="h3">LOGIN WITH PHONE</Typography>
                   </Box>
                   <Box
                     component={NavLink}
                     onClick={() => setNav(2)}
-                    className={Nav === 2 ? "activeNav nav" : " nav"}
+                    className={Nav === 2 ? 'activeNav nav' : ' nav'}
                   >
                     <Typography variant="h3">LOGIN WITH EMAIL</Typography>
                   </Box>
@@ -182,27 +171,20 @@ function Login() {
             </Box>
             <Box sx={{ py: 3 }}></Box>
           </Box>
-
         </Box>
-
       </Box>
-
-    </Container >
+    </Container>
   );
 }
 
 export default Login;
 
-
-
-
-
-
-
-
-
 const styles = {
-
-  swiperImage: { width: "100%", height: '25vh !important', borderRadius: '10px', overflow: 'hidden', objectFit: "fill" },
-
+  swiperImage: {
+    width: '100%',
+    height: '25vh !important',
+    borderRadius: '10px',
+    overflow: 'hidden',
+    objectFit: 'fill',
+  },
 };
