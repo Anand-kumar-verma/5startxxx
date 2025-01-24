@@ -316,7 +316,8 @@ function Wallet() {
                 "&>a>img": { margin: "auto" },
               }}
             >
-              <NavLink to="/Withdrawal">
+            {/* to="/Withdrawal" // ============> ye gateway ka route hai*/}
+              <NavLink to="/withdrawal-manual">
                 <Box
                   component="img"
                   src={withdrow}

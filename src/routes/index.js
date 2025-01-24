@@ -26,6 +26,7 @@ import Activity from "../pages/activity/Activity";
 import Register from "../pages/auth/register/Register";
 import Dashboard from "../pages/dashboard/Dashboard";
 import FundRequest from "../pages/dashboard/FundRequest";
+import WithdrawalManual from "../pages/dashboard/WithdrawalManual";
 import Withdrawl from "../pages/dashboard/Withdrawl";
 import MainPageOFIncome from "../pages/income/MainPageOFIncome";
 import CashbackIncome from "../pages/income/incomeSubSection/Cashback";
@@ -63,6 +64,10 @@ export const routes = [
   {
     path: "/Withdrawal",
     component: <Withdrawl />,
+  },
+  {
+    path: "/withdrawal-manual",
+    component: <WithdrawalManual />,
   },
   {
     path: "/depositHistory",
