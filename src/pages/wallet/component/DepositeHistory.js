@@ -13,27 +13,27 @@ import * as React from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import CustomCircularProgress from "../../../Shared/CustomCircularProgress";
-import { starbluegrad, zubgback, zubgbackgrad, zubgmid } from "../../../Shared/color";
+import {
+  starbluegrad,
+  zubgback,
+  zubgbackgrad,
+  zubgmid,
+} from "../../../Shared/color";
 import deposit from "../../../assets/history2.png";
 import logo2 from "../../../assets/images/5-Star-XXX-8-29-2024.png";
 import Layout from "../../../component/Layout/Layout";
-import {
-  depositHistoryFunction
-} from "../../../services/apicalling";
-
+import { depositHistoryFunction } from "../../../services/apicalling";
 
 function DepositeHistory() {
-  const navigate = useNavigate();
-
   const { isLoading, data } = useQuery(
     ["deposit_history"],
     () => depositHistoryFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true, 
+      refetchOnReconnect: true,
     }
   );
-  const res = data?.data?.data
+  const res = data?.data?.data;
 
   return (
     <Layout>
@@ -49,11 +49,7 @@ function DepositeHistory() {
       >
         <CustomCircularProgress isLoading={isLoading} />
         <Box sx={style.header} className={"!w-full !flex !justify-center"}>
-          <Box
-            component="img"
-            src={logo2}
-            sx={{ width: '150px' }}
-          ></Box>
+          <Box component="img" src={logo2} sx={{ width: "150px" }}></Box>
         </Box>
 
         <Box>
@@ -69,13 +65,18 @@ function DepositeHistory() {
             }}
           >
             <Stack direction="row" sx={{ alignItems: "center", mb: "20px" }}>
-              <Box component="img" src={deposit} width={30} sx={{ filter: 'grayscale(1)' }}></Box>
+              <Box
+                component="img"
+                src={deposit}
+                width={30}
+                sx={{ filter: "grayscale(1)" }}
+              ></Box>
               <Typography
                 variant="body1"
                 color="initial"
                 sx={{ fontSize: "15px ", color: "white", ml: "10px" }}
               >
-                Deposit  history
+                Deposit history
               </Typography>
             </Stack>
             {res?.map((i) => {
@@ -105,17 +106,19 @@ function DepositeHistory() {
                           color: i?.type === "Paying" ? "green" : "red",
                           textTransform: "capitalize",
                         }}
-                      >  {i?.type === "Paying" ? "Deposit" : "Withdrawal"}
-
+                      >
+                        {" "}
+                        {i?.type === "Paying" ? "Deposit" : "Withdrawal"}
                       </Button>
                     </Box>
                     <Box>
                       <Button
                         sx={{ color: "green", textTransform: "capitalize" }}
-                        className={`${i?.tr15_status === "Success"
-                          ? "!text-green-500"
-                          : "!text-red-500"
-                          }`}
+                        className={`${
+                          i?.tr15_status === "Success"
+                            ? "!text-green-500"
+                            : "!text-red-500"
+                        }`}
                       >
                         {i?.tr15_status}
                       </Button>
@@ -138,15 +141,11 @@ function DepositeHistory() {
                       Balance
                     </Typography>
                     <Typography variant="body1" color="initial">
-                      {i?.tr15_amt ? (
-                        i?.type === "Paying" ? (
-                          `${i.tr15_amt}`
-                        ) : (
-                          `-${i.tr15_amt}`
-                        )
-                      ) : (
-                        "N/A"
-                      )}
+                      {i?.tr15_amt
+                        ? i?.type === "Paying"
+                          ? `${i.tr15_amt}`
+                          : `-${i.tr15_amt}`
+                        : "N/A"}
                     </Typography>
                   </Stack>
                   <Stack
@@ -166,23 +165,29 @@ function DepositeHistory() {
                       {moment?.utc(i?.tr15_date)?.format("HH:mm:ss")}
                     </Typography>
                   </Stack>
-                  {i?.success_date !== "NUll" && <Stack
-                    direction="row"
-                    sx={{
-                      mb: "10px",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      "&>p": { color: "white" },
-                    }}
-                  >
-                    <Typography variant="body1" color="initial">
-                      Success Date/Time
-                    </Typography>
-                    <Typography variant="body1" color="initial" className="!text-green-500">
-                      {moment(i?.success_date)?.format("DD-MM-YYYY")}{" "}
-                      {moment(i?.success_date)?.format("HH:mm:ss")}
-                    </Typography>
-                  </Stack>}
+                  {i?.success_date !== "NUll" && (
+                    <Stack
+                      direction="row"
+                      sx={{
+                        mb: "10px",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        "&>p": { color: "white" },
+                      }}
+                    >
+                      <Typography variant="body1" color="initial">
+                        Success Date/Time
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        color="initial"
+                        className="!text-green-500"
+                      >
+                        {moment(i?.success_date)?.format("DD-MM-YYYY")}{" "}
+                        {moment(i?.success_date)?.format("HH:mm:ss")}
+                      </Typography>
+                    </Stack>
+                  )}
                   <Stack
                     direction="row"
                     sx={{
