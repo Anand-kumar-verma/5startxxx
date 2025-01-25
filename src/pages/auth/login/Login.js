@@ -1,55 +1,30 @@
 import { Box, Container, Stack, Typography } from '@mui/material';
-import CryptoJS from 'crypto-js';
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { starblue, stardarkblue } from '../../../Shared/color';
+import output from '../../../assets/images/21782191820.jpg';
 import logo from '../../../assets/images/logo.png';
 import LoginWithEmail from './LoginWithEmail';
 import LoginWithMobile from './LoginWithMobile';
-import output from '../../../assets/images/21782191820.jpg';
 
 function Login() {
-  const navigate = useNavigate();
   const [Nav, setNav] = useState(1);
-
-  const dispatch = useDispatch();
-  const aviator_login_data = useSelector(
-    (state) => state.aviator.aviator_login_data
-  );
-
-  // useEffect(() => {
-  //   !aviator_login_data && get_user_data_fn(dispatch);
-  // }, []);
-
-  const progressCircle = useRef(null);
-  const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-  };
-
-  // useEffect(() => {
-  //   (logindata) && navigate('/dashboard')
-  // }, [])
-
   return (
     <Container
       sx={{
         height: '100%',
-        position: 'relative',
+        position: 'absolute',
         top: 0,
         // left: 0,
         zIndex: -1,
-        alignItems: 'center',
-        justifyItems: 'center',
+
+        // alignItems: 'center',
+        // justifyItems: 'center',
         // border: 'red',
       }}
+      className='lg:!ml-[30%]'
     >
       <Box
         sx={{

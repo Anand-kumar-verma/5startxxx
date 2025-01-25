@@ -7,8 +7,6 @@ import ForgetPassword from "./pages/auth/login/ForgetPassword";
 import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
 import { routes } from "./routes";
-import { MypromotionDataFn } from "./services/apicalling";
-import { useQuery } from "react-query";
 
 const App = () => {
   const isAuthenticated =
