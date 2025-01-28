@@ -14,7 +14,7 @@ const ConfirmationDialogBox = ({
         sx={{
           "&>div": {
             background: "transparent",
-            width: "400px",
+            // width: "400px",
             height: "85vh",
             ...style.flex,
           },
@@ -27,8 +27,8 @@ const ConfirmationDialogBox = ({
       >
         <Box
           sx={{
-            width: "350px",
-            height: "150px",
+            // width: "350px",
+            // height: "150px",
             background: "black",
             // transform: "rotate(90deg)",
             borderRadius: "10px",
@@ -39,7 +39,7 @@ const ConfirmationDialogBox = ({
         >
           <div className=" !flex flex-col !justify-center !items-center mt-4">
             <div>
-              <p className="text-2xl font-bold ">Are you sure want to exit</p>
+              <p className="text-xl font-bold ">Are you sure want to exit</p>
             </div>
             <div className="!flex !justify-center gap-12 mt-4">
               <button
