@@ -43,6 +43,7 @@ import TeamData from "../pages/promotion/component/TeamData";
 import TeamReports from "../pages/promotion/component/TeamReport";
 import Wallet from "../pages/wallet/Wallet";
 import DepositeHistory from "../pages/wallet/component/DepositeHistory";
+import DepositeManually from "../pages/wallet/component/DepositeManually";
 import QRScreen from "../pages/wallet/component/QRScreen";
 import WalletRecharge from "../pages/wallet/component/WalletRecharge";
 import WithdravalHistory from "../pages/wallet/component/WithdravalHistory";
@@ -76,6 +77,10 @@ export const routes = [
   {
     path: "/wallet/Recharge",
     component: <WalletRecharge />,
+  },
+  {
+    path: "/deposit/maunally",
+    component: <DepositeManually />,
   },
   {
     path: "/satta/matka",

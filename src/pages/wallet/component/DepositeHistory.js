@@ -161,8 +161,10 @@ function DepositeHistory() {
                       Date/Time
                     </Typography>
                     <Typography variant="body1" color="initial">
-                      {moment(i?.tr15_date)?.format("DD-MM-YYYY")}{" "}
-                      {moment?.utc(i?.tr15_date)?.format("HH:mm:ss")}
+                    {moment(i?.tr15_date)?.add(5, 'hours').add(30, 'minutes').format("DD-MM-YYYY")}{" "}
+{moment(i?.tr15_date)?.add(5, 'hours').add(30, 'minutes').utc()?.format("HH:mm:ss")}
+
+
                     </Typography>
                   </Stack>
                   {i?.success_date !== "NUll" && (

@@ -88,7 +88,7 @@ function Satta() {
     currentHour < 8 ||
     (currentHour === 8 && currentMinute < 29);
 
-  // const isClosedTime = (currentHour === 15 && currentMinute >= 0 && currentMinute <= 6);
+  // const isClosedTime = (currentHour === 13 && currentMinute >= 0 && currentMinute <= 57);
 
   return (
     <Layout>
@@ -218,7 +218,7 @@ function Satta() {
                     color="initial"
                     sx={styles.gameheading}
                     className="!mt-1 lg:!text-lg !text-[10px]"
-                    // className="!mt-1"
+                  // className="!mt-1"
                   >
                     Last result as :{" "}
                     <span className="!font-bold  !text-4xl !ml-2 px-2 rounded-full !bg-[#fbab0b] !text-white ">
@@ -243,34 +243,9 @@ function Satta() {
                 }}
               >
                 <Box>
-                  {!statta_matka_staus_result?.find(
-                    (i) => i?.title === "satta_gajiyabad"
-                  )?.status ||
-                  minut < 5 ||
-                  isClosedTime ? (
-                    // Show Closed state with countdown
+                  {(!statta_matka_staus_result?.find(i => i?.title === "satta_gajiyabad")?.status || isClosedTime) ? (
                     <Box>
-                      {minut < 5 && (
-                        <Box>
-                          <Typography
-                            sx={{ color: "red", textAlign: "center" }}
-                          >
-                            Closed
-                          </Typography>
-                          <Button variant="text" sx={styles.upcomingButton}>
-                            Upcoming Result
-                          </Button>
-                          <Typography
-                            sx={{ color: "white", textAlign: "center" }}
-                          >
-                            <span> Time Left: </span>
-                            <span>{String(minut)?.padStart(2, "0")}</span>:
-                            <span>
-                              {String(one_min_time)?.padStart(2, "0")}
-                            </span>
-                          </Typography>
-                        </Box>
-                      )}
+                      {/* Game is Closed */}
                       {isClosedTime && (
                         <Box>
                           <Typography
@@ -279,10 +254,7 @@ function Satta() {
                           >
                             Closed
                           </Typography>
-                          <div
-                            className="flex flex-col justify-center items-center text-white my-2"
-                            sx={{ color: "white", textAlign: "center" }}
-                          >
+                          <div className="flex flex-col justify-center items-center text-white my-2" sx={{ textAlign: "center" }}>
                             <p className="!text-[10px]">Open Timing</p>
                             <p className="!text-[10px]">8:30 AM to 11:59 PM</p>
                           </div>
@@ -290,41 +262,35 @@ function Satta() {
                       )}
                     </Box>
                   ) : (
-                    // Show Open state and Play button
-                    <Box
-                      className="!font-bold !text-white"
-                      onClick={() => {
-                        navigate("/satta/play", {
-                          state: {
-                            satta_type: 1,
-                          },
-                        });
-                      }}
-                    >
-                      <Typography
-                        variant="body1"
-                        sx={{ color: "white", textAlign: "center", mb: 1 }}
-                      >
-                        Open
-                      </Typography>
-                      <Button
-                        variant="text"
-                        color="primary"
-                        sx={styles.playButton}
-                        onClick={() => {
-                          navigate("/satta/play", {
-                            state: {
-                              satta_type: 1,
-                            },
-                          });
-                        }}
-                      >
-                        Play
-                      </Button>
-                    </Box>
+                    minut < 5 ? (
+                      <Box>
+                        {/* Upcoming Result */}
+                        <Typography sx={{ color: "red", textAlign: "center" }}>
+                          Closed
+                        </Typography>
+                        <Button variant="text" sx={styles.upcomingButton}>
+                          Upcoming Result
+                        </Button>
+                        <Typography sx={{ color: "white", textAlign: "center" }}>
+                          <span> Time Left: </span>
+                          <span>{String(minut).padStart(2, "0")}</span>:
+                          <span>{String(one_min_time).padStart(2, "0")}</span>
+                        </Typography>
+                      </Box>
+                    ) : (
+                      <Box className="!font-bold !text-white" onClick={() => navigate("/satta/play", { state: { satta_type: 1 } })}>
+                        <Typography variant="body1" sx={{ color: "white", textAlign: "center", mb: 1 }}>
+                          Open
+                        </Typography>
+                        <Button variant="text" color="primary" sx={styles.playButton}>
+                          Play
+                        </Button>
+                      </Box>
+                    )
                   )}
                 </Box>
               </Box>
+
               <div className="pt-2 px-[10%] !w-full !flex justify-between !font-bold">
                 <p>
                   ANDAR
@@ -391,33 +357,12 @@ function Satta() {
                 }}
               >
                 <Box>
-                  {!statta_matka_staus_result?.find(
+                  {(!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_faridabad"
                   )?.status ||
-                  minut < 5 ||
-                  isClosedTime ? (
+                    isClosedTime)? (
                     <Box>
-                      {minut < 5 && (
-                        <Box>
-                          <Typography
-                            sx={{ color: "red", textAlign: "center" }}
-                          >
-                            Closed
-                          </Typography>
-                          <Button variant="text" sx={styles.upcomingButton}>
-                            Upcoming Result
-                          </Button>
-                          <Typography
-                            sx={{ color: "white", textAlign: "center" }}
-                          >
-                            <span> Time Left: </span>
-                            <span>{String(minut)?.padStart(2, "0")}</span>:
-                            <span>
-                              {String(one_min_time)?.padStart(2, "0")}
-                            </span>
-                          </Typography>
-                        </Box>
-                      )}
+                    
                       {isClosedTime && (
                         <Box>
                           <Typography
@@ -437,6 +382,27 @@ function Satta() {
                       )}
                     </Box>
                   ) : (
+                  minut < 5 ? (
+                    <Box>
+                      <Typography
+                        sx={{ color: "red", textAlign: "center" }}
+                      >
+                        Closed
+                      </Typography>
+                      <Button variant="text" sx={styles.upcomingButton}>
+                        Upcoming Result
+                      </Button>
+                      <Typography
+                        sx={{ color: "white", textAlign: "center" }}
+                      >
+                        <span> Time Left: </span>
+                        <span>{String(minut)?.padStart(2, "0")}</span>:
+                        <span>
+                          {String(one_min_time)?.padStart(2, "0")}
+                        </span>
+                      </Typography>
+                    </Box>
+                    ): (
                     <Box
                       className="!font-bold !text-white"
                       onClick={() => {
@@ -469,6 +435,7 @@ function Satta() {
                         Play
                       </Button>
                     </Box>
+                    )
                   )}
                 </Box>
               </Box>
@@ -535,33 +502,12 @@ function Satta() {
                 }}
               >
                 <Box>
-                  {!statta_matka_staus_result?.find(
+                  {(!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_gali"
                   )?.status ||
-                  minut < 5 ||
-                  isClosedTime ? (
+                    isClosedTime) ? (
                     <Box>
-                      {minut < 5 && (
-                        <Box>
-                          <Typography
-                            sx={{ color: "red", textAlign: "center" }}
-                          >
-                            Closed
-                          </Typography>
-                          <Button variant="text" sx={styles.upcomingButton}>
-                            Upcoming Result
-                          </Button>
-                          <Typography
-                            sx={{ color: "white", textAlign: "center" }}
-                          >
-                            <span> Time Left: </span>
-                            <span>{String(minut)?.padStart(2, "0")}</span>:
-                            <span>
-                              {String(one_min_time)?.padStart(2, "0")}
-                            </span>
-                          </Typography>
-                        </Box>
-                      )}
+                     
                       {isClosedTime && (
                         <Box>
                           <Typography
@@ -581,6 +527,27 @@ function Satta() {
                       )}
                     </Box>
                   ) : (
+                     minut < 5 ? (
+                    <Box>
+                      <Typography
+                        sx={{ color: "red", textAlign: "center" }}
+                      >
+                        Closed
+                      </Typography>
+                      <Button variant="text" sx={styles.upcomingButton}>
+                        Upcoming Result
+                      </Button>
+                      <Typography
+                        sx={{ color: "white", textAlign: "center" }}
+                      >
+                        <span> Time Left: </span>
+                        <span>{String(minut)?.padStart(2, "0")}</span>:
+                        <span>
+                          {String(one_min_time)?.padStart(2, "0")}
+                        </span>
+                      </Typography>
+                    </Box>
+                  ):(
                     <Box
                       className="!font-bold !text-white"
                       onClick={() => {
@@ -613,6 +580,7 @@ function Satta() {
                         Play
                       </Button>
                     </Box>
+                  )
                   )}
                 </Box>
               </Box>
@@ -678,33 +646,12 @@ function Satta() {
                 }}
               >
                 <Box>
-                  {!statta_matka_staus_result?.find(
+                  {(!statta_matka_staus_result?.find(
                     (i) => i?.title === "satta_disawar"
                   )?.status ||
-                  minut < 5 ||
-                  isClosedTime ? (
+                    isClosedTime) ? (
                     <Box>
-                      {minut < 5 && (
-                        <Box>
-                          <Typography
-                            sx={{ color: "red", textAlign: "center" }}
-                          >
-                            Closed
-                          </Typography>
-                          <Button variant="text" sx={styles.upcomingButton}>
-                            Upcoming Result
-                          </Button>
-                          <Typography
-                            sx={{ color: "white", textAlign: "center" }}
-                          >
-                            <span> Time Left: </span>
-                            <span>{String(minut)?.padStart(2, "0")}</span>:
-                            <span>
-                              {String(one_min_time)?.padStart(2, "0")}
-                            </span>
-                          </Typography>
-                        </Box>
-                      )}
+                    
                       {isClosedTime && (
                         <Box>
                           <Typography
@@ -723,7 +670,28 @@ function Satta() {
                         </Box>
                       )}
                     </Box>
-                  ) : (
+                  ) :  (
+                   minut < 5 ? (
+                    <Box>
+                      <Typography
+                        sx={{ color: "red", textAlign: "center" }}
+                      >
+                        Closed
+                      </Typography>
+                      <Button variant="text" sx={styles.upcomingButton}>
+                        Upcoming Result
+                      </Button>
+                      <Typography
+                        sx={{ color: "white", textAlign: "center" }}
+                      >
+                        <span> Time Left: </span>
+                        <span>{String(minut)?.padStart(2, "0")}</span>:
+                        <span>
+                          {String(one_min_time)?.padStart(2, "0")}
+                        </span>
+                      </Typography>
+                    </Box>
+                    ): (
                     <Box
                       className="!font-bold !text-white"
                       onClick={() => {
@@ -756,6 +724,7 @@ function Satta() {
                         Play
                       </Button>
                     </Box>
+                    )
                   )}
                 </Box>
               </Box>

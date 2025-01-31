@@ -283,7 +283,7 @@ function Wallet() {
                 mt: "30px",
               }}
             >
-              <NavLink to="/wallet/Recharge">
+              <NavLink to="/deposit/maunally">
                 <Box
                   component="img"
                   src={rechargeIcon}

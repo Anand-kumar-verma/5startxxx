@@ -240,7 +240,7 @@ function Account() {
               Wallet
             </Typography>
           </Box>
-          <Box sx={style.actionBox} component={NavLink} to="/wallet/Recharge">
+          <Box sx={style.actionBox} component={NavLink} to="/deposit/maunally">
             <Box component="img" src={dpt} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>
               Deposit
