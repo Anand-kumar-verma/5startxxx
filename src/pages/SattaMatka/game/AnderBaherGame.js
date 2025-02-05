@@ -104,7 +104,7 @@ const AndarBaharTable = ({ game_type }) => {
 
   async function placeBet() {
     let min = Number(moment(Date.now())?.format("mm"));
-    let time = (min >= 25 && min <= 30) || (min >= 55 && min <= 60);
+    let time = (min >= 25 && min <= 29) || (min >= 55 && min <= 59);
     if (time)
       return toast("Time Over, Please try in next trade.", {
         id: 1,
