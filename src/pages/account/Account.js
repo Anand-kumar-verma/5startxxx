@@ -67,6 +67,17 @@ function Account() {
     { id: 4, img: dp4 },
   ];
 
+  const { data: deposit_staus } = useQuery(
+    ["status_of_payin"],
+    () => apiConnectorGet(endpoint?.node?.getStatusDeposit),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: false,
+    }
+  );
+  const deposit_staus_result = deposit_staus?.data?.data || [];
+
   async function sendUrlCallBackToBackend(transactionId) {
     try {
       const res = await axios.get(
@@ -82,7 +93,7 @@ function Account() {
     client.removeQueries("myprofile");
   }
 
-  const {Loading,data: wallet } = useQuery(
+  const { Loading, data: wallet } = useQuery(
     ["walletamount"],
     () => apiConnectorGet(endpoint.node.get_wallet),
     {
@@ -240,12 +251,22 @@ function Account() {
               Wallet
             </Typography>
           </Box>
-          <Box sx={style.actionBox} component={NavLink} to="/deposit/maunally">
-            <Box component="img" src={dpt} sx={style.actionImage} />
-            <Typography variant="body1" color="initial" sx={style.actionText}>
-              Deposit
-            </Typography>
-          </Box>
+          {deposit_staus_result?.some(i => i?.title === "paying_manually" && i.status === 1) && (
+            <Box sx={style.actionBox} component={NavLink} to="/deposit/maunally">
+              <Box component="img" src={dpt} sx={style.actionImage} />
+              <Typography variant="body1" color="initial" sx={style.actionText}>
+                Deposit 
+              </Typography>
+            </Box>
+          )}
+          {deposit_staus_result?.some(i => i?.title === "paying_qr" && i.status === 1) && (
+            <Box sx={style.actionBox} component={NavLink} to="/wallet/recharge">
+              <Box component="img" src={dpt} sx={style.actionImage} />
+              <Typography variant="body1" color="initial" sx={style.actionText}>
+                Deposit 
+              </Typography>
+            </Box>
+          )}
           <Box sx={style.actionBox} component={NavLink} to="/Withdrawal">
             <Box component="img" src={wtd} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>

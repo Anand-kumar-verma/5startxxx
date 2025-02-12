@@ -39,6 +39,17 @@ function Wallet() {
   });
   const result = data?.data?.data;
 
+  const { data: deposit_staus } = useQuery(
+    ["status_of_payin"],
+    () => apiConnectorGet(endpoint?.node?.getStatusDeposit),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: false,
+    }
+  );
+  const deposit_staus_result = deposit_staus?.data?.data || [];
+
   const { data: wallet } = useQuery(
     ["walletamount"],
     () => apiConnectorGet(endpoint.node.get_wallet),
@@ -266,6 +277,7 @@ function Wallet() {
               alignItems: "baseline",
             }}
           >
+              {deposit_staus_result?.some(i => i?.title === "paying_manually" && i.status === 1) && (
             <Box
               sx={{
                 width: "24%",
@@ -300,6 +312,43 @@ function Wallet() {
                 </Typography>
               </NavLink>
             </Box>
+              )}
+              {deposit_staus_result?.some(i => i?.title === "paying_qr" && i.status === 1) && (
+            <Box
+              sx={{
+                width: "24%",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+                justifyContent: "center",
+                "&>a>p": {
+                  fontSize: "12px",
+                  color: "white",
+                  textAlign: "center",
+                },
+                mt: "30px",
+                "&>a>img": { margin: "auto" },
+                mt: "30px",
+              }}
+            >
+              <NavLink to="/wallet/Recharge">
+                <Box
+                  component="img"
+                  src={rechargeIcon}
+                  width={50}
+                  sx={{ filter: "grayscale(1)" }}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  mt={1}
+                  className="!text-white"
+                >
+                  Deposit 
+                </Typography>
+              </NavLink>
+            </Box>
+              )}
             <Box
               sx={{
                 width: "24%",
