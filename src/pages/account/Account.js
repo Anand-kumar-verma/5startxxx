@@ -251,22 +251,22 @@ function Account() {
               Wallet
             </Typography>
           </Box>
-          {deposit_staus_result?.some(i => i?.title === "paying_manually" && i.status === 1) && (
+          {deposit_staus_result?.some(i => i?.title === "paying_manually" && i.status === 1) ?
             <Box sx={style.actionBox} component={NavLink} to="/deposit/maunally">
               <Box component="img" src={dpt} sx={style.actionImage} />
               <Typography variant="body1" color="initial" sx={style.actionText}>
                 Deposit 
               </Typography>
             </Box>
-          )}
-          {deposit_staus_result?.some(i => i?.title === "paying_qr" && i.status === 1) && (
+            :
             <Box sx={style.actionBox} component={NavLink} to="/wallet/recharge">
-              <Box component="img" src={dpt} sx={style.actionImage} />
-              <Typography variant="body1" color="initial" sx={style.actionText}>
-                Deposit 
-              </Typography>
-            </Box>
-          )}
+            <Box component="img" src={dpt} sx={style.actionImage} />
+            <Typography variant="body1" color="initial" sx={style.actionText}>
+              Deposit 
+            </Typography>
+          </Box>
+          }
+      
           <Box sx={style.actionBox} component={NavLink} to="/Withdrawal">
             <Box component="img" src={wtd} sx={style.actionImage} />
             <Typography variant="body1" color="initial" sx={style.actionText}>

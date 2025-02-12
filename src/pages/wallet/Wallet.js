@@ -277,44 +277,42 @@ function Wallet() {
               alignItems: "baseline",
             }}
           >
-              {deposit_staus_result?.some(i => i?.title === "paying_manually" && i.status === 1) && (
-            <Box
-              sx={{
-                width: "24%",
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-                justifyContent: "center",
-                "&>a>p": {
-                  fontSize: "12px",
-                  color: "white",
-                  textAlign: "center",
-                },
-                mt: "30px",
-                "&>a>img": { margin: "auto" },
-                mt: "30px",
-              }}
-            >
-              <NavLink to="/deposit/maunally">
-                <Box
-                  component="img"
-                  src={rechargeIcon}
-                  width={50}
-                  sx={{ filter: "grayscale(1)" }}
-                ></Box>
-                <Typography
-                  variant="body1"
-                  color="initial"
-                  mt={1}
-                  className="!text-white"
-                >
-                  Deposit
-                </Typography>
-              </NavLink>
-            </Box>
-              )}
-              {deposit_staus_result?.some(i => i?.title === "paying_qr" && i.status === 1) && (
-            <Box
+         {deposit_staus_result?.some(i => i?.title === "paying_manually" && i.status === 1) ? 
+              <Box
+                sx={{
+                  width: "24%",
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  "&>a>p": {
+                    fontSize: "12px",
+                    color: "white",
+                    textAlign: "center",
+                  },
+                  mt: "30px",
+                  "&>a>img": { margin: "auto" },
+                  mt: "30px",
+                }}
+              >
+                <NavLink to="/deposit/maunally">
+                  <Box
+                    component="img"
+                    src={rechargeIcon}
+                    width={50}
+                    sx={{ filter: "grayscale(1)" }}
+                  ></Box>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    mt={1}
+                    className="!text-white"
+                  >
+                    Deposit
+                  </Typography>
+                </NavLink>
+              </Box>
+              : <Box
               sx={{
                 width: "24%",
                 display: "flex",
@@ -344,11 +342,13 @@ function Wallet() {
                   mt={1}
                   className="!text-white"
                 >
-                  Deposit 
+                  Deposit
                 </Typography>
               </NavLink>
             </Box>
-              )}
+            }
+
+
             <Box
               sx={{
                 width: "24%",
@@ -365,7 +365,7 @@ function Wallet() {
                 "&>a>img": { margin: "auto" },
               }}
             >
-            {/* to="/Withdrawal" // ============> ye gateway ka route hai*/}
+              {/* to="/Withdrawal" // ============> ye gateway ka route hai*/}
               <NavLink to="/withdrawal-manual">
                 <Box
                   component="img"
@@ -451,7 +451,7 @@ function Wallet() {
             </Box>
           </Stack>
         </Box>
-      
+
         {openDialogBoxHomeBanner && (
           <Dialog
             PaperProps={{ width: "500px", height: "500px" }}
